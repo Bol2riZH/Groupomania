@@ -1,0 +1,12 @@
+{
+  "name": "backend-p7-groupomania",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "author": "Matthieu REUNGOAT",
+  "license": "ISC"
+}
