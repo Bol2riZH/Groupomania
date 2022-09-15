@@ -31,8 +31,8 @@ exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
     if (users.length === 0)
-      return res.status(404).json({ message: 'No user found' });
-    else return res.status(200).json({ message: 'list of users: ', users });
+      return res.status(404).json({ message: 'User not found' });
+    else return res.status(200).json({ message: 'List of users: ', users });
   } catch (e) {
     return res.status(400).json({ e });
   }
@@ -43,8 +43,20 @@ exports.searchUser = async (req, res) => {
     const user = await User.findOne({
       $or: [{ email: req.body.email }, { userName: req.body.userName }],
     });
-    if (!user) return res.status(404).json({ message: 'No user found' });
+    if (!user) return res.status(404).json({ message: 'User not found' });
     else return res.status(200).json({ message: 'User found', user });
+  } catch (e) {
+    return res.status(500).json({ e });
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const deleteUser = await User.findOneAndRemove({
+      $or: [{ email: req.body.email }, { userName: req.body.userName }],
+    });
+    if (!deleteUser) return res.status(404).json({ message: 'User not found' });
+    else return res.status(200).json({ message: 'User deleted' });
   } catch (e) {
     return res.status(500).json({ e });
   }

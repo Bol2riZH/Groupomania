@@ -29,8 +29,8 @@ exports.addPost = async (req, res) => {
 exports.getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find();
-    if (!posts) return res.status(404).json({ message: 'No post found' });
-    else return res.status(200).json({ message: 'list of post: ', posts });
+    if (!posts) return res.status(404).json({ message: 'Post not found' });
+    else return res.status(200).json({ message: 'List of post: ', posts });
   } catch (e) {
     return res.status(400).json({ e });
   }
@@ -39,16 +39,16 @@ exports.getAllPosts = async (req, res) => {
 exports.getOnePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    if (!post) return res.status(404).json({ message: 'No post found' });
-    else return res.status(200).json({ message: 'post: ', post });
+    if (!post) return res.status(404).json({ message: 'Post not found' });
+    else return res.status(200).json({ message: 'Post: ', post });
   } catch (e) {
     return res.status(500).json({ e });
   }
 };
 
-/*/////////////////////////////*/
+/*////////////////////////////////////////////////////////*/
 /*TODO correct search by title (but seems to work now...)*/
-/*///////////////////////////*/
+/*//////////////////////////////////////////////////////*/
 exports.searchPost = async (req, res) => {
   try {
     const post = await Post.find({
@@ -56,7 +56,7 @@ exports.searchPost = async (req, res) => {
     });
     if (post.length === 0)
       return res.status(404).json({ message: 'No post found' });
-    else return res.status(200).json({ message: 'post: ', post });
+    else return res.status(200).json({ message: 'Post: ', post });
   } catch (e) {
     return res.status(500).json({ e });
   }
@@ -68,7 +68,7 @@ exports.updatePost = async (req, res) => {
     await Post.findByIdAndUpdate(req.params.id, {
       ...updatePost,
     });
-    return res.status(200).json({ message: 'post updated', updatePost });
+    return res.status(200).json({ message: 'Post updated', updatePost });
   } catch (e) {
     return res.status(500).json({ e });
   }
