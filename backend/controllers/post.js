@@ -73,3 +73,12 @@ exports.updatePost = async (req, res) => {
     return res.status(500).json({ e });
   }
 };
+
+exports.deletePost = async (req, res) => {
+  try {
+    await Post.findByIdAndDelete(req.params.id);
+    return res.status(200).json({ message: 'Post deleted' });
+  } catch (e) {
+    return res.status(500).json({ e });
+  }
+};
