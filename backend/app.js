@@ -1,6 +1,6 @@
 'use strict';
 
-require('./mongoDB-config');
+require('./mongoDB');
 
 const express = require('express');
 const cors = require('cors');
