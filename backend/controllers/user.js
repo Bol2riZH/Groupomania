@@ -38,7 +38,7 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
-exports.getOneUser = async (req, res) => {
+exports.searchUser = async (req, res) => {
   try {
     const user = await User.findOne({
       $or: [{ email: req.body.email }, { userName: req.body.userName }],

@@ -8,6 +8,6 @@ const userCtrl = require('../controllers/user');
 router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
 router.get('/', userCtrl.getAllUsers);
-router.post('/', userCtrl.getOneUser);
+router.post('/search-user', userCtrl.searchUser);
 
 module.exports = router;
