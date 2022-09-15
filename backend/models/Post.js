@@ -11,6 +11,7 @@ const postSchema = mongoose.Schema({
   dislikes: { type: Number, default: 0 },
   usersLiked: { type: Array, default: [] },
   usersDisliked: { type: Array, default: [] },
+  date: { type: String, required: true },
 });
 
 module.exports = mongoose.model('Post', postSchema);
