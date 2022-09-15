@@ -44,9 +44,7 @@ exports.getOneUser = async (req, res) => {
       $or: [{ email: req.body.email }, { userName: req.body.userName }],
     });
     if (!user) return res.status(404).json({ message: 'No user found' });
-    else {
-      return res.status(201).json({ message: 'User found', user });
-    }
+    else return res.status(201).json({ message: 'User found', user });
   } catch (e) {
     return res.status(500).json({ e });
   }
