@@ -36,9 +36,6 @@ exports.getAllPosts = async (req, res) => {
   }
 };
 
-/*///////////////////////*/
-/*TODO cannot find by id*/
-/*/////////////////////*/
 exports.getOnePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -50,7 +47,7 @@ exports.getOnePost = async (req, res) => {
 };
 
 /*/////////////////////////////*/
-/*TODO correct search by title*/
+/*TODO correct search by title (but seems to work now...)*/
 /*///////////////////////////*/
 exports.searchPost = async (req, res) => {
   try {
@@ -60,6 +57,18 @@ exports.searchPost = async (req, res) => {
     if (post.length === 0)
       return res.status(404).json({ message: 'No post found' });
     else return res.status(200).json({ message: 'post: ', post });
+  } catch (e) {
+    return res.status(500).json({ e });
+  }
+};
+
+exports.updatePost = async (req, res) => {
+  try {
+    const updatePost = { ...req.body };
+    await Post.findByIdAndUpdate(req.params.id, {
+      ...updatePost,
+    });
+    return res.status(200).json({ message: 'post updated', updatePost });
   } catch (e) {
     return res.status(500).json({ e });
   }
