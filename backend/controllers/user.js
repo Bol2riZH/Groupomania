@@ -21,7 +21,7 @@ exports.login = async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (!user)
       return res.status(401).json({ message: 'Incorrect email or password ' });
-    else return res.status(201).json({ message: 'User connected' });
+    else return res.status(200).json({ message: 'User connected' });
   } catch (e) {
     return res.status(500).json({ e });
   }
@@ -32,7 +32,7 @@ exports.getAllUsers = async (req, res) => {
     const users = await User.find();
     if (users.length === 0)
       return res.status(404).json({ message: 'No user found' });
-    else return res.status(201).json({ message: 'list of users: ', users });
+    else return res.status(200).json({ message: 'list of users: ', users });
   } catch (e) {
     return res.status(400).json({ e });
   }
@@ -44,7 +44,7 @@ exports.getOneUser = async (req, res) => {
       $or: [{ email: req.body.email }, { userName: req.body.userName }],
     });
     if (!user) return res.status(404).json({ message: 'No user found' });
-    else return res.status(201).json({ message: 'User found', user });
+    else return res.status(200).json({ message: 'User found', user });
   } catch (e) {
     return res.status(500).json({ e });
   }

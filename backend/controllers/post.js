@@ -20,13 +20,18 @@ exports.addPost = async (req, res) => {
   }
 };
 
-exports.getAllPosts = async (req, res) => {
-  try {
-  } catch (e) {}
-};
-
 /* GET TIME IN FR FORMAT */
 const postedTime = () => {
   const time = moment.now();
   return moment(time).format('LLLL');
+};
+
+exports.getAllPosts = async (req, res) => {
+  try {
+    const posts = await Post.find();
+    if (!posts) return res.status(404).json({ message: 'No post found' });
+    else return res.status(200).json({ message: 'list of post: ', posts });
+  } catch (e) {
+    return res.status(400).json({ e });
+  }
 };
