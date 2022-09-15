@@ -29,9 +29,20 @@ exports.login = async (req, res) => {
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
-    if (!users) return res.status(401).json({ message: 'No user found' });
-    else return res.status(201).json({ message: 'users: ', users });
+    if (users.length === 0)
+      return res.status(404).json({ message: 'No user found' });
+    else return res.status(201).json({ message: 'list of users: ', users });
   } catch (e) {
     return res.status(400).json({ e });
+  }
+};
+
+exports.getOneUser = async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) return res.status(401).json({ message: 'Incorrect user email' });
+    else return res.status(201).json({ message: 'User found', user });
+  } catch (e) {
+    return res.status(500).json({ e });
   }
 };
