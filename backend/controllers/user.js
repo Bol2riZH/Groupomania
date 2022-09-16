@@ -1,20 +1,32 @@
 'use strict';
 
 const User = require('../models/User');
+const catchAsync = require('../utils/catchAsync');
 
-exports.signup = async (req, res) => {
+// exports.signup = async (req, res) => {
+//   const user = new User({
+//     ...req.body,
+//     profilPictureUrl: `${req.protocol}://${req.get(
+//       'host'
+//     )}/images/profilPictures/${req.file.filename}`,
+//   });
+//   try {
+//     await user.save();
+//     return res.status(201).json({ message: 'User created' });
+//   } catch (e) {
+//     return res.status(400).json({ e });
+//   }
+// };
+exports.signup = catchAsync(async (req, res, next) => {
   const user = new User({
-    userName: req.body.userName,
-    email: req.body.email,
-    password: req.body.password,
+    ...req.body,
+    profilPictureUrl: `${req.protocol}://${req.get(
+      'host'
+    )}/images/profilPictures/${req.file.filename}`,
   });
-  try {
-    await user.save();
-    return res.status(201).json({ message: 'User created' });
-  } catch (e) {
-    return res.status(400).json({ e });
-  }
-};
+  await user.save();
+  return res.status(201).json({ message: 'User created' });
+});
 
 exports.login = async (req, res) => {
   try {
