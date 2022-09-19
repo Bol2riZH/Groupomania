@@ -56,25 +56,71 @@ exports.searchPost = catchAsync(async (req, res) => {
 });
 
 // update post
+// exports.updatePost = catchAsync(async (req, res) => {
+//   const updatePost = req.file
+//     ? {
+//         ...req.body,
+//         imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
+//           req.file.filename
+//         }`,
+//       }
+//     : { ...req.body };
+//   await Post.findByIdAndUpdate(req.params.id, {
+//     ...updatePost,
+//   });
+//   return res
+//     .status(200)
+//     .json({ status: 'success', message: 'Post updated', updatePost });
+// });
+
+///////////////////////////////////////////////////
 exports.updatePost = catchAsync(async (req, res) => {
-  const updatePost = { ...req.body };
-  // console.log({ ...req.body });
-  // const updatePost = req.file
-  //   ? {
-  //       // parse to be able to update image
-  //       ...JSON.parse(req.body.post),
-  //       imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
-  //         req.file.filename
-  //       }`,
-  //     }
-  //   : { ...req.body };
-  await Post.findByIdAndUpdate(req.params.id, {
-    ...updatePost,
-  });
-  return res
-    .status(200)
-    .json({ status: 'success', message: 'Post updated', updatePost });
+  if (req.file) {
+    const getFilename = await Post.findById(req.params.id);
+    const filename = getFilename.imageUrl.split('images/posts/')[1];
+    fs.unlink(`images/posts/${filename}`, () => {});
+    const updatePost = {
+      ...req.body,
+      imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
+        req.file.filename
+      }`,
+    };
+    await Post.findByIdAndUpdate(req.params.id, {
+      ...updatePost,
+    });
+    return res
+      .status(200)
+      .json({ status: 'success', message: 'Post updated', updatePost });
+  } else {
+    const updatePost = { ...req.body };
+    await Post.findByIdAndUpdate(req.params.id, {
+      ...updatePost,
+    });
+    return res
+      .status(200)
+      .json({ status: 'success', message: 'Post updated', updatePost });
+  }
 });
+// });
+// const updatePost = req.file
+//   ? {
+//       ...req.body,
+//       imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
+//         req.file.filename
+//       }`,
+//     }
+//   : { ...req.body };
+// delete updatePost._userId;
+// const filename = updatePost.imageUrl.split('images/posts/')[1];
+// fs.unlink(`images/posts/${filename}`, async () => {
+//   await Post.findByIdAndUpdate(req.params.id, {
+//     ...updatePost,
+//   });
+//   return res
+//     .status(200)
+//     .json({ status: 'success', message: 'Post updated', updatePost });
+// }});
+// });
 
 // delete post
 exports.deletePost = catchAsync(async (req, res) => {

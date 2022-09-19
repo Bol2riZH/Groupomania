@@ -11,5 +11,6 @@ router.post('/login', userCtrl.login);
 router.get('/', userCtrl.getAllUsers);
 router.post('/search-user', userCtrl.searchUser);
 router.delete('/', userCtrl.deleteUser);
+// router.post('/',userCtrl.logout);
 
 module.exports = router;
