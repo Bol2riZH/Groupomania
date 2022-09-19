@@ -1,17 +1,42 @@
 'use strict';
 
+const validator = require('validator');
+const bcrypt = require('bcrypt');
+
 const User = require('../models/User');
 const catchAsync = require('../utils/catchAsync');
 
+/*///////////////////////////////////////////////////////*/
+/*////////////////////// FUNCTIONS /////////////////////*/
+/*/////////////////////////////////////////////////////*/
+const emailAndPasswordValidator = (res, email, password) => {
+  if (!validator.isEmail(email)) {
+    return res
+      .status(400)
+      .json({ status: 'fail', message: 'email format incorrect' });
+  }
+  if (!validator.isStrongPassword(password)) {
+    return res.status(400).json({
+      status: 'fail',
+      message:
+        'password must contain at least 8 characters, must have at least 1 capital letter, one number and one special character',
+    });
+  } else return false;
+};
+
 exports.signup = catchAsync(async (req, res) => {
-  const user = new User({
-    ...req.body,
-    profilPictureUrl: `${req.protocol}://${req.get(
-      'host'
-    )}/images/profilPictures/${req.file.filename}`,
-  });
-  await user.save();
-  return res.status(201).json({ message: 'User created' });
+  if (!emailAndPasswordValidator(res, req.body.email, req.body.password)) {
+    const hash = await bcrypt.hash(req.body.password, 10);
+    const user = new User({
+      ...req.body,
+      password: hash,
+      profilPictureUrl: `${req.protocol}://${req.get(
+        'host'
+      )}/images/profilPictures/${req.file.filename}`,
+    });
+    await user.save();
+    return res.status(201).json({ message: 'User created' });
+  }
 });
 
 exports.login = catchAsync(async (req, res) => {
