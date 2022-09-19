@@ -3,6 +3,8 @@
 const Post = require('../models/Post');
 const catchAsync = require('../utils/catchAsync');
 
+const fs = require('fs');
+
 const moment = require('moment');
 moment.locale('fr');
 
@@ -56,14 +58,34 @@ exports.searchPost = catchAsync(async (req, res) => {
 // update post
 exports.updatePost = catchAsync(async (req, res) => {
   const updatePost = { ...req.body };
+  // console.log({ ...req.body });
+  // const updatePost = req.file
+  //   ? {
+  //       // parse to be able to update image
+  //       ...JSON.parse(req.body.post),
+  //       imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
+  //         req.file.filename
+  //       }`,
+  //     }
+  //   : { ...req.body };
   await Post.findByIdAndUpdate(req.params.id, {
     ...updatePost,
   });
-  return res.status(200).json({ message: 'Post updated', updatePost });
+  return res
+    .status(200)
+    .json({ status: 'success', message: 'Post updated', updatePost });
 });
 
 // delete post
 exports.deletePost = catchAsync(async (req, res) => {
-  await Post.findByIdAndDelete(req.params.id);
-  return res.status(200).json({ message: 'Post deleted' });
+  const deletePost = await Post.findById(req.params.id);
+  if (deletePost.userId !== req.auth.userId)
+    res.status(401).json({ message: 'Unauthorized' });
+  else {
+    const filename = deletePost.imageUrl.split('images/posts/')[1];
+    fs.unlink(`images/posts/${filename}`, async () => {
+      await Post.findByIdAndDelete(req.params.id);
+      return res.status(200).json({ message: 'post deleted !' });
+    });
+  }
 });
