@@ -29,6 +29,8 @@ const emailAndPasswordValidator = (res, email, password) => {
 /*///////////////////////////////////////////////////////*/
 /*///////////////// USER CONTROLLERS ///////////////////*/
 /*/////////////////////////////////////////////////////*/
+
+// signup
 exports.signup = catchAsync(async (req, res) => {
   if (!emailAndPasswordValidator(res, req.body.email, req.body.password)) {
     const hash = await bcrypt.hash(req.body.password, 10);
@@ -44,6 +46,7 @@ exports.signup = catchAsync(async (req, res) => {
   }
 });
 
+// login
 exports.login = catchAsync(async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user)
@@ -63,6 +66,7 @@ exports.login = catchAsync(async (req, res) => {
   }
 });
 
+// get all users
 exports.getAllUsers = catchAsync(async (req, res) => {
   const users = await User.find();
   if (users.length === 0)
@@ -70,6 +74,7 @@ exports.getAllUsers = catchAsync(async (req, res) => {
   else return res.status(200).json({ message: 'List of users: ', users });
 });
 
+// search one user
 exports.searchUser = catchAsync(async (req, res) => {
   const user = await User.findOne({
     $or: [{ email: req.body.email }, { userName: req.body.userName }],
@@ -78,6 +83,11 @@ exports.searchUser = catchAsync(async (req, res) => {
   else return res.status(200).json({ message: 'User found', user });
 });
 
+/*//////////////////////////////////////*/
+/*TODO : add admin access to this route*/
+/*////////////////////////////////////*/
+
+// delete user (admin)
 exports.deleteUser = catchAsync(async (req, res) => {
   const deleteUser = await User.findOneAndRemove({
     $or: [{ email: req.body.email }, { userName: req.body.userName }],

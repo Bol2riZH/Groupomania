@@ -4,9 +4,9 @@ const express = require('express');
 const router = express.Router();
 
 const userCtrl = require('../controllers/user');
-const multer = require('../middlewares/multer');
+const { profilePictureMulter } = require('../middlewares/multer');
 
-router.post('/signup', multer.profilePictureMulter, userCtrl.signup);
+router.post('/signup', profilePictureMulter, userCtrl.signup);
 router.post('/login', userCtrl.login);
 router.get('/', userCtrl.getAllUsers);
 router.post('/search-user', userCtrl.searchUser);
