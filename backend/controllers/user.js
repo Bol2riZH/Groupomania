@@ -2,6 +2,8 @@
 
 const validator = require('validator');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const User = require('../models/User');
 const catchAsync = require('../utils/catchAsync');
@@ -24,6 +26,9 @@ const emailAndPasswordValidator = (res, email, password) => {
   } else return false;
 };
 
+/*///////////////////////////////////////////////////////*/
+/*///////////////// USER CONTROLLERS ///////////////////*/
+/*/////////////////////////////////////////////////////*/
 exports.signup = catchAsync(async (req, res) => {
   if (!emailAndPasswordValidator(res, req.body.email, req.body.password)) {
     const hash = await bcrypt.hash(req.body.password, 10);
@@ -43,7 +48,19 @@ exports.login = catchAsync(async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user)
     return res.status(401).json({ message: 'Incorrect email or password ' });
-  else return res.status(200).json({ message: 'User connected' });
+  const validPassword = await bcrypt.compare(req.body.password, user.password);
+  if (!validPassword)
+    return res.status(401).json({ message: 'Incorrect email or password ' });
+  else {
+    res.status(200).json({
+      status: 'success',
+      message: 'User connected',
+      userId: user._id,
+      token: jwt.sign({ userId: user._id }, process.env.TOKEN_KEY, {
+        expiresIn: '24h',
+      }),
+    });
+  }
 });
 
 exports.getAllUsers = catchAsync(async (req, res) => {
