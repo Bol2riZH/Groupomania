@@ -2,17 +2,10 @@
 
 const Post = require('../models/Post');
 const catchAsync = require('../utils/catchAsync');
+const postedTime = require('../utils/postedTime');
+const { findAndUnlinkPostImage } = require('../utils/findAndUnlinkImage');
 
 const fs = require('fs');
-
-const moment = require('moment');
-moment.locale('fr');
-
-/* GET TIME IN FR FORMAT */
-const postedTime = () => {
-  const time = moment.now();
-  return moment(time).format('LLLL');
-};
 
 // add post
 exports.addPost = catchAsync(async (req, res) => {
@@ -56,71 +49,25 @@ exports.searchPost = catchAsync(async (req, res) => {
 });
 
 // update post
-// exports.updatePost = catchAsync(async (req, res) => {
-//   const updatePost = req.file
-//     ? {
-//         ...req.body,
-//         imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
-//           req.file.filename
-//         }`,
-//       }
-//     : { ...req.body };
-//   await Post.findByIdAndUpdate(req.params.id, {
-//     ...updatePost,
-//   });
-//   return res
-//     .status(200)
-//     .json({ status: 'success', message: 'Post updated', updatePost });
-// });
-
-///////////////////////////////////////////////////
 exports.updatePost = catchAsync(async (req, res) => {
-  if (req.file) {
-    const getFilename = await Post.findById(req.params.id);
-    const filename = getFilename.imageUrl.split('images/posts/')[1];
-    fs.unlink(`images/posts/${filename}`, () => {});
-    const updatePost = {
+  let updatePost;
+  if (!req.file) updatePost = { ...req.body };
+  else {
+    await findAndUnlinkPostImage(Post, req.params.id, 'posts');
+    updatePost = {
       ...req.body,
       imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
         req.file.filename
       }`,
     };
-    await Post.findByIdAndUpdate(req.params.id, {
-      ...updatePost,
-    });
-    return res
-      .status(200)
-      .json({ status: 'success', message: 'Post updated', updatePost });
-  } else {
-    const updatePost = { ...req.body };
-    await Post.findByIdAndUpdate(req.params.id, {
-      ...updatePost,
-    });
-    return res
-      .status(200)
-      .json({ status: 'success', message: 'Post updated', updatePost });
   }
+  await Post.findByIdAndUpdate(req.params.id, {
+    ...updatePost,
+  });
+  return res
+    .status(200)
+    .json({ status: 'success', message: 'Post updated', updatePost });
 });
-// });
-// const updatePost = req.file
-//   ? {
-//       ...req.body,
-//       imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
-//         req.file.filename
-//       }`,
-//     }
-//   : { ...req.body };
-// delete updatePost._userId;
-// const filename = updatePost.imageUrl.split('images/posts/')[1];
-// fs.unlink(`images/posts/${filename}`, async () => {
-//   await Post.findByIdAndUpdate(req.params.id, {
-//     ...updatePost,
-//   });
-//   return res
-//     .status(200)
-//     .json({ status: 'success', message: 'Post updated', updatePost });
-// }});
-// });
 
 // delete post
 exports.deletePost = catchAsync(async (req, res) => {
@@ -129,9 +76,8 @@ exports.deletePost = catchAsync(async (req, res) => {
     res.status(401).json({ message: 'Unauthorized' });
   else {
     const filename = deletePost.imageUrl.split('images/posts/')[1];
-    fs.unlink(`images/posts/${filename}`, async () => {
-      await Post.findByIdAndDelete(req.params.id);
-      return res.status(200).json({ message: 'post deleted !' });
-    });
+    fs.unlink(`images/posts/${filename}`, () => {});
+    await Post.findByIdAndDelete(req.params.id);
+    return res.status(200).json({ message: 'post deleted !' });
   }
 });
