@@ -4,12 +4,11 @@ const Post = require('../models/Post');
 const catchAsync = require('../utils/catchAsync');
 const postedTime = require('../utils/postedTime');
 const { findAndUnlinkPostImage } = require('../utils/findAndUnlinkImage');
-
-const fs = require('fs');
+const { response } = require('express');
 
 // add post
 exports.addPost = catchAsync(async (req, res) => {
-  const postContent = await { ...req.body };
+  const postContent = { ...req.body };
   const post = new Post({
     ...postContent,
     userId: req.auth.userId,
@@ -50,10 +49,15 @@ exports.searchPost = catchAsync(async (req, res) => {
 
 // update post
 exports.updatePost = catchAsync(async (req, res) => {
+  const postToUpdate = await Post.findById(req.params.id);
+
+  if (postToUpdate.userId !== req.auth.userId)
+    return res.status(401).json({ message: 'Unauthorized' });
+
   let updatePost;
   if (!req.file) updatePost = { ...req.body };
   else {
-    await findAndUnlinkPostImage(Post, req.params.id, 'posts');
+    await findAndUnlinkPostImage(postToUpdate, 'posts');
     updatePost = {
       ...req.body,
       imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
@@ -71,13 +75,15 @@ exports.updatePost = catchAsync(async (req, res) => {
 
 // delete post
 exports.deletePost = catchAsync(async (req, res) => {
-  const deletePost = await Post.findById(req.params.id);
-  if (deletePost.userId !== req.auth.userId)
-    res.status(401).json({ message: 'Unauthorized' });
-  else {
-    const filename = deletePost.imageUrl.split('images/posts/')[1];
-    fs.unlink(`images/posts/${filename}`, () => {});
-    await Post.findByIdAndDelete(req.params.id);
-    return res.status(200).json({ message: 'post deleted !' });
-  }
+  const postToDelete = await Post.findById(req.params.id);
+
+  if (postToDelete.userId !== req.auth.userId)
+    return res.status(401).json({ message: 'Unauthorized' });
+
+  await findAndUnlinkPostImage(postToDelete, 'posts');
+  await Post.findByIdAndDelete(req.params.id);
+  return res.status(200).json({ message: 'post deleted !' });
 });
+
+//like / dislike a post
+exports.likedPost = (req, res) => {};

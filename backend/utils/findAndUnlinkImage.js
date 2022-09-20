@@ -2,14 +2,12 @@
 
 const fs = require('fs');
 
-exports.findAndUnlinkPostImage = async (Model, id, directory) => {
-  const getModel = await Model.findById(id);
-  const filename = getModel.imageUrl.split(`images/${directory}/`)[1];
+exports.findAndUnlinkPostImage = async (Post, directory) => {
+  const filename = Post.imageUrl.split(`images/${directory}/`)[1];
   fs.unlink(`images/${directory}/${filename}`, () => {});
 };
 
-exports.findAndUnlinkProfilePicture = async (Model, id, directory) => {
-  const getModel = await Model.findById(id);
-  const filename = getModel.profilePictureUrl.split(`images/${directory}/`)[1];
+exports.findAndUnlinkProfilePicture = async (User, directory) => {
+  const filename = User.profilePictureUrl.split(`images/${directory}/`)[1];
   fs.unlink(`images/${directory}/${filename}`, () => {});
 };
