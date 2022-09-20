@@ -13,7 +13,7 @@ router.get('/:id', postCtrl.getOnePost);
 router.post('/search-post', postCtrl.searchPost);
 router.put('/:id', auth, postMulter, postCtrl.updatePost);
 router.delete('/:id', auth, postCtrl.deletePost);
-// router.post('/:id/like', postCtrl.likedPost);
+router.post('/:id/like', auth, postCtrl.NoticedPost);
 // router.post('/:id/comment', postCtrl.commentPost)
 
 module.exports = router;

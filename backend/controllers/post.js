@@ -4,7 +4,6 @@ const Post = require('../models/Post');
 const catchAsync = require('../utils/catchAsync');
 const postedTime = require('../utils/postedTime');
 const { findAndUnlinkPostImage } = require('../utils/findAndUnlinkImage');
-const { response } = require('express');
 
 // add post
 exports.addPost = catchAsync(async (req, res) => {
@@ -86,4 +85,48 @@ exports.deletePost = catchAsync(async (req, res) => {
 });
 
 //like / dislike a post
-exports.likedPost = (req, res) => {};
+exports.NoticedPost = catchAsync(async (req, res) => {
+  const stateLike = +req.body.like;
+  const postToNoticed = await Post.findById(req.params.id);
+  switch (stateLike) {
+    case 0:
+      if (postToNoticed.usersLiked.includes(postToNoticed.userId)) {
+        const indexOfUser = postToNoticed.usersLiked.indexOf(
+          postToNoticed.userId
+        ); //TODO : postToNoticed.userId -> req.auth.id
+        await Post.findByIdAndUpdate(req.params.id, {
+          ...postToNoticed,
+          likes: postToNoticed.likes--,
+          usersLiked: postToNoticed.usersLiked.splice(indexOfUser, 1),
+        });
+      }
+      if (postToNoticed.usersDisliked.includes(postToNoticed.userId)) {
+        const indexOfUser = postToNoticed.usersDisliked.indexOf(
+          postToNoticed.userId
+        ); //TODO : postToNoticed.userId -> req.auth.id
+        await Post.findByIdAndUpdate(req.params.id, {
+          ...postToNoticed,
+          dislikes: postToNoticed.dislikes--,
+          usersDisliked: postToNoticed.usersDisliked.splice(indexOfUser, 1),
+        });
+      }
+      break;
+    case 1:
+      await Post.findByIdAndUpdate(req.params.id, {
+        ...postToNoticed,
+        likes: postToNoticed.likes++,
+        usersLiked: postToNoticed.usersLiked.push(postToNoticed.userId), //TODO : postToNoticed.userId -> req.auth.id
+      });
+      break;
+    case -1:
+      await Post.findByIdAndUpdate(req.params.id, {
+        ...postToNoticed,
+        dislikes: postToNoticed.dislikes++,
+        usersDisliked: postToNoticed.usersDisliked.push(postToNoticed.userId), //TODO : postToNoticed.userId -> req.auth.id
+      });
+      break;
+  }
+  return res
+    .status(200)
+    .json({ status: 'success', message: 'post noticed', postToNoticed });
+});
