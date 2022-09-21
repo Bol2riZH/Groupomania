@@ -2,8 +2,10 @@
 
 const Post = require('../models/Post');
 const User = require('../models/User');
+
 const catchAsync = require('../utils/catchAsync');
 const postedTime = require('../utils/postedTime');
+const getUserInfo = require('../utils/getUserInfo');
 const { findAndUnlinkPostImage } = require('../utils/findAndUnlinkImage');
 const {
   controlUserLiked,
@@ -16,12 +18,16 @@ const {
 /*///////////////// POST CONTROLLERS ///////////////////*/
 /*/////////////////////////////////////////////////////*/
 
-// add post
+// add
 exports.addPost = catchAsync(async (req, res) => {
+  const user = await User.findById(req.auth.userId);
+  const userInfo = getUserInfo(user);
+
   const postContent = { ...req.body };
   const post = new Post({
     ...postContent,
     userId: req.auth.userId,
+    userInfo: userInfo,
     imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
       req.file.filename
     }`,
@@ -33,21 +39,21 @@ exports.addPost = catchAsync(async (req, res) => {
     .json({ status: 'success', message: 'Post added: ', post });
 });
 
-// get all posts
+// get all
 exports.getAllPosts = catchAsync(async (req, res) => {
   const posts = await Post.find();
   if (!posts) return res.status(404).json({ message: 'Post not founded' });
   else return res.status(200).json({ message: 'List of post: ', posts });
 });
 
-// get one post
+// get one
 exports.getOnePost = catchAsync(async (req, res) => {
   const post = await Post.findById(req.params.id);
   if (!post) return res.status(404).json({ message: 'Post not founded' });
   else return res.status(200).json({ message: 'Post: ', post });
 });
 
-// search post by username or title
+// search by username or title
 exports.searchPost = catchAsync(async (req, res) => {
   const post = await Post.find({
     $or: [{ username: req.body.username }, { title: req.body.title }],
@@ -57,12 +63,15 @@ exports.searchPost = catchAsync(async (req, res) => {
   else return res.status(200).json({ message: 'Post: ', post });
 });
 
-// update post
+// update
 exports.updatePost = catchAsync(async (req, res) => {
   const postToUpdate = await Post.findById(req.params.id);
 
   if (postToUpdate.userId !== req.auth.userId)
     return res.status(401).json({ message: 'Unauthorized' });
+
+  const user = await User.findById(req.auth.userId);
+  const userInfo = getUserInfo(user);
 
   let updatePost;
   if (!req.file) updatePost = { ...req.body };
@@ -70,6 +79,7 @@ exports.updatePost = catchAsync(async (req, res) => {
     await findAndUnlinkPostImage(postToUpdate, 'posts');
     updatePost = {
       ...req.body,
+      userInfo: userInfo,
       imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
         req.file.filename
       }`,
@@ -83,7 +93,7 @@ exports.updatePost = catchAsync(async (req, res) => {
     .json({ status: 'success', message: 'Post updated', updatePost });
 });
 
-// delete post
+// delete
 exports.deletePost = catchAsync(async (req, res) => {
   const postToDelete = await Post.findById(req.params.id);
 
@@ -95,7 +105,7 @@ exports.deletePost = catchAsync(async (req, res) => {
   return res.status(200).json({ message: 'post deleted !' });
 });
 
-//like / dislike a post
+// like / dislike
 exports.NoticePost = catchAsync(async (req, res) => {
   const stateLike = +req.body.like;
   const postToNoticed = await Post.findById(req.params.id);
@@ -150,15 +160,12 @@ exports.NoticePost = catchAsync(async (req, res) => {
     .json({ status: 'success', message: 'post noticed', postToNoticed });
 });
 
+// add comment
 exports.commentPost = catchAsync(async (req, res) => {
   const postToComment = await Post.findById(req.params.id);
 
   const user = await User.findById(req.auth.userId);
-  const userInfo = {
-    userId: req.auth.userId,
-    username: user.username,
-    profilPictureUrl: user.profilPictureUrl,
-  };
+  const userInfo = getUserInfo(user);
 
   await Post.findByIdAndUpdate(req.params.id, {
     ...postToComment,

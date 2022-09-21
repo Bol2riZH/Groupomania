@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const User = require('../models/User');
+
 const catchAsync = require('../utils/catchAsync');
 const emailAndPasswordValidator = require('../utils/emailAndPasswordValidator');
 
