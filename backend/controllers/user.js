@@ -8,6 +8,7 @@ const User = require('../models/User');
 
 const catchAsync = require('../utils/catchAsync');
 const emailAndPasswordValidator = require('../utils/emailAndPasswordValidator');
+const { findAndUnlinkProfilePicture } = require('../utils/findAndUnlinkImage');
 
 /*///////////////////////////////////////////////////////*/
 /*///////////////// USER CONTROLLERS ///////////////////*/
@@ -47,6 +48,29 @@ exports.login = catchAsync(async (req, res) => {
       }),
     });
   }
+});
+
+// update
+exports.updateUser = catchAsync(async (req, res) => {
+  const userToUpdate = await User.findById(req.params.id);
+
+  let updateUser;
+  if (!req.file) updateUser = { ...req.body };
+  else {
+    await findAndUnlinkProfilePicture(userToUpdate, 'profilPictures');
+    updateUser = {
+      ...req.body,
+      profilPictureUrl: `${req.protocol}://${req.get(
+        'host'
+      )}/images/profilPictures/${req.file.filename}`,
+    };
+  }
+  await User.findByIdAndUpdate(req.params.id, {
+    ...updateUser,
+  });
+  return res
+    .status(200)
+    .json({ status: 'success', message: 'User updated', updateUser });
 });
 
 // get all users
