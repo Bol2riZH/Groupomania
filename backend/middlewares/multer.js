@@ -31,9 +31,9 @@ const storage = (destination) => {
 /*TODO : process.env.xxx doesn't work*/
 /*//////////////////////////////////*/
 exports.profilePictureMulter = multer({
-  storage: storage('profilPictures'),
+  storage: storage('profilePictures'),
   limits: { fileSize: 1000000 },
-}).single('profilPictureUrl');
+}).single('profilePictureUrl');
 
 exports.postMulter = multer({
   storage: storage('posts'),

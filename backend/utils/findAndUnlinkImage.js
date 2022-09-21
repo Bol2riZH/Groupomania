@@ -8,6 +8,6 @@ exports.findAndUnlinkPostImage = async (Post, directory) => {
 };
 
 exports.findAndUnlinkProfilePicture = async (User, directory) => {
-  const filename = User.profilPictureUrl.split(`images/${directory}/`)[1];
+  const filename = User.profilePictureUrl.split(`images/${directory}/`)[1];
   fs.unlink(`images/${directory}/${filename}`, () => {});
 };

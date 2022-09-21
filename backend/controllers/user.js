@@ -21,9 +21,9 @@ exports.signup = catchAsync(async (req, res) => {
     const user = new User({
       ...req.body,
       password: hash,
-      profilPictureUrl: `${req.protocol}://${req.get(
+      profilePictureUrl: `${req.protocol}://${req.get(
         'host'
-      )}/images/profilPictures/${req.file.filename}`,
+      )}/images/profilePictureUrl/${req.file.filename}`,
     });
     await user.save();
     return res.status(201).json({ message: 'User created' });
@@ -57,12 +57,12 @@ exports.updateUser = catchAsync(async (req, res) => {
   let updateUser;
   if (!req.file) updateUser = { ...req.body };
   else {
-    await findAndUnlinkProfilePicture(userToUpdate, 'profilPictures');
+    await findAndUnlinkProfilePicture(userToUpdate, 'profilePictures');
     updateUser = {
       ...req.body,
-      profilPictureUrl: `${req.protocol}://${req.get(
+      profilePictureUrl: `${req.protocol}://${req.get(
         'host'
-      )}/images/profilPictures/${req.file.filename}`,
+      )}/images/profilePictureUrl/${req.file.filename}`,
     };
   }
   await User.findByIdAndUpdate(req.params.id, {
