@@ -23,7 +23,7 @@ exports.signup = catchAsync(async (req, res) => {
       password: hash,
       profilePictureUrl: `${req.protocol}://${req.get(
         'host'
-      )}/images/profilePictureUrl/${req.file.filename}`,
+      )}/images/profilePictures/${req.file.filename}`,
     });
     await user.save();
     return res.status(201).json({ message: 'User created' });
@@ -57,12 +57,12 @@ exports.updateUser = catchAsync(async (req, res) => {
   let updateUser;
   if (!req.file) updateUser = { ...req.body };
   else {
-    await findAndUnlinkProfilePicture(userToUpdate, 'profilePictures');
+    findAndUnlinkProfilePicture(userToUpdate);
     updateUser = {
       ...req.body,
       profilePictureUrl: `${req.protocol}://${req.get(
         'host'
-      )}/images/profilePictureUrl/${req.file.filename}`,
+      )}/images/profilePictures/${req.file.filename}`,
     };
   }
   await User.findByIdAndUpdate(req.params.id, {
@@ -96,9 +96,13 @@ exports.searchUser = catchAsync(async (req, res) => {
 
 // delete user (admin)
 exports.deleteUser = catchAsync(async (req, res) => {
-  const deleteUser = await User.findOneAndRemove({
+  const userToDelete = await User.findOne({
     $or: [{ email: req.body.email }, { username: req.body.username }],
   });
-  if (!deleteUser) return res.status(404).json({ message: 'User not found' });
-  else return res.status(200).json({ message: 'User deleted' });
+  if (!userToDelete) return res.status(404).json({ message: 'User not found' });
+  if (userToDelete.profilePictureUrl) findAndUnlinkProfilePicture(userToDelete);
+  await User.findOneAndDelete({
+    $or: [{ email: req.body.email }, { username: req.body.username }],
+  });
+  return res.status(200).json({ message: 'User deleted' });
 });

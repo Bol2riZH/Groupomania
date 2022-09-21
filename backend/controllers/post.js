@@ -76,7 +76,7 @@ exports.updatePost = catchAsync(async (req, res) => {
   let updatePost;
   if (!req.file) updatePost = { ...req.body };
   else {
-    await findAndUnlinkPostImage(postToUpdate, 'posts');
+    findAndUnlinkPostImage(postToUpdate, 'posts');
     updatePost = {
       ...req.body,
       userInfo: userInfo,
@@ -100,7 +100,7 @@ exports.deletePost = catchAsync(async (req, res) => {
   if (postToDelete.userId !== req.auth.userId)
     return res.status(401).json({ message: 'Unauthorized' });
 
-  await findAndUnlinkPostImage(postToDelete, 'posts');
+  findAndUnlinkPostImage(postToDelete, 'posts');
   await Post.findByIdAndDelete(req.params.id);
   return res.status(200).json({ message: 'post deleted !' });
 });

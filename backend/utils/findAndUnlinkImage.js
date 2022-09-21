@@ -2,12 +2,12 @@
 
 const fs = require('fs');
 
-exports.findAndUnlinkPostImage = async (Post, directory) => {
+exports.findAndUnlinkPostImage = (Post, directory) => {
   const filename = Post.imageUrl.split(`images/${directory}/`)[1];
   fs.unlink(`images/${directory}/${filename}`, () => {});
 };
 
-exports.findAndUnlinkProfilePicture = async (User, directory) => {
-  const filename = User.profilePictureUrl.split(`images/${directory}/`)[1];
-  fs.unlink(`images/${directory}/${filename}`, () => {});
+exports.findAndUnlinkProfilePicture = (User) => {
+  const filename = User.profilePictureUrl.split(`images/profilePictures/`)[1];
+  fs.unlink(`images/profilePictures/${filename}`, () => {});
 };
