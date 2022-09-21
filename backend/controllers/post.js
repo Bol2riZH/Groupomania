@@ -4,6 +4,12 @@ const Post = require('../models/Post');
 const catchAsync = require('../utils/catchAsync');
 const postedTime = require('../utils/postedTime');
 const { findAndUnlinkPostImage } = require('../utils/findAndUnlinkImage');
+const {
+  controlUserLiked,
+  controlUserDisliked,
+  controlUserPostLikes,
+  controlUserPostDislikes,
+} = require('../utils/controlUserPostNotice');
 
 // add post
 exports.addPost = catchAsync(async (req, res) => {
@@ -88,42 +94,51 @@ exports.deletePost = catchAsync(async (req, res) => {
 exports.NoticedPost = catchAsync(async (req, res) => {
   const stateLike = +req.body.like;
   const postToNoticed = await Post.findById(req.params.id);
+
+  const authId = req.auth.userId;
+  const indexOfUserLike = controlUserLiked(postToNoticed, authId);
+  const indexOfUserDislike = controlUserDisliked(postToNoticed, authId);
+  const userLikes = controlUserPostLikes(postToNoticed, authId);
+  const userDislikes = controlUserPostDislikes(postToNoticed, authId);
+
   switch (stateLike) {
     case 0:
-      if (postToNoticed.usersLiked.includes(postToNoticed.userId)) {
-        const indexOfUser = postToNoticed.usersLiked.indexOf(
-          postToNoticed.userId
-        ); //TODO : postToNoticed.userId -> req.auth.id
+      if (indexOfUserLike !== false) {
         await Post.findByIdAndUpdate(req.params.id, {
           ...postToNoticed,
           likes: postToNoticed.likes--,
-          usersLiked: postToNoticed.usersLiked.splice(indexOfUser, 1),
+          usersLiked: postToNoticed.usersLiked.splice(indexOfUserLike, 1),
         });
       }
-      if (postToNoticed.usersDisliked.includes(postToNoticed.userId)) {
-        const indexOfUser = postToNoticed.usersDisliked.indexOf(
-          postToNoticed.userId
-        ); //TODO : postToNoticed.userId -> req.auth.id
+      if (indexOfUserDislike !== false) {
         await Post.findByIdAndUpdate(req.params.id, {
           ...postToNoticed,
           dislikes: postToNoticed.dislikes--,
-          usersDisliked: postToNoticed.usersDisliked.splice(indexOfUser, 1),
+          usersDisliked: postToNoticed.usersDisliked.splice(
+            indexOfUserDislike,
+            1
+          ),
         });
       }
       break;
     case 1:
-      await Post.findByIdAndUpdate(req.params.id, {
-        ...postToNoticed,
-        likes: postToNoticed.likes++,
-        usersLiked: postToNoticed.usersLiked.push(postToNoticed.userId), //TODO : postToNoticed.userId -> req.auth.id
-      });
+      if (!userLikes && !userDislikes) {
+        await Post.findByIdAndUpdate(req.params.id, {
+          ...postToNoticed,
+          likes: postToNoticed.likes++,
+          usersLiked: postToNoticed.usersLiked.push(authId),
+        });
+      }
+
       break;
     case -1:
-      await Post.findByIdAndUpdate(req.params.id, {
-        ...postToNoticed,
-        dislikes: postToNoticed.dislikes++,
-        usersDisliked: postToNoticed.usersDisliked.push(postToNoticed.userId), //TODO : postToNoticed.userId -> req.auth.id
-      });
+      if (!userDislikes && !userLikes) {
+        await Post.findByIdAndUpdate(req.params.id, {
+          ...postToNoticed,
+          dislikes: postToNoticed.dislikes++,
+          usersDisliked: postToNoticed.usersDisliked.push(authId),
+        });
+      }
       break;
   }
   return res
