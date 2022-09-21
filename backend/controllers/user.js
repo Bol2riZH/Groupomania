@@ -1,30 +1,12 @@
 'use strict';
 
-const validator = require('validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const User = require('../models/User');
 const catchAsync = require('../utils/catchAsync');
-
-/*///////////////////////////////////////////////////////*/
-/*////////////////////// FUNCTIONS /////////////////////*/
-/*/////////////////////////////////////////////////////*/
-const emailAndPasswordValidator = (res, email, password) => {
-  if (!validator.isEmail(email)) {
-    return res
-      .status(400)
-      .json({ status: 'fail', message: 'email format incorrect' });
-  }
-  if (!validator.isStrongPassword(password)) {
-    return res.status(400).json({
-      status: 'fail',
-      message:
-        'password must contain at least 8 characters, must have at least 1 capital letter, one number and one special character',
-    });
-  } else return false;
-};
+const emailAndPasswordValidator = require('../utils/emailAndPasswordValidator');
 
 /*///////////////////////////////////////////////////////*/
 /*///////////////// USER CONTROLLERS ///////////////////*/
@@ -77,7 +59,7 @@ exports.getAllUsers = catchAsync(async (req, res) => {
 // search one user
 exports.searchUser = catchAsync(async (req, res) => {
   const user = await User.findOne({
-    $or: [{ email: req.body.email }, { userName: req.body.userName }],
+    $or: [{ email: req.body.email }, { username: req.body.username }],
   });
   if (!user) return res.status(404).json({ message: 'User not found' });
   else return res.status(200).json({ message: 'User found', user });
@@ -90,7 +72,7 @@ exports.searchUser = catchAsync(async (req, res) => {
 // delete user (admin)
 exports.deleteUser = catchAsync(async (req, res) => {
   const deleteUser = await User.findOneAndRemove({
-    $or: [{ email: req.body.email }, { userName: req.body.userName }],
+    $or: [{ email: req.body.email }, { username: req.body.username }],
   });
   if (!deleteUser) return res.status(404).json({ message: 'User not found' });
   else return res.status(200).json({ message: 'User deleted' });

@@ -1,6 +1,7 @@
 'use strict';
 
 const Post = require('../models/Post');
+const User = require('../models/User');
 const catchAsync = require('../utils/catchAsync');
 const postedTime = require('../utils/postedTime');
 const { findAndUnlinkPostImage } = require('../utils/findAndUnlinkImage');
@@ -10,6 +11,10 @@ const {
   controlUserPostLikes,
   controlUserPostDislikes,
 } = require('../utils/controlUserPostNotice');
+
+/*///////////////////////////////////////////////////////*/
+/*///////////////// POST CONTROLLERS ///////////////////*/
+/*/////////////////////////////////////////////////////*/
 
 // add post
 exports.addPost = catchAsync(async (req, res) => {
@@ -42,10 +47,10 @@ exports.getOnePost = catchAsync(async (req, res) => {
   else return res.status(200).json({ message: 'Post: ', post });
 });
 
-// search post by userName or title
+// search post by username or title
 exports.searchPost = catchAsync(async (req, res) => {
   const post = await Post.find({
-    $or: [{ userName: req.body.userName }, { title: req.body.title }],
+    $or: [{ username: req.body.username }, { title: req.body.title }],
   });
   if (post.length === 0)
     return res.status(404).json({ message: 'Post not founded' });
@@ -91,7 +96,7 @@ exports.deletePost = catchAsync(async (req, res) => {
 });
 
 //like / dislike a post
-exports.NoticedPost = catchAsync(async (req, res) => {
+exports.NoticePost = catchAsync(async (req, res) => {
   const stateLike = +req.body.like;
   const postToNoticed = await Post.findById(req.params.id);
 
@@ -129,7 +134,6 @@ exports.NoticedPost = catchAsync(async (req, res) => {
           usersLiked: postToNoticed.usersLiked.push(authId),
         });
       }
-
       break;
     case -1:
       if (!userDislikes && !userLikes) {
@@ -144,4 +148,27 @@ exports.NoticedPost = catchAsync(async (req, res) => {
   return res
     .status(200)
     .json({ status: 'success', message: 'post noticed', postToNoticed });
+});
+
+exports.commentPost = catchAsync(async (req, res) => {
+  const postToComment = await Post.findById(req.params.id);
+
+  const user = await User.findById(req.auth.userId);
+  const userInfo = {
+    userId: req.auth.userId,
+    username: user.username,
+    profilPictureUrl: user.profilPictureUrl,
+  };
+
+  await Post.findByIdAndUpdate(req.params.id, {
+    ...postToComment,
+    comments: postToComment.comments.push({
+      ...userInfo,
+      comment: req.body.comments,
+      date: postedTime(),
+    }),
+  });
+  return res
+    .status(200)
+    .json({ status: 'success', message: 'post commented', postToComment });
 });
