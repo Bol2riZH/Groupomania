@@ -90,8 +90,7 @@ exports.updatePost = catchAsync(async (req, res) => {
     return res
       .status(200)
       .json({ status: 'success', message: 'Post updated', updatePost });
-  }
-  return res.status(401).json({ message: 'Unauthorized' });
+  } else return res.status(403).json({ message: 'Forbidden' });
 });
 
 // delete
@@ -101,8 +100,7 @@ exports.deletePost = catchAsync(async (req, res) => {
     findAndUnlinkPostImage(postToDelete, 'posts');
     await Post.findByIdAndDelete(req.params.id);
     return res.status(200).json({ message: 'post deleted !' });
-  }
-  return res.status(401).json({ message: 'Unauthorized' });
+  } else return res.status(403).json({ message: 'Forbidden' });
 });
 
 // like / dislike

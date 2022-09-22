@@ -9,10 +9,10 @@ const { profilePictureMulter } = require('../middlewares/multer');
 
 router.post('/signup', profilePictureMulter, userCtrl.signup);
 router.post('/login', userCtrl.login);
+router.post('/logout', auth, userCtrl.logout);
 router.put('/:id', auth, profilePictureMulter, userCtrl.updateUser);
 router.get('/', userCtrl.getAllUsers);
 router.post('/search-user', userCtrl.searchUser);
 router.delete('/', auth, userCtrl.deleteUser);
-// router.post('/', userCtrl.logout);
 
 module.exports = router;

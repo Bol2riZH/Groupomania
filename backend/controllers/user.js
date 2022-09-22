@@ -48,10 +48,16 @@ exports.login = catchAsync(async (req, res) => {
       message: 'User connected',
       userId: user._id,
       token: jwt.sign({ userId: user._id }, process.env.TOKEN_KEY, {
-        expiresIn: '24h',
+        expiresIn: process.env.TOKEN_TTL,
       }),
     });
   }
+});
+
+exports.logout = catchAsync(async (req, res) => {
+  const userToLogout = await User.findById(req.auth.userId);
+  console.log(userToLogout.token);
+  return res.status(200).json({ status: 'success', message: 'User logout' });
 });
 
 // update
@@ -75,7 +81,7 @@ exports.updateUser = catchAsync(async (req, res) => {
     return res
       .status(200)
       .json({ status: 'success', message: 'User updated', updateUser });
-  } else return res.status(401).json({ message: 'Unauthorized' });
+  } else return res.status(403).json({ message: 'Forbidden' });
 });
 
 // get all users
@@ -109,5 +115,5 @@ exports.deleteUser = catchAsync(async (req, res) => {
       $or: [{ email: req.body.email }, { username: req.body.username }],
     });
     return res.status(200).json({ message: 'User deleted' });
-  } else return res.status(401).json({ message: 'Unauthorized' });
+  } else return res.status(403).json({ message: 'Forbidden' });
 });
