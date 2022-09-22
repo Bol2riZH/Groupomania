@@ -3,6 +3,7 @@
 const Post = require('../models/Post');
 const User = require('../models/User');
 
+const checkAdmin = require('../utils/checkAdmin');
 const catchAsync = require('../utils/catchAsync');
 const postedTime = require('../utils/postedTime');
 const getUserInfo = require('../utils/getUserInfo');
@@ -67,42 +68,41 @@ exports.searchPost = catchAsync(async (req, res) => {
 exports.updatePost = catchAsync(async (req, res) => {
   const postToUpdate = await Post.findById(req.params.id);
 
-  if (postToUpdate.userId !== req.auth.userId)
-    return res.status(401).json({ message: 'Unauthorized' });
+  if ((await checkAdmin(req)) || postToUpdate.userId === req.auth.userId) {
+    const user = await User.findById(req.auth.userId);
+    const userInfo = getUserInfo(user);
 
-  const user = await User.findById(req.auth.userId);
-  const userInfo = getUserInfo(user);
-
-  let updatePost;
-  if (!req.file) updatePost = { ...req.body };
-  else {
-    findAndUnlinkPostImage(postToUpdate, 'posts');
-    updatePost = {
-      ...req.body,
-      userInfo: userInfo,
-      imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
-        req.file.filename
-      }`,
-    };
+    let updatePost;
+    if (!req.file) updatePost = { ...req.body };
+    else {
+      findAndUnlinkPostImage(postToUpdate, 'posts');
+      updatePost = {
+        ...req.body,
+        userInfo: userInfo,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
+          req.file.filename
+        }`,
+      };
+    }
+    await Post.findByIdAndUpdate(req.params.id, {
+      ...updatePost,
+    });
+    return res
+      .status(200)
+      .json({ status: 'success', message: 'Post updated', updatePost });
   }
-  await Post.findByIdAndUpdate(req.params.id, {
-    ...updatePost,
-  });
-  return res
-    .status(200)
-    .json({ status: 'success', message: 'Post updated', updatePost });
+  return res.status(401).json({ message: 'Unauthorized' });
 });
 
 // delete
 exports.deletePost = catchAsync(async (req, res) => {
   const postToDelete = await Post.findById(req.params.id);
-
-  if (postToDelete.userId !== req.auth.userId)
-    return res.status(401).json({ message: 'Unauthorized' });
-
-  findAndUnlinkPostImage(postToDelete, 'posts');
-  await Post.findByIdAndDelete(req.params.id);
-  return res.status(200).json({ message: 'post deleted !' });
+  if ((await checkAdmin(req)) || postToDelete.userId === req.auth.userId) {
+    findAndUnlinkPostImage(postToDelete, 'posts');
+    await Post.findByIdAndDelete(req.params.id);
+    return res.status(200).json({ message: 'post deleted !' });
+  }
+  return res.status(401).json({ message: 'Unauthorized' });
 });
 
 // like / dislike
