@@ -2,9 +2,9 @@
 
 const fs = require('fs');
 
-exports.findAndUnlinkPostImage = (Post, directory) => {
-  const filename = Post.imageUrl.split(`images/${directory}/`)[1];
-  fs.unlink(`images/${directory}/${filename}`, () => {});
+exports.findAndUnlinkPostImage = (Post) => {
+  const filename = Post.imageUrl.split(`images/posts/`)[1];
+  fs.unlink(`images/posts/${filename}`, () => {});
 };
 
 exports.findAndUnlinkProfilePicture = (User) => {

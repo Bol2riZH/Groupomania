@@ -1,21 +1,21 @@
 'use strict';
 
-exports.controlUserLiked = (post, id) => {
-  const index = post.usersLiked.indexOf(id);
+exports.controlUserLiked = (post, req) => {
+  const index = post.usersLiked.indexOf(req.auth.userId);
   if (index < 0) return false;
   else return index;
 };
 
-exports.controlUserDisliked = (post, id) => {
-  const index = post.usersDisliked.indexOf(id);
+exports.controlUserDisliked = (post, req) => {
+  const index = post.usersDisliked.indexOf(req.auth.userId);
   if (index < 0) return false;
   else return index;
 };
 
-exports.controlUserPostLikes = (post, id) => {
-  return post.usersLiked.includes(id);
+exports.controlUserPostLikes = (post, req) => {
+  return post.usersLiked.includes(req.auth.userId);
 };
 
-exports.controlUserPostDislikes = (post, id) => {
-  return post.usersDisliked.includes(id);
+exports.controlUserPostDislikes = (post, req) => {
+  return post.usersDisliked.includes(req.auth.userId);
 };

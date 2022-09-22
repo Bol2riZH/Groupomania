@@ -11,11 +11,8 @@ const catchAsync = require('../utils/catchAsync');
 const emailAndPasswordValidator = require('../utils/emailAndPasswordValidator');
 const { findAndUnlinkProfilePicture } = require('../utils/findAndUnlinkImage');
 
-/*///////////////////////////////////////////////////////*/
-/*///////////////// USER CONTROLLERS ///////////////////*/
-/*/////////////////////////////////////////////////////*/
-
-// signup
+/*/////////////////////////////////////////////*/
+/*///////////////// SIGNUP ///////////////////*/
 exports.signup = catchAsync(async (req, res) => {
   if (!emailAndPasswordValidator(req, res)) {
     const hash = await bcrypt.hash(req.body.password, 10);
@@ -34,7 +31,8 @@ exports.signup = catchAsync(async (req, res) => {
   }
 });
 
-// login
+/*////////////////////////////////////////////*/
+/*///////////////// LOGIN ///////////////////*/
 exports.login = catchAsync(async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user)
@@ -45,7 +43,7 @@ exports.login = catchAsync(async (req, res) => {
   else {
     res.status(200).json({
       status: 'success',
-      message: 'User connected',
+      message: 'User login',
       userId: user._id,
       token: jwt.sign({ userId: user._id }, process.env.TOKEN_KEY, {
         expiresIn: process.env.TOKEN_TTL,
@@ -54,14 +52,9 @@ exports.login = catchAsync(async (req, res) => {
   }
 });
 
-exports.logout = catchAsync(async (req, res) => {
-  const userToLogout = await User.findById(req.auth.userId);
-  console.log(userToLogout.token);
-  return res.status(200).json({ status: 'success', message: 'User logout' });
-});
-
-// update
-exports.updateUser = catchAsync(async (req, res) => {
+/*/////////////////////////////////////////////*/
+/*///////////////// UPDATE ///////////////////*/
+exports.update = catchAsync(async (req, res) => {
   const userToUpdate = await User.findById(req.params.id);
   if ((await checkAdmin(req)) || req.params.id === req.auth.userId) {
     let updateUser;
@@ -84,16 +77,9 @@ exports.updateUser = catchAsync(async (req, res) => {
   } else return res.status(403).json({ message: 'Forbidden' });
 });
 
-// get all users
-exports.getAllUsers = catchAsync(async (req, res) => {
-  const users = await User.find();
-  if (users.length === 0)
-    return res.status(404).json({ message: 'User not found' });
-  else return res.status(200).json({ message: 'List of users: ', users });
-});
-
-// search one user
-exports.searchUser = catchAsync(async (req, res) => {
+/*/////////////////////////////////////////////*/
+/*///////////////// SEARCH ///////////////////*/
+exports.search = catchAsync(async (req, res) => {
   const user = await User.findOne({
     $or: [{ email: req.body.email }, { username: req.body.username }],
   });
@@ -101,8 +87,18 @@ exports.searchUser = catchAsync(async (req, res) => {
   else return res.status(200).json({ message: 'User found', user });
 });
 
-// delete user (admin)
-exports.deleteUser = catchAsync(async (req, res) => {
+/*//////////////////////////////////////////////*/
+/*///////////////// GET ALL ///////////////////*/
+exports.getAll = catchAsync(async (req, res) => {
+  const users = await User.find();
+  if (users.length === 0)
+    return res.status(404).json({ message: 'User not found' });
+  else return res.status(200).json({ message: 'List of users: ', users });
+});
+
+/*/////////////////////////////////////////////*/
+/*///////////////// DELETE ///////////////////*/
+exports.delete = catchAsync(async (req, res) => {
   if (await checkAdmin(req)) {
     const userToDelete = await User.findOne({
       $or: [{ email: req.body.email }, { username: req.body.username }],
