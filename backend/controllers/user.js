@@ -17,16 +17,16 @@ const { findAndUnlinkProfilePicture } = require('../utils/findAndUnlinkImage');
 
 // signup
 exports.signup = catchAsync(async (req, res) => {
-  if (!emailAndPasswordValidator(res, req.body.email, req.body.password)) {
+  if (!emailAndPasswordValidator(req, res)) {
     const hash = await bcrypt.hash(req.body.password, 10);
     const user = new User({
       ...req.body,
       password: hash,
-      profilePictureUrl: req.file
-        ? `${req.protocol}://${req.get('host')}/images/profilePictures/${
-            req.file.filename
-          }`
-        : '',
+      profilePictureUrl:
+        req.file &&
+        `${req.protocol}://${req.get('host')}/images/profilePictures/${
+          req.file.filename
+        }`,
       role: 'user',
     });
     await user.save();
