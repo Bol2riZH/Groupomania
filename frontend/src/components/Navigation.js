@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import './_Navigation.module.scss';
+
 const Navigation = () => {
   return (
     <div>
@@ -9,7 +11,10 @@ const Navigation = () => {
           <li>Home</li>
         </NavLink>
         <NavLink to="/signup">
-          <li>signup</li>
+          <li>Signup</li>
+        </NavLink>
+        <NavLink to="/list-of-user">
+          <li>List of users</li>
         </NavLink>
       </ul>
     </div>

@@ -1,7 +1,6 @@
 .button {
   background-color: rgb(85, 165, 230);
   color: white;
-  font-size: 1.6rem;
   padding: 1rem 2rem;
   height: fit-content;
   border: none;
@@ -13,4 +12,8 @@
 .button:hover {
   cursor: pointer;
   background-color: rgb(69, 141, 197);
+}
+
+.button:active {
+  background-color: rgb(85, 165, 230);
 }
