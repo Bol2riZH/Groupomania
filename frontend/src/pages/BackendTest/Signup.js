@@ -3,8 +3,6 @@ import axios from 'axios';
 
 import './_Signup.module.scss';
 
-import Header from '../../layout/Header';
-import Navigation from '../../components/Navigation';
 import Button from '../../UI/Button';
 import Card from '../../UI/Card';
 
