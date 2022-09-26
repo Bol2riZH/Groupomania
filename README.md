@@ -11,7 +11,7 @@ In this project, we have to build an entire social network from scratch for a co
 - **R**eact
 - **N**ode
 
-### For now on, the front-end is operational on the user (not post)
+### For now on, the front-end is operational on the user routes (not the post routes)
 
 ### All the back-end can be use by Postman
 

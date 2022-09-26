@@ -13,27 +13,6 @@ const { findAndUnlinkProfilePicture } = require('../utils/findAndUnlinkImage');
 
 /*/////////////////////////////////////////////*/
 /*///////////////// SIGNUP ///////////////////*/
-// exports.signup = catchAsync(async (req, res) => {
-//   console.log(req.file);
-//   if (!emailAndPasswordValidator(req, res)) {
-//     const hash = await bcrypt.hash(req.body.password, 10);
-//     const defaultProfilePicture =
-//       '../images/profilePictures/defaultProfile.svg';
-//
-//     const user = new User({
-//       ...req.body,
-//       password: hash,
-//       profilePictureUrl: req.file
-//         ? `${req.protocol}://${req.get('host')}/images/profilePictures/${
-//             req.file.filename
-//           }`
-//         : defaultProfilePicture,
-//       role: 'user',
-//     });
-//     await user.save();
-//     return res.status(201).json({ message: 'User created' });
-//   }
-// });
 exports.signup = catchAsync(async (req, res) => {
   if (!emailAndPasswordValidator(req, res)) {
     const hash = await bcrypt.hash(req.body.password, 10);
@@ -56,10 +35,11 @@ exports.signup = catchAsync(async (req, res) => {
 /*///////////////// LOGIN ///////////////////*/
 exports.login = catchAsync(async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(401).json({ message: 'Incorrect email' });
+  if (!user)
+    return res.status(401).json({ message: 'Incorrect email or password' });
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword)
-    return res.status(401).json({ message: 'Incorrect password ' });
+    return res.status(401).json({ message: 'Incorrect email or password ' });
   else {
     res.status(200).json({
       status: 'success',
