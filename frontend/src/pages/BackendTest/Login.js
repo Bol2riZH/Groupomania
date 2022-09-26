@@ -25,8 +25,11 @@ const Login = () => {
         password: password,
       })
       .then((res) => {
-        console.log(res.data);
-        localStorage.setItem('token', res.data.token);
+        const user = {
+          id: res.data.userId,
+          token: res.data.token,
+        };
+        localStorage.setItem('user', JSON.stringify(user));
       });
   };
 
