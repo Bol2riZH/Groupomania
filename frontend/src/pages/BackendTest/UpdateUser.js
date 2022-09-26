@@ -43,16 +43,14 @@ const UpdateUser = () => {
     password && formData.append('password', password);
     confirmPassword && formData.append('confirmPassword', confirmPassword);
 
+    const userId = JSON.parse(localStorage.getItem('user'));
+
     axios
-      .put(
-        'http://localhost:4000/api/auth/update/6331739525bec69f651b163b',
-        formData,
-        {
-          headers: {
-            'content-type': 'multipart/form-data',
-          },
-        }
-      )
+      .put(`http://localhost:4000/api/auth/update/${userId.id}`, formData, {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      })
       .then((res) => console.log(res.data));
   };
 
