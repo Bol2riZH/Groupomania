@@ -23,14 +23,13 @@ const DeleteUser = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const data = dataToObj(findUserBy, user);
-
+    const dataObj = dataToObj(findUserBy, user);
     axios
-      .delete('http://localhost:4000/api/auth/', {
+      .delete('http://localhost:4000/api/auth/delete', {
         headers: {
           'content-type': 'application/json',
         },
-        data,
+        data: dataObj,
       })
       .then((res) => console.log(res.data));
   };

@@ -99,17 +99,29 @@ exports.getAll = catchAsync(async (req, res) => {
 /*/////////////////////////////////////////////*/
 /*///////////////// DELETE ///////////////////*/
 exports.delete = catchAsync(async (req, res) => {
-  if (await checkAdmin(req)) {
-    const userToDelete = await User.findOne({
-      $or: [{ email: req.body.email }, { username: req.body.username }],
-    });
-    if (!userToDelete)
-      return res.status(404).json({ message: 'User not found' });
-    if (userToDelete.profilePictureUrl)
-      findAndUnlinkProfilePicture(userToDelete);
-    await User.findOneAndDelete({
-      $or: [{ email: req.body.email }, { username: req.body.username }],
-    });
-    return res.status(200).json({ message: 'User deleted' });
-  } else return res.status(403).json({ message: 'Forbidden' });
+  const userToDelete = await User.findOne({
+    $or: [{ email: req.body.email }, { username: req.body.username }],
+  });
+  if (!userToDelete) return res.status(404).json({ message: 'User not found' });
+  if (userToDelete.profilePictureUrl) findAndUnlinkProfilePicture(userToDelete);
+  await User.findOneAndDelete({
+    $or: [{ email: req.body.email }, { username: req.body.username }],
+  });
+  return res.status(200).json({ message: 'User deleted' });
 });
+
+// exports.delete = catchAsync(async (req, res) => {
+//   if (await checkAdmin(req)) {
+//     const userToDelete = await User.findOne({
+//       $or: [{ email: req.body.email }, { username: req.body.username }],
+//     });
+//     if (!userToDelete)
+//       return res.status(404).json({ message: 'User not found' });
+//     if (userToDelete.profilePictureUrl)
+//       findAndUnlinkProfilePicture(userToDelete);
+//     await User.findOneAndDelete({
+//       $or: [{ email: req.body.email }, { username: req.body.username }],
+//     });
+//     return res.status(200).json({ message: 'User deleted' });
+//   } else return res.status(403).json({ message: 'Forbidden' });
+// });

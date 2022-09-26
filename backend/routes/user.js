@@ -12,9 +12,10 @@ router.post('/signup', profilePictureMulter, userCtrl.signup);
 router.post('/login', userCtrl.login);
 router.put('/:id', auth, profilePictureMulter, userCtrl.update);
 
-router.post('/search-user', userCtrl.search);
+router.post('/search', userCtrl.search);
 router.get('/', userCtrl.getAll);
 
-router.delete('/', auth, userCtrl.delete);
+router.delete('/delete', userCtrl.delete);
+// router.delete('/delete', auth, userCtrl.delete);
 
 module.exports = router;

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Card from '../../UI/Card';
 import Button from '../../UI/Button';
 import axios from 'axios';
-import { json } from 'react-router-dom';
 
 const SearchUser = () => {
   const [user, setUser] = useState('');
@@ -24,8 +23,9 @@ const SearchUser = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     const data = dataToObj(findUserBy, user);
+    console.log(data);
     axios
-      .post('http://localhost:4000/api/auth/search-user/', data)
+      .post('http://localhost:4000/api/auth/search', data)
       .then((res) => console.log(res.data));
   };
 
