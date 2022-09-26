@@ -16,6 +16,12 @@ const Navigation = () => {
         <NavLink to="/list-of-user">
           <li>List of users</li>
         </NavLink>
+        <NavLink to="/search-user">
+          <li>Search a user</li>
+        </NavLink>
+        <NavLink to="/delete-user">
+          <li>Delete a user</li>
+        </NavLink>
       </ul>
     </div>
   );
