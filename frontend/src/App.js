@@ -2,15 +2,15 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Header from './layout/Header';
-import Home from './pages/BackendTest/Home';
+import Home from './pages/BackendTestUser/Home';
 import Navigation from './components/Navigation';
-import Signup from './pages/BackendTest/Signup';
-import Login from './pages/BackendTest/Login';
-import Logout from './pages/BackendTest/Logout';
-import UpdateUser from './pages/BackendTest/UpdateUser';
-import ListOfUsers from './pages/BackendTest/ListOfUsers';
-import SearchUser from './pages/BackendTest/SearchUser';
-import DeleteUser from './pages/BackendTest/DeleteUser';
+import Signup from './pages/BackendTestUser/Signup';
+import Login from './pages/BackendTestUser/Login';
+import Logout from './pages/BackendTestUser/Logout';
+import UpdateUser from './pages/BackendTestUser/UpdateUser';
+import ListOfUsers from './pages/BackendTestUser/ListOfUsers';
+import SearchUser from './pages/BackendTestUser/SearchUser';
+import DeleteUser from './pages/BackendTestUser/DeleteUser';
 
 function App() {
   return (

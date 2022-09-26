@@ -2,6 +2,7 @@ import React from 'react';
 
 import Card from '../../UI/Card';
 import Button from '../../UI/Button';
+import classes from './Logout.module.scss';
 
 const Logout = () => {
   const logoutHandler = () => {
@@ -9,7 +10,8 @@ const Logout = () => {
   };
 
   return (
-    <Card>
+    <Card className={classes.center}>
+      <h1>LOGIN</h1>
       <Button onClick={logoutHandler}>Logout</Button>
     </Card>
   );

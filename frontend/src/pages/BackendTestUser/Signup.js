@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import './_Signup.module.scss';
-
 import Button from '../../UI/Button';
 import Card from '../../UI/Card';
 
@@ -35,6 +33,7 @@ const Signup = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
     const formData = new FormData();
     formData.append('profilePictureUrl', profilePicture);
     formData.append('username', username);

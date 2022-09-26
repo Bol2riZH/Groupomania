@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import axios from 'axios';
-import classes from './_ListOfUsers.module.scss';
+import classes from './ListOfUsers.module.scss';
 import Card from '../../UI/Card';
 
 const ListOfUsers = () => {
@@ -22,12 +22,16 @@ const ListOfUsers = () => {
       {users.map((user, index) => (
         <li key={index}>
           <Card className={classes.profileCard}>
-            <div>
+            <div className={classes.info}>
               <h2>{user.username}</h2>
               <p>{user.email}</p>
             </div>
             <div className={classes.img}>
-              <img src={user.profilePictureUrl} alt="profile picture" />
+              {user.profilePictureUrl ? (
+                <img src={user.profilePictureUrl} alt="profile picture" />
+              ) : (
+                <img src="./defaultProfile.svg" alt="profile picture" />
+              )}
             </div>
           </Card>
         </li>

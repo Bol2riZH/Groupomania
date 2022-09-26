@@ -11,9 +11,18 @@ In this project, we have to build an entire social network from scratch for a co
 - **R**eact
 - **N**ode
 
-<span style="color:#ec8acc;font-weight:700;font-size:20px"> 
-    For now on, only the backend is operational.
-</span>
+### For now on, the front-end is operational on the user (not post)
+
+### All the back-end can be use by Postman
+
+## How to use FRONTEND
+
+Open your terminal and go the  `/frontend` folder.
+
+Run `npm install` to install all required dependencies.
+
+Run `npm start` to start the interface on your browser (PORT 3000).
+
 
 ## How to use BACKEND
 

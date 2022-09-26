@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import './_Signup.module.scss';
-
 import Button from '../../UI/Button';
 import Card from '../../UI/Card';
 
