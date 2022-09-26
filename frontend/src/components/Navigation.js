@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import './Navigation.module.scss';
+import classes from './Navigation.module.scss';
 
 const Navigation = () => {
   return (
-    <div>
+    <div className={classes.nav}>
       <ul>
         <NavLink to="/">
           <li>Home</li>
@@ -30,6 +30,11 @@ const Navigation = () => {
         </NavLink>
         <NavLink to="/delete-user">
           <li>Delete a user</li>
+        </NavLink>
+      </ul>
+      <ul>
+        <NavLink to="/add-post">
+          <li>Add a post</li>
         </NavLink>
       </ul>
     </div>

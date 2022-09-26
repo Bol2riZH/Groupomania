@@ -12,6 +12,8 @@ import ListOfUsers from './pages/BackendTestUser/ListOfUsers';
 import SearchUser from './pages/BackendTestUser/SearchUser';
 import DeleteUser from './pages/BackendTestUser/DeleteUser';
 
+import AddPost from './pages/BackendTestPost/AddPost';
+
 function App() {
   return (
     <BrowserRouter>
@@ -27,6 +29,8 @@ function App() {
         <Route path="/list-users" element={<ListOfUsers />} />
         <Route path="/search-user" element={<SearchUser />} />
         <Route path="/delete-user" element={<DeleteUser />} />
+
+        <Route path="/add-post" element={<AddPost />} />
       </Routes>
     </BrowserRouter>
   );

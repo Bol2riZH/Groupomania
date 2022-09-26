@@ -11,7 +11,7 @@ const Logout = () => {
 
   return (
     <Card className={classes.center}>
-      <h1>LOGIN</h1>
+      <h1>LOGOUT</h1>
       <Button onClick={logoutHandler}>Logout</Button>
     </Card>
   );
