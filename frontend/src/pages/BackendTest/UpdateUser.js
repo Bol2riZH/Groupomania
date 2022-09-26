@@ -44,14 +44,15 @@ const UpdateUser = () => {
     confirmPassword && formData.append('confirmPassword', confirmPassword);
 
     const userId = JSON.parse(localStorage.getItem('user'));
-
-    axios
-      .put(`http://localhost:4000/api/auth/update/${userId.id}`, formData, {
-        headers: {
-          'content-type': 'multipart/form-data',
-        },
-      })
-      .then((res) => console.log(res.data));
+    userId &&
+      axios
+        .put(`http://localhost:4000/api/auth/update/${userId.id}`, formData, {
+          headers: {
+            Authorization: `Bearer ${userId.token}`,
+            'content-type': 'multipart/form-data',
+          },
+        })
+        .then((res) => console.log(res.data));
   };
 
   return (

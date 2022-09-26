@@ -6,6 +6,7 @@ import Home from './pages/BackendTest/Home';
 import Navigation from './components/Navigation';
 import Signup from './pages/BackendTest/Signup';
 import Login from './pages/BackendTest/Login';
+import Logout from './pages/BackendTest/Logout';
 import UpdateUser from './pages/BackendTest/UpdateUser';
 import ListOfUsers from './pages/BackendTest/ListOfUsers';
 import SearchUser from './pages/BackendTest/SearchUser';
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
         <Route path="/update-user" element={<UpdateUser />} />
         <Route path="/list-users" element={<ListOfUsers />} />
         <Route path="/search-user" element={<SearchUser />} />

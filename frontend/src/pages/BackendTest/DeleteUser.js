@@ -23,15 +23,20 @@ const DeleteUser = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
     const dataObj = dataToObj(findUserBy, user);
-    axios
-      .delete('http://localhost:4000/api/auth/delete', {
-        headers: {
-          'content-type': 'application/json',
-        },
-        data: dataObj,
-      })
-      .then((res) => console.log(res.data));
+
+    const userId = JSON.parse(localStorage.getItem('user'));
+    userId &&
+      axios
+        .delete('http://localhost:4000/api/auth/delete', {
+          headers: {
+            Authorization: `Bearer ${userId.token}`,
+            'content-type': 'application/json',
+          },
+          data: dataObj,
+        })
+        .then((res) => console.log(res.data));
   };
 
   return (

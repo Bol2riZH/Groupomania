@@ -16,6 +16,9 @@ const Navigation = () => {
         <NavLink to="/login">
           <li>Login</li>
         </NavLink>
+        <NavLink to="/logout">
+          <li>Logout</li>
+        </NavLink>
         <NavLink to="/update-user">
           <li>Update user</li>
         </NavLink>

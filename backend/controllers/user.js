@@ -35,11 +35,10 @@ exports.signup = catchAsync(async (req, res) => {
 /*///////////////// LOGIN ///////////////////*/
 exports.login = catchAsync(async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
-  if (!user)
-    return res.status(401).json({ message: 'Incorrect email or password ' });
+  if (!user) return res.status(401).json({ message: 'Incorrect email' });
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword)
-    return res.status(401).json({ message: 'Incorrect email or password ' });
+    return res.status(401).json({ message: 'Incorrect password ' });
   else {
     res.status(200).json({
       status: 'success',
@@ -56,25 +55,25 @@ exports.login = catchAsync(async (req, res) => {
 /*///////////////// UPDATE ///////////////////*/
 exports.update = catchAsync(async (req, res) => {
   const userToUpdate = await User.findById(req.params.id);
-  // if ((await checkAdmin(req)) || req.params.id === req.auth.userId) {
-  let updateUser;
-  if (!req.file) updateUser = { ...req.body };
-  else {
-    findAndUnlinkProfilePicture(userToUpdate);
-    updateUser = {
-      ...req.body,
-      profilePictureUrl: `${req.protocol}://${req.get(
-        'host'
-      )}/images/profilePictures/${req.file.filename}`,
-    };
-  }
-  await User.findByIdAndUpdate(req.params.id, {
-    ...updateUser,
-  });
-  return res
-    .status(200)
-    .json({ status: 'success', message: 'User updated', updateUser });
-  // } else return res.status(403).json({ message: 'Forbidden' });
+  if ((await checkAdmin(req)) || req.params.id === req.auth.userId) {
+    let updateUser;
+    if (!req.file) updateUser = { ...req.body };
+    else {
+      findAndUnlinkProfilePicture(userToUpdate);
+      updateUser = {
+        ...req.body,
+        profilePictureUrl: `${req.protocol}://${req.get(
+          'host'
+        )}/images/profilePictures/${req.file.filename}`,
+      };
+    }
+    await User.findByIdAndUpdate(req.params.id, {
+      ...updateUser,
+    });
+    return res
+      .status(200)
+      .json({ status: 'success', message: 'User updated', updateUser });
+  } else return res.status(403).json({ message: 'Forbidden' });
 });
 
 /*/////////////////////////////////////////////*/
@@ -99,15 +98,17 @@ exports.getAll = catchAsync(async (req, res) => {
 /*/////////////////////////////////////////////*/
 /*///////////////// DELETE ///////////////////*/
 exports.delete = catchAsync(async (req, res) => {
-  // if (await checkAdmin(req)) {
-  const userToDelete = await User.findOne({
-    $or: [{ email: req.body.email }, { username: req.body.username }],
-  });
-  if (!userToDelete) return res.status(404).json({ message: 'User not found' });
-  if (userToDelete.profilePictureUrl) findAndUnlinkProfilePicture(userToDelete);
-  await User.findOneAndDelete({
-    $or: [{ email: req.body.email }, { username: req.body.username }],
-  });
-  return res.status(200).json({ message: 'User deleted' });
-  // } else return res.status(403).json({ message: 'Forbidden' });
+  if (await checkAdmin(req)) {
+    const userToDelete = await User.findOne({
+      $or: [{ email: req.body.email }, { username: req.body.username }],
+    });
+    if (!userToDelete)
+      return res.status(404).json({ message: 'User not found' });
+    if (userToDelete.profilePictureUrl)
+      findAndUnlinkProfilePicture(userToDelete);
+    await User.findOneAndDelete({
+      $or: [{ email: req.body.email }, { username: req.body.username }],
+    });
+    return res.status(200).json({ message: 'User deleted' });
+  } else return res.status(403).json({ message: 'Forbidden' });
 });
