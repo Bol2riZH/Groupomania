@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import axios from 'axios';
-import classes from './ListOfUsers.module.scss';
+
 import Card from '../../UI/Card';
+import classes from './ListOfUsers.module.scss';
 
 const ListOfUsers = () => {
   const effectRan = useRef(false);

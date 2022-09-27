@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
-import Card from '../../UI/Card';
 import axios from 'axios';
+
+import Card from '../../UI/Card';
 import Button from '../../UI/Button';
 
 const AddPost = () => {
