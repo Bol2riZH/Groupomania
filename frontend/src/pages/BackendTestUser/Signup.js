@@ -4,8 +4,6 @@ import axios from 'axios';
 import Button from '../../UI/Button';
 import Card from '../../UI/Card';
 
-import classes from './Signup.module.scss';
-
 const Signup = () => {
   const [profilePicture, setProfilePicture] = useState('');
   const [username, setUsername] = useState('');
