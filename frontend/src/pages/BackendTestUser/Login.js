@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Button from '../../UI/Button';
 import Card from '../../UI/Card';
+import PassswordRevealer from '../../components/PasswordRevealer';
 
 const Login = () => {
   const [email, setEnteredEmail] = useState('');
@@ -38,20 +39,10 @@ const Login = () => {
       <h1>LOGIN</h1>
       <form onSubmit={submitHandler}>
         <label htmlFor="email">Email: </label>
-        <input
-          id="email"
-          type="text"
-          onChange={emailHandler}
-          defaultValue={email}
-        />
+        <input id="email" type="text" onChange={emailHandler} />
         <label htmlFor="password">Password: </label>
-        <input
-          id="password"
-          type="text"
-          onChange={passwordHandler}
-          defaultValue={password}
-        />
-        <Button type="submit">Envoyer</Button>
+        <PassswordRevealer id="password" onChange={passwordHandler} />
+        <Button type="submit">Login</Button>
       </form>
     </Card>
   );

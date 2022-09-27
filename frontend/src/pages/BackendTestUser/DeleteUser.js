@@ -53,7 +53,7 @@ const DeleteUser = () => {
           Entered the username or email address of the user you want to delete:
         </label>
         <input id="user" type="text" onChange={userHandler} />
-        <Button type="submit">Envoyer</Button>
+        <Button type="submit">Confirm</Button>
       </form>
     </Card>
   );

@@ -92,7 +92,7 @@ const UpdateUser = () => {
           onChange={confirmPasswordHandler}
           defaultValue={confirmPassword}
         />
-        <Button type="submit">Envoyer</Button>
+        <Button type="submit">Update</Button>
       </form>
     </Card>
   );

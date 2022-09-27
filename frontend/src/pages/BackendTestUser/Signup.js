@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Button from '../../UI/Button';
 import Card from '../../UI/Card';
+import PassswordRevealer from '../../components/PasswordRevealer';
 
 const Signup = () => {
   const [profilePicture, setProfilePicture] = useState('');
@@ -69,34 +70,22 @@ const Signup = () => {
           onChange={profilePictureHandler}
         />
         <label htmlFor="username">username: </label>
-        <input
-          id="username"
-          type="text"
-          onChange={usernameHandler}
-          defaultValue={username}
-        />
+        <input id="username" type="text" onChange={usernameHandler} />
         <label htmlFor="email">Email: </label>
-        <input
-          id="email"
-          type="text"
-          onChange={emailHandler}
-          defaultValue={email}
-        />
+        <input id="email" type="text" onChange={emailHandler} />
         <label htmlFor="password">Password: </label>
-        <input
+        <PassswordRevealer
           id="password"
-          type="text"
+          type="password"
           onChange={passwordHandler}
-          defaultValue={password}
         />
         <label htmlFor="confirm-password">Confirm password: </label>
-        <input
+        <PassswordRevealer
           id="confirm-password"
-          type="text"
+          type="password"
           onChange={confirmPasswordHandler}
-          defaultValue={confirmPassword}
         />
-        <Button type="submit">Envoyer</Button>
+        <Button type="submit">Signup</Button>
       </form>
     </Card>
   );
