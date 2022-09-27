@@ -20,13 +20,16 @@ const SearchUser = () => {
     else return { email: value };
   };
 
+  const postData = async (data) => {
+    const res = await axios.post('http://localhost:4000/api/auth/search', data);
+    console.log(res.data);
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
+
     const data = dataToObj(findUserBy, user);
-    console.log(data);
-    axios
-      .post('http://localhost:4000/api/auth/search', data)
-      .then((res) => console.log(res.data));
+    postData(data).catch(console.error);
   };
 
   return (

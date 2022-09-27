@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import Button from '../../UI/Button';
 import Card from '../../UI/Card';
-import PassswordRevealer from '../../components/PasswordRevealer';
 
 const Login = () => {
   const [email, setEnteredEmail] = useState('');
@@ -17,21 +16,23 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const submitHandler = (e) => {
+  const postData = async (email, password) => {
+    const res = await axios.post('http://localhost:4000/api/auth/login', {
+      email: email,
+      password: password,
+    });
+    console.log(res.data);
+    return {
+      id: res.data.userId,
+      token: res.data.token,
+    };
+  };
+
+  const submitHandler = async (e) => {
     e.preventDefault();
 
-    axios
-      .post('http://localhost:4000/api/auth/login', {
-        email: email,
-        password: password,
-      })
-      .then((res) => {
-        const user = {
-          id: res.data.userId,
-          token: res.data.token,
-        };
-        localStorage.setItem('user', JSON.stringify(user));
-      });
+    const user = await postData(email, password).catch(console.error);
+    localStorage.setItem('user', JSON.stringify(user));
   };
 
   return (
@@ -41,7 +42,7 @@ const Login = () => {
         <label htmlFor="email">Email: </label>
         <input id="email" type="text" onChange={emailHandler} />
         <label htmlFor="password">Password: </label>
-        <PassswordRevealer id="password" onChange={passwordHandler} />
+        <input type="password" id="password" onChange={passwordHandler} />
         <Button type="submit">Login</Button>
       </form>
     </Card>

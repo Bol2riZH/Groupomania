@@ -3,7 +3,8 @@ import axios from 'axios';
 
 import Button from '../../UI/Button';
 import Card from '../../UI/Card';
-import PassswordRevealer from '../../components/PasswordRevealer';
+
+import classes from './Signup.module.scss';
 
 const Signup = () => {
   const [profilePicture, setProfilePicture] = useState('');
@@ -32,6 +33,19 @@ const Signup = () => {
     setConfirmPassword(e.target.value);
   };
 
+  const postData = async (data) => {
+    const res = await axios.post(
+      'http://localhost:4000/api/auth/signup',
+      data,
+      {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      }
+    );
+    console.log(res.data);
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -42,20 +56,7 @@ const Signup = () => {
     formData.append('password', password);
     formData.append('confirmPassword', confirmPassword);
 
-    axios
-      .post('http://localhost:4000/api/auth/signup', formData, {
-        headers: {
-          'content-type': 'multipart/form-data',
-        },
-        onUploadProgress: (progressEvent) => {
-          console.log(
-            'Upload Progress: ' +
-              Math.round((progressEvent.loaded / progressEvent.total) * 100) +
-              '%'
-          );
-        },
-      })
-      .then((res) => console.log(res.data));
+    postData(formData).catch(console.error);
   };
 
   return (
@@ -74,13 +75,9 @@ const Signup = () => {
         <label htmlFor="email">Email: </label>
         <input id="email" type="text" onChange={emailHandler} />
         <label htmlFor="password">Password: </label>
-        <PassswordRevealer
-          id="password"
-          type="password"
-          onChange={passwordHandler}
-        />
+        <input id="password" type="password" onChange={passwordHandler} />
         <label htmlFor="confirm-password">Confirm password: </label>
-        <PassswordRevealer
+        <input
           id="confirm-password"
           type="password"
           onChange={confirmPasswordHandler}

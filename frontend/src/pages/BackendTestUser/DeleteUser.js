@@ -21,22 +21,24 @@ const DeleteUser = () => {
     else return { email: value };
   };
 
+  const removeData = async (id, data) => {
+    const res = await axios.delete('http://localhost:4000/api/auth/delete', {
+      headers: {
+        Authorization: `Bearer ${id.token}`,
+        'content-type': 'application/json',
+      },
+      data: data,
+    });
+    console.log(res.data);
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
 
     const dataObj = dataToObj(findUserBy, user);
 
     const userId = JSON.parse(localStorage.getItem('user'));
-    userId &&
-      axios
-        .delete('http://localhost:4000/api/auth/delete', {
-          headers: {
-            Authorization: `Bearer ${userId.token}`,
-            'content-type': 'application/json',
-          },
-          data: dataObj,
-        })
-        .then((res) => console.log(res.data));
+    userId && removeData(userId, dataObj);
   };
 
   return (

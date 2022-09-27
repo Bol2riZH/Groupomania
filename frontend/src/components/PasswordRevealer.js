@@ -1,10 +1,14 @@
 import React from 'react';
 
-const PassswordRevealer = ({ value }) => {
+const PasswordRevealer = (value) => {
   const [shown, setShown] = React.useState(false);
   return (
     <>
-      <input type={shown ? 'text' : 'password'} value={value} />
+      <input
+        type={shown ? 'text' : 'password'}
+        value={value}
+        onChange={value.onChange}
+      />
       <button type="button" onClick={() => setShown(!shown)}>
         Show/Hide
       </button>
@@ -12,4 +16,4 @@ const PassswordRevealer = ({ value }) => {
   );
 };
 
-export default PassswordRevealer;
+export default PasswordRevealer;

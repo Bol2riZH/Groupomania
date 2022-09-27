@@ -31,6 +31,20 @@ const UpdateUser = () => {
     setConfirmPassword(e.target.value);
   };
 
+  const updateData = async (id, data) => {
+    const res = await axios.put(
+      `http://localhost:4000/api/auth/update/${id.id}`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${id.token}`,
+          'content-type': 'multipart/form-data',
+        },
+      }
+    );
+    console.log(res.data);
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -42,15 +56,7 @@ const UpdateUser = () => {
     confirmPassword && formData.append('confirmPassword', confirmPassword);
 
     const userId = JSON.parse(localStorage.getItem('user'));
-    userId &&
-      axios
-        .put(`http://localhost:4000/api/auth/update/${userId.id}`, formData, {
-          headers: {
-            Authorization: `Bearer ${userId.token}`,
-            'content-type': 'multipart/form-data',
-          },
-        })
-        .then((res) => console.log(res.data));
+    userId && updateData(userId, formData).catch(console.error);
   };
 
   return (

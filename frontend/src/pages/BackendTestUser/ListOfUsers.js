@@ -9,12 +9,14 @@ const ListOfUsers = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    if (effectRan.current === false) {
-      axios.get('http://localhost:4000/api/auth/').then((res) => {
+    const fetchData = async () => {
+      if (effectRan.current === false) {
+        const res = await axios.get('http://localhost:4000/api/auth/');
         setUsers(res.data.users);
-      });
-    }
-    effectRan.current = true;
+      }
+      effectRan.current = true;
+    };
+    fetchData().catch(console.error);
   }, []);
 
   return (
