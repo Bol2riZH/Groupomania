@@ -29,7 +29,8 @@ exports.addPost = catchAsync(async (req, res) => {
     imageUrl:
       req.file &&
       `${req.protocol}://${req.get('host')}/images/posts/${req.file.filename}`,
-    date: postedTime(),
+    date: Date.now(),
+    postedTime: postedTime(),
   });
   await post.save();
   return res

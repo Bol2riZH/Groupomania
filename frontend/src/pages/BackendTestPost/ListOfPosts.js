@@ -39,7 +39,7 @@ const ListOfPosts = () => {
       const data = await fetchDataToDelete(post._id, userId).catch(
         console.error
       );
-      // if forbidden : not refreshing data
+      // forbidden ? not refreshing data
       data !== undefined && setDeletePost(true);
     } else console.log('Forbidden');
   };
@@ -47,6 +47,7 @@ const ListOfPosts = () => {
   return (
     <ul>
       {posts
+        // .filter((post) => post.userInfo.username.includes('Bol2riZH'))
         .sort((a, b) => b.date - a.date)
         .map((post) => (
           <li key={post._id}>
@@ -94,7 +95,7 @@ const ListOfPosts = () => {
                 <Button className={classes.btnDislike}>DisLike</Button>
                 <span>{post.usersDisliked.length}</span>
               </div>
-              <time>{post.date}</time>
+              <time>{post.postedTime}</time>
             </Card>
           </li>
         ))}

@@ -14,6 +14,7 @@ const postSchema = mongoose.Schema({
   usersDisliked: { type: Array, default: [] },
   comments: { type: Array, default: [] },
   date: { type: String, required: true },
+  postedTime: { type: String, required: true },
 });
 
 module.exports = mongoose.model('Post', postSchema);
