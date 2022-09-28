@@ -8,6 +8,8 @@ import classes from './ListOfPosts.module.scss';
 const ListOfPosts = () => {
   const [posts, setPosts] = useState([]);
   const [deletePost, setDeletePost] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editContent, setEditContent] = useState(false);
 
   useEffect(() => {
     fetchData().catch(console.error);
@@ -33,6 +35,20 @@ const ListOfPosts = () => {
     return res.data;
   };
 
+  const fetchDataToUpdate = async (postId, userId, data) => {
+    const res = await axios.put(
+      `http://localhost:4000/api/posts/${postId}`,
+      ...data,
+      {
+        headers: {
+          Authorization: `Bearer ${userId.token}`,
+          'content-type': 'application/json',
+        },
+      }
+    );
+    return res.data;
+  };
+
   const deletePostHandler = async (post) => {
     const userId = JSON.parse(localStorage.getItem('user'));
     if (userId) {
@@ -42,6 +58,20 @@ const ListOfPosts = () => {
       // forbidden ? not refreshing data //
       data !== undefined && setDeletePost(true);
     } else console.log('Forbidden');
+  };
+
+  // TODO : add title and image editing
+  const updatePostHandler = async (post) => {
+    const userId = JSON.parse(localStorage.getItem('user'));
+    if (userId.id === post.userId) {
+      setIsEditing(true);
+    } else console.log('Forbidden');
+  };
+  // TODO : editing by id
+  const confirmUpdatePostHandler = async (post) => {
+    const userId = JSON.parse(localStorage.getItem('user'));
+    await fetchDataToUpdate(post, userId, editContent).catch(console.error);
+    setIsEditing(false);
   };
 
   return (
@@ -67,18 +97,25 @@ const ListOfPosts = () => {
                   </div>
                 </div>
                 <div>
-                  <Button>Update</Button>
+                  {!isEditing ? (
+                    <Button onClick={() => updatePostHandler(post)}>
+                      Update
+                    </Button>
+                  ) : (
+                    <Button onClick={() => confirmUpdatePostHandler(post)}>
+                      Confirm
+                    </Button>
+                  )}
+
                   <Button
                     className={classes.btnDelete}
-                    onClick={() => {
-                      deletePostHandler(post);
-                    }}
+                    onClick={() => deletePostHandler(post)}
                   >
                     Delete
                   </Button>
                 </div>
               </header>
-              <div className={classes.post}>
+              <section className={classes.post}>
                 <h2>{post.title}</h2>
                 <div className={post.imageUrl && classes.img}>
                   {post.imageUrl ? (
@@ -87,8 +124,16 @@ const ListOfPosts = () => {
                     ''
                   )}
                 </div>
-                <p>{post.post}</p>
-              </div>
+                {isEditing ? (
+                  <textarea
+                    autoFocus
+                    defaultValue={editContent ? editContent : post.post}
+                    onChange={(e) => setEditContent(e.target.value)}
+                  ></textarea>
+                ) : (
+                  <p>{editContent ? editContent : post.post}</p>
+                )}
+              </section>
               <div className={classes.like}>
                 <Button className={classes.btnLike}>Like</Button>
                 <span>{post.usersLiked.length}</span>

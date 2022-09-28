@@ -51,7 +51,7 @@ const AddPost = () => {
         <label htmlFor="title">Title: </label>
         <input id="title" type="text" onChange={titleHandler} />
         <label htmlFor="post">post: </label>
-        <textarea id="post" onChange={postHandler} />
+        <textarea id="post" onChange={postHandler} cols="30" rows="10" />
         <label htmlFor="image">image: </label>
         <input
           id="image"
