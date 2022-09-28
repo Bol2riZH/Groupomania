@@ -33,7 +33,7 @@ function App() {
         <Route path="/delete-user" element={<DeleteUser />} />
 
         <Route path="/add-post" element={<AddPost />} />
-        <Route path="/list-of-posts" element={<ListOfPosts />} />
+        <Route path="/list-posts" element={<ListOfPosts />} />
       </Routes>
     </BrowserRouter>
   );

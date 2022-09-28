@@ -36,7 +36,7 @@ const Navigation = () => {
         <NavLink to="/add-post">
           <li>Add a post</li>
         </NavLink>
-        <NavLink to="/list-of-posts">
+        <NavLink to="/list-posts">
           <li>List of posts</li>
         </NavLink>
       </ul>

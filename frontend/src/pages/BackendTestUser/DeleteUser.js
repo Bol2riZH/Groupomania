@@ -21,7 +21,7 @@ const DeleteUser = () => {
     else return { email: value };
   };
 
-  const removeData = async (id, data) => {
+  const fetchDataToDelete = async (id, data) => {
     const res = await axios.delete('http://localhost:4000/api/auth/delete', {
       headers: {
         Authorization: `Bearer ${id.token}`,
@@ -38,7 +38,7 @@ const DeleteUser = () => {
     const dataObj = dataToObj(findUserBy, user);
 
     const userId = JSON.parse(localStorage.getItem('user'));
-    userId && removeData(userId, dataObj);
+    userId ? fetchDataToDelete(userId, dataObj) : console.log('Forbidden');
   };
 
   return (
