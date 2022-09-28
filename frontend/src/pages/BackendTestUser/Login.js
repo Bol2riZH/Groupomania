@@ -32,7 +32,9 @@ const Login = () => {
     e.preventDefault();
 
     const user = await postData(email, password).catch(console.error);
-    localStorage.setItem('user', JSON.stringify(user));
+    user
+      ? localStorage.setItem('user', JSON.stringify(user))
+      : console.log('Cant Login');
   };
 
   return (
