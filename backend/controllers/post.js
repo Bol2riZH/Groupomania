@@ -3,7 +3,6 @@
 const Post = require('../models/Post');
 const User = require('../models/User');
 
-const checkAdmin = require('../utils/checkAdmin');
 const catchAsync = require('../utils/catchAsync');
 const postedTime = require('../utils/postedTime');
 const getUserInfo = require('../utils/getUserInfo');
@@ -44,7 +43,7 @@ exports.updatePost = catchAsync(async (req, res) => {
   const postToUpdate = await Post.findById(req.params.id);
 
   //  check admin right or userID
-  if ((await checkAdmin(req)) || postToUpdate.userId === req.auth.userId) {
+  if (req.auth.role === 'admin' || postToUpdate.userId === req.auth.userId) {
     const user = await User.findById(req.auth.userId);
     const userInfo = getUserInfo(user);
 
@@ -202,9 +201,8 @@ exports.getOnePost = catchAsync(async (req, res) => {
 exports.deletePost = catchAsync(async (req, res) => {
   const postToDelete = await Post.findById(req.params.id);
 
-  //  check admin right or userID
-  if ((await checkAdmin(req)) || postToDelete.userId === req.auth.userId) {
-    findAndUnlinkPostImage(postToDelete);
+  if (req.auth.role === 'admin' || postToDelete.userId === req.auth.userId) {
+    postToDelete.imageUrl && findAndUnlinkPostImage(postToDelete);
     await Post.findByIdAndDelete(req.params.id);
     return res.status(200).json({ message: 'post deleted !' });
   }

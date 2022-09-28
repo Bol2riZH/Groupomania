@@ -39,7 +39,7 @@ const ListOfPosts = () => {
       const data = await fetchDataToDelete(post._id, userId).catch(
         console.error
       );
-      // forbidden ? not refreshing data
+      // forbidden ? not refreshing data //
       data !== undefined && setDeletePost(true);
     } else console.log('Forbidden');
   };

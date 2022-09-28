@@ -34,7 +34,7 @@ const Login = () => {
     const user = await postData(email, password).catch(console.error);
     user
       ? localStorage.setItem('user', JSON.stringify(user))
-      : console.log('Cant Login');
+      : console.log('Incorrect email or password');
   };
 
   return (

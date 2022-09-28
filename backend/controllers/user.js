@@ -6,7 +6,6 @@ require('dotenv').config();
 
 const User = require('../models/User');
 
-const checkAdmin = require('../utils/checkAdmin');
 const catchAsync = require('../utils/catchAsync');
 const emailAndPasswordValidator = require('../utils/emailAndPasswordValidator');
 const { findAndUnlinkProfilePicture } = require('../utils/findAndUnlinkImage');
@@ -56,7 +55,7 @@ exports.login = catchAsync(async (req, res) => {
 /*///////////////// UPDATE ///////////////////*/
 exports.update = catchAsync(async (req, res) => {
   const userToUpdate = await User.findById(req.params.id);
-  if ((await checkAdmin(req)) || req.params.id === req.auth.userId) {
+  if (req.auth.role === 'admin' || req.params.id === req.auth.userId) {
     let updateUser;
     if (!req.file) updateUser = { ...req.body };
     else {
@@ -99,7 +98,7 @@ exports.getAll = catchAsync(async (req, res) => {
 /*/////////////////////////////////////////////*/
 /*///////////////// DELETE ///////////////////*/
 exports.delete = catchAsync(async (req, res) => {
-  if (await checkAdmin(req)) {
+  if (req.auth.role === 'admin') {
     const userToDelete = await User.findOne({
       $or: [{ email: req.body.email }, { username: req.body.username }],
     });
