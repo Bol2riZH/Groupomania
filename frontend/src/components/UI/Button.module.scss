@@ -1,0 +1,23 @@
+@import '../../style/variables';
+
+.button {
+  background-color: $btn-color;
+  color: white;
+
+  padding: 1rem 0;
+  margin: 0.5rem 0;
+
+  border: none;
+  box-shadow: 0 1px 3px #2f65ae;
+
+  transition: background-color 250ms;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: rgb(69, 141, 197);
+}
+
+.button:active {
+  background-color: rgb(85, 165, 230);
+}

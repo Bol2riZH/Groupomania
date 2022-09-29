@@ -1,5 +1,6 @@
 @import 'reset';
 @import 'normalize';
+@import 'variables';
 
 *,
 *:before,
@@ -11,7 +12,7 @@
 
 html {
   font-size: 62.5%;
-  background-color: #120f0f;
+  background-color: $secondary-color;
   margin: auto;
 }
 
@@ -38,9 +39,6 @@ form {
   flex-direction: column;
 }
 
-label,
-input,
-button,
 select,
 textarea {
   margin: 3px auto;

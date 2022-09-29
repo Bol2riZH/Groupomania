@@ -3,12 +3,13 @@ import './style/global.scss';
 import AppTest from './App.test';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from './pages/Login';
 
 const App = () => {
   return (
     <>
       {/*<AppTest />*/}
-      <div></div>
+      <Login />
     </>
   );
 };
