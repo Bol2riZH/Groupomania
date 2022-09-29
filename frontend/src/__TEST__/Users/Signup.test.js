@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import Button from '../../UI/Button';
-import Card from '../../UI/Card';
+import ButtonTest from '../UI/Button.test';
+import CardTest from '../UI/Card.test';
 
-const Signup = () => {
+const SignupTest = () => {
   const [profilePicture, setProfilePicture] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEnteredEmail] = useState('');
@@ -58,7 +58,7 @@ const Signup = () => {
   };
 
   return (
-    <Card>
+    <CardTest>
       <h1>SIGNUP</h1>
       <form onSubmit={submitHandler}>
         <label htmlFor="profilePicture">Add a profile picture ? </label>
@@ -71,7 +71,7 @@ const Signup = () => {
         <label htmlFor="username">username: </label>
         <input id="username" type="text" onChange={usernameHandler} />
         <label htmlFor="email">Email: </label>
-        <input id="email" type="text" onChange={emailHandler} />
+        <input id="email" type="email" onChange={emailHandler} />
         <label htmlFor="password">Password: </label>
         <input id="password" type="password" onChange={passwordHandler} />
         <label htmlFor="confirm-password">Confirm password: </label>
@@ -80,10 +80,10 @@ const Signup = () => {
           type="password"
           onChange={confirmPasswordHandler}
         />
-        <Button type="submit">Signup</Button>
+        <ButtonTest type="submit">Signup</ButtonTest>
       </form>
-    </Card>
+    </CardTest>
   );
 };
 
-export default Signup;
+export default SignupTest;

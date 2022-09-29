@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import Button from '../../UI/Button';
-import Card from '../../UI/Card';
+import ButtonTest from '../UI/Button.test';
+import CardTest from '../UI/Card.test';
 
-const UpdateUser = () => {
+const UpdateUserTest = () => {
   const [profilePicture, setProfilePicture] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEnteredEmail] = useState('');
@@ -60,7 +60,7 @@ const UpdateUser = () => {
   };
 
   return (
-    <Card>
+    <CardTest>
       <h1>UPDATE</h1>
       <form onSubmit={submitHandler}>
         <label htmlFor="profilePicture">Add a profile picture ? </label>
@@ -98,10 +98,10 @@ const UpdateUser = () => {
           onChange={confirmPasswordHandler}
           defaultValue={confirmPassword}
         />
-        <Button type="submit">Update</Button>
+        <ButtonTest type="submit">Update</ButtonTest>
       </form>
-    </Card>
+    </CardTest>
   );
 };
 
-export default UpdateUser;
+export default UpdateUserTest;

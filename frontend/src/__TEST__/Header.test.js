@@ -2,7 +2,7 @@ import React from 'react';
 
 import classes from './Header.module.scss';
 
-const Header = (props) => {
+const HeaderTest = (props) => {
   return (
     <>
       <header className={classes.header}>{props.children}</header>
@@ -10,4 +10,4 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+export default HeaderTest;

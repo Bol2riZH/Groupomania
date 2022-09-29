@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 import axios from 'axios';
 
-import Card from '../../UI/Card';
-import Button from '../../UI/Button';
+import CardTest from '../UI/Card.test';
+import ButtonTest from '../UI/Button.test';
 
-const AddPost = () => {
+const AddPostTest = () => {
   const [title, setTitle] = useState('');
   const [post, setPost] = useState('');
   const [image, setImage] = useState('');
@@ -45,7 +45,7 @@ const AddPost = () => {
   };
 
   return (
-    <Card>
+    <CardTest>
       <h1>ADD POST</h1>
       <form onSubmit={submitHandler}>
         <label htmlFor="title">Title: </label>
@@ -59,10 +59,10 @@ const AddPost = () => {
           accept="image/*"
           onChange={imageHandler}
         />
-        <Button type="submit">Add post</Button>
+        <ButtonTest type="submit">Add post</ButtonTest>
       </form>
-    </Card>
+    </CardTest>
   );
 };
 
-export default AddPost;
+export default AddPostTest;

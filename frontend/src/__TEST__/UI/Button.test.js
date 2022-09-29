@@ -2,7 +2,7 @@ import React from 'react';
 
 import classes from './Button.module.scss';
 
-const Button = (props) => {
+const ButtonTest = (props) => {
   return (
     <button
       type={props.type || 'button'}
@@ -14,4 +14,4 @@ const Button = (props) => {
   );
 };
 
-export default Button;
+export default ButtonTest;

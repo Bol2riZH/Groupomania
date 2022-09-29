@@ -1,15 +1,15 @@
 import React from 'react';
 
 import classes from './Home.module.scss';
-import Card from '../../UI/Card';
+import CardTest from '../UI/Card.test';
 
-const Home = () => {
+const HomeTest = () => {
   return (
-    <Card className={classes.home}>
+    <CardTest className={classes.home}>
       <h1>HOME</h1>
       <img src="./B2Rprofile.png" alt="B2R" />
-    </Card>
+    </CardTest>
   );
 };
 
-export default Home;
+export default HomeTest;

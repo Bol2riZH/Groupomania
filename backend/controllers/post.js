@@ -34,7 +34,7 @@ exports.addPost = catchAsync(async (req, res) => {
   await post.save();
   return res
     .status(201)
-    .json({ status: 'success', message: 'Post added: ', post });
+    .json({ status: 'success', message: 'Posts added: ', post });
 });
 
 /*/////////////////////////////////////////////*/
@@ -64,7 +64,7 @@ exports.updatePost = catchAsync(async (req, res) => {
     });
     return res
       .status(200)
-      .json({ status: 'success', message: 'Post updated', updatePost });
+      .json({ status: 'success', message: 'Posts updated', updatePost });
   }
   return res.status(403).json({ message: 'Forbidden' });
 });
@@ -176,15 +176,15 @@ exports.searchPost = catchAsync(async (req, res) => {
     $or: [{ username: req.body.username }, { title: req.body.title }],
   });
   if (post.length === 0)
-    return res.status(404).json({ message: 'Post not founded' });
-  return res.status(200).json({ message: 'Post: ', post });
+    return res.status(404).json({ message: 'Posts not founded' });
+  return res.status(200).json({ message: 'Posts: ', post });
 });
 
 /*//////////////////////////////////////////////*/
 /*///////////////// GET ALL ///////////////////*/
 exports.getAllPosts = catchAsync(async (req, res) => {
   const posts = await Post.find();
-  if (!posts) return res.status(404).json({ message: 'Post not founded' });
+  if (!posts) return res.status(404).json({ message: 'Posts not founded' });
   return res.status(200).json({ message: 'Posts: ', posts });
 });
 
@@ -192,8 +192,8 @@ exports.getAllPosts = catchAsync(async (req, res) => {
 /*///////////////// GET ONE ///////////////////*/
 exports.getOnePost = catchAsync(async (req, res) => {
   const post = await Post.findById(req.params.id);
-  if (!post) return res.status(404).json({ message: 'Post not founded' });
-  return res.status(200).json({ message: 'Post: ', post });
+  if (!post) return res.status(404).json({ message: 'Posts not founded' });
+  return res.status(200).json({ message: 'Posts: ', post });
 });
 
 /*/////////////////////////////////////////////*/

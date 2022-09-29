@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import Card from '../../UI/Card';
-import Button from '../../UI/Button';
-import axios from 'axios';
 
-const SearchUser = () => {
+import axios from 'axios';
+import CardTest from '../UI/Card.test';
+import ButtonTest from '../UI/Button.test';
+
+const DeleteUserTest = () => {
   const [user, setUser] = useState('');
   const [findUserBy, setFindUserBy] = useState('');
 
@@ -20,21 +21,29 @@ const SearchUser = () => {
     else return { email: value };
   };
 
-  const postData = async (data) => {
-    const res = await axios.post('http://localhost:4000/api/auth/search', data);
+  const fetchDataToDelete = async (id, data) => {
+    const res = await axios.delete('http://localhost:4000/api/auth/delete', {
+      headers: {
+        Authorization: `Bearer ${id.token}`,
+        'content-type': 'application/json',
+      },
+      data: data,
+    });
     console.log(res.data);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const data = dataToObj(findUserBy, user);
-    postData(data).catch(console.error);
+    const dataObj = dataToObj(findUserBy, user);
+
+    const userId = JSON.parse(localStorage.getItem('user'));
+    userId ? fetchDataToDelete(userId, dataObj) : console.log('Forbidden');
   };
 
   return (
-    <Card>
-      <h1>SEARCH USER</h1>
+    <CardTest>
+      <h1>DELETE USER</h1>
       <form onSubmit={submitHandler}>
         <label htmlFor="findUserBy">Find user by: </label>
         <select id="findUserBy" onChange={findUserByHandler}>
@@ -46,10 +55,10 @@ const SearchUser = () => {
           Entered the username or email address of the user you want to delete:
         </label>
         <input id="user" type="text" onChange={userHandler} />
-        <Button type="submit">Search</Button>
+        <ButtonTest type="submit">Confirm</ButtonTest>
       </form>
-    </Card>
+    </CardTest>
   );
 };
 
-export default SearchUser;
+export default DeleteUserTest;

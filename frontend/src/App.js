@@ -1,41 +1,16 @@
 import React from 'react';
+import './style/global.scss';
+import AppTest from './App.test';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Header from './layout/Header';
-import Home from './pages/BackendTestUser/Home';
-import Navigation from './components/Navigation';
-
-import Signup from './pages/BackendTestUser/Signup';
-import Login from './pages/BackendTestUser/Login';
-import Logout from './pages/BackendTestUser/Logout';
-import UpdateUser from './pages/BackendTestUser/UpdateUser';
-import ListOfUsers from './pages/BackendTestUser/ListOfUsers';
-import SearchUser from './pages/BackendTestUser/SearchUser';
-import DeleteUser from './pages/BackendTestUser/DeleteUser';
-
-import AddPost from './pages/BackendTestPost/AddPost';
-import ListOfPosts from './pages/BackendTestPost/ListOfPosts';
-
-function App() {
+const App = () => {
   return (
-    <BrowserRouter>
-      <Header>
-        <Navigation />
-      </Header>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="/update-user" element={<UpdateUser />} />
-        <Route path="/list-users" element={<ListOfUsers />} />
-        <Route path="/search-user" element={<SearchUser />} />
-        <Route path="/delete-user" element={<DeleteUser />} />
-
-        <Route path="/add-post" element={<AddPost />} />
-        <Route path="/list-posts" element={<ListOfPosts />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      {/*<AppTest />*/}
+      <div></div>
+    </>
   );
-}
+};
+
 export default App;

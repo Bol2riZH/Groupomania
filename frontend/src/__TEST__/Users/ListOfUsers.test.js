@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 import axios from 'axios';
 
-import Card from '../../UI/Card';
+import CardTest from '../UI/Card.test';
 import classes from './ListOfUsers.module.scss';
 
-const ListOfUsers = () => {
+const ListOfUsersTest = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const ListOfUsers = () => {
     <ul>
       {users.map((user) => (
         <li key={user._id}>
-          <Card className={classes.profileCard}>
+          <CardTest className={classes.profileCard}>
             <div className={classes.info}>
               <h2>{user.username}</h2>
               <p>{user.email}</p>
@@ -33,11 +33,11 @@ const ListOfUsers = () => {
                 <img src="./defaultProfile.svg" alt="profile picture" />
               )}
             </div>
-          </Card>
+          </CardTest>
         </li>
       ))}
     </ul>
   );
 };
 
-export default ListOfUsers;
+export default ListOfUsersTest;

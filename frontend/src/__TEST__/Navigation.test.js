@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import classes from './Navigation.module.scss';
 
-const Navigation = () => {
+const NavigationTest = () => {
   return (
     <div className={classes.nav}>
       <ul>
@@ -44,4 +44,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default NavigationTest;

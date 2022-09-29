@@ -17,4 +17,4 @@ const postSchema = mongoose.Schema({
   postedTime: { type: String, required: true },
 });
 
-module.exports = mongoose.model('Post', postSchema);
+module.exports = mongoose.model('Posts', postSchema);

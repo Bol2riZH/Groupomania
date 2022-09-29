@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import Card from '../../UI/Card';
-import Button from '../../UI/Button';
+import CardTest from '../UI/Card.test';
+import ButtonTest from '../UI/Button.test';
 import classes from './ListOfPosts.module.scss';
 
-const ListOfPosts = () => {
+const ListOfPostsTest = () => {
   const [posts, setPosts] = useState([]);
   const [deletePost, setDeletePost] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -132,7 +132,7 @@ const ListOfPosts = () => {
         .sort((a, b) => b.date - a.date)
         .map((post) => (
           <li key={post._id}>
-            <Card className={classes.postCard}>
+            <CardTest className={classes.postCard}>
               <header>
                 <div>
                   <h2>{post.userInfo.username}</h2>
@@ -149,25 +149,27 @@ const ListOfPosts = () => {
                 </div>
                 <div>
                   {!isEditing ? (
-                    <Button onClick={() => updatePostHandler(post)}>
+                    <ButtonTest onClick={() => updatePostHandler(post)}>
                       Update
-                    </Button>
+                    </ButtonTest>
                   ) : (
                     <div>
-                      <Button onClick={() => confirmUpdatePostHandler(post)}>
+                      <ButtonTest
+                        onClick={() => confirmUpdatePostHandler(post)}
+                      >
                         Confirm
-                      </Button>
-                      <Button onClick={() => cancelUpdatePostHandler(post)}>
+                      </ButtonTest>
+                      <ButtonTest onClick={() => cancelUpdatePostHandler(post)}>
                         Cancel
-                      </Button>
+                      </ButtonTest>
                     </div>
                   )}
-                  <Button
+                  <ButtonTest
                     className={classes.btnDelete}
                     onClick={() => deletePostHandler(post)}
                   >
                     Delete
-                  </Button>
+                  </ButtonTest>
                 </div>
               </header>
               <section className={classes.post}>
@@ -190,27 +192,30 @@ const ListOfPosts = () => {
                 )}
               </section>
               <div className={classes.like}>
-                <Button
+                <ButtonTest
                   className={classes.btnLike}
                   onClick={() => addLikeHandler(post)}
                 >
                   Like
-                </Button>
+                </ButtonTest>
                 <span>{likePost}</span>
-                <Button
+                <ButtonTest
                   className={classes.btnDislike}
                   onClick={() => addDislikeHandler(post)}
                 >
                   DisLike
-                </Button>
+                </ButtonTest>
                 <span>{dislikePost}</span>
               </div>
               <time>{post.postedTime}</time>
-            </Card>
+              <div>
+                <ButtonTest>Comment</ButtonTest>
+              </div>
+            </CardTest>
           </li>
         ))}
     </ul>
   );
 };
 
-export default ListOfPosts;
+export default ListOfPostsTest;

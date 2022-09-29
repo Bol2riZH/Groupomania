@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PasswordRevealer = (value) => {
+const PasswordRevealerTest = (value) => {
   const [shown, setShown] = React.useState(false);
   return (
     <>
@@ -16,4 +16,4 @@ const PasswordRevealer = (value) => {
   );
 };
 
-export default PasswordRevealer;
+export default PasswordRevealerTest;
