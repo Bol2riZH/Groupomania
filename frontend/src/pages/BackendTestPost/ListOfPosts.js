@@ -10,6 +10,8 @@ const ListOfPosts = () => {
   const [deletePost, setDeletePost] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(false);
+  const [likePost, setLikePost] = useState(0);
+  const [dislikePost, setDislikePost] = useState(0);
 
   useEffect(() => {
     fetchData().catch(console.error);
@@ -70,8 +72,57 @@ const ListOfPosts = () => {
   // TODO : editing by id
   const confirmUpdatePostHandler = async (post) => {
     const userId = JSON.parse(localStorage.getItem('user'));
-    await fetchDataToUpdate(post, userId, editContent).catch(console.error);
+    if (userId) {
+      const data = await fetchDataToUpdate(post._id, userId, editContent).catch(
+        console.error
+      );
+      setIsEditing(false);
+
+      // forbidden ? not refreshing data //
+      data !== undefined && setDeletePost(true);
+    } else console.log('Forbidden');
+  };
+
+  const cancelUpdatePostHandler = (post) => {
+    setEditContent(post.post);
     setIsEditing(false);
+  };
+
+  const addLikeHandler = async (post) => {
+    console.log('likes' + post.likes);
+    console.log('dislikes' + post.dislikes);
+    const userId = JSON.parse(localStorage.getItem('user'));
+    const res = await axios.post(
+      `http://localhost:4000/api/posts/${post._id}/notice`,
+      {
+        like: 1 && 0,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${userId.token}`,
+          'content-type': 'application/json',
+        },
+      }
+    );
+    console.log(res.data);
+    setLikePost(post.likes);
+  };
+  const addDislikeHandler = async (post) => {
+    const userId = JSON.parse(localStorage.getItem('user'));
+    const res = await axios.post(
+      `http://localhost:4000/api/posts/${post._id}/notice`,
+      {
+        like: -1 && 0,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${userId.token}`,
+          'content-type': 'application/json',
+        },
+      }
+    );
+    console.log(res.data);
+    setDislikePost(post.dislikes);
   };
 
   return (
@@ -102,11 +153,15 @@ const ListOfPosts = () => {
                       Update
                     </Button>
                   ) : (
-                    <Button onClick={() => confirmUpdatePostHandler(post)}>
-                      Confirm
-                    </Button>
+                    <div>
+                      <Button onClick={() => confirmUpdatePostHandler(post)}>
+                        Confirm
+                      </Button>
+                      <Button onClick={() => cancelUpdatePostHandler(post)}>
+                        Cancel
+                      </Button>
+                    </div>
                   )}
-
                   <Button
                     className={classes.btnDelete}
                     onClick={() => deletePostHandler(post)}
@@ -135,10 +190,20 @@ const ListOfPosts = () => {
                 )}
               </section>
               <div className={classes.like}>
-                <Button className={classes.btnLike}>Like</Button>
-                <span>{post.usersLiked.length}</span>
-                <Button className={classes.btnDislike}>DisLike</Button>
-                <span>{post.usersDisliked.length}</span>
+                <Button
+                  className={classes.btnLike}
+                  onClick={() => addLikeHandler(post)}
+                >
+                  Like
+                </Button>
+                <span>{likePost}</span>
+                <Button
+                  className={classes.btnDislike}
+                  onClick={() => addDislikeHandler(post)}
+                >
+                  DisLike
+                </Button>
+                <span>{dislikePost}</span>
               </div>
               <time>{post.postedTime}</time>
             </Card>
