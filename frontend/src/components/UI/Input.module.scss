@@ -1,6 +1,12 @@
+@import '../../style/variables';
+
 .input {
   & input {
     margin: 0.5rem auto;
+    padding: 1rem;
     width: 100%;
+    &:focus::placeholder {
+      color: $btn-color;
+    }
   }
 }

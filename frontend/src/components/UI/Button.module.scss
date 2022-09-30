@@ -8,16 +8,16 @@
   margin: 0.5rem 0;
 
   border: none;
-  box-shadow: 0 1px 3px #2f65ae;
+  box-shadow: 0 1px 3px darken($btn-color, 10%);
 
   transition: background-color 250ms;
 }
 
 .button:hover {
   cursor: pointer;
-  background-color: rgb(69, 141, 197);
+  background-color: darken($btn-color, 10%);
 }
 
 .button:active {
-  background-color: rgb(85, 165, 230);
+  background-color: $btn-color;
 }

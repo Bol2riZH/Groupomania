@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { USER_URL } from '../../data/constants';
+
 import axios from 'axios';
+import { USER_URL } from '../../data/constants';
 
 import Button from '../UI/Button';
 import Input from '../UI/Input';
@@ -40,10 +41,21 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={submitHandler}>
-      <Input type="email" onChange={emailHandler} />
-      <Input type="password" onChange={passwordHandler} />
-      <Button type="submit">Se connecter</Button>
-      <Button>Créer un nouveau compte</Button>
+      <Input
+        type="email"
+        htmlFor="email"
+        id="email"
+        placeHolder="Email"
+        onChange={emailHandler}
+      />
+      <Input
+        type="password"
+        htmlFor="password"
+        id="password"
+        placeHolder="Mot de passe"
+        onChange={passwordHandler}
+      />
+      <Button type="submit">Connexion</Button>
     </form>
   );
 };
