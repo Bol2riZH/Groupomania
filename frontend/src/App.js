@@ -2,14 +2,19 @@ import React from 'react';
 import './style/global.scss';
 import AppTest from './App.test';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
 import Login from './pages/Login';
 
 const App = () => {
   return (
     <>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
+
       {/*<AppTest />*/}
-      <Login />
     </>
   );
 };

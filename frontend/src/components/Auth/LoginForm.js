@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import axios from 'axios';
 import { USER_URL } from '../../data/constants';
 
 import Button from '../UI/Button';
 import Input from '../UI/Input';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [email, setEnteredEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [log, setLog] = useState(false);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (log)
+      setTimeout(() => {
+        navigate('/home');
+      }, 1000);
+  }, [log]);
 
   const emailHandler = (e) => {
     setEnteredEmail(e.target.value);
@@ -34,29 +44,32 @@ const LoginForm = () => {
     e.preventDefault();
 
     const user = await loginHandler(email, password).catch(console.error);
-    user
-      ? localStorage.setItem('user', JSON.stringify(user))
-      : console.log('Incorrect email or password');
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+      setLog(true);
+    } else console.log('Incorrect email or password');
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <Input
-        type="email"
-        htmlFor="email"
-        id="email"
-        placeHolder="Email"
-        onChange={emailHandler}
-      />
-      <Input
-        type="password"
-        htmlFor="password"
-        id="password"
-        placeHolder="Mot de passe"
-        onChange={passwordHandler}
-      />
-      <Button type="submit">Connexion</Button>
-    </form>
+    <>
+      <form onSubmit={submitHandler}>
+        <Input
+          type="email"
+          htmlFor="email"
+          id="email"
+          placeHolder="Email"
+          onChange={emailHandler}
+        />
+        <Input
+          type="password"
+          htmlFor="password"
+          id="password"
+          placeHolder="Mot de passe"
+          onChange={passwordHandler}
+        />
+        <Button type="submit">Connexion</Button>
+      </form>
+    </>
   );
 };
 

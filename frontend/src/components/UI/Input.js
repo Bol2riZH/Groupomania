@@ -8,7 +8,7 @@ const Input = (props) => {
         id={props.id}
         name={props.name}
         placeholder={props.placeHolder}
-        type={props.type ? props.type : 'text'}
+        type={props.type || 'text'}
         onChange={props.onChange}
       />
     </div>

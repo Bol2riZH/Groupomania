@@ -24,7 +24,7 @@ import ListOfPostsTest from './__TEST__/Posts/ListOfPosts.test';
 
 function AppTest() {
   return (
-    <BrowserRouter>
+    <>
       <HeaderTest>
         <NavigationTest />
       </HeaderTest>
@@ -41,7 +41,7 @@ function AppTest() {
         <Route path="/add-post" element={<AddPostTest />} />
         <Route path="/list-posts" element={<ListOfPostsTest />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 export default AppTest;

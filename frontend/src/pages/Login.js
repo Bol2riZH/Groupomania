@@ -10,9 +10,7 @@ const Login = () => {
   const [signup, setSignup] = useState(false);
 
   const LogHandler = () => {
-    setSignup((prevState) => {
-      prevState ? setSignup(false) : setSignup(true);
-    });
+    !signup ? setSignup(true) : setSignup(false);
   };
 
   return (
