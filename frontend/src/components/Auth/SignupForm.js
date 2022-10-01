@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { USER_URL } from '../../data/constants';
 
-import Button from '../UI/Button';
 import Input from '../UI/Input';
 
 const SignupForm = () => {
@@ -89,7 +88,6 @@ const SignupForm = () => {
         placeHolder="Confirmer le mot de passe"
         onChange={confirmPasswordHandler}
       />
-      <Button type="submit">Créer un compte</Button>
     </form>
   );
 };

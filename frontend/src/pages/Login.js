@@ -8,16 +8,9 @@ import SignupForm from '../components/Auth/SignupForm';
 
 const Login = () => {
   const [signup, setSignup] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   const accountHandler = () => {
     !signup ? setSignup(true) : setSignup(false);
-  };
-
-  const getSignupData = (email, password) => {
-    setEmail(email);
-    setPassword(password);
   };
 
   return (
@@ -26,15 +19,23 @@ const Login = () => {
         <h1>GROUPOMANIA</h1>
         {!signup ? (
           <>
-            <LoginForm sendEmail={email} sendPassword={password} />
-            <Button onClick={accountHandler} className={classes.btn__signup}>
+            <LoginForm />
+            <Button className={classes.btn} type="submit">
+              Connexion
+            </Button>
+
+            <Button onClick={accountHandler} className={classes.btn}>
               Pas encore de compte ?
             </Button>
           </>
         ) : (
           <>
-            <SignupForm onSignup={getSignupData} />
-            <Button onClick={accountHandler} className={classes.btn__signup}>
+            <SignupForm />
+            <Button className={classes.btn} type="submit">
+              Créer un compte
+            </Button>
+
+            <Button onClick={accountHandler} className={classes.btn}>
               Retour
             </Button>
           </>

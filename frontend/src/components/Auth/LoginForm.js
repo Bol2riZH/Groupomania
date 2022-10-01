@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { USER_URL } from '../../data/constants';
 
-import Button from '../UI/Button';
 import Input from '../UI/Input';
 import { useNavigate } from 'react-router-dom';
 
@@ -67,7 +66,6 @@ const LoginForm = () => {
           placeHolder="Mot de passe"
           onChange={passwordHandler}
         />
-        <Button type="submit">Connexion</Button>
       </form>
     </>
   );
