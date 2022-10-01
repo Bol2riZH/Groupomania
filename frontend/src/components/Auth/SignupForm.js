@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-import axios from 'axios';
-import { USER_URL } from '../../data/constants';
-
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 
@@ -33,15 +30,6 @@ const SignupForm = (props) => {
     setConfirmPassword(e.target.value);
   };
 
-  const signupHandler = async (formData) => {
-    const res = await axios.post(`${USER_URL}signup`, formData, {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    });
-    console.log(res.data);
-  };
-
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -52,9 +40,7 @@ const SignupForm = (props) => {
     formData.append('password', password);
     formData.append('confirmPassword', confirmPassword);
 
-    // signupHandler(formData).catch(console.error);
-
-    props.onSignup(formData);
+    props.onSignup(formData, email, password);
   };
 
   return (
