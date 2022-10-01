@@ -21,7 +21,7 @@ const Login = () => {
     if (log)
       setTimeout(() => {
         navigate('/home');
-      }, 1000);
+      }, 600);
   }, [log]);
 
   const accountHandler = () => {
