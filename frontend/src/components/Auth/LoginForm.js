@@ -13,6 +13,7 @@ const LoginForm = () => {
   const [log, setLog] = useState(false);
 
   const navigate = useNavigate();
+
   useEffect(() => {
     if (log)
       setTimeout(() => {
@@ -42,7 +43,6 @@ const LoginForm = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
     const user = await loginHandler(email, password).catch(console.error);
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));
