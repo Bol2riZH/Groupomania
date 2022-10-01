@@ -28,18 +28,23 @@ const Login = () => {
     !signup ? setSignup(true) : setSignup(false);
   };
 
+  const SetLocalStorage = (userId) => {
+    localStorage.setItem('user', JSON.stringify(userId));
+  };
+
   const loginHandler = async (email, password) => {
     const res = await axios.post(`${USER_URL}login`, {
       email: email,
       password: password,
     });
     console.log(res.data);
-    const user = {
+    const userId = {
       id: res.data.userId,
       token: res.data.token,
     };
+    SetLocalStorage(userId);
     setLog(true);
-    return user;
+    return userId;
   };
 
   const signupHandler = async (userInfo, email, password) => {
@@ -49,7 +54,8 @@ const Login = () => {
       },
     });
     console.log(res.data);
-    await loginHandler(email, password);
+    const userId = await loginHandler(email, password);
+    SetLocalStorage(userId);
     setLog(true);
   };
 
