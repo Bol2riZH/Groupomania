@@ -4,6 +4,7 @@ import axios from 'axios';
 import { USER_URL } from '../../data/constants';
 
 import Input from '../UI/Input';
+import Button from '../UI/Button';
 
 const SignupForm = (props) => {
   const [profilePicture, setProfilePicture] = useState('');
@@ -51,7 +52,9 @@ const SignupForm = (props) => {
     formData.append('password', password);
     formData.append('confirmPassword', confirmPassword);
 
-    signupHandler(formData).catch(console.error);
+    // signupHandler(formData).catch(console.error);
+
+    props.onSignup(formData);
   };
 
   return (
@@ -88,6 +91,7 @@ const SignupForm = (props) => {
         placeHolder="Confirmer le mot de passe"
         onChange={confirmPasswordHandler}
       />
+      <Button type="submit">Créer un compte</Button>
     </form>
   );
 };

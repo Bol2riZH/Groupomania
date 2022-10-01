@@ -28,17 +28,28 @@ const Login = () => {
     !signup ? setSignup(true) : setSignup(false);
   };
 
-  const checkLoginHandler = async (email, password) => {
+  const loginHandler = async (email, password) => {
     const res = await axios.post(`${USER_URL}login`, {
       email: email,
       password: password,
     });
     console.log(res.data);
-    return {
+    const user = {
       id: res.data.userId,
       token: res.data.token,
     };
     // setLog(true);
+    return user;
+  };
+
+  const signupHandler = async (userInfo) => {
+    const res = await axios.post(`${USER_URL}signup`, userInfo, {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    });
+    // console.log(res.data);
+    setLog(true);
   };
 
   return (
@@ -47,18 +58,14 @@ const Login = () => {
         <h1>GROUPOMANIA</h1>
         {!signup ? (
           <>
-            <LoginForm onLogin={checkLoginHandler} />
+            <LoginForm onLogin={loginHandler} />
             <Button onClick={accountHandler} className={classes.btn}>
               Pas encore de compte ?
             </Button>
           </>
         ) : (
           <>
-            <SignupForm />
-            <Button className={classes.btn} type="submit">
-              Créer un compte
-            </Button>
-
+            <SignupForm onSignup={signupHandler} />
             <Button onClick={accountHandler} className={classes.btn}>
               Retour
             </Button>
