@@ -1,24 +1,11 @@
-import React, { useEffect, useState } from 'react';
-
-import axios from 'axios';
-import { USER_URL } from '../../data/constants';
+import React, { useState } from 'react';
 
 import Input from '../UI/Input';
-import { useNavigate } from 'react-router-dom';
+import Button from '../UI/Button';
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const [email, setEnteredEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [log, setLog] = useState(false);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (log)
-      setTimeout(() => {
-        navigate('/home');
-      }, 1000);
-  }, [log]);
 
   const emailHandler = (e) => {
     setEnteredEmail(e.target.value);
@@ -28,25 +15,9 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
-  const loginHandler = async (email, password) => {
-    const res = await axios.post(`${USER_URL}login`, {
-      email: email,
-      password: password,
-    });
-    console.log(res.data);
-    return {
-      id: res.data.userId,
-      token: res.data.token,
-    };
-  };
-
   const submitHandler = async (e) => {
     e.preventDefault();
-    const user = await loginHandler(email, password).catch(console.error);
-    if (user) {
-      localStorage.setItem('user', JSON.stringify(user));
-      setLog(true);
-    } else console.log('Incorrect email or password');
+    props.onLogin(email, password);
   };
 
   return (
@@ -66,6 +37,7 @@ const LoginForm = () => {
           placeHolder="Mot de passe"
           onChange={passwordHandler}
         />
+        <Button type="submit">Connexion</Button>
       </form>
     </>
   );

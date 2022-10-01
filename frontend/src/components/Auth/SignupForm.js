@@ -5,7 +5,7 @@ import { USER_URL } from '../../data/constants';
 
 import Input from '../UI/Input';
 
-const SignupForm = () => {
+const SignupForm = (props) => {
   const [profilePicture, setProfilePicture] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEnteredEmail] = useState('');
