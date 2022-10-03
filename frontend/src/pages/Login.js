@@ -55,7 +55,8 @@ const Login = () => {
     }
   };
 
-  const signupHandler = async (userInfo, email, password) => {
+  const signupHandler = async (userInfo, userSignup) => {
+    console.log(userSignup);
     try {
       const res = await axios.post(`${USER_URL}signup`, userInfo, {
         headers: {
@@ -64,7 +65,7 @@ const Login = () => {
       });
       // const response = await signup.post('/signup', userInfo);
       console.log(res.data);
-      const userId = await loginHandler(email, password);
+      const userId = await loginHandler(userSignup);
       SetLocalStorage(userId);
       setLog(true);
     } catch (err) {
