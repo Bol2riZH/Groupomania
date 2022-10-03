@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import classes from './Login.module.scss';
 
+import { login } from '../data/axios';
+// import { signup } from '../data/axios';
+
 import axios from 'axios';
 import { USER_URL } from '../data/constants';
 
@@ -33,30 +36,39 @@ const Login = () => {
   };
 
   const loginHandler = async (email, password) => {
-    const res = await axios.post(`${USER_URL}login`, {
-      email: email,
-      password: password,
-    });
-    console.log(res.data);
-    const userId = {
-      id: res.data.userId,
-      token: res.data.token,
-    };
-    SetLocalStorage(userId);
-    setLog(true);
-    return userId;
+    try {
+      const res = await login.post('/login', {
+        email: email,
+        password: password,
+      });
+      console.log(res.data);
+      const userId = {
+        id: res.data.userId,
+        token: res.data.token,
+      };
+      SetLocalStorage(userId);
+      setLog(true);
+      return userId;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const signupHandler = async (userInfo, email, password) => {
-    const res = await axios.post(`${USER_URL}signup`, userInfo, {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    });
-    console.log(res.data);
-    const userId = await loginHandler(email, password);
-    SetLocalStorage(userId);
-    setLog(true);
+    try {
+      const res = await axios.post(`${USER_URL}signup`, userInfo, {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      });
+      // const res = await signup.post('/signup', userInfo);
+      console.log(res.data);
+      const userId = await loginHandler(email, password);
+      SetLocalStorage(userId);
+      setLog(true);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
