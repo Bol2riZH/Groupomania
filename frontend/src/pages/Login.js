@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import classes from './Login.module.scss';
 
 import { login } from '../data/axios';
+
+/* TODO : Make signup axios function work*/
 // import { signup } from '../data/axios';
 
 import axios from 'axios';
@@ -35,11 +37,10 @@ const Login = () => {
     localStorage.setItem('user', JSON.stringify(userId));
   };
 
-  const loginHandler = async (email, password) => {
+  const loginHandler = async (userLogin) => {
     try {
       const res = await login.post('/login', {
-        email: email,
-        password: password,
+        ...userLogin,
       });
       console.log(res.data);
       const userId = {
@@ -61,7 +62,7 @@ const Login = () => {
           'content-type': 'multipart/form-data',
         },
       });
-      // const res = await signup.post('/signup', userInfo);
+      // const response = await signup.post('/signup', userInfo);
       console.log(res.data);
       const userId = await loginHandler(email, password);
       SetLocalStorage(userId);
