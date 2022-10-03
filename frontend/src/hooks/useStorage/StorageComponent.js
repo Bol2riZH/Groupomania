@@ -1,15 +1,16 @@
 import { useLocalStorage } from './useStorage';
 
 export default function StorageComponent() {
-  const [age, setAge, removeAge] = useLocalStorage('age', 26);
+  const [id, setId, removeId] = useLocalStorage('id', 'az');
+  const [token, setToken, removeToken] = useLocalStorage('token', '45');
 
   return (
     <div>
-      <div>{/*{name} - {age}*/}</div>
-      {/*<button onClick={() => setName('John')}>Set Name</button>*/}
-      <button onClick={() => setAge(40)}>Set Age</button>
-      {/*<button onClick={removeName}>Remove Name</button>*/}
-      <button onClick={removeAge}>Remove Age</button>
+      <div>{{ id } - { token }}</div>
+      <button onClick={() => setId('John')}>Set id</button>
+      <button onClick={() => setToken('40')}>Set token</button>
+      <button onClick={removeId}>Remove id</button>
+      <button onClick={removeToken}>Remove token</button>
     </div>
   );
 }

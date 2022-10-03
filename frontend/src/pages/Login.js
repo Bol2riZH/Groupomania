@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import classes from './Login.module.scss';
 
 import { login } from '../data/axios';
-
-/* TODO : Make signup axios function work*/
+/* TODO : Make signup axios function work */
 // import { signup } from '../data/axios';
 
 import axios from 'axios';
@@ -33,7 +32,7 @@ const Login = () => {
     !signup ? setSignup(true) : setSignup(false);
   };
 
-  const SetLocalStorage = (userId) => {
+  const setLocalStorage = (userId) => {
     localStorage.setItem('user', JSON.stringify(userId));
   };
 
@@ -47,8 +46,9 @@ const Login = () => {
         id: res.data.userId,
         token: res.data.token,
       };
-      SetLocalStorage(userId);
+      setLocalStorage(userId);
       setLog(true);
+
       return userId;
     } catch (err) {
       console.log(err);
@@ -66,8 +66,7 @@ const Login = () => {
       // const response = await signup.post('/signup', userInfo);
       console.log(res.data);
       const userId = await loginHandler(userSignup);
-      SetLocalStorage(userId);
-      setLog(true);
+      setLocalStorage(userId);
     } catch (err) {
       console.log(err);
     }
