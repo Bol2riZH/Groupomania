@@ -1,12 +1,42 @@
-//@import '../../style/variables';
+@import '../../style/variables';
 
 .header {
-  margin: 0;
-  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
+  padding: 2rem;
   background-color: white;
 }
 
 .btn {
-  width: 100%;
+  font-size: 1rem;
+  background: none;
+  border: none;
+  color: black;
+  &:hover {
+    cursor: pointer;
+    font-weight: bold;
+  }
+}
+
+.profilePicture {
+  background: none;
+  border: none;
+  & img {
+    object-fit: cover;
+
+    border-radius: 50%;
+    border: 0.3rem solid $btn-color;
+    padding: 0.2rem;
+
+    width: 5rem;
+    height: 5rem;
+
+    transition: border 150ms;
+    &:hover {
+      cursor: pointer;
+      border: none;
+    }
+  }
 }

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import classes from '../Layout/Header.module.scss';
-import Button from '../UI/Button';
 import { login } from '../../data/axios';
 
 const Header = (props) => {
@@ -19,34 +18,41 @@ const Header = (props) => {
   }, [log]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await login.get(`${authLog.id}`);
-      console.log(res.data);
-      setProfilePicture(res.data.user.profilePictureUrl);
-      console.log(profilePicture);
-    };
-    fetchData().catch(console.error);
+    getProfil().catch(console.error);
   }, []);
+
+  const getProfil = async () => {
+    const res = await login.get(`${authLog?.id}`);
+    setProfilePicture(res.data.user.profilePictureUrl);
+  };
+
+  const logoutHandler = () => {
+    localStorage.removeItem('auth');
+    setLog('');
+  };
+
+  const onProfileHandler = () => {
+    setTimeout(() => {
+      navigate('/profile');
+    }, 600);
+  };
 
   return (
     <>
       <header className={classes.header}>
         <h1>Groupomania</h1>
         <div>
-          <Button
-            className={classes.btn}
-            onClick={() => {
-              localStorage.removeItem('auth');
-              setLog('');
-            }}
-          >
+          <button className={classes.profilePicture} onClick={onProfileHandler}>
+            {profilePicture ? (
+              <img src={profilePicture} alt="photo de profil" />
+            ) : (
+              <img src="./defaultProfile.svg" alt="photo de profil" />
+            )}
+          </button>
+
+          <button className={classes.btn} onClick={logoutHandler}>
             Déconnexion
-          </Button>
-          {profilePicture ? (
-            <img src={profilePicture} alt="photo de profil" />
-          ) : (
-            <img src="./defaultProfile.svg" alt="photo de profil" />
-          )}
+          </button>
         </div>
         {props.children}
       </header>
