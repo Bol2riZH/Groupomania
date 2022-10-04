@@ -11,7 +11,7 @@ export const ACTIONS = {
   INPUT_FILE: 'input_file',
 };
 
-export const signupReducer = (state, action) => {
+export const profileReducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.INPUT_TEXT:
       return {

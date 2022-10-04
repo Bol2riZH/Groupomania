@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { login } from '../../data/axios';
+
 import { useNavigate } from 'react-router-dom';
 
 import classes from '../Layout/Header.module.scss';
-import { login } from '../../data/axios';
 
 const Header = (props) => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
@@ -41,7 +42,7 @@ const Header = (props) => {
     <>
       <header className={classes.header}>
         <h1>Groupomania</h1>
-        <div>
+        <div className={classes.user}>
           <button className={classes.profilePicture} onClick={onProfileHandler}>
             {profilePicture ? (
               <img src={profilePicture} alt="photo de profil" />
@@ -49,9 +50,8 @@ const Header = (props) => {
               <img src="./defaultProfile.svg" alt="photo de profil" />
             )}
           </button>
-
           <button className={classes.btn} onClick={logoutHandler}>
-            Déconnexion
+            Se déconnecter
           </button>
         </div>
         {props.children}

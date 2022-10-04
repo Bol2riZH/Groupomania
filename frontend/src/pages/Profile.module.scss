@@ -8,7 +8,8 @@ section {
 .img {
   & img {
     object-fit: cover;
+    width: 25rem;
+    height: 25rem;
     border-radius: 50%;
-    width: 20rem;
   }
 }

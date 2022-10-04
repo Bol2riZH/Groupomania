@@ -1,31 +1,56 @@
-import React, { useEffect, useState } from 'react';
-import classes from './Profile.module.scss';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { login } from '../data/axios';
+import { signup } from '../data/axios';
+
+import UserProfile from '../components/Users/UserProfile';
+import UpdateUserProfile from '../components/Users/UpdateUserProfile';
+
 import Card from '../components/UI/Card';
+import Button from '../components/UI/Button';
 
 const Profile = () => {
-  const authLog = JSON.parse(localStorage.getItem('auth'));
+  const [isEditing, setIsEditing] = useState(false);
 
-  const [user, setUser] = useState('');
+  const navigate = useNavigate();
+  const goBackHandler = () => {
+    setTimeout(() => {
+      navigate('/home');
+    }, 600);
+  };
 
-  useEffect(() => {
-    getProfil().catch(console.error);
-  });
+  const onEditHandler = () => {
+    !isEditing ? setIsEditing(true) : setIsEditing(false);
+  };
 
-  const getProfil = async () => {
-    const res = await login.get(`${authLog?.id}`);
-    setUser(res.data.user);
+  const onConfirmUpdateHandler = async (updateUserInfo) => {
+    const authLog = JSON.parse(localStorage.getItem('auth'));
+
+    const res = await signup.put(`/update/${authLog.id}`, updateUserInfo, {
+      headers: {
+        Authorization: `Bearer ${authLog.token}`,
+        'content-type': 'multipart/form-data',
+      },
+    });
+    console.log(res.data);
+    setIsEditing(false);
   };
 
   return (
     <Card>
       <section>
-        <h2>{user.username}</h2>
-        <p>{user.email}</p>
-        <div className={classes.img}>
-          <img src={user.profilePictureUrl} alt="photo de profil" />
-        </div>
+        {!isEditing ? (
+          <>
+            <UserProfile />
+            <Button onClick={onEditHandler}>Modifier le profil</Button>
+            <Button onClick={goBackHandler}>Retour</Button>
+          </>
+        ) : (
+          <>
+            <UpdateUserProfile onUpdate={onConfirmUpdateHandler} />
+            <Button onClick={onEditHandler}>Annuler</Button>
+          </>
+        )}
       </section>
     </Card>
   );

@@ -1,24 +1,24 @@
 import React, { useReducer } from 'react';
 import {
-  profileReducer,
   ACTIONS,
   INITIAL_STATE,
+  profileReducer,
 } from '../Reducer/profileReducer';
 
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 
-const SignupForm = (props) => {
+const UpdateUserProfile = (props) => {
   const [state, dispatch] = useReducer(profileReducer, INITIAL_STATE);
 
-  const signupHandler = (e) => {
+  const updateTextHandler = (e) => {
     dispatch({
       type: ACTIONS.INPUT_TEXT,
       payload: { name: e.target.name, value: e.target.value },
     });
   };
 
-  const profilePictureHandler = (e) => {
+  const updateFileHandler = (e) => {
     dispatch({
       type: ACTIONS.INPUT_FILE,
       payload: { name: e.target.name, files: e.target.files[0] },
@@ -28,14 +28,16 @@ const SignupForm = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append('profilePictureUrl', state.profilePictureUrl);
-    formData.append('username', state.username);
-    formData.append('email', state.email);
-    formData.append('password', state.password);
-    formData.append('confirmPassword', state.confirmPassword);
+    const updateUserInfo = new FormData();
+    state.profilePictureUrl &&
+      updateUserInfo.append('profilePictureUrl', state.profilePictureUrl);
+    state.username && updateUserInfo.append('username', state.username);
+    state.email && updateUserInfo.append('email', state.email);
+    state.password && updateUserInfo.append('password', state.password);
+    state.confirmPassword &&
+      updateUserInfo.append('confirmPassword', state.confirmPassword);
 
-    props.onSignup(formData, state);
+    props.onUpdate(updateUserInfo);
   };
 
   return (
@@ -45,29 +47,37 @@ const SignupForm = (props) => {
         htmlFor="profilePicture"
         id="profilePicture"
         type="file"
-        onChange={profilePictureHandler}
+        onChange={updateFileHandler}
       />
       <Input
         name="username"
         htmlFor="username"
         id="username"
         placeHolder="Nom d'utilisateur"
-        onChange={signupHandler}
+        onChange={updateTextHandler}
       />
       <Input
         name="email"
         htmlFor="email"
         id="email"
         placeHolder="Email"
-        onChange={signupHandler}
+        onChange={updateTextHandler}
       />
       <Input
         name="password"
         htmlFor="password"
         id="password"
         type="password"
-        placeHolder="Mot de passe"
-        onChange={signupHandler}
+        placeHolder="Ancien mot de passe"
+        onChange={updateTextHandler}
+      />
+      <Input
+        name="newPassword"
+        htmlFor="newPassword"
+        id="newPassword"
+        type="password"
+        placeHolder="Nouveau mot de passe"
+        onChange={updateTextHandler}
       />
       <Input
         name="confirmPassword"
@@ -75,11 +85,11 @@ const SignupForm = (props) => {
         id="confirmPassword"
         type="password"
         placeHolder="Confirmer le mot de passe"
-        onChange={signupHandler}
+        onChange={updateTextHandler}
       />
-      <Button type="submit">Créer un compte</Button>
+      <Button type="submit">Confirmer</Button>
     </form>
   );
 };
 
-export default SignupForm;
+export default UpdateUserProfile;
