@@ -20,7 +20,6 @@ const Login = () => {
   const [log, setLog] = useState(false);
 
   const navigate = useNavigate();
-
   useEffect(() => {
     if (log)
       setTimeout(() => {
@@ -33,7 +32,7 @@ const Login = () => {
   };
 
   const setLocalStorage = (userId) => {
-    localStorage.setItem('user', JSON.stringify(userId));
+    localStorage.setItem('auth', JSON.stringify(userId));
   };
 
   const loginHandler = async (userLogin) => {
@@ -42,6 +41,7 @@ const Login = () => {
         ...userLogin,
       });
       console.log(res.data);
+
       const userId = {
         id: res.data.userId,
         token: res.data.token,
