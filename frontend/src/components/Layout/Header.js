@@ -8,6 +8,7 @@ import { login } from '../../data/axios';
 const Header = (props) => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
   const [log, setLog] = useState(authLog?.token);
+  const [profilePicture, setProfilePicture] = useState('');
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -21,6 +22,8 @@ const Header = (props) => {
     const fetchData = async () => {
       const res = await login.get(`${authLog.id}`);
       console.log(res.data);
+      setProfilePicture(res.data.user.profilePictureUrl);
+      console.log(profilePicture);
     };
     fetchData().catch(console.error);
   }, []);
@@ -39,6 +42,11 @@ const Header = (props) => {
           >
             Déconnexion
           </Button>
+          {profilePicture ? (
+            <img src={profilePicture} alt="photo de profil" />
+          ) : (
+            <img src="./defaultProfile.svg" alt="photo de profil" />
+          )}
         </div>
         {props.children}
       </header>
