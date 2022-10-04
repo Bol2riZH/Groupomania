@@ -13,6 +13,7 @@ router.post('/login', userCtrl.login);
 router.put('/update/:id', auth, profilePictureMulter, userCtrl.update);
 
 router.post('/search', userCtrl.search);
+router.get('/:id', userCtrl.getOne);
 router.get('/', userCtrl.getAll);
 
 router.delete('/delete', auth, userCtrl.delete);

@@ -19,7 +19,7 @@ const Header = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await login.get('http://localhost:4000/api/auth/');
+      const res = await login.get(`${authLog.id}`);
       console.log(res.data);
     };
     fetchData().catch(console.error);

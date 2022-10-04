@@ -86,6 +86,14 @@ exports.search = catchAsync(async (req, res) => {
   else return res.status(200).json({ message: 'User found', user });
 });
 
+/*/////////////////////////////////////////////*/
+/*///////////////// GET BY ID ///////////////////*/
+exports.getOne = catchAsync(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (!user) return res.status(404).json({ message: 'User not found' });
+  else return res.status(200).json({ message: 'User found', user });
+});
+
 /*//////////////////////////////////////////////*/
 /*///////////////// GET ALL ///////////////////*/
 exports.getAll = catchAsync(async (req, res) => {
