@@ -26,11 +26,6 @@ const Post = ({ post }) => {
               ''
             )}
           </div>
-          {authLog.id === post.userId ? (
-            <Button onClick={isEditingHandler}>Modifier</Button>
-          ) : (
-            ''
-          )}
         </header>
         <section className={classes.post}>
           <h2>{post.title}</h2>
@@ -40,8 +35,20 @@ const Post = ({ post }) => {
           </div>
         </section>
         <footer className={classes.like}>
-          <Button className={classes.btnLike}>like</Button>
-          <span>{post.postedTime}</span>
+          {authLog.id === post.userId ? (
+            <>
+              <Button onClick={isEditingHandler}>Modifier</Button>
+              <Button className={classes.btnDelete} onClick={isEditingHandler}>
+                Supprimer
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button className={classes.btnLike}>J'aime</Button>
+              <Button>Commenter</Button>
+            </>
+          )}
+          <time>{post.postedTime}</time>
         </footer>
       </Card>
     </li>
