@@ -10,7 +10,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     getProfil().catch(console.error);
-  });
+  }, []);
 
   const getProfil = async () => {
     const res = await login.get(`${authLog?.id}`);

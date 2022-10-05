@@ -10,3 +10,7 @@ export const signup = axios.create({
     'content-type': 'multipart/form-data',
   },
 });
+
+export const getPost = axios.create({
+  baseURL: `http://localhost:4000/api/posts`,
+});

@@ -74,7 +74,7 @@ const Login = () => {
 
   return (
     <div className={classes.layout}>
-      <Card>
+      <Card className={classes.form}>
         <h1>GROUPOMANIA</h1>
         {!signup ? (
           <>

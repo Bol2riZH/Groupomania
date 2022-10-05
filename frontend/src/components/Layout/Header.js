@@ -8,6 +8,7 @@ import classes from '../Layout/Header.module.scss';
 import logo from '../../assets/logo/icon-monochrome-black.svg';
 import defaultProfilePicture from '../../assets/images/defaultProfilePicture.svg';
 import Input from '../UI/Input';
+import SearchBar from '../SearchBar';
 
 const Header = () => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
@@ -49,7 +50,7 @@ const Header = () => {
           <img src={logo} alt="logo" />
           <h1>Groupomania</h1>
         </div>
-        <Input />
+        <SearchBar />
         <div className={classes.user}>
           <button className={classes.profilePicture} onClick={onProfileHandler}>
             {profilePicture ? (

@@ -2,7 +2,7 @@ import classes from './Input.module.scss';
 
 const Input = (props) => {
   return (
-    <div className={classes.input}>
+    <div className={`${classes.input} ${props.className}`}>
       <label htmlFor={props.input}>{props.label}</label>
       <input
         id={props.id}
