@@ -9,10 +9,20 @@
   background-color: white;
 }
 
+.logo {
+  display: flex;
+  gap: 0.5rem;
+  & img {
+    width: 5rem;
+  }
+  & h1 {
+    font-weight: bolder;
+  }
+}
+
 .user {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 }
 
 .btn {

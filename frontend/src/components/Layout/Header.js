@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
+
 import { login } from '../../data/axios';
 
 import { useNavigate } from 'react-router-dom';
 
 import classes from '../Layout/Header.module.scss';
+import logo from '../../assets/logo/icon-monochrome-black.svg';
+import defaultProfilePicture from '../../assets/images/defaultProfilePicture.svg';
 import Input from '../UI/Input';
 
-const Header = (props) => {
+const Header = () => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
   const [log, setLog] = useState(authLog?.token);
   const [profilePicture, setProfilePicture] = useState('');
@@ -42,13 +45,17 @@ const Header = (props) => {
   return (
     <>
       <header className={classes.header}>
-        <h1>Groupomania</h1>
+        <div className={classes.logo}>
+          <img src={logo} alt="logo" />
+          <h1>Groupomania</h1>
+        </div>
+        <Input />
         <div className={classes.user}>
           <button className={classes.profilePicture} onClick={onProfileHandler}>
             {profilePicture ? (
-              <img src={profilePicture} alt="photo de profil" />
+              <img src={profilePicture} alt="profil" />
             ) : (
-              <img src="./defaultProfile.svg" alt="photo de profil" />
+              <img src={defaultProfilePicture} alt="profil" />
             )}
           </button>
           <button className={classes.btn} onClick={logoutHandler}>

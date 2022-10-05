@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { login } from '../../data/axios';
+
 import classes from '../../pages/Profile.module.scss';
+import defaultProfilePicture from '../../assets/images/defaultProfilePicture.svg';
 
 const UserProfile = () => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
@@ -21,9 +23,9 @@ const UserProfile = () => {
       <p>{user.email}</p>
       <div className={classes.img}>
         {user.profilePictureUrl ? (
-          <img src={user.profilePictureUrl} alt="photo de profil" />
+          <img src={user.profilePictureUrl} alt="profil" />
         ) : (
-          <img src="./defaultProfile.svg" alt="photo de profil" />
+          <img src={defaultProfilePicture} alt="profil" />
         )}
       </div>
     </section>
