@@ -3,7 +3,7 @@ import {
   profileReducer,
   ACTIONS,
   INITIAL_STATE,
-} from '../Reducer/profileReducer';
+} from '../Reducer/Profile/profileReducer';
 
 import Input from '../UI/Input';
 import Button from '../UI/Button';
@@ -11,18 +11,18 @@ import Button from '../UI/Button';
 const SignupForm = (props) => {
   const [state, dispatch] = useReducer(profileReducer, INITIAL_STATE);
 
-  const signupHandler = (e) => {
-    dispatch({
-      type: ACTIONS.INPUT_TEXT,
-      payload: { name: e.target.name, value: e.target.value },
-    });
-  };
-
-  const profilePictureHandler = (e) => {
-    dispatch({
-      type: ACTIONS.INPUT_FILE,
-      payload: { name: e.target.name, files: e.target.files[0] },
-    });
+  const inputHandler = (e) => {
+    if (e.target.name === 'profilePictureUrl') {
+      dispatch({
+        type: ACTIONS.INPUT_FILE,
+        payload: { name: e.target.name, files: e.target.files[0] },
+      });
+    } else {
+      dispatch({
+        type: ACTIONS.INPUT_TEXT,
+        payload: { name: e.target.name, value: e.target.value },
+      });
+    }
   };
 
   const submitHandler = (e) => {
@@ -45,21 +45,21 @@ const SignupForm = (props) => {
         htmlFor="profilePicture"
         id="profilePicture"
         type="file"
-        onChange={profilePictureHandler}
+        onChange={inputHandler}
       />
       <Input
         name="username"
         htmlFor="username"
         id="username"
         placeHolder="Nom d'utilisateur"
-        onChange={signupHandler}
+        onChange={inputHandler}
       />
       <Input
         name="email"
         htmlFor="email"
         id="email"
         placeHolder="Email"
-        onChange={signupHandler}
+        onChange={inputHandler}
       />
       <Input
         name="password"
@@ -67,7 +67,7 @@ const SignupForm = (props) => {
         id="password"
         type="password"
         placeHolder="Mot de passe"
-        onChange={signupHandler}
+        onChange={inputHandler}
       />
       <Input
         name="confirmPassword"
@@ -75,7 +75,7 @@ const SignupForm = (props) => {
         id="confirmPassword"
         type="password"
         placeHolder="Confirmer le mot de passe"
-        onChange={signupHandler}
+        onChange={inputHandler}
       />
       <Button type="submit">Créer un compte</Button>
     </form>

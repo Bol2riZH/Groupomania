@@ -4,6 +4,7 @@ import { login } from '../../data/axios';
 import { useNavigate } from 'react-router-dom';
 
 import classes from '../Layout/Header.module.scss';
+import Input from '../UI/Input';
 
 const Header = (props) => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
@@ -54,7 +55,6 @@ const Header = (props) => {
             Se déconnecter
           </button>
         </div>
-        {props.children}
       </header>
     </>
   );
