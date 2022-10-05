@@ -17,9 +17,11 @@ const PostSummary = () => {
 
   return (
     <ul>
-      {posts.map((post) => (
-        <Post key={post._id} post={post} />
-      ))}
+      {posts
+        .sort((a, b) => b.date - a.date)
+        .map((post) => (
+          <Post key={post._id} post={post} />
+        ))}
     </ul>
   );
 };

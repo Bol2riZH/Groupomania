@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import classes from './Post.module.scss';
 
@@ -6,6 +6,17 @@ import Card from '../../UI/Card';
 import Button from '../../UI/Button';
 
 const Post = ({ post }) => {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const authorize = () => {
+    return JSON.parse(localStorage.getItem('auth')) === post.id;
+  };
+
+  const isEditingHandler = () => {
+    setIsEditing(true);
+    console.log(isEditing);
+  };
+
   return (
     <li>
       <Card className={classes.postCard}>
@@ -18,6 +29,7 @@ const Post = ({ post }) => {
               ''
             )}
           </div>
+          {authorize() && <Button onClick={isEditingHandler}>Modifier</Button>}
         </header>
         <section className={classes.post}>
           <h2>{post.title}</h2>
@@ -28,6 +40,7 @@ const Post = ({ post }) => {
         </section>
         <footer className={classes.like}>
           <Button className={classes.btnLike}>like</Button>
+          <span>{post.postedTime}</span>
         </footer>
       </Card>
     </li>
