@@ -7,6 +7,7 @@ import {
 
 import Input from '../UI/Input';
 import Button from '../UI/Button';
+import { formData } from '../../data/formData';
 
 const UpdateUserProfile = (props) => {
   const [state, dispatch] = useReducer(profileReducer, INITIAL_STATE);
@@ -27,17 +28,7 @@ const UpdateUserProfile = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    const updateUserInfo = new FormData();
-    state.profilePictureUrl &&
-      updateUserInfo.append('profilePictureUrl', state.profilePictureUrl);
-    state.username && updateUserInfo.append('username', state.username);
-    state.email && updateUserInfo.append('email', state.email);
-    state.password && updateUserInfo.append('password', state.password);
-    state.confirmPassword &&
-      updateUserInfo.append('confirmPassword', state.confirmPassword);
-
-    props.onUpdate(updateUserInfo);
+    props.onUpdate(formData(state));
   };
 
   return (

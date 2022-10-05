@@ -7,6 +7,7 @@ import {
 
 import Input from '../UI/Input';
 import Button from '../UI/Button';
+import { formData } from '../../data/formData';
 
 const SignupForm = (props) => {
   const [state, dispatch] = useReducer(profileReducer, INITIAL_STATE);
@@ -27,15 +28,7 @@ const SignupForm = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append('profilePictureUrl', state.profilePictureUrl);
-    formData.append('username', state.username);
-    formData.append('email', state.email);
-    formData.append('password', state.password);
-    formData.append('confirmPassword', state.confirmPassword);
-
-    props.onSignup(formData, state);
+    props.onSignup(formData(state), state);
   };
 
   return (
