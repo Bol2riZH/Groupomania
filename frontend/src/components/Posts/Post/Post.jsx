@@ -6,11 +6,8 @@ import Card from '../../UI/Card';
 import Button from '../../UI/Button';
 
 const Post = ({ post }) => {
+  const authLog = JSON.parse(localStorage.getItem('auth'));
   const [isEditing, setIsEditing] = useState(false);
-
-  const authorize = () => {
-    return JSON.parse(localStorage.getItem('auth')) === post.id;
-  };
 
   const isEditingHandler = () => {
     setIsEditing(true);
@@ -29,7 +26,11 @@ const Post = ({ post }) => {
               ''
             )}
           </div>
-          {authorize() && <Button onClick={isEditingHandler}>Modifier</Button>}
+          {authLog.id === post.userId ? (
+            <Button onClick={isEditingHandler}>Modifier</Button>
+          ) : (
+            ''
+          )}
         </header>
         <section className={classes.post}>
           <h2>{post.title}</h2>
