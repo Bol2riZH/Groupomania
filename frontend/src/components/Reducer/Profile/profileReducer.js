@@ -1,9 +1,15 @@
-export const INITIAL_STATE = {
+export const USER_INITIAL_STATE = {
   profilePictureUrl: '',
   username: '',
   email: '',
   password: '',
   confirmPassword: '',
+};
+
+export const POST_INITIAL_STATE = {
+  title: '',
+  post: '',
+  imageUrl: '',
 };
 
 export const ACTIONS = {

@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import classes from './Home.module.scss';
 
 import Header from '../components/Layout/Header';
 import PostSummary from '../components/Posts/PostSummary';
 import AddPost from '../components/Posts/Post/AddPost';
+import { addPost } from '../data/axios';
 
 const Home = () => {
-  const addPostHandler = () => {};
+  const addPostHandler = async (postData, authLog) => {
+    const res = await addPost.post('/', postData, {
+      headers: {
+        Authorization: `Bearer ${authLog.token}`,
+        'content-type': 'multipart/form-data',
+      },
+    });
+    console.log(res.data);
+  };
 
   return (
     <>

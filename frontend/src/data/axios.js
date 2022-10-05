@@ -14,3 +14,7 @@ export const signup = axios.create({
 export const getPost = axios.create({
   baseURL: `http://localhost:4000/api/posts`,
 });
+
+export const addPost = axios.create({
+  baseURL: `http://localhost:4000/api/posts`,
+});

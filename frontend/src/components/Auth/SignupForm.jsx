@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import {
   profileReducer,
   ACTIONS,
-  INITIAL_STATE,
+  USER_INITIAL_STATE,
 } from '../Reducer/Profile/profileReducer';
 
 import Input from '../UI/Input';
@@ -10,7 +10,7 @@ import Button from '../UI/Button';
 import { formData } from '../../data/formData';
 
 const SignupForm = (props) => {
-  const [state, dispatch] = useReducer(profileReducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(profileReducer, USER_INITIAL_STATE);
 
   const inputHandler = (e) => {
     if (e.target.name === 'profilePictureUrl') {

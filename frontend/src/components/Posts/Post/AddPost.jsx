@@ -6,14 +6,14 @@ import Card from '../../UI/Card';
 import Input from '../../UI/Input';
 import {
   ACTIONS,
-  INITIAL_STATE,
+  POST_INITIAL_STATE,
   profileReducer,
 } from '../../Reducer/Profile/profileReducer';
 import { formData } from '../../../data/formData';
 import Button from '../../UI/Button';
 
 const AddPost = (props) => {
-  const [state, dispatch] = useReducer(profileReducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(profileReducer, POST_INITIAL_STATE);
 
   const inputHandler = (e) => {
     if (e.target.name === 'imageUrl') {
@@ -31,18 +31,23 @@ const AddPost = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    props.onAddPost(formData(state), state);
+    const authLog = JSON.parse(localStorage.getItem('auth'));
+    props.onAddPost(formData(state), authLog);
   };
 
   return (
     <Card>
       <form onSubmit={submitHandler}>
         <h2>Quelles sont les nouvelles ?</h2>
-        <Input placeHolder="Titre de votre message" onChange={inputHandler} />
+        <Input
+          name="title"
+          placeHolder="Titre de votre message"
+          onChange={inputHandler}
+        />
         <textarea
           className={classes.textArea}
-          name="message"
-          id="message"
+          name="post"
+          id="post"
           rows="10"
           onChange={inputHandler}
         ></textarea>
