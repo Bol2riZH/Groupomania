@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import classes from '../Layout/Header.module.scss';
 import logo from '../../assets/logo/icon-monochrome-black.svg';
 import defaultProfilePicture from '../../assets/images/defaultProfilePicture.svg';
-import Input from '../UI/Input';
 import SearchBar from '../SearchBar';
 
 const Header = () => {
