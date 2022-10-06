@@ -17,9 +17,6 @@ const Post = ({ post }) => {
   };
 
   const likeHandler = async () => {
-    const user = post.usersLiked.find((userId) => userId === authLog.id);
-    if (user === undefined) console.log('yes');
-    console.log(user);
     const res = await axios.post(
       `http://localhost:4000/api/posts/${post._id}/notice`,
       {
@@ -33,9 +30,7 @@ const Post = ({ post }) => {
       }
     );
     console.log(res.data);
-    console.log('likes: ' + post.likes);
     setLikePost(+post.likes);
-    console.log('likes: ' + post.likes);
   };
 
   return (
@@ -72,7 +67,6 @@ const Post = ({ post }) => {
                 J'aime
               </Button>
               <span>{+post.likes}</span>
-              <span>{+likePost}</span>
               <Button>Commenter</Button>
             </>
           )}
