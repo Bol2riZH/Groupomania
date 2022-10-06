@@ -134,7 +134,7 @@ exports.NoticePost = catchAsync(async (req, res) => {
           likes: postToNoticed.likes++,
           usersLiked: postToNoticed.usersLiked.push(req.auth.userId),
         });
-        return res.status(400).json({
+        return res.status(200).json({
           status: 'success',
           message: 'post liked',
         });
