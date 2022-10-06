@@ -33,10 +33,6 @@ const Home = () => {
     getPostHandler().catch(console.error);
   };
 
-  const likeHandler = () => {
-    getPostHandler().catch(console.error);
-  };
-
   return (
     <>
       <Header />
@@ -46,7 +42,12 @@ const Home = () => {
           {posts
             .sort((a, b) => b.date - a.date)
             .map((post) => (
-              <Post key={post._id} {...post} onLike={likeHandler} />
+              <Post
+                key={post._id}
+                {...post}
+                onLikePost={getPostHandler}
+                onDeletePost={getPostHandler}
+              />
             ))}
         </ul>
       </div>

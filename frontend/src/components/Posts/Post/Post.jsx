@@ -17,10 +17,11 @@ const Post = (props) => {
   };
 
   const likeHandler = async () => {
+    const stateLike = props.usersLiked.find((userId) => userId === authLog.id);
     const res = await axios.post(
       `http://localhost:4000/api/posts/${props._id}/notice`,
       {
-        like: props.usersLiked.find((userId) => userId === authLog.id) ? 0 : 1,
+        like: stateLike ? 0 : 1,
       },
       {
         headers: {
@@ -30,8 +31,22 @@ const Post = (props) => {
       }
     );
     console.log(res.data);
-    setLikePost(+props.likes);
-    props.onLike(props.likes);
+    !stateLike ? setLikePost(+props.likes + 1) : setLikePost(+props.likes - 1);
+    props.onLikePost();
+  };
+
+  const deleteHandler = async () => {
+    const res = await axios.delete(
+      `http://localhost:4000/api/posts/${props._id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${authLog.token}`,
+          'content-type': 'application/json',
+        },
+      }
+    );
+    console.log(res.data);
+    props.onDeletePost();
   };
 
   return (
@@ -58,7 +73,7 @@ const Post = (props) => {
           {authLog.id === props.userId ? (
             <>
               <Button onClick={isEditingHandler}>Modifier</Button>
-              <Button className={classes.btnDelete} onClick={isEditingHandler}>
+              <Button className={classes.btnDelete} onClick={deleteHandler}>
                 Supprimer
               </Button>
             </>
@@ -67,7 +82,8 @@ const Post = (props) => {
               <Button className={classes.btnLike} onClick={likeHandler}>
                 J'aime
               </Button>
-              <span>{+props.likes}</span>
+              {/*<span>{+props.likes}</span>*/}
+              <span>{likePost}</span>
               <Button>Commenter</Button>
             </>
           )}
