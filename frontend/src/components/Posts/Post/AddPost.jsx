@@ -1,5 +1,4 @@
 import React, { useReducer } from 'react';
-
 import classes from './AddPost.module.scss';
 
 import Card from '../../UI/Card';

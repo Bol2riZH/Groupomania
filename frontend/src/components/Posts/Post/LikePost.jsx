@@ -34,7 +34,6 @@ const LikePost = (props) => {
         J'aime
       </Button>
       <span>{likePost}</span>
-      <Button>Commenter</Button>
     </>
   );
 };
