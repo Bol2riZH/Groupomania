@@ -1,9 +1,9 @@
 import React, { useReducer } from 'react';
-import { profileReducer, ACTIONS, USER_INITIAL_STATE } from './profileReducer';
+import { dataReducer, ACTIONS, USER_INITIAL_STATE } from './dataReducer';
 
 /*TODO : that's not working.....*/
-const useProfileReducer = (e, inputFileName) => {
-  const [state, dispatch] = useReducer(profileReducer, USER_INITIAL_STATE);
+const useDataReducer = (e, inputFileName) => {
+  const [state, dispatch] = useReducer(dataReducer, USER_INITIAL_STATE);
 
   if (e.target.name === inputFileName) {
     dispatch({
@@ -19,4 +19,4 @@ const useProfileReducer = (e, inputFileName) => {
   return state;
 };
 
-export default useProfileReducer;
+export default useDataReducer;

@@ -4,7 +4,6 @@ import classes from './Home.module.scss';
 import { addPost, getPost } from '../data/axios';
 
 import Header from '../components/Layout/Header';
-import PostSummary from '../components/Posts/PostSummary';
 import AddPost from '../components/Posts/Post/AddPost';
 import Post from '../components/Posts/Post/Post';
 
@@ -48,6 +47,7 @@ const Home = () => {
                 onLikePost={getPostHandler}
                 onDeletePost={getPostHandler}
                 onEditPost={getPostHandler}
+                onCommentPost={getPostHandler}
               />
             ))}
         </ul>

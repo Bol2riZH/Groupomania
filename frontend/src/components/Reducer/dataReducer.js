@@ -24,7 +24,7 @@ export const ACTIONS = {
   CLEAR_INPUT: 'clear_input',
 };
 
-export const profileReducer = (state, action) => {
+export const dataReducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.INPUT_TEXT:
       return {

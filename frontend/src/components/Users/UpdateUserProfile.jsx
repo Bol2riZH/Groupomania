@@ -2,15 +2,15 @@ import React, { useReducer } from 'react';
 import {
   ACTIONS,
   USER_INITIAL_STATE,
-  profileReducer,
-} from '../Reducer/Profile/profileReducer';
+  dataReducer,
+} from '../Reducer/dataReducer';
 
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import { formData } from '../../data/formData';
 
 const UpdateUserProfile = (props) => {
-  const [state, dispatch] = useReducer(profileReducer, USER_INITIAL_STATE);
+  const [state, dispatch] = useReducer(dataReducer, USER_INITIAL_STATE);
 
   const inputHandler = (e) => {
     if (e.target.name === 'profilePictureUrl') {

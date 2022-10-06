@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 
 import classes from './Post.module.scss';
 
@@ -10,23 +10,42 @@ import Button from '../../UI/Button';
 
 import DeletePost from './DeletePost';
 import LikePost from './LikePost';
+import Input from '../../UI/Input';
+import {
+  ACTIONS,
+  dataReducer,
+  POST_INITIAL_STATE,
+} from '../../Reducer/dataReducer';
 
 const Post = (props) => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
-
   const [isEditing, setIsEditing] = useState(false);
-  const [editContent, setEditContent] = useState(false);
+
+  const [state, dispatch] = useReducer(dataReducer, POST_INITIAL_STATE);
+
+  const inputHandler = (e) => {
+    if (e.target.name === 'imageUrl') {
+      dispatch({
+        type: ACTIONS.INPUT_FILE,
+        payload: { name: e.target.name, files: e.target.files[0] },
+      });
+    } else {
+      dispatch({
+        type: ACTIONS.INPUT_TEXT,
+        payload: { name: e.target.name, value: e.target.value },
+      });
+    }
+  };
 
   const editHandler = () => {
-    setIsEditing(true);
-    console.log(isEditing);
+    isEditing ? setIsEditing(false) : setIsEditing(true);
   };
 
   const confirmEditHandler = async () => {
-    formData(editContent);
+    const editData = formData(state);
     const res = await axios.put(
       `http://localhost:4000/api/posts/${props._id}`,
-      formData,
+      editData,
       {
         headers: {
           Authorization: `Bearer ${authLog.token}`,
@@ -37,10 +56,6 @@ const Post = (props) => {
     console.log(res.data);
     setIsEditing(false);
     props.onEditPost();
-  };
-  const cancelEditHandler = () => {
-    setEditContent(props.post);
-    setIsEditing(false);
   };
 
   return (
@@ -57,19 +72,34 @@ const Post = (props) => {
           </div>
         </header>
         <section className={classes.post}>
-          <h2>{props.title}</h2>
           {!isEditing ? (
-            <p>{editContent ? editContent : props.post}</p>
+            <>
+              <h2>{props.title}</h2>
+              <p>{props.post}</p>
+              <div className={props.imageUrl && classes.img}>
+                {props.imageUrl ? (
+                  <img src={props.imageUrl} alt="message" />
+                ) : (
+                  ''
+                )}
+              </div>
+            </>
           ) : (
-            <textarea
-              autoFocus
-              defaultValue={editContent ? editContent : props.post}
-              onChange={(e) => setEditContent(e.target.value)}
-            ></textarea>
+            <>
+              <Input
+                name="title"
+                placeHolder={props.title}
+                defaultValue={props.title}
+                onChange={inputHandler}
+              />
+              <textarea
+                name={'post'}
+                autoFocus
+                defaultValue={props.post}
+                onChange={inputHandler}
+              ></textarea>
+            </>
           )}
-          <div className={props.imageUrl && classes.img}>
-            {props.imageUrl ? <img src={props.imageUrl} alt="message" /> : ''}
-          </div>
         </section>
         <footer>
           {authLog.id === props.userId ? (
@@ -79,7 +109,7 @@ const Post = (props) => {
               ) : (
                 <>
                   <Button onClick={confirmEditHandler}>Confirmer</Button>
-                  <Button onClick={cancelEditHandler}>Annuler</Button>
+                  <Button onClick={editHandler}>Annuler</Button>
                 </>
               )}
               <DeletePost {...props} />

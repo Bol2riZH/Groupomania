@@ -7,13 +7,13 @@ import Input from '../../UI/Input';
 import {
   ACTIONS,
   POST_INITIAL_STATE,
-  profileReducer,
-} from '../../Reducer/Profile/profileReducer';
+  dataReducer,
+} from '../../Reducer/dataReducer';
 import { formData } from '../../../data/formData';
 import Button from '../../UI/Button';
 
 const AddPost = (props) => {
-  const [state, dispatch] = useReducer(profileReducer, POST_INITIAL_STATE);
+  const [state, dispatch] = useReducer(dataReducer, POST_INITIAL_STATE);
 
   const inputHandler = (e) => {
     if (e.target.name === 'imageUrl') {

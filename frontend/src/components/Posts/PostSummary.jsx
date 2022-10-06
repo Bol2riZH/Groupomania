@@ -7,7 +7,7 @@ const PostSummary = (props) => {
       {props.getSummary
         .sort((a, b) => b.date - a.date)
         .map((post) => (
-          <Post key={post._id} post={post} />
+          <Post key={post._id} {...props} />
         ))}
     </ul>
   );
