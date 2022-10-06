@@ -25,9 +25,9 @@ exports.addPost = catchAsync(async (req, res) => {
     ...postContent,
     userId: req.auth.userId,
     userInfo: userInfo,
-    imageUrl:
-      req.file &&
-      `${req.protocol}://${req.get('host')}/images/posts/${req.file.filename}`,
+    imageUrl: req.file
+      ? `${req.protocol}://${req.get('host')}/images/posts/${req.file.filename}`
+      : '',
     date: Date.now(),
     postedTime: postedTime(),
   });
