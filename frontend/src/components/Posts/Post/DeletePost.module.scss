@@ -1,0 +1,9 @@
+.btnDelete {
+  background: #d15858;
+  &:hover {
+    background: #d73c42;
+  }
+  &:active {
+    background: #d15858;
+  }
+}

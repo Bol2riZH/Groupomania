@@ -2,51 +2,45 @@ import React, { useState } from 'react';
 
 import classes from './Post.module.scss';
 
+import axios from 'axios';
+import { formData } from '../../../data/formData';
+
 import Card from '../../UI/Card';
 import Button from '../../UI/Button';
-import axios from 'axios';
+
+import DeletePost from './DeletePost';
+import LikePost from './LikePost';
 
 const Post = (props) => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
-  const [isEditing, setIsEditing] = useState(false);
-  const [likePost, setLikePost] = useState(+props.likes);
 
-  const isEditingHandler = () => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editContent, setEditContent] = useState(false);
+
+  const editHandler = () => {
     setIsEditing(true);
     console.log(isEditing);
   };
 
-  const likeHandler = async () => {
-    const stateLike = props.usersLiked.find((userId) => userId === authLog.id);
-    const res = await axios.post(
-      `http://localhost:4000/api/posts/${props._id}/notice`,
-      {
-        like: stateLike ? 0 : 1,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${authLog.token}`,
-          'content-type': 'application/json',
-        },
-      }
-    );
-    console.log(res.data);
-    !stateLike ? setLikePost(+props.likes + 1) : setLikePost(+props.likes - 1);
-    props.onLikePost();
-  };
-
-  const deleteHandler = async () => {
-    const res = await axios.delete(
+  const confirmEditHandler = async () => {
+    formData(editContent);
+    const res = await axios.put(
       `http://localhost:4000/api/posts/${props._id}`,
+      formData,
       {
         headers: {
           Authorization: `Bearer ${authLog.token}`,
-          'content-type': 'application/json',
+          'content-type': 'multipart/form-data',
         },
       }
     );
     console.log(res.data);
-    props.onDeletePost();
+    setIsEditing(false);
+    props.onEditPost();
+  };
+  const cancelEditHandler = () => {
+    setEditContent(props.post);
+    setIsEditing(false);
   };
 
   return (
@@ -64,7 +58,15 @@ const Post = (props) => {
         </header>
         <section className={classes.post}>
           <h2>{props.title}</h2>
-          <p>{props.post}</p>
+          {!isEditing ? (
+            <p>{editContent ? editContent : props.post}</p>
+          ) : (
+            <textarea
+              autoFocus
+              defaultValue={editContent ? editContent : props.post}
+              onChange={(e) => setEditContent(e.target.value)}
+            ></textarea>
+          )}
           <div className={props.imageUrl && classes.img}>
             {props.imageUrl ? <img src={props.imageUrl} alt="message" /> : ''}
           </div>
@@ -72,19 +74,19 @@ const Post = (props) => {
         <footer>
           {authLog.id === props.userId ? (
             <>
-              <Button onClick={isEditingHandler}>Modifier</Button>
-              <Button className={classes.btnDelete} onClick={deleteHandler}>
-                Supprimer
-              </Button>
+              {!isEditing ? (
+                <Button onClick={editHandler}>Modifier</Button>
+              ) : (
+                <>
+                  <Button onClick={confirmEditHandler}>Confirmer</Button>
+                  <Button onClick={cancelEditHandler}>Annuler</Button>
+                </>
+              )}
+              <DeletePost {...props} />
             </>
           ) : (
             <>
-              <Button className={classes.btnLike} onClick={likeHandler}>
-                J'aime
-              </Button>
-              {/*<span>{+props.likes}</span>*/}
-              <span>{likePost}</span>
-              <Button>Commenter</Button>
+              <LikePost {...props} />
             </>
           )}
           <time>{props.postedTime}</time>

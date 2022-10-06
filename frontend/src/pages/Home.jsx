@@ -47,6 +47,7 @@ const Home = () => {
                 {...post}
                 onLikePost={getPostHandler}
                 onDeletePost={getPostHandler}
+                onEditPost={getPostHandler}
               />
             ))}
         </ul>
