@@ -6,6 +6,7 @@ import { addPost, getPost } from '../data/axios';
 import Header from '../components/Layout/Header';
 import PostSummary from '../components/Posts/PostSummary';
 import AddPost from '../components/Posts/Post/AddPost';
+import Post from '../components/Posts/Post/Post';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -32,12 +33,22 @@ const Home = () => {
     getPostHandler().catch(console.error);
   };
 
+  const likeHandler = () => {
+    getPostHandler().catch(console.error);
+  };
+
   return (
     <>
       <Header />
       <div className={classes.posts}>
         <AddPost onAddPost={addPostHandler} />
-        <PostSummary getSummary={posts} />
+        <ul>
+          {posts
+            .sort((a, b) => b.date - a.date)
+            .map((post) => (
+              <Post key={post._id} {...post} onLike={likeHandler} />
+            ))}
+        </ul>
       </div>
     </>
   );
