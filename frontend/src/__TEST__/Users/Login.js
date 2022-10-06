@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import ButtonTest from '../UI/Button.test';
-import CardTest from '../UI/Card.test';
+import Button from '../UI/Button';
+import Card from '../UI/Card';
 
-const LoginTest = () => {
+const Login = () => {
   const [email, setEnteredEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -38,17 +38,17 @@ const LoginTest = () => {
   };
 
   return (
-    <CardTest>
+    <Card>
       <h1>LOGIN</h1>
       <form onSubmit={submitHandler}>
         <label htmlFor="email">Email: </label>
         <input id="email" type="email" onChange={emailHandler} />
         <label htmlFor="password">Password: </label>
         <input type="password" id="password" onChange={passwordHandler} />
-        <ButtonTest type="submit">Login</ButtonTest>
+        <Button type="submit">Login</Button>
       </form>
-    </CardTest>
+    </Card>
   );
 };
 
-export default LoginTest;
+export default Login;

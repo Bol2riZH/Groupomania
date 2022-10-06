@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PasswordRevealerTest = (value) => {
+const PasswordRevealer = (value) => {
   const [shown, setShown] = React.useState(false);
   return (
     <>

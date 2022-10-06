@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import CardTest from '../UI/Card.test';
-import ButtonTest from '../UI/Button.test';
+import Card from '../UI/Card';
+import Button from '../UI/Button';
 import classes from './ListOfPosts.module.scss';
 
-const ListOfPostsTest = () => {
+const ListOfPosts = () => {
   const [posts, setPosts] = useState([]);
   const [deletePost, setDeletePost] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -52,7 +52,7 @@ const ListOfPostsTest = () => {
   };
 
   const deletePostHandler = async (post) => {
-    const userId = JSON.parse(localStorage.getItem('user'));
+    const userId = JSON.parse(localStorage.getItem('auth'));
     if (userId) {
       const data = await fetchDataToDelete(post._id, userId).catch(
         console.error
@@ -64,14 +64,14 @@ const ListOfPostsTest = () => {
 
   // TODO : add title and image editing
   const updatePostHandler = async (post) => {
-    const userId = JSON.parse(localStorage.getItem('user'));
+    const userId = JSON.parse(localStorage.getItem('auth'));
     if (userId.id === post.userId) {
       setIsEditing(true);
     } else console.log('Forbidden');
   };
   // TODO : editing by id
   const confirmUpdatePostHandler = async (post) => {
-    const userId = JSON.parse(localStorage.getItem('user'));
+    const userId = JSON.parse(localStorage.getItem('auth'));
     if (userId) {
       const data = await fetchDataToUpdate(post._id, userId, editContent).catch(
         console.error
@@ -91,7 +91,7 @@ const ListOfPostsTest = () => {
   const addLikeHandler = async (post) => {
     console.log('likes' + post.likes);
     console.log('dislikes' + post.dislikes);
-    const userId = JSON.parse(localStorage.getItem('user'));
+    const userId = JSON.parse(localStorage.getItem('auth'));
     const res = await axios.post(
       `http://localhost:4000/api/posts/${post._id}/notice`,
       {
@@ -108,7 +108,7 @@ const ListOfPostsTest = () => {
     setLikePost(post.likes);
   };
   const addDislikeHandler = async (post) => {
-    const userId = JSON.parse(localStorage.getItem('user'));
+    const userId = JSON.parse(localStorage.getItem('auth'));
     const res = await axios.post(
       `http://localhost:4000/api/posts/${post._id}/notice`,
       {
@@ -132,7 +132,7 @@ const ListOfPostsTest = () => {
         .sort((a, b) => b.date - a.date)
         .map((post) => (
           <li key={post._id}>
-            <CardTest className={classes.postCard}>
+            <Card className={classes.postCard}>
               <header>
                 <div>
                   <h2>{post.userInfo.username}</h2>
@@ -149,27 +149,25 @@ const ListOfPostsTest = () => {
                 </div>
                 <div>
                   {!isEditing ? (
-                    <ButtonTest onClick={() => updatePostHandler(post)}>
+                    <Button onClick={() => updatePostHandler(post)}>
                       Update
-                    </ButtonTest>
+                    </Button>
                   ) : (
                     <div>
-                      <ButtonTest
-                        onClick={() => confirmUpdatePostHandler(post)}
-                      >
+                      <Button onClick={() => confirmUpdatePostHandler(post)}>
                         Confirm
-                      </ButtonTest>
-                      <ButtonTest onClick={() => cancelUpdatePostHandler(post)}>
+                      </Button>
+                      <Button onClick={() => cancelUpdatePostHandler(post)}>
                         Cancel
-                      </ButtonTest>
+                      </Button>
                     </div>
                   )}
-                  <ButtonTest
+                  <Button
                     className={classes.btnDelete}
                     onClick={() => deletePostHandler(post)}
                   >
                     Delete
-                  </ButtonTest>
+                  </Button>
                 </div>
               </header>
               <section className={classes.post}>
@@ -192,30 +190,30 @@ const ListOfPostsTest = () => {
                 )}
               </section>
               <div className={classes.like}>
-                <ButtonTest
+                <Button
                   className={classes.btnLike}
                   onClick={() => addLikeHandler(post)}
                 >
                   Like
-                </ButtonTest>
+                </Button>
                 <span>{likePost}</span>
-                <ButtonTest
+                <Button
                   className={classes.btnDislike}
                   onClick={() => addDislikeHandler(post)}
                 >
                   DisLike
-                </ButtonTest>
+                </Button>
                 <span>{dislikePost}</span>
               </div>
               <time>{post.postedTime}</time>
               <div>
-                <ButtonTest>Comment</ButtonTest>
+                <Button>Comment</Button>
               </div>
-            </CardTest>
+            </Card>
           </li>
         ))}
     </ul>
   );
 };
 
-export default ListOfPostsTest;
+export default ListOfPosts;

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import ButtonTest from '../UI/Button.test';
-import CardTest from '../UI/Card.test';
+import Button from '../UI/Button';
+import Card from '../UI/Card';
 
-const SignupTest = () => {
+const UpdateUser = () => {
   const [profilePicture, setProfilePicture] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEnteredEmail] = useState('');
@@ -31,12 +31,13 @@ const SignupTest = () => {
     setConfirmPassword(e.target.value);
   };
 
-  const postData = async (data) => {
-    const res = await axios.post(
-      'http://localhost:4000/api/auth/signup',
+  const updateData = async (id, data) => {
+    const res = await axios.put(
+      `http://localhost:4000/api/auth/update/${id.id}`,
       data,
       {
         headers: {
+          Authorization: `Bearer ${id.token}`,
           'content-type': 'multipart/form-data',
         },
       }
@@ -48,18 +49,19 @@ const SignupTest = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('profilePictureUrl', profilePicture);
-    formData.append('username', username);
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('confirmPassword', confirmPassword);
+    profilePicture && formData.append('profilePictureUrl', profilePicture);
+    username && formData.append('username', username);
+    email && formData.append('email', email);
+    password && formData.append('password', password);
+    confirmPassword && formData.append('confirmPassword', confirmPassword);
 
-    postData(formData).catch(console.error);
+    const userId = JSON.parse(localStorage.getItem('user'));
+    userId && updateData(userId, formData).catch(console.error);
   };
 
   return (
-    <CardTest>
-      <h1>SIGNUP</h1>
+    <Card>
+      <h1>UPDATE</h1>
       <form onSubmit={submitHandler}>
         <label htmlFor="profilePicture">Add a profile picture ? </label>
         <input
@@ -69,21 +71,37 @@ const SignupTest = () => {
           onChange={profilePictureHandler}
         />
         <label htmlFor="username">username: </label>
-        <input id="username" type="text" onChange={usernameHandler} />
+        <input
+          id="username"
+          type="text"
+          onChange={usernameHandler}
+          defaultValue={username}
+        />
         <label htmlFor="email">Email: </label>
-        <input id="email" type="email" onChange={emailHandler} />
+        <input
+          id="email"
+          type="text"
+          onChange={emailHandler}
+          defaultValue={email}
+        />
         <label htmlFor="password">Password: </label>
-        <input id="password" type="password" onChange={passwordHandler} />
+        <input
+          id="password"
+          type="text"
+          onChange={passwordHandler}
+          defaultValue={password}
+        />
         <label htmlFor="confirm-password">Confirm password: </label>
         <input
           id="confirm-password"
-          type="password"
+          type="text"
           onChange={confirmPasswordHandler}
+          defaultValue={confirmPassword}
         />
-        <ButtonTest type="submit">Signup</ButtonTest>
+        <Button type="submit">Update</Button>
       </form>
-    </CardTest>
+    </Card>
   );
 };
 
-export default SignupTest;
+export default UpdateUser;

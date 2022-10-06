@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import './style/global.scss';
 
-import AppTest from './App.test';
+import AppTest from './AppTest';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';

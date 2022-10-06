@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 import axios from 'axios';
 
-import CardTest from '../UI/Card.test';
-import ButtonTest from '../UI/Button.test';
+import Card from '../UI/Card';
+import Button from '../UI/Button';
 
-const AddPostTest = () => {
+const AddPost = () => {
   const [title, setTitle] = useState('');
   const [post, setPost] = useState('');
   const [image, setImage] = useState('');
@@ -40,12 +40,12 @@ const AddPostTest = () => {
     formData.append('post', post);
     formData.append('imageUrl', image);
 
-    const userId = JSON.parse(localStorage.getItem('user'));
+    const userId = JSON.parse(localStorage.getItem('auth'));
     userId && postData(userId, formData).catch(console.error);
   };
 
   return (
-    <CardTest>
+    <Card>
       <h1>ADD POST</h1>
       <form onSubmit={submitHandler}>
         <label htmlFor="title">Title: </label>
@@ -59,10 +59,10 @@ const AddPostTest = () => {
           accept="image/*"
           onChange={imageHandler}
         />
-        <ButtonTest type="submit">Add post</ButtonTest>
+        <Button type="submit">Add post</Button>
       </form>
-    </CardTest>
+    </Card>
   );
 };
 
-export default AddPostTest;
+export default AddPost;

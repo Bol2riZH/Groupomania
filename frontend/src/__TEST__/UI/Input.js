@@ -1,6 +1,6 @@
 import classes from './Input.module.scss';
 
-const InputTest = (props) => {
+const Input = (props) => {
   return (
     <div className={classes.input}>
       <label htmlFor={props.input.id}>{props.label}</label>
@@ -9,4 +9,4 @@ const InputTest = (props) => {
   );
 };
 
-export default InputTest;
+export default Input;

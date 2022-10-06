@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-
 import classes from './Home.module.scss';
+
+import { addPost, getPost } from '../data/axios';
 
 import Header from '../components/Layout/Header';
 import PostSummary from '../components/Posts/PostSummary';
 import AddPost from '../components/Posts/Post/AddPost';
-import { addPost, getPost } from '../data/axios';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -17,6 +17,8 @@ const Home = () => {
   const getPostHandler = async () => {
     const res = await getPost.get();
     setPosts(res.data.posts);
+
+    console.log(res.data.posts);
   };
 
   const addPostHandler = async (postData, authLog) => {
@@ -35,7 +37,7 @@ const Home = () => {
       <Header />
       <div className={classes.posts}>
         <AddPost onAddPost={addPostHandler} />
-        <PostSummary onAddPost={posts} />
+        <PostSummary getSummary={posts} />
       </div>
     </>
   );

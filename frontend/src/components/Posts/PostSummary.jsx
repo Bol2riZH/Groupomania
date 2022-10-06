@@ -4,7 +4,7 @@ import Post from './Post/Post';
 const PostSummary = (props) => {
   return (
     <ul>
-      {props.onAddPost
+      {props.getSummary
         .sort((a, b) => b.date - a.date)
         .map((post) => (
           <Post key={post._id} post={post} />
