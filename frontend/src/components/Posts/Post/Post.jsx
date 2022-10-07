@@ -7,13 +7,19 @@ import Button from '../../UI/Button';
 import DeletePost from './DeletePost';
 import LikePost from './LikePost';
 import EditPost from './EditPost';
+import CommentPost from './CommentPost';
 
 const Post = (props) => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
   const [isEditing, setIsEditing] = useState(false);
+  const [isCommenting, setIsCommenting] = useState(false);
 
   const editHandler = () => {
     isEditing ? setIsEditing(false) : setIsEditing(true);
+  };
+
+  const commentHandler = () => {
+    isCommenting ? setIsCommenting(false) : setIsCommenting(true);
   };
 
   return (
@@ -54,7 +60,15 @@ const Post = (props) => {
           ) : (
             <LikePost {...props} />
           )}
-          <Button>Commenter</Button>
+          {isCommenting ? (
+            <CommentPost
+              onConfirmCommentPost={commentHandler}
+              onCancelCommentPost={commentHandler}
+            />
+          ) : (
+            <Button onClick={commentHandler}>Commenter</Button>
+          )}
+
           <time>{props.postedTime}</time>
         </footer>
       </Card>
