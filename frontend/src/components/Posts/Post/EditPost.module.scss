@@ -1,0 +1,17 @@
+.post {
+  & p {
+    margin: 2rem 0;
+  }
+}
+.img {
+  width: 100%;
+  height: 30rem;
+  & img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+.btnCancel {
+  width: 100%;
+}

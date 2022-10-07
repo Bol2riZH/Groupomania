@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from 'react';
-import classes from './Post.module.scss';
+import classes from './EditPost.module.scss';
 import Input from '../../UI/Input';
 import Button from '../../UI/Button';
 import {
@@ -74,7 +74,11 @@ const EditPost = (props) => {
             type="file"
             onChange={inputHandler}
           />
-          <Button onClick={confirmEditHandler} {...props}>
+          <Button
+            className={classes.btnCancel}
+            onClick={confirmEditHandler}
+            {...props}
+          >
             Confirmer
           </Button>
         </section>
