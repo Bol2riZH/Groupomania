@@ -7,7 +7,8 @@ import Button from '../../UI/Button';
 import DeletePost from './DeletePost';
 import LikePost from './LikePost';
 import EditPost from './EditPost';
-import CommentPost from './CommentPost';
+import AddComment from './AddComment';
+import Comment from './Comment';
 
 const Post = (props) => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
@@ -42,33 +43,42 @@ const Post = (props) => {
             <div className={props.imageUrl && classes.img}>
               {props.imageUrl ? <img src={props.imageUrl} alt="message" /> : ''}
             </div>
+            <div>{props.comments && <Comment {...props} />}</div>
+
             {authLog.id === props.userId ? (
-              <Button onClick={editHandler}>Modifier</Button>
+              <Button className={classes.btnEdit} onClick={editHandler}>
+                Modifier
+              </Button>
             ) : (
               ''
             )}
           </section>
         ) : (
-          <>
-            <EditPost {...props} onConfirmEditing={editHandler} />
-            <Button onClick={editHandler}>Annuler</Button>
-          </>
+          <EditPost
+            {...props}
+            onConfirmEditing={editHandler}
+            onCancelEditing={editHandler}
+          />
         )}
         <footer>
-          {authLog.id === props.userId ? (
-            <DeletePost {...props} />
-          ) : (
-            <LikePost {...props} />
-          )}
+          <div className={classes.footerTop}>
+            {authLog.id === props.userId ? (
+              <DeletePost {...props} />
+            ) : (
+              <LikePost {...props} />
+            )}
+          </div>
           {isCommenting ? (
-            <CommentPost
-              onConfirmCommentPost={commentHandler}
-              onCancelCommentPost={commentHandler}
+            <AddComment
+              {...props}
+              onConfirmComment={commentHandler}
+              onCancelComment={commentHandler}
             />
           ) : (
-            <Button onClick={commentHandler}>Commenter</Button>
+            <Button className={classes.btnComment} onClick={commentHandler}>
+              Commenter
+            </Button>
           )}
-
           <time>{props.postedTime}</time>
         </footer>
       </Card>

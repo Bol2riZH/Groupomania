@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer } from 'react';
 import classes from './EditPost.module.scss';
 import Input from '../../UI/Input';
 import Button from '../../UI/Button';
@@ -12,7 +12,6 @@ import axios from 'axios';
 
 const EditPost = (props) => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
-  const [isEditing, setIsEditing] = useState(true);
 
   const [state, dispatch] = useReducer(dataReducer, POST_INITIAL_STATE);
 
@@ -43,48 +42,45 @@ const EditPost = (props) => {
       }
     );
     console.log(res.data);
-    setIsEditing(false);
     props.onConfirmEditing();
-    props.onEditPost();
+  };
+
+  const cancelEditHandler = () => {
+    props.onCancelEditing();
   };
 
   return (
     <>
-      {isEditing ? (
-        <section className={classes.post}>
-          <Input
-            name="title"
-            placeHolder={props.title}
-            defaultValue={props.title}
-            onChange={inputHandler}
-          />
-          <textarea
-            autoFocus
-            name={'post'}
-            defaultValue={props.post}
-            onChange={inputHandler}
-          ></textarea>
-          <div className={props.imageUrl && classes.img}>
-            {props.imageUrl ? <img src={props.imageUrl} alt="message" /> : ''}
-          </div>
-          <Input
-            name="imageUrl"
-            htmlFor="postPicture"
-            id="postPicture"
-            type="file"
-            onChange={inputHandler}
-          />
-          <Button
-            className={classes.btnCancel}
-            onClick={confirmEditHandler}
-            {...props}
-          >
-            Confirmer
-          </Button>
-        </section>
-      ) : (
-        ''
-      )}
+      <section className={classes.post}>
+        <Input
+          name="title"
+          placeHolder={props.title}
+          defaultValue={props.title}
+          onChange={inputHandler}
+        />
+        <textarea
+          autoFocus
+          name={'post'}
+          defaultValue={props.post}
+          onChange={inputHandler}
+        ></textarea>
+        <div className={props.imageUrl && classes.img}>
+          {props.imageUrl ? <img src={props.imageUrl} alt="message" /> : ''}
+        </div>
+        <Input
+          name="imageUrl"
+          htmlFor="postPicture"
+          id="postPicture"
+          type="file"
+          onChange={inputHandler}
+        />
+        <Button className={classes.btn} onClick={confirmEditHandler}>
+          Confirmer
+        </Button>
+        <Button className={classes.btn} onClick={cancelEditHandler}>
+          Annuler
+        </Button>
+      </section>
     </>
   );
 };

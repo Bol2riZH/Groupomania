@@ -10,18 +10,31 @@ import Profile from './pages/Profile';
 
 /*/////////////////////////////////////////////*/
 /* TODO:
-    Add admin auth
-    Handle error from backend
-    Handle general error
-    Add modal
-    Add confirm email to signup
+    FIRST:
+        - Remove input on add post after post *
+        - Add admin auth *
+        - Handle error from backend *
+        - Handle general error *
+        - Add modals *
+        - Add confirm email to signup
+        - Add delete image on edit post *
+        - Refactoring reducer *
+        - Use useContext for auth *
+        - Review AXIOS handler *
     FEATURES:
-        - Comment post
-        - Top 5 posts
+        - Comment post *
         - Search post or user
+        - Top 5 posts
         - Admin can ban user
         - Dark mode
     DESIGN
+    BACKEND:
+        - CRUD comment :
+        model > reference post et user
+        route > passe par :postId
+        controller
+        referencement commentaire dans post à supprimer (referencement unitlatéral)
+ */
 /*/ ////////////////////////////////////////////*/
 
 const App = () => {
