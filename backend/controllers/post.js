@@ -48,7 +48,12 @@ exports.updatePost = catchAsync(async (req, res) => {
     const userInfo = getUserInfo(user);
 
     let updatePost;
-    if (!req.file) updatePost = { ...req.body };
+    if (!req.file)
+      updatePost = {
+        ...req.body,
+        date: Date.now(),
+        postedTime: `Édité le : ${postedTime()}`,
+      };
     else {
       findAndUnlinkPostImage(postToUpdate);
       updatePost = {
@@ -57,6 +62,8 @@ exports.updatePost = catchAsync(async (req, res) => {
         imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
           req.file.filename
         }`,
+        date: Date.now(),
+        postedTime: `Édité le : ${postedTime()}`,
       };
     }
     await Post.findByIdAndUpdate(req.params.id, {

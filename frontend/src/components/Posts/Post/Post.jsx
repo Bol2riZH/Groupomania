@@ -37,9 +37,7 @@ const Post = (props) => {
               {props.imageUrl ? <img src={props.imageUrl} alt="message" /> : ''}
             </div>
             {authLog.id === props.userId ? (
-              <>
-                <Button onClick={editHandler}>Modifier</Button>
-              </>
+              <Button onClick={editHandler}>Modifier</Button>
             ) : (
               ''
             )}
