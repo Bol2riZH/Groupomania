@@ -16,13 +16,13 @@ import Profile from './pages/Profile';
         - Handle error from backend *
         - Handle general error *
         - Add modals *
-        - Add confirm email to signup
         - Add delete image on edit post *
         - Refactoring reducer *
         - Use useContext for auth *
         - Review AXIOS handler *
+        - Add confirm email to signup
     FEATURES:
-        - Comment post *
+        - Comment post OK > make it with new backend model
         - Search post or user
         - Top 5 posts
         - Admin can ban user
@@ -33,7 +33,7 @@ import Profile from './pages/Profile';
         model > reference post et user
         route > passe par :postId
         controller
-        referencement commentaire dans post à supprimer (referencement unitlatéral)
+        unilateral reference comment
 /*/ ////////////////////////////////////////////*/
 
 const App = () => {
