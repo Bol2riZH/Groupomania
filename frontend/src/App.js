@@ -34,7 +34,6 @@ import Profile from './pages/Profile';
         route > passe par :postId
         controller
         referencement commentaire dans post à supprimer (referencement unitlatéral)
- */
 /*/ ////////////////////////////////////////////*/
 
 const App = () => {

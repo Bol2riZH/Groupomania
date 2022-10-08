@@ -47,8 +47,7 @@ const Home = () => {
                 onLikePost={getPostHandler}
                 onDeletePost={getPostHandler}
                 onEditPost={getPostHandler}
-                onCommentPost={getPostHandler}
-                onConfirmComment={getPostHandler}
+                onComment={getPostHandler}
               />
             ))}
         </ul>

@@ -29,6 +29,7 @@ const AddComment = (props) => {
     );
     console.log(res.data);
     props.onConfirmComment();
+    props.onComment();
   };
   const cancelCommentHandler = () => {
     props.onCancelComment();
