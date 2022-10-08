@@ -34,6 +34,8 @@ import Profile from './pages/Profile';
         route > passe par :postId
         controller
         unilateral reference comment
+        >>>> when delete post delete all comments
+ */
 /*/ ////////////////////////////////////////////*/
 
 const App = () => {

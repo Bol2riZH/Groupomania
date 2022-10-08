@@ -18,7 +18,7 @@ const AddComment = (props) => {
     const res = await axios.post(
       `http://localhost:4000/api/posts/${props._id}/comment`,
       {
-        comments: comment,
+        comment: comment,
       },
       {
         headers: {
