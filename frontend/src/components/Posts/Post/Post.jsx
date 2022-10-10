@@ -25,6 +25,11 @@ const Post = (props) => {
     isCommenting ? setIsCommenting(false) : setIsCommenting(true);
   };
 
+  const getComment = async () => {
+    const res = await axios.get(`http://localhost:4000/api/posts/comment`);
+    console.log(res.data);
+  };
+
   return (
     <li>
       <Card className={classes.postCard}>
@@ -66,6 +71,7 @@ const Post = (props) => {
           {isCommenting ? (
             <AddComment
               {...props}
+              onComment={getComment}
               onConfirmComment={commentHandler}
               onCancelComment={commentHandler}
             />

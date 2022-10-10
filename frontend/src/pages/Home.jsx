@@ -6,7 +6,6 @@ import { addPost, getPost } from '../data/axios';
 import Header from '../components/Layout/Header';
 import AddPost from '../components/Posts/Post/AddPost';
 import Post from '../components/Posts/Post/Post';
-import axios from 'axios';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -19,7 +18,7 @@ const Home = () => {
     const res = await getPost.get();
     setPosts(res.data.posts);
 
-    // console.log(res.data.posts);
+    console.log(res.data.posts);
   };
 
   const addPostHandler = async (postData, authLog) => {
@@ -29,7 +28,7 @@ const Home = () => {
         'content-type': 'multipart/form-data',
       },
     });
-    // console.log(res.data);
+    console.log(res.data);
     getPostHandler().catch(console.error);
   };
 
@@ -48,7 +47,8 @@ const Home = () => {
                 onLikePost={getPostHandler}
                 onDeletePost={getPostHandler}
                 onEditPost={getPostHandler}
-                onComment={getPostHandler}
+                // onComment={getPostHandler}
+                onAddComment={getPostHandler}
               />
             ))}
         </ul>

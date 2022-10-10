@@ -13,7 +13,7 @@ router.post('/', auth, postMulter, postCtrl.addPost);
 router.put('/:id', auth, postMulter, postCtrl.updatePost);
 // router.post('/:id/comment', auth, postCtrl.commentPost);
 router.post('/:postId/comment', auth, commentCtrl.addComment);
-router.get('/:postId/comment', commentCtrl.getPostComments);
+router.get('/comment', commentCtrl.getPostComments);
 
 router.post('/:id/notice', auth, postCtrl.NoticePost);
 
