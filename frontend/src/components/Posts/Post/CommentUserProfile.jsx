@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import classes from './PostUserProfile.module.scss';
+
 import { login } from '../../../data/axios';
 
-import classes from './PostUserProfile.module.scss';
 import defaultProfilePicture from '../../../assets/images/defaultProfilePicture.svg';
 
-const CommentUserProfile = (props) => {
+const CommentUserProfile = (comment) => {
   const [user, setUser] = useState('');
 
   useEffect(() => {
@@ -12,7 +13,7 @@ const CommentUserProfile = (props) => {
   }, []);
 
   const getProfil = async () => {
-    const res = await login.get(`${props.userId}`);
+    const res = await login.get(`${comment.userId}`);
     setUser(res.data.user);
   };
 

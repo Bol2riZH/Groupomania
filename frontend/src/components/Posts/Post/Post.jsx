@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classes from './Post.module.scss';
 
 import Card from '../../UI/Card';
@@ -10,6 +10,7 @@ import EditPost from './EditPost';
 import AddComment from './AddComment';
 import Comment from './Comment';
 import PostUserProfile from './PostUserProfile';
+import axios from 'axios';
 
 const Post = (props) => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
@@ -35,7 +36,9 @@ const Post = (props) => {
             <div className={props.imageUrl && classes.img}>
               {props.imageUrl ? <img src={props.imageUrl} alt="message" /> : ''}
             </div>
-            <div>{props.comments && <Comment {...props} />}</div>
+            <ul>
+              <Comment {...props} />
+            </ul>
 
             {authLog.id === props.userId ? (
               <Button className={classes.btnEdit} onClick={editHandler}>
