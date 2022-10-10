@@ -9,7 +9,6 @@ const postedTime = require('../utils/postedTime');
 
 exports.addComment = catchAsync(async (req, res) => {
   const postToComment = await Post.findById(req.params.postId);
-  console.log(postToComment);
 
   const comment = new Comment({
     ...req.body,
@@ -18,9 +17,9 @@ exports.addComment = catchAsync(async (req, res) => {
     postedTime: postedTime(),
   });
   await comment.save();
-  console.log(comment);
   await Post.findByIdAndUpdate(req.params.postId, {
-    comments: postToComment.comments.push(comment),
+    ...postToComment,
+    ...postToComment.comments.push(comment),
   });
   return res
     .status(200)

@@ -9,6 +9,7 @@ import LikePost from './LikePost';
 import EditPost from './EditPost';
 import AddComment from './AddComment';
 import Comment from './Comment';
+import PostUserProfile from './PostUserProfile';
 
 const Post = (props) => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
@@ -26,16 +27,7 @@ const Post = (props) => {
   return (
     <li>
       <Card className={classes.postCard}>
-        <header>
-          <h2>{props.userInfo.username}</h2>
-          <div className={classes.profilePicture}>
-            {props.userInfo.profilePictureUrl ? (
-              <img src={props.userInfo.profilePictureUrl} alt="profile" />
-            ) : (
-              ''
-            )}
-          </div>
-        </header>
+        <PostUserProfile {...props} />
         {!isEditing ? (
           <section className={classes.post}>
             <h2>{props.title}</h2>
