@@ -55,6 +55,13 @@ const SignupForm = (props) => {
         onChange={inputHandler}
       />
       <Input
+        name="confirmEmail"
+        htmlFor="confirmEmail"
+        id="confirmEmail"
+        placeHolder="Confirmer votre adresse mail"
+        onChange={inputHandler}
+      />
+      <Input
         name="password"
         htmlFor="password"
         id="password"

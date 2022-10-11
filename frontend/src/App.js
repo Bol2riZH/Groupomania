@@ -11,7 +11,6 @@ import Profile from './pages/Profile';
 /*/////////////////////////////////////////////*/
 /* TODO:
     FIRST:
-        - Add delete image on edit post *
         - Handle error from backend *
         - Handle general error *
         - Add modals *
@@ -23,7 +22,6 @@ import Profile from './pages/Profile';
     DESIGN
         - crypt role ?
         - Add password reveal ?
-        - Add confirm email to signup ?
         - Use a use reducerHook ?
 /*/ ////////////////////////////////////////////*/
 

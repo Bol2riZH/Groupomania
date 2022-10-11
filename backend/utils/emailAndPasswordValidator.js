@@ -8,6 +8,12 @@ module.exports = (req, res) => {
       .status(400)
       .json({ status: 'fail', message: 'email format incorrect' });
   }
+  if (req.body.email !== req.body.confirmEmail) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'email and email confirmation must be same',
+    });
+  }
   if (!validator.isStrongPassword(req.body.password)) {
     return res.status(400).json({
       status: 'fail',
