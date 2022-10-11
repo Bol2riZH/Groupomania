@@ -16,9 +16,9 @@ const AddComment = (props) => {
 
   const confirmCommentHandler = async () => {
     const res = await axios.post(
-      `http://localhost:4000/api/posts/${props._id}/comment`,
+      `http://localhost:4000/api/comments/${props._id}`,
       {
-        comments: comment,
+        comment: comment,
       },
       {
         headers: {
@@ -37,14 +37,14 @@ const AddComment = (props) => {
 
   return (
     <div className={classes.comment}>
-      <Button onClick={confirmCommentHandler}>Envoyer</Button>
-      <Button onClick={cancelCommentHandler}>Annuler</Button>
       <Input
         name="comment"
         id="comment"
         placeHolder="Écrivez un commentaire..."
         onChange={inputHandler}
       />
+      <Button onClick={confirmCommentHandler}>Envoyer</Button>
+      <Button onClick={cancelCommentHandler}>Annuler</Button>
     </div>
   );
 };

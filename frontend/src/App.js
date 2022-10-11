@@ -16,24 +16,25 @@ import Profile from './pages/Profile';
         - Handle error from backend *
         - Handle general error *
         - Add modals *
-        - Add confirm email to signup
         - Add delete image on edit post *
         - Refactoring reducer *
         - Use useContext for auth *
         - Review AXIOS handler *
+        - Add confirm email to signup
     FEATURES:
-        - Comment post *
         - Search post or user
         - Top 5 posts
         - Admin can ban user
         - Dark mode
-    DESIGN
     BACKEND:
         - CRUD comment :
         model > reference post et user
         route > passe par :postId
         controller
-        referencement commentaire dans post à supprimer (referencement unitlatéral)
+        unilateral reference comment
+        >>>> when delete post delete all comments
+    DESIGN
+ */
 /*/ ////////////////////////////////////////////*/
 
 const App = () => {
