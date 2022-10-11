@@ -22,7 +22,7 @@ import Profile from './pages/Profile';
     DESIGN
         - crypt role ?
         - Add password reveal ?
-        - Use a use reducerHook ?
+        - Use a useReducer Hook ?
 /*/ ////////////////////////////////////////////*/
 
 const App = () => {

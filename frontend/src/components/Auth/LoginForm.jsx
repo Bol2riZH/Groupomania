@@ -8,6 +8,7 @@ const LoginForm = (props) => {
     email: '',
     password: '',
   });
+  const [shown, setShown] = React.useState(false);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -34,12 +35,15 @@ const LoginForm = (props) => {
         />
         <Input
           name="password"
-          type="password"
+          type={shown ? 'text' : 'password'}
           htmlFor="password"
           id="password"
           placeHolder="Mot de passe"
           onChange={loginHandler}
         />
+        <button type="button" onClick={() => setShown(!shown)}>
+          voir/cacher
+        </button>
         <Button type="submit">Connexion</Button>
       </form>
     </>

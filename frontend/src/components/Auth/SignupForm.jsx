@@ -11,6 +11,7 @@ import Button from '../UI/Button';
 
 const SignupForm = (props) => {
   const [state, dispatch] = useReducer(dataReducer, USER_INITIAL_STATE);
+  const [shown, setShown] = React.useState(false);
 
   const inputHandler = (e) => {
     if (e.target.name === 'profilePictureUrl') {
@@ -65,7 +66,7 @@ const SignupForm = (props) => {
         name="password"
         htmlFor="password"
         id="password"
-        type="password"
+        type={shown ? 'text' : 'password'}
         placeHolder="Mot de passe"
         onChange={inputHandler}
       />
@@ -73,10 +74,13 @@ const SignupForm = (props) => {
         name="confirmPassword"
         htmlFor="confirmPassword"
         id="confirmPassword"
-        type="password"
+        type={shown ? 'text' : 'password'}
         placeHolder="Confirmer le mot de passe"
         onChange={inputHandler}
       />
+      <button type="button" onClick={() => setShown(!shown)}>
+        voir/cacher
+      </button>
       <Button type="submit">Créer un compte</Button>
     </form>
   );
