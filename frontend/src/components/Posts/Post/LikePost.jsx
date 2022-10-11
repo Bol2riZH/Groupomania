@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import classes from './Post.module.scss';
 
-import axios from 'axios';
+import { axiosPost } from '../../../data/axios';
+
 import Button from '../../UI/Button';
 
 const LikePost = (props) => {
@@ -11,8 +12,8 @@ const LikePost = (props) => {
 
   const likeHandler = async () => {
     const stateLike = props.usersLiked.find((userId) => userId === authLog.id);
-    const res = await axios.post(
-      `http://localhost:4000/api/posts/${props._id}/notice`,
+    const res = await axiosPost.post(
+      `${props._id}/notice`,
       {
         like: stateLike ? 0 : 1,
       },

@@ -4,10 +4,10 @@ import {
   ACTIONS,
   USER_INITIAL_STATE,
 } from '../Reducer/dataReducer';
+import { formData } from '../../data/formData';
 
 import Input from '../UI/Input';
 import Button from '../UI/Button';
-import { formData } from '../../data/formData';
 
 const SignupForm = (props) => {
   const [state, dispatch] = useReducer(dataReducer, USER_INITIAL_STATE);

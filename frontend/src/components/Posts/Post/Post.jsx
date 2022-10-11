@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import classes from './Post.module.scss';
 
-import axios from 'axios';
+import { axiosComment } from '../../../data/axios';
 
 import Card from '../../UI/Card';
 import Button from '../../UI/Button';
@@ -27,7 +27,7 @@ const Post = (props) => {
   }, []);
 
   const getCommentHandler = async () => {
-    const res = await axios.get(`http://localhost:4000/api/comments`);
+    const res = await axiosComment.get();
     setComments(res.data.postComment);
   };
 

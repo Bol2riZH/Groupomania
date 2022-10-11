@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { login } from '../../data/axios';
+import { axiosUser } from '../../data/axios';
 
 import classes from '../../pages/Profile.module.scss';
 import defaultProfilePicture from '../../assets/images/defaultProfilePicture.svg';
@@ -13,7 +13,7 @@ const UserProfile = () => {
   }, []);
 
   const getProfil = async () => {
-    const res = await login.get(`${authLog?.id}`);
+    const res = await axiosUser.get(`${authLog?.id}`);
     setUser(res.data.user);
   };
 

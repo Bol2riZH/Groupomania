@@ -12,12 +12,6 @@ export const POST_INITIAL_STATE = {
   imageUrl: '',
 };
 
-const initialValue = {
-  title: '',
-  post: '',
-  imageUrl: '',
-};
-
 export const ACTIONS = {
   INPUT_TEXT: 'input_text',
   INPUT_FILE: 'input_file',
@@ -35,10 +29,6 @@ export const dataReducer = (state, action) => {
       return {
         ...state,
         [action.payload.name]: action.payload.files,
-      };
-    case ACTIONS.CLEAR_INPUT:
-      return {
-        ...initialValue,
       };
     default:
       return state;

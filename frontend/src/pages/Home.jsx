@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import classes from './Home.module.scss';
 
-import { addPost, getPost } from '../data/axios';
+import { axiosPost } from '../data/axios';
 
 import Header from '../components/Layout/Header';
 import AddPost from '../components/Posts/Post/AddPost';
@@ -15,14 +15,14 @@ const Home = () => {
   }, []);
 
   const getPostHandler = async () => {
-    const res = await getPost.get();
+    const res = await axiosPost.get();
     setPosts(res.data.posts);
 
     console.log(res.data.posts);
   };
 
   const addPostHandler = async (postData, authLog) => {
-    const res = await addPost.post('/', postData, {
+    const res = await axiosPost.post('/', postData, {
       headers: {
         Authorization: `Bearer ${authLog.token}`,
         'content-type': 'multipart/form-data',

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import classes from './CommentUserProfile.module.scss';
 
-import { login } from '../../../data/axios';
+import { axiosUser } from '../../../data/axios';
 
 import defaultProfilePicture from '../../../assets/images/defaultProfilePicture.svg';
 
@@ -13,7 +13,7 @@ const CommentUserProfile = (comment) => {
   }, []);
 
   const getProfil = async () => {
-    const res = await login.get(`${comment.userId}`);
+    const res = await axiosUser.get(`${comment.userId}`);
     setUser(res.data.user);
   };
 

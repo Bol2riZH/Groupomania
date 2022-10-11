@@ -11,16 +11,16 @@ import Profile from './pages/Profile';
 /*/////////////////////////////////////////////*/
 /* TODO:
     FIRST:
-        - Remove input on add post after post *
         - Add admin auth *
         - Handle error from backend *
         - Handle general error *
         - Add modals *
         - Add delete image on edit post *
+        - correct error on refreshing edit post *
         - Refactoring reducer *
         - Use useContext for auth *
-        - Review AXIOS handler *
         - Add confirm email to signup
+        - Add password reveal
     FEATURES:
         - Search post or user
         - Top 5 posts

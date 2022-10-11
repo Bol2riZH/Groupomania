@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-
-import { login } from '../../data/axios';
-
-import { useNavigate } from 'react-router-dom';
-
 import classes from '../Layout/Header.module.scss';
 import logo from '../../assets/logo/icon-monochrome-black.svg';
 import defaultProfilePicture from '../../assets/images/defaultProfilePicture.svg';
+
+import { axiosUser } from '../../data/axios';
+
+import { useNavigate } from 'react-router-dom';
+
 import SearchBar from '../SearchBar';
 
 const Header = () => {
@@ -27,7 +27,7 @@ const Header = () => {
   }, []);
 
   const getProfil = async () => {
-    const res = await login.get(`${authLog?.id}`);
+    const res = await axiosUser.get(`${authLog?.id}`);
     setProfilePicture(res.data.user.profilePictureUrl);
   };
 

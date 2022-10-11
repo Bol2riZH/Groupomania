@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import classes from './Login.module.scss';
 
-import { login } from '../data/axios';
-/* TODO : Make signup axios function work */
-// import { signup } from '../data/axios';
-
-import axios from 'axios';
-import { USER_URL } from '../data/constants';
+import { axiosUser } from '../data/axios';
 
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../components/UI/Card';
 import Button from '../components/UI/Button';
+
 import LoginForm from '../components/Auth/LoginForm';
 import SignupForm from '../components/Auth/SignupForm';
 
@@ -37,7 +33,7 @@ const Login = () => {
 
   const loginHandler = async (userLogin) => {
     try {
-      const res = await login.post('/login', {
+      const res = await axiosUser.post('/login', {
         ...userLogin,
       });
       console.log(res.data);
@@ -58,12 +54,11 @@ const Login = () => {
   const signupHandler = async (userInfo, userSignup) => {
     console.log(userSignup);
     try {
-      const res = await axios.post(`${USER_URL}signup`, userInfo, {
+      const res = await axiosUser.post(`/signup`, userInfo, {
         headers: {
           'content-type': 'multipart/form-data',
         },
       });
-      // const response = await signup.post('/signup', userInfo);
       console.log(res.data);
       const userId = await loginHandler(userSignup);
       setLocalStorage(userId);

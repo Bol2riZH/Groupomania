@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { signup } from '../data/axios';
+import { axiosUser } from '../data/axios';
 
 import UserProfile from '../components/Users/UserProfile';
 import UpdateUserProfile from '../components/Users/UpdateUserProfile';
@@ -26,7 +26,7 @@ const Profile = () => {
   const onConfirmUpdateHandler = async (updateUserInfo) => {
     const authLog = JSON.parse(localStorage.getItem('auth'));
 
-    const res = await signup.put(`/update/${authLog.id}`, updateUserInfo, {
+    const res = await axiosUser.put(`/update/${authLog.id}`, updateUserInfo, {
       headers: {
         Authorization: `Bearer ${authLog.token}`,
         'content-type': 'multipart/form-data',

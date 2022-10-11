@@ -1,14 +1,15 @@
 import React, { useReducer } from 'react';
 import classes from './AddPost.module.scss';
 
-import Card from '../../UI/Card';
-import Input from '../../UI/Input';
 import {
   ACTIONS,
   POST_INITIAL_STATE,
   dataReducer,
 } from '../../Reducer/dataReducer';
 import { formData } from '../../../data/formData';
+
+import Card from '../../UI/Card';
+import Input from '../../UI/Input';
 import Button from '../../UI/Button';
 
 const AddPost = (props) => {
