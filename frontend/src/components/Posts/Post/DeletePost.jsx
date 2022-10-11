@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 import classes from './DeletePost.module.scss';
 
 import { axiosPost } from '../../../data/axios';
@@ -6,12 +7,12 @@ import { axiosPost } from '../../../data/axios';
 import Button from '../../UI/Button';
 
 const DeletePost = (props) => {
-  const authLog = JSON.parse(localStorage.getItem('auth'));
+  const { ...auth } = useAuthContext();
 
   const deleteHandler = async () => {
     const res = await axiosPost.delete(`${props._id}`, {
       headers: {
-        Authorization: `Bearer ${authLog.token}`,
+        Authorization: `Bearer ${auth.token}`,
         'content-type': 'application/json',
       },
     });

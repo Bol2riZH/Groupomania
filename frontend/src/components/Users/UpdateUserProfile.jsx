@@ -8,9 +8,11 @@ import {
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import { formData } from '../../data/formData';
+import { useNavigate } from 'react-router-dom';
 
 const UpdateUserProfile = (props) => {
   const [state, dispatch] = useReducer(dataReducer, USER_INITIAL_STATE);
+  const navigate = useNavigate();
 
   const inputHandler = (e) => {
     if (e.target.name === 'profilePictureUrl') {
@@ -29,6 +31,9 @@ const UpdateUserProfile = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     props.onUpdate(formData(state));
+    setTimeout(() => {
+      navigate('/home');
+    }, 150);
   };
 
   return (

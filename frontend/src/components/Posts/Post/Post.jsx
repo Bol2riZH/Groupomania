@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 import classes from './Post.module.scss';
 
 import { axiosComment } from '../../../data/axios';
@@ -16,7 +17,7 @@ import AddComment from '../Comments/AddComment';
 import DeleteComment from '../Comments/DeleteComment';
 
 const Post = (props) => {
-  const authLog = JSON.parse(localStorage.getItem('auth'));
+  const { ...auth } = useAuthContext();
 
   const [isEditing, setIsEditing] = useState(false);
   const [isCommenting, setIsCommenting] = useState(false);
@@ -62,7 +63,8 @@ const Post = (props) => {
                         <p>{comment.comment}</p>
                         <time>{comment.postedTime}</time>
                       </div>
-                      {authLog.id === comment.userId ? (
+                      {/*{authLog.id === comment.userId ? (*/}
+                      {auth.id === comment.userId || auth.role === 'admin' ? (
                         <DeleteComment
                           {...comment}
                           onDeleteComment={getCommentHandler}
@@ -74,7 +76,7 @@ const Post = (props) => {
                   ))}
             </ul>
 
-            {authLog.id === props.userId ? (
+            {auth.id === props.userId || auth.role === 'admin' ? (
               <Button className={classes.btnEdit} onClick={editHandler}>
                 Modifier
               </Button>
@@ -91,7 +93,7 @@ const Post = (props) => {
         )}
         <footer>
           <div className={classes.footerTop}>
-            {authLog.id === props.userId ? (
+            {auth.id === props.userId || auth.role === 'admin' ? (
               <DeletePost {...props} />
             ) : (
               <LikePost {...props} />

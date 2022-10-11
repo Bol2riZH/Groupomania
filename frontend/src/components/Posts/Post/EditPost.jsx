@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 import classes from './EditPost.module.scss';
 
 import { axiosPost } from '../../../data/axios';
@@ -14,7 +15,7 @@ import Input from '../../UI/Input';
 import Button from '../../UI/Button';
 
 const EditPost = (props) => {
-  const authLog = JSON.parse(localStorage.getItem('auth'));
+  const { ...auth } = useAuthContext();
 
   const [state, dispatch] = useReducer(dataReducer, POST_INITIAL_STATE);
 
@@ -36,7 +37,7 @@ const EditPost = (props) => {
     const editData = formData(state);
     const res = await axiosPost.put(`${props._id}`, editData, {
       headers: {
-        Authorization: `Bearer ${authLog.token}`,
+        Authorization: `Bearer ${auth.token}`,
         'content-type': 'multipart/form-data',
       },
     });

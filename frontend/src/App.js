@@ -11,7 +11,6 @@ import Profile from './pages/Profile';
 /*/////////////////////////////////////////////*/
 /* TODO:
     FIRST:
-        - Add admin auth *
         - crypt role *
         - Handle error from backend *
         - Handle general error *
@@ -19,7 +18,6 @@ import Profile from './pages/Profile';
         - Add delete image on edit post *
         - correct error on refreshing edit post *
         - Refactoring reducer *
-        - Use useContext for auth *
         - Add confirm email to signup
         - Add password reveal
     FEATURES:

@@ -11,8 +11,11 @@ import { formData } from '../../../data/formData';
 import Card from '../../UI/Card';
 import Input from '../../UI/Input';
 import Button from '../../UI/Button';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 
 const AddPost = (props) => {
+  const { ...auth } = useAuthContext();
+
   const [state, dispatch] = useReducer(dataReducer, POST_INITIAL_STATE);
 
   const inputHandler = (e) => {
@@ -31,8 +34,7 @@ const AddPost = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const authLog = JSON.parse(localStorage.getItem('auth'));
-    props.onAddPost(formData(state), authLog);
+    props.onAddPost(formData(state), auth);
     e.target.reset();
   };
 

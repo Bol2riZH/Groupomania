@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import classes from './Home.module.scss';
 
 import { axiosPost } from '../data/axios';
+import { AuthContextProvider } from '../store/AuthContext';
 
 import Header from '../components/Layout/Header';
 import AddPost from '../components/Posts/Post/AddPost';
@@ -33,7 +34,7 @@ const Home = () => {
   };
 
   return (
-    <>
+    <AuthContextProvider>
       <Header />
       <div className={classes.posts}>
         <AddPost onAddPost={addPostHandler} />
@@ -51,7 +52,7 @@ const Home = () => {
             ))}
         </ul>
       </div>
-    </>
+    </AuthContextProvider>
   );
 };
 

@@ -19,7 +19,7 @@ const Header = () => {
     if (log === '')
       setTimeout(() => {
         navigate('/');
-      }, 600);
+      }, 150);
   }, [log]);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const Header = () => {
   const onProfileHandler = () => {
     setTimeout(() => {
       navigate('/profile');
-    }, 600);
+    }, 150);
   };
 
   return (

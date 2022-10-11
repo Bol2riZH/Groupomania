@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 import classes from './AddComment.module.scss';
 
 import Button from '../../UI/Button';
@@ -6,7 +7,7 @@ import Input from '../../UI/Input';
 import axios from 'axios';
 
 const AddComment = (props) => {
-  const authLog = JSON.parse(localStorage.getItem('auth'));
+  const { ...auth } = useAuthContext();
 
   const [comment, setComment] = useState('');
 
@@ -22,7 +23,7 @@ const AddComment = (props) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${authLog.token}`,
+          Authorization: `Bearer ${auth.token}`,
           'content-type': 'application/json',
         },
       }

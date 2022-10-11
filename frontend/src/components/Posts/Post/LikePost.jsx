@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 import classes from './Post.module.scss';
 
 import { axiosPost } from '../../../data/axios';
@@ -6,12 +7,12 @@ import { axiosPost } from '../../../data/axios';
 import Button from '../../UI/Button';
 
 const LikePost = (props) => {
-  const authLog = JSON.parse(localStorage.getItem('auth'));
+  const { ...auth } = useAuthContext();
 
   const [likePost, setLikePost] = useState(+props.likes);
 
   const likeHandler = async () => {
-    const stateLike = props.usersLiked.find((userId) => userId === authLog.id);
+    const stateLike = props.usersLiked.find((userId) => userId === auth.id);
     const res = await axiosPost.post(
       `${props._id}/notice`,
       {
@@ -19,7 +20,7 @@ const LikePost = (props) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${authLog.token}`,
+          Authorization: `Bearer ${auth.token}`,
           'content-type': 'application/json',
         },
       }

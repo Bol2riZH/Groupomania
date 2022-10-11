@@ -11,12 +11,12 @@ import Button from '../components/UI/Button';
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
-
   const navigate = useNavigate();
+
   const goBackHandler = () => {
     setTimeout(() => {
       navigate('/home');
-    }, 600);
+    }, 150);
   };
 
   const onEditHandler = () => {

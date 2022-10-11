@@ -4,14 +4,15 @@ import classes from './DeleteComment.module.scss';
 import { axiosComment } from '../../../data/axios';
 
 import Button from '../../UI/Button';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 
 const DeleteComment = (comment) => {
-  const authLog = JSON.parse(localStorage.getItem('auth'));
+  const { ...auth } = useAuthContext();
 
   const deleteHandler = async () => {
     const res = await axiosComment.delete(`${comment._id}`, {
       headers: {
-        Authorization: `Bearer ${authLog.token}`,
+        Authorization: `Bearer ${auth.token}`,
         'content-type': 'application/json',
       },
     });
