@@ -15,7 +15,6 @@ import Profile from './pages/Profile';
         - Handle error from backend *
         - Handle general error *
         - Add modals *
-        - Refactoring reducer *
     FEATURES:
         - Search post or user
         - Top 5 posts
@@ -25,7 +24,7 @@ import Profile from './pages/Profile';
         - crypt role ?
         - Add password reveal ?
         - Add confirm email to signup ?
- */
+        - Use a use reducerHook ?
 /*/ ////////////////////////////////////////////*/
 
 const App = () => {

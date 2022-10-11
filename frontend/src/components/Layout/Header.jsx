@@ -27,8 +27,12 @@ const Header = () => {
   }, []);
 
   const getProfil = async () => {
-    const res = await axiosUser.get(`${authLog?.id}`);
-    setProfilePicture(res.data.user.profilePictureUrl);
+    try {
+      const res = await axiosUser.get(`${authLog?.id}`);
+      setProfilePicture(res.data.user.profilePictureUrl);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const logoutHandler = () => {

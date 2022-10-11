@@ -10,14 +10,18 @@ const DeleteComment = (comment) => {
   const { ...auth } = useAuthContext();
 
   const deleteHandler = async () => {
-    const res = await axiosComment.delete(`${comment._id}`, {
-      headers: {
-        Authorization: `Bearer ${auth.token}`,
-        'content-type': 'application/json',
-      },
-    });
-    console.log(res.data);
-    comment.onDeleteComment();
+    try {
+      const res = await axiosComment.delete(`${comment._id}`, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+          'content-type': 'application/json',
+        },
+      });
+      console.log(res.data);
+      comment.onDeleteComment();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

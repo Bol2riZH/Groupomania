@@ -25,15 +25,18 @@ const Profile = () => {
 
   const onConfirmUpdateHandler = async (updateUserInfo) => {
     const authLog = JSON.parse(localStorage.getItem('auth'));
-
-    const res = await axiosUser.put(`/update/${authLog.id}`, updateUserInfo, {
-      headers: {
-        Authorization: `Bearer ${authLog.token}`,
-        'content-type': 'multipart/form-data',
-      },
-    });
-    console.log(res.data);
-    setIsEditing(false);
+    try {
+      const res = await axiosUser.put(`/update/${authLog.id}`, updateUserInfo, {
+        headers: {
+          Authorization: `Bearer ${authLog.token}`,
+          'content-type': 'multipart/form-data',
+        },
+      });
+      console.log(res.data);
+      setIsEditing(false);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

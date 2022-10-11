@@ -13,8 +13,12 @@ const CommentUserProfile = (comment) => {
   }, []);
 
   const getProfil = async () => {
-    const res = await axiosUser.get(`${comment.userId}`);
-    setUser(res.data.user);
+    try {
+      const res = await axiosUser.get(`${comment.userId}`);
+      setUser(res.data.user);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

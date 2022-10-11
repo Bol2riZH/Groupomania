@@ -29,8 +29,12 @@ const Post = (props) => {
   }, []);
 
   const getCommentHandler = async () => {
-    const res = await axiosComment.get();
-    setComments(res.data.postComment);
+    try {
+      const res = await axiosComment.get();
+      setComments(res.data.postComment);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const commentHandler = () => {

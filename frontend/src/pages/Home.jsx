@@ -16,10 +16,14 @@ const Home = () => {
   }, []);
 
   const getPostHandler = async () => {
-    const res = await axiosPost.get();
-    setPosts(res.data.posts);
+    try {
+      const res = await axiosPost.get();
+      setPosts(res.data.posts);
 
-    console.log(res.data.posts);
+      console.log(res.data.posts);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const addPostHandler = async (postData, authLog) => {

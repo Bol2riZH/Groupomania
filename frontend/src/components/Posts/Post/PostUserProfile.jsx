@@ -13,8 +13,12 @@ const PostUserProfile = (props) => {
   }, []);
 
   const getProfil = async () => {
-    const res = await axiosUser.get(`${props.userId}`);
-    setUser(res.data.user);
+    try {
+      const res = await axiosUser.get(`${props.userId}`);
+      setUser(res.data.user);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

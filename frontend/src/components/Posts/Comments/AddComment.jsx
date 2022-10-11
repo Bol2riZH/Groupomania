@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import classes from './AddComment.module.scss';
 
+import { axiosComment } from '../../../data/axios';
+
 import Button from '../../UI/Button';
 import Input from '../../UI/Input';
-import axios from 'axios';
 
 const AddComment = (props) => {
   const { ...auth } = useAuthContext();
@@ -16,21 +17,25 @@ const AddComment = (props) => {
   };
 
   const confirmCommentHandler = async () => {
-    const res = await axios.post(
-      `http://localhost:4000/api/comments/${props._id}`,
-      {
-        comment: comment,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${auth.token}`,
-          'content-type': 'application/json',
+    try {
+      const res = await axiosComment.post(
+        `${props._id}`,
+        {
+          comment: comment,
         },
-      }
-    );
-    console.log(res.data);
-    props.onConfirmComment();
-    props.onComment();
+        {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+            'content-type': 'application/json',
+          },
+        }
+      );
+      console.log(res.data);
+      props.onConfirmComment();
+      props.onComment();
+    } catch (err) {
+      console.error(err);
+    }
   };
   const cancelCommentHandler = () => {
     props.onCancelComment();

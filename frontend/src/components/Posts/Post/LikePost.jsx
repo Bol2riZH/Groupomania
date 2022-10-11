@@ -13,21 +13,27 @@ const LikePost = (props) => {
 
   const likeHandler = async () => {
     const stateLike = props.usersLiked.find((userId) => userId === auth.id);
-    const res = await axiosPost.post(
-      `${props._id}/notice`,
-      {
-        like: stateLike ? 0 : 1,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${auth.token}`,
-          'content-type': 'application/json',
+    try {
+      const res = await axiosPost.post(
+        `${props._id}/notice`,
+        {
+          like: stateLike ? 0 : 1,
         },
-      }
-    );
-    console.log(res.data);
-    !stateLike ? setLikePost(+props.likes + 1) : setLikePost(+props.likes - 1);
-    props.onLikePost();
+        {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+            'content-type': 'application/json',
+          },
+        }
+      );
+      console.log(res.data);
+      !stateLike
+        ? setLikePost(+props.likes + 1)
+        : setLikePost(+props.likes - 1);
+      props.onLikePost();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

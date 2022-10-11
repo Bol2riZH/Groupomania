@@ -10,14 +10,18 @@ const DeletePost = (props) => {
   const { ...auth } = useAuthContext();
 
   const deleteHandler = async () => {
-    const res = await axiosPost.delete(`${props._id}`, {
-      headers: {
-        Authorization: `Bearer ${auth.token}`,
-        'content-type': 'application/json',
-      },
-    });
-    console.log(res.data);
-    props.onDeletePost();
+    try {
+      const res = await axiosPost.delete(`${props._id}`, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+          'content-type': 'application/json',
+        },
+      });
+      console.log(res.data);
+      props.onDeletePost();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
