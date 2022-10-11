@@ -22,12 +22,10 @@ import Profile from './pages/Profile';
         - Review AXIOS handler *
         - Add confirm email to signup
     FEATURES:
-        - Comment post OK > make it with new backend model
         - Search post or user
         - Top 5 posts
         - Admin can ban user
         - Dark mode
-    DESIGN
     BACKEND:
         - CRUD comment :
         model > reference post et user
@@ -35,6 +33,7 @@ import Profile from './pages/Profile';
         controller
         unilateral reference comment
         >>>> when delete post delete all comments
+    DESIGN
  */
 /*/ ////////////////////////////////////////////*/
 

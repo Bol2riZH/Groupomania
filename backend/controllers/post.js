@@ -1,11 +1,10 @@
 'use strict';
 
 const Post = require('../models/Post');
-const User = require('../models/User');
 
 const catchAsync = require('../utils/catchAsync');
 const postedTime = require('../utils/postedTime');
-const getUserInfo = require('../utils/getUserInfo');
+
 const { findAndUnlinkPostImage } = require('../utils/findAndUnlinkImage');
 const {
   controlUserLiked,
@@ -17,14 +16,9 @@ const {
 /*//////////////////////////////////////////*/
 /*///////////////// ADD ///////////////////*/
 exports.addPost = catchAsync(async (req, res) => {
-  const user = await User.findById(req.auth.userId);
-  const userInfo = getUserInfo(user);
-
-  const postContent = { ...req.body };
   const post = new Post({
-    ...postContent,
+    ...req.body,
     userId: req.auth.userId,
-    userInfo: userInfo,
     imageUrl: req.file
       ? `${req.protocol}://${req.get('host')}/images/posts/${req.file.filename}`
       : '',
@@ -44,9 +38,6 @@ exports.updatePost = catchAsync(async (req, res) => {
 
   //  check admin right or userID
   if (req.auth.role === 'admin' || postToUpdate.userId === req.auth.userId) {
-    const user = await User.findById(req.auth.userId);
-    const userInfo = getUserInfo(user);
-
     let updatePost;
     if (!req.file)
       updatePost = {
@@ -58,7 +49,6 @@ exports.updatePost = catchAsync(async (req, res) => {
       findAndUnlinkPostImage(postToUpdate);
       updatePost = {
         ...req.body,
-        userInfo: userInfo,
         imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
           req.file.filename
         }`,
@@ -78,24 +68,24 @@ exports.updatePost = catchAsync(async (req, res) => {
 
 /*//////////////////////////////////////////////*/
 /*///////////////// COMMENT ///////////////////*/
-exports.commentPost = catchAsync(async (req, res) => {
-  const postToComment = await Post.findById(req.params.id);
-
-  const user = await User.findById(req.auth.userId);
-  const userInfo = getUserInfo(user);
-
-  await Post.findByIdAndUpdate(req.params.id, {
-    ...postToComment,
-    comments: postToComment.comments.push({
-      ...userInfo,
-      comment: req.body.comments,
-      date: postedTime(),
-    }),
-  });
-  return res
-    .status(200)
-    .json({ status: 'success', message: 'post commented', postToComment });
-});
+// exports.commentPost = catchAsync(async (req, res) => {
+//   const postToComment = await Post.findById(req.params.id);
+//
+//   const user = await User.findById(req.auth.userId);
+//   const userInfo = getUserInfo(user);
+//
+//   await Post.findByIdAndUpdate(req.params.id, {
+//     ...postToComment,
+//     comments: postToComment.comments.push({
+//       ...userInfo,
+//       comment: req.body.comments,
+//       date: postedTime(),
+//     }),
+//   });
+//   return res
+//     .status(200)
+//     .json({ status: 'success', message: 'post commented', postToComment });
+// });
 
 /*/////////////////////////////////////////////*/
 /*///////////////// NOTICE ///////////////////*/

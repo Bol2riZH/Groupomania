@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import classes from './PostUserProfile.module.scss';
+import classes from './CommentUserProfile.module.scss';
 
 import { login } from '../../../data/axios';
 
@@ -19,8 +19,6 @@ const CommentUserProfile = (comment) => {
 
   return (
     <header className={classes.userProfile}>
-      <h2>{user.username}</h2>
-      <h2>{user.userId}</h2>
       <div className={classes.img}>
         {user.profilePictureUrl ? (
           <img src={user.profilePictureUrl} alt="profil" />
@@ -28,6 +26,7 @@ const CommentUserProfile = (comment) => {
           <img src={defaultProfilePicture} alt="profil" />
         )}
       </div>
+      <span>{user.username}</span>
     </header>
   );
 };

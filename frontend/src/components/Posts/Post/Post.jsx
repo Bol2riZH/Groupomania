@@ -1,33 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import classes from './Post.module.scss';
 
+import axios from 'axios';
+
 import Card from '../../UI/Card';
 import Button from '../../UI/Button';
 
 import DeletePost from './DeletePost';
 import LikePost from './LikePost';
 import EditPost from './EditPost';
-import AddComment from './AddComment';
-import Comment from './Comment';
 import PostUserProfile from './PostUserProfile';
-import axios from 'axios';
+
+import CommentUserProfile from '../Comments/CommentUserProfile';
+import AddComment from '../Comments/AddComment';
 
 const Post = (props) => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
+
   const [isEditing, setIsEditing] = useState(false);
   const [isCommenting, setIsCommenting] = useState(false);
 
-  const editHandler = () => {
-    isEditing ? setIsEditing(false) : setIsEditing(true);
+  const [comments, setComments] = useState('');
+
+  useEffect(() => {
+    getCommentHandler().catch(console.error);
+  }, []);
+
+  const getCommentHandler = async () => {
+    const res = await axios.get(`http://localhost:4000/api/comments`);
+    setComments(res.data.postComment);
   };
 
   const commentHandler = () => {
     isCommenting ? setIsCommenting(false) : setIsCommenting(true);
   };
 
-  const getComment = async () => {
-    const res = await axios.get(`http://localhost:4000/api/posts/comment`);
-    console.log(res.data);
+  const editHandler = () => {
+    isEditing ? setIsEditing(false) : setIsEditing(true);
   };
 
   return (
@@ -42,7 +51,18 @@ const Post = (props) => {
               {props.imageUrl ? <img src={props.imageUrl} alt="message" /> : ''}
             </div>
             <ul>
-              <Comment {...props} />
+              {comments &&
+                comments
+                  .filter((comment) => comment.postId === props._id)
+                  .map((comment) => (
+                    <li key={comment._id} className={classes.commentCard}>
+                      <CommentUserProfile {...comment} />
+                      <div className={classes.comment}>
+                        <p>{comment.comment}</p>
+                        <time>{comment.postedTime}</time>
+                      </div>
+                    </li>
+                  ))}
             </ul>
 
             {authLog.id === props.userId ? (
@@ -71,7 +91,7 @@ const Post = (props) => {
           {isCommenting ? (
             <AddComment
               {...props}
-              onComment={getComment}
+              onComment={getCommentHandler}
               onConfirmComment={commentHandler}
               onCancelComment={commentHandler}
             />

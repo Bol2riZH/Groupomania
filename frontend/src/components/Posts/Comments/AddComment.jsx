@@ -16,7 +16,7 @@ const AddComment = (props) => {
 
   const confirmCommentHandler = async () => {
     const res = await axios.post(
-      `http://localhost:4000/api/posts/${props._id}/comment`,
+      `http://localhost:4000/api/comments/${props._id}`,
       {
         comment: comment,
       },

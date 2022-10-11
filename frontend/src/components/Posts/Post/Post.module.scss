@@ -59,3 +59,18 @@
     }
   }
 }
+.commentCard {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+}
+.comment {
+  margin-left: 2rem;
+  & p {
+    font-size: 2rem;
+  }
+  & time {
+    font-size: 1.2rem;
+    font-style: italic;
+  }
+}
