@@ -66,27 +66,6 @@ exports.updatePost = catchAsync(async (req, res) => {
   return res.status(403).json({ message: 'Forbidden' });
 });
 
-/*//////////////////////////////////////////////*/
-/*///////////////// COMMENT ///////////////////*/
-// exports.commentPost = catchAsync(async (req, res) => {
-//   const postToComment = await Post.findById(req.params.id);
-//
-//   const user = await User.findById(req.auth.userId);
-//   const userInfo = getUserInfo(user);
-//
-//   await Post.findByIdAndUpdate(req.params.id, {
-//     ...postToComment,
-//     comments: postToComment.comments.push({
-//       ...userInfo,
-//       comment: req.body.comments,
-//       date: postedTime(),
-//     }),
-//   });
-//   return res
-//     .status(200)
-//     .json({ status: 'success', message: 'post commented', postToComment });
-// });
-
 /*/////////////////////////////////////////////*/
 /*///////////////// NOTICE ///////////////////*/
 exports.NoticePost = catchAsync(async (req, res) => {

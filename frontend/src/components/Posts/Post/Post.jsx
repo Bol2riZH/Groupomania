@@ -13,6 +13,7 @@ import PostUserProfile from './PostUserProfile';
 
 import CommentUserProfile from '../Comments/CommentUserProfile';
 import AddComment from '../Comments/AddComment';
+import DeleteComment from '../Comments/DeleteComment';
 
 const Post = (props) => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
@@ -61,6 +62,14 @@ const Post = (props) => {
                         <p>{comment.comment}</p>
                         <time>{comment.postedTime}</time>
                       </div>
+                      {authLog.id === comment.userId ? (
+                        <DeleteComment
+                          {...comment}
+                          onDeleteComment={getCommentHandler}
+                        />
+                      ) : (
+                        ''
+                      )}
                     </li>
                   ))}
             </ul>
