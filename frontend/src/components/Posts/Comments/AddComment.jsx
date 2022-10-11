@@ -44,6 +44,7 @@ const AddComment = (props) => {
   return (
     <div className={classes.comment}>
       <Input
+        autoFocus
         name="comment"
         id="comment"
         placeHolder="Écrivez un commentaire..."

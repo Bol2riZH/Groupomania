@@ -21,7 +21,6 @@ import Profile from './pages/Profile';
         - Dark mode
     DESIGN
         - crypt role ?
-        - Add password reveal ?
         - Use a useReducer Hook ?
 /*/ ////////////////////////////////////////////*/
 

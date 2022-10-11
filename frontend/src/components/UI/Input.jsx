@@ -10,6 +10,7 @@ const Input = (props) => {
         placeholder={props.placeHolder}
         type={props.type || 'text'}
         onChange={props.onChange}
+        autoFocus={props.autoFocus}
       />
     </div>
   );
