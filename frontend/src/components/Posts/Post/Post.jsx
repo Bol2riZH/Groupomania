@@ -96,13 +96,6 @@ const Post = (props) => {
           />
         )}
         <footer>
-          <div className={classes.footerTop}>
-            {auth.id === props.userId || auth.role === 'admin' ? (
-              <DeletePost {...props} />
-            ) : (
-              <LikePost {...props} />
-            )}
-          </div>
           {isCommenting ? (
             <AddComment
               {...props}
@@ -115,6 +108,13 @@ const Post = (props) => {
               Commenter
             </Button>
           )}
+          <div className={classes.footerTop}>
+            {auth.id === props.userId || auth.role === 'admin' ? (
+              <DeletePost {...props} />
+            ) : (
+              <LikePost {...props} />
+            )}
+          </div>
           <time>{props.postedTime}</time>
         </footer>
       </Card>

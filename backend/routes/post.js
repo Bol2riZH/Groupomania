@@ -10,8 +10,9 @@ const { postMulter } = require('../middlewares/multer');
 
 router.post('/', auth, postMulter, postCtrl.addPost);
 router.put('/:id', auth, postMulter, postCtrl.updatePost);
+router.put('/remove-image/:id', auth, postMulter, postCtrl.removePostImage);
 
-router.post('/:id/notice', auth, postCtrl.NoticePost);
+router.post('/notice/:id', auth, postCtrl.NoticePost);
 
 router.post('/search-post', postCtrl.searchPost);
 

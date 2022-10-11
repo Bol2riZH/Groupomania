@@ -67,6 +67,24 @@ exports.updatePost = catchAsync(async (req, res) => {
   return res.status(403).json({ message: 'Forbidden' });
 });
 
+exports.removePostImage = catchAsync(async (req, res) => {
+  const imageToRemove = await Post.findById(req.params.id);
+  if (req.auth.role === 'admin' || imageToRemove.userId === req.auth.userId) {
+    const updatePost = {
+      ...req.body,
+      imageUrl: '',
+      date: Date.now(),
+      postedTime: `Édité le : ${postedTime()}`,
+    };
+    findAndUnlinkPostImage(imageToRemove);
+    await Post.findByIdAndUpdate(req.params.id, { ...updatePost });
+    return res
+      .status(200)
+      .json({ status: 'success', message: 'Image removed' });
+  }
+  return res.status(403).json({ message: 'Forbidden' });
+});
+
 /*/////////////////////////////////////////////*/
 /*///////////////// NOTICE ///////////////////*/
 exports.NoticePost = catchAsync(async (req, res) => {

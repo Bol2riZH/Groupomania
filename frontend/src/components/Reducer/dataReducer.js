@@ -30,6 +30,10 @@ export const dataReducer = (state, action) => {
         ...state,
         [action.payload.name]: action.payload.files,
       };
+    case ACTIONS.CLEAR_INPUT:
+      return {
+        [action.payload.name]: action.payload.files,
+      };
     default:
       return state;
   }

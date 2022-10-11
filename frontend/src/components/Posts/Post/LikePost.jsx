@@ -15,7 +15,7 @@ const LikePost = (props) => {
     const stateLike = props.usersLiked.find((userId) => userId === auth.id);
     try {
       const res = await axiosPost.post(
-        `${props._id}/notice`,
+        `notice/${props._id}`,
         {
           like: stateLike ? 0 : 1,
         },

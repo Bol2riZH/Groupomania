@@ -54,6 +54,23 @@ const EditPost = (props) => {
     props.onCancelEditing();
   };
 
+  const deletePostPicture = async () => {
+    const editData = formData(state);
+    try {
+      const res = await axiosPost.put(`remove-image/${props._id}`, editData, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+          'content-type': 'multipart/form-data',
+        },
+      });
+      console.log(res.data);
+      props.onConfirmEditing();
+      props.onEditPost();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <>
       <section className={classes.post}>
@@ -70,7 +87,14 @@ const EditPost = (props) => {
           onChange={inputHandler}
         ></textarea>
         <div className={props.imageUrl && classes.img}>
-          {props.imageUrl ? <img src={props.imageUrl} alt="message" /> : ''}
+          {props.imageUrl ? (
+            <>
+              <img src={props.imageUrl} alt="message" />
+              <Button onClick={deletePostPicture}>X</Button>
+            </>
+          ) : (
+            ''
+          )}
         </div>
         <Input
           name="imageUrl"
