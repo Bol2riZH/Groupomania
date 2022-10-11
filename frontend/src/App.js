@@ -26,13 +26,6 @@ import Profile from './pages/Profile';
         - Top 5 posts
         - Admin can ban user
         - Dark mode
-    BACKEND:
-        - CRUD comment :
-        model > reference post et user
-        route > passe par :postId
-        controller
-        unilateral reference comment
-        >>>> when delete post delete all comments
     DESIGN
  */
 /*/ ////////////////////////////////////////////*/

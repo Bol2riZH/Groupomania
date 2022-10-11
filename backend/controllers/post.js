@@ -1,6 +1,7 @@
 'use strict';
 
 const Post = require('../models/Post');
+const Comment = require('../models/Comment');
 
 const catchAsync = require('../utils/catchAsync');
 const postedTime = require('../utils/postedTime');
@@ -180,6 +181,8 @@ exports.deletePost = catchAsync(async (req, res) => {
   if (req.auth.role === 'admin' || postToDelete.userId === req.auth.userId) {
     postToDelete.imageUrl && findAndUnlinkPostImage(postToDelete);
     await Post.findByIdAndDelete(req.params.id);
+    await Comment.deleteMany({ postId: req.params.id });
+
     return res.status(200).json({ message: 'post deleted !' });
   }
   return res.status(403).json({ message: 'Forbidden' });
