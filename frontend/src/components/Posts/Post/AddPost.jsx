@@ -32,6 +32,7 @@ const AddPost = (props) => {
     e.preventDefault();
     const authLog = JSON.parse(localStorage.getItem('auth'));
     props.onAddPost(formData(state), authLog);
+    e.target.reset();
   };
 
   return (
