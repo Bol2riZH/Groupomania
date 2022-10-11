@@ -12,6 +12,7 @@ import Profile from './pages/Profile';
 /* TODO:
     FIRST:
         - Add admin auth *
+        - crypt role *
         - Handle error from backend *
         - Handle general error *
         - Add modals *
