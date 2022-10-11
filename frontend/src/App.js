@@ -11,21 +11,20 @@ import Profile from './pages/Profile';
 /*/////////////////////////////////////////////*/
 /* TODO:
     FIRST:
-        - crypt role *
+        - Add delete image on edit post *
         - Handle error from backend *
         - Handle general error *
         - Add modals *
-        - Add delete image on edit post *
-        - correct error on refreshing edit post *
         - Refactoring reducer *
-        - Add confirm email to signup
-        - Add password reveal
     FEATURES:
         - Search post or user
         - Top 5 posts
         - Admin can ban user
         - Dark mode
     DESIGN
+        - crypt role ?
+        - Add password reveal ?
+        - Add confirm email to signup ?
  */
 /*/ ////////////////////////////////////////////*/
 

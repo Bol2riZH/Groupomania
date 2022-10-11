@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 import classes from './AddPost.module.scss';
 
 import {
@@ -11,7 +12,6 @@ import { formData } from '../../../data/formData';
 import Card from '../../UI/Card';
 import Input from '../../UI/Input';
 import Button from '../../UI/Button';
-import { useAuthContext } from '../../../hooks/useAuthContext';
 
 const AddPost = (props) => {
   const { ...auth } = useAuthContext();

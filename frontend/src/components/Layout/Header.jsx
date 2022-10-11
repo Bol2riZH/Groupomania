@@ -7,7 +7,7 @@ import { axiosUser } from '../../data/axios';
 
 import { useNavigate } from 'react-router-dom';
 
-import SearchBar from '../SearchBar';
+import SearchBar from './SearchBar';
 
 const Header = () => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
@@ -49,7 +49,7 @@ const Header = () => {
           <img src={logo} alt="logo" />
           <h1>Groupomania</h1>
         </div>
-        <SearchBar />
+        {/*<SearchBar />*/}
         <div className={classes.user}>
           <button className={classes.profilePicture} onClick={onProfileHandler}>
             {profilePicture ? (

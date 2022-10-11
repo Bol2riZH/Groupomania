@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import classes from './SearchBar.module.scss';
 
-import Input from './UI/Input';
-import Button from './UI/Button';
+import Input from '../UI/Input';
+import Button from '../UI/Button';
 
 const SearchBar = () => {
   const [searchInput, setSearchInput] = useState('');

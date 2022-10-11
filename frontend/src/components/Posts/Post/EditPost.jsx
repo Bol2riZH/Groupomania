@@ -35,14 +35,19 @@ const EditPost = (props) => {
 
   const confirmEditHandler = async () => {
     const editData = formData(state);
-    const res = await axiosPost.put(`${props._id}`, editData, {
-      headers: {
-        Authorization: `Bearer ${auth.token}`,
-        'content-type': 'multipart/form-data',
-      },
-    });
-    console.log(res.data);
-    props.onConfirmEditing();
+    try {
+      const res = await axiosPost.put(`${props._id}`, editData, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+          'content-type': 'multipart/form-data',
+        },
+      });
+      console.log(res.data);
+      props.onConfirmEditing();
+      props.onEditPost();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const cancelEditHandler = () => {
