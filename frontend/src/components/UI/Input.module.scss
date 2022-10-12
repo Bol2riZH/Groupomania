@@ -5,8 +5,14 @@
     margin: 0.5rem auto;
     padding: 1rem;
     width: 100%;
-    &:focus::placeholder {
-      color: $btn-color;
+    &:focus {
+      outline: none;
+      background: $quaternary-color;
     }
   }
+}
+
+.input .invalid {
+  border-color: red;
+  background: #ffd7d7;
 }

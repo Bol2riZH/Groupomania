@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { AuthContextProvider } from './store/AuthContext';
 
 import './style/global.scss';
 
@@ -29,9 +30,15 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
+        <Route
+          path="/home"
+          element={
+            <AuthContextProvider>
+              <Home />
+            </AuthContextProvider>
+          }
+        />
         <Route path="/profile" element={<Profile />} />
-        <Route path="*" element={<Home />} />
       </Routes>
 
       {/*<AppTest />*/}

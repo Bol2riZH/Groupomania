@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import classes from './Home.module.scss';
 
 import { axiosPost } from '../data/axios';
-import { AuthContextProvider } from '../store/AuthContext';
 
 import Header from '../components/Layout/Header';
 import AddPost from '../components/Posts/Post/AddPost';
 import Post from '../components/Posts/Post/Post';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const authLog = JSON.parse(localStorage.getItem('auth'));
+
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
+    !authLog && navigate('/');
     getPostHandler().catch(console.error);
   }, []);
 
@@ -38,7 +42,7 @@ const Home = () => {
   };
 
   return (
-    <AuthContextProvider>
+    <>
       <Header />
       <div className={classes.posts}>
         <AddPost onAddPost={addPostHandler} />
@@ -56,7 +60,7 @@ const Home = () => {
             ))}
         </ul>
       </div>
-    </AuthContextProvider>
+    </>
   );
 };
 
