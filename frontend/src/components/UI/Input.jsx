@@ -8,7 +8,7 @@ const Input = (props) => {
         props.isValid === false ? classes.invalid : ''
       }`}
     >
-      <label htmlFor={props.input}>{props.label}</label>
+      <label htmlFor={props.id}>{props.label}</label>
       <input
         id={props.id}
         name={props.name}

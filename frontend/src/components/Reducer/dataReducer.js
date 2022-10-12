@@ -15,7 +15,6 @@ export const POST_INITIAL_STATE = {
 export const ACTIONS = {
   INPUT_TEXT: 'input_text',
   INPUT_FILE: 'input_file',
-  CLEAR_INPUT: 'clear_input',
 };
 
 export const dataReducer = (state, action) => {
@@ -28,10 +27,6 @@ export const dataReducer = (state, action) => {
     case ACTIONS.INPUT_FILE:
       return {
         ...state,
-        [action.payload.name]: action.payload.files,
-      };
-    case ACTIONS.CLEAR_INPUT:
-      return {
         [action.payload.name]: action.payload.files,
       };
     default:

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Card from '../components/UI/Card';
 import Button from '../components/UI/Button';
+import Error from '../components/UI/Error';
 
 import LoginForm from '../components/Auth/LoginForm';
 import SignupForm from '../components/Auth/SignupForm';
@@ -14,6 +15,7 @@ import SignupForm from '../components/Auth/SignupForm';
 const Login = () => {
   const [signup, setSignup] = useState(false);
   const [log, setLog] = useState(false);
+  const [isValid, setIsValid] = useState(false);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -48,7 +50,8 @@ const Login = () => {
 
       return userId;
     } catch (err) {
-      console.error('email ou mot de passe incorrect ' + err);
+      setIsValid(true);
+      console.error('email ou mot de passe incorrect : ' + err);
     }
   };
 
@@ -64,7 +67,8 @@ const Login = () => {
       const userId = await loginHandler(userSignup);
       setLocalStorage(userId);
     } catch (err) {
-      console.log(err);
+      setLog(false);
+      console.error('Impossible de vous créer un compte : ' + err);
     }
   };
 
@@ -74,6 +78,7 @@ const Login = () => {
         <h1>GROUPOMANIA</h1>
         {!signup ? (
           <>
+            {isValid && <Error>Email ou mot de passe incorrect</Error>}
             <LoginForm onLogin={loginHandler} />
             <Button onClick={accountHandler} className={classes.btn}>
               Pas encore de compte ?

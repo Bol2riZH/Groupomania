@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import Input from '../UI/Input';
 import Button from '../UI/Button';
@@ -9,28 +9,29 @@ const LoginForm = (props) => {
     password: '',
   });
   const [shown, setShown] = React.useState(false);
-  const [isValid, setIsValid] = useState(true);
-
-  // useEffect(() => {
-  //   return () => {
-  //     if (userLogin.email.includes('@')) {
-  //       setIsValid(true);
-  //     } else {
-  //       setIsValid(false);
-  //     }
-  //     console.log(isValid);
-  //   };
-  // }, [userLogin.email]);
+  const [isValid, setIsValid] = useState({
+    email: true,
+    password: true,
+  });
 
   const submitHandler = async (e) => {
     e.preventDefault();
     if (!userLogin.email.includes('@')) {
-      setIsValid(false);
+      setIsValid((prevState) => ({
+        ...prevState,
+        email: false,
+      }));
     } else {
-      setIsValid(true);
-    }
-    if (userLogin.password.length < 6) {
-      setIsValid(false);
+      setIsValid((prevState) => ({
+        ...prevState,
+        email: true,
+      }));
+      if (userLogin.password.length < 6) {
+        setIsValid((prevState) => ({
+          ...prevState,
+          password: false,
+        }));
+      }
     }
     props.onLogin(userLogin);
   };
@@ -53,8 +54,9 @@ const LoginForm = (props) => {
           placeHolder="Email"
           value={userLogin.email}
           onChange={loginHandler}
-          isValid={isValid}
+          isValid={isValid.email}
         />
+        {!isValid.email ? <p>Veuillez entrer un email valide</p> : ''}
         <Input
           name="password"
           type={shown ? 'text' : 'password'}
@@ -63,7 +65,7 @@ const LoginForm = (props) => {
           placeHolder="Mot de passe"
           value={userLogin.password}
           onChange={loginHandler}
-          isValid={isValid}
+          isValid={isValid.password}
         />
         <button type="button" onClick={() => setShown(!shown)}>
           voir/cacher

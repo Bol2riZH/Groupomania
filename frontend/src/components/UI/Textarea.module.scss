@@ -3,4 +3,14 @@
   max-width: 100%;
 
   padding: 1rem;
+  &:focus {
+    outline: none;
+    background: rgba(112, 202, 230, 0.17);
+  }
+}
+.textarea.invalid {
+  & textarea {
+    outline: none;
+    background: #ffd7d7;
+  }
 }
