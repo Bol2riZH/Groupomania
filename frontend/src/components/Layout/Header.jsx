@@ -10,34 +10,34 @@ import { useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
 
 const Header = () => {
-  const authLog = JSON.parse(localStorage.getItem('auth'));
-  const [log, setLog] = useState(authLog?.token);
+  const [authLog, setAuthLog] = useState(
+    JSON.parse(localStorage.getItem('auth'))
+  );
+
   const [profilePicture, setProfilePicture] = useState('');
 
   const navigate = useNavigate();
-  useEffect(() => {
-    if (log === '')
-      setTimeout(() => {
-        navigate('/');
-      }, 150);
-  }, [log]);
 
   useEffect(() => {
-    getProfil().catch(console.error);
-  }, []);
+    authLog
+      ? getProfil()
+      : setTimeout(() => {
+          navigate('/');
+        }, 150);
+  }, [authLog]);
 
   const getProfil = async () => {
     try {
       const res = await axiosUser.get(`${authLog?.id}`);
       setProfilePicture(res.data.user.profilePictureUrl);
     } catch (err) {
-      console.error(err);
+      console.error('Profil utilisateur introuvable ' + err);
     }
   };
 
   const logoutHandler = () => {
     localStorage.removeItem('auth');
-    setLog('');
+    setAuthLog('');
   };
 
   const onProfileHandler = () => {

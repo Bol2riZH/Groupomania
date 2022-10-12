@@ -7,12 +7,14 @@
     width: 100%;
     &:focus {
       outline: none;
-      background: $quaternary-color;
+      background: rgba(112, 202, 230, 0.17);
     }
   }
 }
 
-.input .invalid {
-  border-color: red;
-  background: #ffd7d7;
+.input.invalid {
+  & input {
+    outline: none;
+    background: #ffd7d7;
+  }
 }

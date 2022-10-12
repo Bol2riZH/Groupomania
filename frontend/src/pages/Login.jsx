@@ -48,7 +48,7 @@ const Login = () => {
 
       return userId;
     } catch (err) {
-      console.log(err);
+      console.error('email ou mot de passe incorrect ' + err);
     }
   };
 

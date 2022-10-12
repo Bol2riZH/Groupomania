@@ -12,9 +12,10 @@ import Card from '../../UI/Card';
 import Input from '../../UI/Input';
 import Button from '../../UI/Button';
 import Textarea from '../../UI/Textarea';
+import { AuthContext } from '../../../store/AuthContext';
 
 const AddPost = (props) => {
-  const { ...auth } = useAuthContext();
+  const { ...auth } = useAuthContext(AuthContext);
 
   const [state, dispatch] = useReducer(dataReducer, POST_INITIAL_STATE);
 

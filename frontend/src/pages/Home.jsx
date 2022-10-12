@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classes from './Home.module.scss';
 
 import { axiosPost } from '../data/axios';
@@ -16,7 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     !authLog && navigate('/');
-    getPostHandler().catch(console.error);
+    getPostHandler();
   }, []);
 
   const getPostHandler = async () => {
@@ -31,14 +31,18 @@ const Home = () => {
   };
 
   const addPostHandler = async (postData, authLog) => {
-    const res = await axiosPost.post('/', postData, {
-      headers: {
-        Authorization: `Bearer ${authLog.token}`,
-        'content-type': 'multipart/form-data',
-      },
-    });
-    console.log(res.data);
-    getPostHandler().catch(console.error);
+    try {
+      const res = await axiosPost.post('/', postData, {
+        headers: {
+          Authorization: `Bearer ${authLog.token}`,
+          'content-type': 'multipart/form-data',
+        },
+      });
+      console.log(res.data);
+      getPostHandler();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
