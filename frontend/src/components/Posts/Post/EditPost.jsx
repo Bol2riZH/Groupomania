@@ -13,6 +13,7 @@ import { formData } from '../../../data/formData';
 
 import Input from '../../UI/Input';
 import Button from '../../UI/Button';
+import Textarea from '../../UI/Textarea';
 
 const EditPost = (props) => {
   const { ...auth } = useAuthContext();
@@ -77,15 +78,15 @@ const EditPost = (props) => {
         <Input
           name="title"
           placeHolder={props.title}
-          defaultValue={props.title}
+          value={props.title}
           onChange={inputHandler}
         />
-        <textarea
+        <Textarea
           autoFocus
           name={'post'}
           defaultValue={props.post}
           onChange={inputHandler}
-        ></textarea>
+        ></Textarea>
         <div className={props.imageUrl && classes.img}>
           {props.imageUrl ? (
             <>

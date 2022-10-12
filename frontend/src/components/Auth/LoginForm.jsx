@@ -31,6 +31,7 @@ const LoginForm = (props) => {
           htmlFor="email"
           id="email"
           placeHolder="Email"
+          value={userLogin.email}
           onChange={loginHandler}
         />
         <Input
@@ -39,6 +40,7 @@ const LoginForm = (props) => {
           htmlFor="password"
           id="password"
           placeHolder="Mot de passe"
+          value={userLogin.password}
           onChange={loginHandler}
         />
         <button type="button" onClick={() => setShown(!shown)}>

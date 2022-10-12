@@ -43,7 +43,8 @@ exports.updatePost = catchAsync(async (req, res) => {
     if (!req.file)
       updatePost = {
         ...req.body,
-        date: Date.now(),
+        // Don't update date for update post not to be up the post page //
+        // date: Date.now(),
         postedTime: `Édité le : ${postedTime()}`,
       };
     else {
@@ -53,7 +54,8 @@ exports.updatePost = catchAsync(async (req, res) => {
         imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
           req.file.filename
         }`,
-        date: Date.now(),
+        // Don't update date for update post not to be up the post page //
+        // date: Date.now(),
         postedTime: `Édité le : ${postedTime()}`,
       };
     }
@@ -67,6 +69,8 @@ exports.updatePost = catchAsync(async (req, res) => {
   return res.status(403).json({ message: 'Forbidden' });
 });
 
+/*///////////////////////////////////////////////////*/
+/*///////////////// REMOVE IMAGE ///////////////////*/
 exports.removePostImage = catchAsync(async (req, res) => {
   const imageToRemove = await Post.findById(req.params.id);
   if (req.auth.role === 'admin' || imageToRemove.userId === req.auth.userId) {

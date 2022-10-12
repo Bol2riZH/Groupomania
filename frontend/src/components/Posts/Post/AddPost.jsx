@@ -1,6 +1,5 @@
 import React, { useReducer } from 'react';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import classes from './AddPost.module.scss';
 
 import {
   ACTIONS,
@@ -12,6 +11,7 @@ import { formData } from '../../../data/formData';
 import Card from '../../UI/Card';
 import Input from '../../UI/Input';
 import Button from '../../UI/Button';
+import Textarea from '../../UI/Textarea';
 
 const AddPost = (props) => {
   const { ...auth } = useAuthContext();
@@ -45,20 +45,22 @@ const AddPost = (props) => {
         <Input
           name="title"
           placeHolder="Titre de votre message"
+          value={state}
           onChange={inputHandler}
         />
-        <textarea
-          className={classes.textArea}
+        <Textarea
+          placeholder="...message"
           name="post"
           id="post"
           rows="10"
           onChange={inputHandler}
-        ></textarea>
+        />
         <Input
           name="imageUrl"
           htmlFor="postPicture"
           id="postPicture"
           type="file"
+          value={state}
           onChange={inputHandler}
         />
         <Button type="submit">Envoyer</Button>

@@ -48,6 +48,7 @@ const AddComment = (props) => {
         name="comment"
         id="comment"
         placeHolder="Écrivez un commentaire..."
+        value={comment}
         onChange={inputHandler}
       />
       <Button onClick={confirmCommentHandler}>Envoyer</Button>

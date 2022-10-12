@@ -39,6 +39,7 @@ const SignupForm = (props) => {
         htmlFor="profilePicture"
         id="profilePicture"
         type="file"
+        value={state}
         onChange={inputHandler}
       />
       <Input
@@ -46,6 +47,7 @@ const SignupForm = (props) => {
         htmlFor="username"
         id="username"
         placeHolder="Nom d'utilisateur"
+        value={state}
         onChange={inputHandler}
       />
       <Input
@@ -60,6 +62,7 @@ const SignupForm = (props) => {
         htmlFor="confirmEmail"
         id="confirmEmail"
         placeHolder="Confirmer votre adresse mail"
+        value={state}
         onChange={inputHandler}
       />
       <Input
@@ -68,6 +71,7 @@ const SignupForm = (props) => {
         id="password"
         type={shown ? 'text' : 'password'}
         placeHolder="Mot de passe"
+        value={state}
         onChange={inputHandler}
       />
       <Input
@@ -76,6 +80,7 @@ const SignupForm = (props) => {
         id="confirmPassword"
         type={shown ? 'text' : 'password'}
         placeHolder="Confirmer le mot de passe"
+        value={state}
         onChange={inputHandler}
       />
       <button type="button" onClick={() => setShown(!shown)}>
