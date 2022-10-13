@@ -27,6 +27,7 @@ const Login = () => {
 
   const accountHandler = () => {
     !signup ? setSignup(true) : setSignup(false);
+    setIsValid(true);
   };
 
   const setLocalStorage = (userId) => {

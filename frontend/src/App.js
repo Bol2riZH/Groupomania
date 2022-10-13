@@ -12,8 +12,6 @@ import Profile from './pages/Profile';
 /*/////////////////////////////////////////////*/
 /* TODO:
     FIRST:
-        - Handle error from backend *
-        - Handle general error *
         - Add modals *
     FEATURES:
         - Search post or user
