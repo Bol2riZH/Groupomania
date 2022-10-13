@@ -4,8 +4,8 @@ import { useAuthContext } from '../../../hooks/useAuthContext';
 import {
   ACTIONS,
   POST_INITIAL_STATE,
-  dataReducer,
-} from '../../Reducer/dataReducer';
+  postReducer,
+} from '../../Reducer/postReducer';
 import { formData } from '../../../data/formData';
 
 import Card from '../../UI/Card';
@@ -17,20 +17,16 @@ import { AuthContext } from '../../../store/AuthContext';
 const AddPost = (props) => {
   const { ...auth } = useAuthContext(AuthContext);
 
-  const [state, dispatch] = useReducer(dataReducer, POST_INITIAL_STATE);
+  const [state, dispatch] = useReducer(postReducer, POST_INITIAL_STATE);
 
   const inputHandler = (e) => {
-    if (e.target.name === 'imageUrl') {
-      dispatch({
-        type: ACTIONS.INPUT_FILE,
-        payload: { name: e.target.name, files: e.target.files[0] },
-      });
-    } else {
-      dispatch({
-        type: ACTIONS.INPUT_TEXT,
-        payload: { name: e.target.name, value: e.target.value },
-      });
-    }
+    dispatch({
+      type: ACTIONS.INPUT,
+      payload:
+        e.target.name === 'imageUrl'
+          ? { name: e.target.name, files: e.target.files[0] }
+          : { name: e.target.name, value: e.target.value },
+    });
   };
 
   const submitHandler = (e) => {
