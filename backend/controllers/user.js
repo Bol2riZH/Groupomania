@@ -13,7 +13,14 @@ const { findAndUnlinkProfilePicture } = require('../utils/findAndUnlinkImage');
 /*/////////////////////////////////////////////*/
 /*///////////////// SIGNUP ///////////////////*/
 exports.signup = catchAsync(async (req, res) => {
-  if (!emailAndPasswordValidator(req, res)) {
+  const user = await User.findOne({
+    $or: [{ email: req.body.email }, { username: req.body.username }],
+  });
+  if (user) {
+    return res.status(400).json({ message: 'Username or email already used' });
+  }
+  if (emailAndPasswordValidator(req)) {
+    console.log('coucou');
     const hash = await bcrypt.hash(req.body.password, 10);
     const user = new User({
       ...req.body,

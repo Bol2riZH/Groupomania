@@ -15,7 +15,7 @@ import SignupForm from '../components/Auth/SignupForm';
 const Login = () => {
   const [signup, setSignup] = useState(false);
   const [log, setLog] = useState(false);
-  const [isValid, setIsValid] = useState(false);
+  const [isValid, setIsValid] = useState(true);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -40,6 +40,7 @@ const Login = () => {
       });
       console.log(res.data);
 
+      setIsValid(true);
       const userId = {
         id: res.data.userId,
         token: res.data.token,
@@ -50,13 +51,12 @@ const Login = () => {
 
       return userId;
     } catch (err) {
-      setIsValid(true);
+      setIsValid(false);
       console.error('email ou mot de passe incorrect : ' + err);
     }
   };
 
   const signupHandler = async (userInfo, userSignup) => {
-    console.log(userSignup);
     try {
       const res = await axiosUser.post(`/signup`, userInfo, {
         headers: {
@@ -67,8 +67,9 @@ const Login = () => {
       const userId = await loginHandler(userSignup);
       setLocalStorage(userId);
     } catch (err) {
+      setIsValid(false);
       setLog(false);
-      console.error('Impossible de vous créer un compte : ' + err);
+      console.error('Nom utilisateur ou adresse email déjà utilisées : ' + err);
     }
   };
 
@@ -78,7 +79,7 @@ const Login = () => {
         <h1>GROUPOMANIA</h1>
         {!signup ? (
           <>
-            {isValid && <Error>Email ou mot de passe incorrect</Error>}
+            {!isValid && <Error>Email ou mot de passe incorrect</Error>}
             <LoginForm onLogin={loginHandler} />
             <Button onClick={accountHandler} className={classes.btn}>
               Pas encore de compte ?
@@ -86,6 +87,9 @@ const Login = () => {
           </>
         ) : (
           <>
+            {!isValid && (
+              <Error>Nom utilisateur ou adresse email déjà utilisées</Error>
+            )}
             <SignupForm onSignup={signupHandler} />
             <Button onClick={accountHandler} className={classes.btn}>
               Retour
