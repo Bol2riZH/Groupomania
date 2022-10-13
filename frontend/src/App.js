@@ -22,7 +22,6 @@ import Profile from './pages/Profile';
         - Dark mode
     DESIGN
         - crypt role ?
-        - Use a useReducer Hook ?
 /*/ ////////////////////////////////////////////*/
 
 const App = () => {

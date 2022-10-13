@@ -1,34 +1,34 @@
 import React, { useReducer } from 'react';
 import {
-  dataReducer,
   ACTIONS,
   USER_INITIAL_STATE,
-} from '../Reducer/dataReducer';
+  signupReducer,
+} from '../Reducer/signupReducer';
 import { formData } from '../../data/formData';
 
 import Input from '../UI/Input';
 import Button from '../UI/Button';
+import Error from '../UI/Error';
 
 const SignupForm = (props) => {
-  const [state, dispatch] = useReducer(dataReducer, USER_INITIAL_STATE);
+  const [state, dispatch] = useReducer(signupReducer, USER_INITIAL_STATE);
   const [shown, setShown] = React.useState(false);
 
   const inputHandler = (e) => {
-    if (e.target.name === 'profilePictureUrl') {
-      dispatch({
-        type: ACTIONS.INPUT_FILE,
-        payload: { name: e.target.name, files: e.target.files[0] },
-      });
-    } else {
-      dispatch({
-        type: ACTIONS.INPUT_TEXT,
-        payload: { name: e.target.name, value: e.target.value },
-      });
-    }
+    dispatch({
+      type: ACTIONS.INPUT,
+      payload:
+        e.target.name === 'profilePictureUrl'
+          ? { name: e.target.name, files: e.target.files[0] }
+          : { name: e.target.name, value: e.target.value },
+    });
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch({
+      type: ACTIONS.IS_VALID,
+    });
     props.onSignup(formData(state), state);
   };
 
@@ -42,6 +42,11 @@ const SignupForm = (props) => {
         value={state}
         onChange={inputHandler}
       />
+      {!state.isValidProfilPicture ? (
+        <Error>Taille maximum autorisé 1Mo</Error>
+      ) : (
+        ''
+      )}
       <Input
         name="username"
         htmlFor="username"
@@ -50,6 +55,11 @@ const SignupForm = (props) => {
         value={state}
         onChange={inputHandler}
       />
+      {!state.isValidUsername ? (
+        <Error>Veuillez entrer nom d'utilisateur</Error>
+      ) : (
+        ''
+      )}
       <Input
         name="email"
         htmlFor="email"
@@ -57,6 +67,11 @@ const SignupForm = (props) => {
         placeHolder="Email"
         onChange={inputHandler}
       />
+      {!state.isValidEmail ? (
+        <Error>Veuillez entrer un email valide</Error>
+      ) : (
+        ''
+      )}
       <Input
         name="confirmEmail"
         htmlFor="confirmEmail"
@@ -65,6 +80,11 @@ const SignupForm = (props) => {
         value={state}
         onChange={inputHandler}
       />
+      {!state.isValidConfirmEmail ? (
+        <Error>Les adresses email ne sont pas identiques</Error>
+      ) : (
+        ''
+      )}
       <Input
         name="password"
         htmlFor="password"
@@ -74,6 +94,11 @@ const SignupForm = (props) => {
         value={state}
         onChange={inputHandler}
       />
+      {!state.isValidPassword ? (
+        <Error>Veuillez entrer un mot de passe valide</Error>
+      ) : (
+        ''
+      )}
       <Input
         name="confirmPassword"
         htmlFor="confirmPassword"
@@ -83,6 +108,11 @@ const SignupForm = (props) => {
         value={state}
         onChange={inputHandler}
       />
+      {!state.isValidConfirmPassword ? (
+        <Error>Les mot de passe ne sont pas identiques</Error>
+      ) : (
+        ''
+      )}
       <button type="button" onClick={() => setShown(!shown)}>
         voir/cacher
       </button>

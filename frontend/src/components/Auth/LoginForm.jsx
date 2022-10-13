@@ -1,21 +1,22 @@
 import React, { useState, useReducer } from 'react';
-import { LOG_INITIAL_STATE, ACTIONS, logReducer } from '../Reducer/logReducer';
+import {
+  LOG_INITIAL_STATE,
+  ACTIONS,
+  loginReducer,
+} from '../Reducer/loginReducer';
 
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import Error from '../UI/Error';
 
 const LoginForm = (props) => {
-  const [state, dispatch] = useReducer(logReducer, LOG_INITIAL_STATE);
+  const [state, dispatch] = useReducer(loginReducer, LOG_INITIAL_STATE);
   const [shown, setShown] = useState(false);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     dispatch({
-      type: ACTIONS.IS_VALID_EMAIL,
-    });
-    dispatch({
-      type: ACTIONS.IS_VALID_PASSWORD,
+      type: ACTIONS.IS_VALID,
     });
     props.onLogin(state);
   };

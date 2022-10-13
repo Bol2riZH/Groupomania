@@ -7,29 +7,23 @@ export const LOG_INITIAL_STATE = {
 
 export const ACTIONS = {
   INPUT_TEXT: 'input_text',
-  IS_VALID_EMAIL: 'is_valid_email',
-  IS_VALID_PASSWORD: 'is_valid_password',
+  IS_VALID: 'is_valid',
 };
 
-export const logReducer = (state, action) => {
+export const loginReducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.INPUT_TEXT:
       return {
         ...state,
         [action.payload.name]: action.payload.value,
       };
-    case ACTIONS.IS_VALID_EMAIL:
+    case ACTIONS.IS_VALID:
       if (!state.email.includes('@')) {
         return {
           ...state,
           isValidEmail: false,
         };
       }
-      return {
-        ...state,
-        isValidEmail: true,
-      };
-    case ACTIONS.IS_VALID_PASSWORD:
       if (state.password.length < 8) {
         return {
           ...state,
@@ -38,6 +32,7 @@ export const logReducer = (state, action) => {
       }
       return {
         ...state,
+        isValidEmail: true,
         isValidPassword: true,
       };
     default:
