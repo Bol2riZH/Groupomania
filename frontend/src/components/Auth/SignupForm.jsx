@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useState, useReducer } from 'react';
 import {
   ACTIONS,
   USER_INITIAL_STATE,
@@ -12,7 +12,8 @@ import Error from '../UI/Error';
 
 const SignupForm = (props) => {
   const [state, dispatch] = useReducer(signupReducer, USER_INITIAL_STATE);
-  const [shown, setShown] = React.useState(false);
+  const [shown, setShown] = useState(false);
+  const [isEmptyForm, setIsEmptyForm] = useState(null);
 
   const inputHandler = (e) => {
     dispatch({
@@ -23,17 +24,30 @@ const SignupForm = (props) => {
           : { name: e.target.name, value: e.target.value },
     });
   };
-
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch({
       type: ACTIONS.IS_VALID,
     });
-    props.onSignup(formData(state), state);
+    const formInput = [];
+    state.username && formInput.push(state.isValidUsername);
+    state.email && formInput.push(state.isValidEmail);
+    state.confirmEmail && formInput.push(state.isValidConfirmEmail);
+    state.password && formInput.push(state.isValidPassword);
+    state.confirmPassword && formInput.push(state.isValidConfirmPassword);
+
+    // check if the form fully empty //
+    formInput.length === 0 ? setIsEmptyForm(true) : setIsEmptyForm(false);
+
+    // check if the form is fill with no errors before post//
+    if (!isEmptyForm && isEmptyForm !== null && formInput.length === 5) {
+      props.onSignup(formData(state), state);
+    }
   };
 
   return (
     <form onSubmit={submitHandler}>
+      {isEmptyForm && <Error>Formulaire non remplie</Error>}
       <Input
         name="profilePictureUrl"
         htmlFor="profilePicture"

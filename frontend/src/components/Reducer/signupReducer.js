@@ -100,13 +100,13 @@ export const signupReducer = (state, action) => {
           isValidPassword: true,
         };
       return {
+        ...state,
         isValidProfilPicture: true,
         isValidUsername: true,
         isValidEmail: true,
         isValidConfirmEmail: true,
         isValidPassword: true,
         isValidConfirmPassword: true,
-        ...state,
       };
     default:
       return state;

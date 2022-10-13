@@ -21,7 +21,9 @@ import Profile from './pages/Profile';
         - Admin can ban user
         - Dark mode
     DESIGN
-        - crypt role ?
+    BACKEND :
+        - On signup error > still save profilePicture...
+ */
 /*/ ////////////////////////////////////////////*/
 
 const App = () => {
