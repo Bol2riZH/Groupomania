@@ -1,46 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
+import { LOG_INITIAL_STATE, ACTIONS, logReducer } from '../Reducer/logReducer';
 
 import Input from '../UI/Input';
 import Button from '../UI/Button';
+import Error from '../UI/Error';
 
 const LoginForm = (props) => {
-  const [userLogin, setUserLogin] = useState({
-    email: '',
-    password: '',
-  });
-  const [shown, setShown] = React.useState(false);
-  const [isValid, setIsValid] = useState({
-    email: true,
-    password: true,
-  });
+  const [state, dispatch] = useReducer(logReducer, LOG_INITIAL_STATE);
+  const [shown, setShown] = useState(false);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (!userLogin.email.includes('@')) {
-      setIsValid((prevState) => ({
-        ...prevState,
-        email: false,
-      }));
-    } else {
-      setIsValid((prevState) => ({
-        ...prevState,
-        email: true,
-      }));
-      if (userLogin.password.length < 6) {
-        setIsValid((prevState) => ({
-          ...prevState,
-          password: false,
-        }));
-      }
-    }
-    props.onLogin(userLogin);
+    dispatch({
+      type: ACTIONS.IS_VALID_EMAIL,
+    });
+    dispatch({
+      type: ACTIONS.IS_VALID_PASSWORD,
+    });
+    props.onLogin(state);
   };
 
   const loginHandler = (e) => {
-    setUserLogin((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+    dispatch({
+      type: ACTIONS.INPUT_TEXT,
+      payload: { name: e.target.name, value: e.target.value },
+    });
   };
 
   return (
@@ -52,21 +36,30 @@ const LoginForm = (props) => {
           htmlFor="email"
           id="email"
           placeHolder="Email"
-          value={userLogin.email}
+          value={state.email}
           onChange={loginHandler}
-          isValid={isValid.email}
+          isValid={state.isValidEmail}
         />
-        {!isValid.email ? <p>Veuillez entrer un email valide</p> : ''}
+        {!state.isValidEmail ? (
+          <Error>Veuillez entrer un email valide</Error>
+        ) : (
+          ''
+        )}
         <Input
           name="password"
           type={shown ? 'text' : 'password'}
           htmlFor="password"
           id="password"
           placeHolder="Mot de passe"
-          value={userLogin.password}
+          value={state.password}
           onChange={loginHandler}
-          isValid={isValid.password}
+          isValid={state.isValidPassword}
         />
+        {!state.isValidPassword ? (
+          <Error>Veuillez entrer un mot de passe valide</Error>
+        ) : (
+          ''
+        )}
         <button type="button" onClick={() => setShown(!shown)}>
           voir/cacher
         </button>

@@ -40,6 +40,7 @@ const Login = () => {
       });
       console.log(res.data);
 
+      setIsValid(false);
       const userId = {
         id: res.data.userId,
         token: res.data.token,
