@@ -30,6 +30,10 @@ exports.getPostComments = catchAsync(async (req, res) => {
   return res.status(200).json({ message: 'Comments: ', postComment });
 });
 
+/*///////////////////////////////////////////*/
+/*///////////////// LIKE ///////////////////*/
+exports.noticeComment = catchAsync(async (req, res) => {});
+
 /*/////////////////////////////////////////////*/
 /*///////////////// DELETE ///////////////////*/
 exports.deleteComment = catchAsync(async (req, res) => {

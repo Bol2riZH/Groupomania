@@ -91,7 +91,7 @@ exports.removePostImage = catchAsync(async (req, res) => {
 
 /*/////////////////////////////////////////////*/
 /*///////////////// NOTICE ///////////////////*/
-exports.NoticePost = catchAsync(async (req, res) => {
+exports.noticePost = catchAsync(async (req, res) => {
   const stateLike = +req.body.like;
   const postToNoticed = await Post.findById(req.params.id);
 
