@@ -12,10 +12,10 @@ exports.controlUserDisliked = (post, req) => {
   else return index;
 };
 
-exports.controlUserPostLikes = (post, req) => {
+exports.controlUserLikes = (post, req) => {
   return post.usersLiked.includes(req.auth.userId);
 };
 
-exports.controlUserPostDislikes = (post, req) => {
+exports.controlUserDislikes = (post, req) => {
   return post.usersDisliked.includes(req.auth.userId);
 };

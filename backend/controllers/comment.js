@@ -6,7 +6,7 @@ const catchAsync = require('../utils/catchAsync');
 const postedTime = require('../utils/postedTime');
 const {
   controlUserLiked,
-  controlUserPostLikes,
+  controlUserLikes,
 } = require('../utils/controlUserPostNotice');
 const Post = require('../models/Post');
 
@@ -43,7 +43,7 @@ exports.likeComment = catchAsync(async (req, res) => {
 
   // Control if the user already liked the comment //
   const indexOfUserLike = controlUserLiked(commentToLike, req);
-  const userLikes = controlUserPostLikes(commentToLike, req);
+  const userLikes = controlUserLikes(commentToLike, req);
 
   switch (stateLike) {
     // remove like //
@@ -62,7 +62,7 @@ exports.likeComment = catchAsync(async (req, res) => {
     // like //
     case 1:
       if (!userLikes) {
-        await Post.findByIdAndUpdate(req.params.id, {
+        await Comment.findByIdAndUpdate(req.params.id, {
           ...commentToLike,
           likes: commentToLike.likes++,
           usersLiked: commentToLike.usersLiked.push(req.auth.userId),
@@ -75,6 +75,11 @@ exports.likeComment = catchAsync(async (req, res) => {
       return res.status(400).json({
         status: 'fail',
         message: 'comment already liked',
+      });
+    default:
+      return res.status(400).json({
+        status: 'fail',
+        message: 'bad request',
       });
   }
 });

@@ -10,8 +10,8 @@ const { findAndUnlinkPostImage } = require('../utils/findAndUnlinkImage');
 const {
   controlUserLiked,
   controlUserDisliked,
-  controlUserPostLikes,
-  controlUserPostDislikes,
+  controlUserLikes,
+  controlUserDislikes,
 } = require('../utils/controlUserPostNotice');
 
 /*//////////////////////////////////////////*/
@@ -98,8 +98,8 @@ exports.noticePost = catchAsync(async (req, res) => {
   // Control if the user already noticed the post //
   const indexOfUserLike = controlUserLiked(postToNoticed, req);
   const indexOfUserDislike = controlUserDisliked(postToNoticed, req);
-  const userLikes = controlUserPostLikes(postToNoticed, req);
-  const userDislikes = controlUserPostDislikes(postToNoticed, req);
+  const userLikes = controlUserLikes(postToNoticed, req);
+  const userDislikes = controlUserDislikes(postToNoticed, req);
 
   switch (stateLike) {
     // remove notice //
