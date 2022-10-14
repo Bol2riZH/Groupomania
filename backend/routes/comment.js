@@ -10,7 +10,7 @@ const auth = require('../middlewares/auth');
 router.post('/:postId', auth, commentCtrl.addComment);
 router.get('/:postId', commentCtrl.getPostComments);
 
-router.post('/notice/:id', auth, commentCtrl.noticeComment);
+router.post('/notice/:id', auth, commentCtrl.likeComment);
 
 router.delete('/:id', auth, commentCtrl.deleteComment);
 
