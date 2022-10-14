@@ -3,6 +3,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+const fs = require('fs');
 
 const User = require('../models/User');
 
@@ -17,6 +18,11 @@ exports.signup = catchAsync(async (req, res) => {
     $or: [{ email: req.body.email }, { username: req.body.username }],
   });
   if (user) {
+    if (req.file) {
+      fs.unlinkSync(
+        __dirname + '/../images/profilePictures/' + req.file.filename
+      );
+    }
     return res.status(400).json({ message: 'Username or email already used' });
   }
   if (emailAndPasswordValidator(req)) {

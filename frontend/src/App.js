@@ -13,14 +13,8 @@ import Profile from './pages/Profile';
 /* TODO:
     FIRST:
         - Add modals *
-    FEATURES:
-        - Search post or user
-        - Top 5 posts
-        - Admin can ban user
-        - Dark mode
+        - like on comments *
     DESIGN
-    BACKEND :
-        - On signup error > still save profilePicture...
  */
 /*/ ////////////////////////////////////////////*/
 

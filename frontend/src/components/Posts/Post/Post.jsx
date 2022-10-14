@@ -30,7 +30,7 @@ const Post = (props) => {
 
   const getCommentHandler = async () => {
     try {
-      const res = await axiosComment.get();
+      const res = await axiosComment.get(props._id);
       setComments(res.data.postComment);
     } catch (err) {
       console.error(err);
@@ -59,7 +59,7 @@ const Post = (props) => {
             <ul>
               {comments &&
                 comments
-                  .filter((comment) => comment.postId === props._id)
+                  // .filter((comment) => comment.postId === props._id)
                   .map((comment) => (
                     <li key={comment._id} className={classes.commentCard}>
                       <CommentUserProfile {...comment} />
