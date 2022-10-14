@@ -1,0 +1,10 @@
+.btnLike {
+  margin-right: 1rem;
+  background: darkseagreen;
+  &:hover {
+    background: #4bc84b;
+  }
+  &:active {
+    background: darkseagreen;
+  }
+}

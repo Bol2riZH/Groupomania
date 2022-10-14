@@ -12,7 +12,7 @@ router.post('/', auth, postMulter, postCtrl.addPost);
 router.put('/:id', auth, postMulter, postCtrl.updatePost);
 router.put('/remove-image/:id', auth, postMulter, postCtrl.removePostImage);
 
-router.post('/notice/:id', auth, postCtrl.NoticePost);
+router.post('/notice/:id', auth, postCtrl.noticePost);
 
 router.post('/search-post', postCtrl.searchPost);
 

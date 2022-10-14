@@ -7,13 +7,14 @@ import { axiosComment } from '../../../data/axios';
 import Card from '../../UI/Card';
 import Button from '../../UI/Button';
 
-import DeletePost from './DeletePost';
-import LikePost from './LikePost';
-import EditPost from './EditPost';
 import PostUserProfile from './PostUserProfile';
+import EditPost from './EditPost';
+import LikePost from './LikePost';
+import DeletePost from './DeletePost';
 
 import CommentUserProfile from '../Comments/CommentUserProfile';
 import AddComment from '../Comments/AddComment';
+import LikeComment from '../Comments/LikeComment';
 import DeleteComment from '../Comments/DeleteComment';
 
 const Post = (props) => {
@@ -58,26 +59,26 @@ const Post = (props) => {
             </div>
             <ul>
               {comments &&
-                comments
-                  // .filter((comment) => comment.postId === props._id)
-                  .map((comment) => (
-                    <li key={comment._id} className={classes.commentCard}>
-                      <CommentUserProfile {...comment} />
-                      <div className={classes.comment}>
-                        <p>{comment.comment}</p>
-                        <time>{comment.postedTime}</time>
-                      </div>
-                      {/*{authLog.id === comment.userId ? (*/}
-                      {auth.id === comment.userId || auth.role === 'admin' ? (
-                        <DeleteComment
-                          {...comment}
-                          onDeleteComment={getCommentHandler}
-                        />
-                      ) : (
-                        ''
-                      )}
-                    </li>
-                  ))}
+                comments.map((comment) => (
+                  <li key={comment._id} className={classes.commentCard}>
+                    <CommentUserProfile {...comment} />
+                    <div className={classes.comment}>
+                      <p>{comment.comment}</p>
+                      <time>{comment.postedTime}</time>
+                    </div>
+                    {auth.id === comment.userId || auth.role === 'admin' ? (
+                      <DeleteComment
+                        {...comment}
+                        onDeleteComment={getCommentHandler}
+                      />
+                    ) : (
+                      <LikeComment
+                        onLikeComment={getCommentHandler}
+                        {...comment}
+                      />
+                    )}
+                  </li>
+                ))}
             </ul>
 
             {auth.id === props.userId || auth.role === 'admin' ? (
