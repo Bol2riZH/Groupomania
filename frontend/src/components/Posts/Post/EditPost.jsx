@@ -6,9 +6,9 @@ import { axiosPost } from '../../../data/axios';
 
 import {
   ACTIONS,
-  dataReducer,
+  postReducer,
   POST_INITIAL_STATE,
-} from '../../Reducer/dataReducer';
+} from '../../Reducer/postReducer';
 import { formData } from '../../../data/formData';
 
 import Input from '../../UI/Input';
@@ -18,20 +18,16 @@ import Textarea from '../../UI/Textarea';
 const EditPost = (props) => {
   const { ...auth } = useAuthContext();
 
-  const [state, dispatch] = useReducer(dataReducer, POST_INITIAL_STATE);
+  const [state, dispatch] = useReducer(postReducer, POST_INITIAL_STATE);
 
   const inputHandler = (e) => {
-    if (e.target.name === 'imageUrl') {
-      dispatch({
-        type: ACTIONS.INPUT_FILE,
-        payload: { name: e.target.name, files: e.target.files[0] },
-      });
-    } else {
-      dispatch({
-        type: ACTIONS.INPUT_TEXT,
-        payload: { name: e.target.name, value: e.target.value },
-      });
-    }
+    dispatch({
+      type: ACTIONS.INPUT,
+      payload:
+        e.target.name === 'imageUrl'
+          ? { name: e.target.name, files: e.target.files[0] }
+          : { name: e.target.name, value: e.target.value },
+    });
   };
 
   const confirmEditHandler = async () => {
