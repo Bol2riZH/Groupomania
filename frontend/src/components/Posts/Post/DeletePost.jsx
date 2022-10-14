@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import classes from './DeletePost.module.scss';
 
 import { axiosPost } from '../../../data/axios';
 
 import Button from '../../UI/Button';
+import ConfirmModal from '../../UI/ConfirmModal';
 
 const DeletePost = (props) => {
   const { ...auth } = useAuthContext();
+  const [confirm, setConfirm] = useState(false);
+
+  const confirmModalHandler = () => {
+    setConfirm(true);
+  };
+
+  const onCancel = () => {
+    setConfirm(false);
+  };
 
   const deleteHandler = async () => {
     try {
@@ -25,9 +35,19 @@ const DeletePost = (props) => {
   };
 
   return (
-    <Button className={classes.btnDelete} onClick={deleteHandler}>
-      Supprimer
-    </Button>
+    <>
+      {confirm && (
+        <ConfirmModal
+          title="Suppression"
+          message="Voulez-vous vraiment supprimer votre message ?"
+          onConfirm={deleteHandler}
+          onCancel={onCancel}
+        />
+      )}
+      <Button className={classes.btnDelete} onClick={confirmModalHandler}>
+        Supprimer
+      </Button>
+    </>
   );
 };
 

@@ -16,6 +16,7 @@ import CommentUserProfile from '../Comments/CommentUserProfile';
 import AddComment from '../Comments/AddComment';
 import LikeComment from '../Comments/LikeComment';
 import DeleteComment from '../Comments/DeleteComment';
+import ConfirmModal from '../../UI/ConfirmModal';
 
 const Post = (props) => {
   const { ...auth } = useAuthContext();

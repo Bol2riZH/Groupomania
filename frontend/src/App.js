@@ -12,9 +12,10 @@ import Profile from './pages/Profile';
 /*/////////////////////////////////////////////*/
 /* TODO:
     FIRST:
-        - Add modals *
-        - like on comments *
-    DESIGN
+        - Add modals
+        - Add footer
+    DESIGN:
+        - loader
  */
 /*/ ////////////////////////////////////////////*/
 
