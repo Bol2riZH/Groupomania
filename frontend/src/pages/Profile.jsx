@@ -8,9 +8,11 @@ import UpdateUserProfile from '../components/Users/UpdateUserProfile';
 
 import Card from '../components/UI/Card';
 import Button from '../components/UI/Button';
+import Error from '../components/UI/Error';
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const [isUnique, setIsUnique] = useState(true);
   const navigate = useNavigate();
 
   const goBackHandler = () => {
@@ -34,8 +36,14 @@ const Profile = () => {
       });
       console.log(res.data);
       setIsEditing(false);
+      setIsUnique(true);
+
+      setTimeout(() => {
+        navigate('/home');
+      }, 150);
     } catch (err) {
-      console.error(err);
+      setIsUnique(false);
+      console.error("Nom d'utilisateur : " + err);
     }
   };
 
@@ -51,6 +59,7 @@ const Profile = () => {
         ) : (
           <>
             <UpdateUserProfile onUpdate={onConfirmUpdateHandler} />
+            {!isUnique && <Error>Nom d'utilisateur déjà utilisé</Error>}
             <Button onClick={onEditHandler}>Annuler</Button>
           </>
         )}

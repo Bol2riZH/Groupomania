@@ -20,7 +20,6 @@ exports.signup = catchAsync(async (req, res) => {
     return res.status(400).json({ message: 'Username or email already used' });
   }
   if (emailAndPasswordValidator(req)) {
-    console.log('coucou');
     const hash = await bcrypt.hash(req.body.password, 10);
     const user = new User({
       ...req.body,
