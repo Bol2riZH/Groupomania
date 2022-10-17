@@ -1,23 +1,30 @@
 @import '../../style/abstracts/variables';
 
-.button {
-  background-color: $btn-color;
-  color: white;
+.offset {
+  width: fit-content;
+  border: 1px solid black;
+  margin: 1rem 0;
 
-  padding: 1rem 1rem;
-  margin: 0.5rem 0;
+  background: $btn-color;
+  & .button {
+    position: relative;
+    bottom: 0.5rem;
+    right: 0.5rem;
 
-  border: none;
-  box-shadow: 0 1px 3px darken($btn-color, 10%);
+    padding: 0.5rem;
+    background-color: white;
+    border: 1px solid black;
 
-  transition: background-color 250ms;
-}
+    transition: background-color 250ms;
+  }
 
-.button:hover {
-  cursor: pointer;
-  background-color: darken($btn-color, 10%);
-}
+  & .button:hover {
+    cursor: pointer;
+    transform: translate(0.5rem, 0.5rem);
+    border: none;
+  }
 
-.button:active {
-  background-color: $btn-color;
+  & .button:active {
+    background-color: $btn-color;
+  }
 }

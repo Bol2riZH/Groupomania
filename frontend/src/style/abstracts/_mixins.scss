@@ -1,10 +1,8 @@
 @mixin inputForm {
   width: 30rem;
   box-shadow: 5px 5px black;
-  border-radius: 3px;
   margin-bottom: 3rem;
 
-  transition: scale 200ms ease-in-out;
   &:hover {
     scale: 103%;
     box-shadow: 6px 5px black;
@@ -14,8 +12,7 @@
     width: 100%;
     padding: 1rem;
 
-    border: 2px solid black;
+    border: 1px solid black;
     box-shadow: 2px 2px white;
-    border-radius: 3px;
   }
 }

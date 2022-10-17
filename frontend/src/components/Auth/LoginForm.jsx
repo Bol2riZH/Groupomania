@@ -55,7 +55,6 @@ const LoginForm = (props) => {
         ''
       )}
       <Input
-        // className={classes.passwordLabel}
         className={`${classes.input} ${classes.passwordLabel}
         }`}
         name="password"
@@ -75,7 +74,7 @@ const LoginForm = (props) => {
         }
       />
 
-      <Button type="submit">Connexion</Button>
+      <Button type="submit">CONNEXION</Button>
     </form>
   );
 };
