@@ -6,7 +6,7 @@ const Input = (props) => {
     <div
       className={`${classes.input} ${
         props.isValid === false ? classes.invalid : ''
-      }`}
+      } ${props.className}`}
     >
       <label htmlFor={props.id}>{props.label}</label>
       <input

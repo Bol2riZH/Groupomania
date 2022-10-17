@@ -1,29 +1,24 @@
-.input {
-  box-shadow: 4px 4px black;
-  border-radius: 3px;
-  margin-bottom: 2rem;
-
-  transition: scale 250ms ease-in-out;
-  &:hover {
-    scale: 102%;
-    box-shadow: 4px 4px 2px black;
+@keyframes error {
+  0% {
+    transform: translateX(-3px);
   }
-
-  & input {
-    width: 100%;
-    padding: 1rem;
-
-    border: 2px solid black;
-    box-shadow: 1px 1px white;
-    border-radius: 3px;
-    &:focus {
-      box-shadow: 2px 2px white;
-    }
+  100% {
+    transform: translateX(3px);
   }
 }
 
 .input.invalid {
+  animation: error 70ms alternate-reverse;
+  animation-iteration-count: 6;
+
   & input {
-    border-color: #d73c42;
+    color: white;
+    background: #d73c42;
+    &::placeholder {
+      color: white;
+    }
+  }
+  & label {
+    color: white;
   }
 }

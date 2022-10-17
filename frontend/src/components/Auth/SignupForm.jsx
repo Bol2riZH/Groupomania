@@ -6,9 +6,12 @@ import {
 } from '../Reducer/signupReducer';
 import { formData } from '../../data/formData';
 
+import classes from './SignupForm.module.scss';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import Error from '../UI/Error';
+
+import { FaEye, FaEyeSlash, FaFileDownload } from 'react-icons/fa';
 
 const SignupForm = (props) => {
   const [state, dispatch] = useReducer(signupReducer, USER_INITIAL_STATE);
@@ -49,6 +52,7 @@ const SignupForm = (props) => {
     <form onSubmit={submitHandler}>
       {isEmptyForm && <Error>Formulaire non remplie</Error>}
       <Input
+        label={<FaFileDownload />}
         name="profilePictureUrl"
         htmlFor="profilePicture"
         id="profilePicture"
@@ -62,6 +66,7 @@ const SignupForm = (props) => {
         ''
       )}
       <Input
+        className={classes.input}
         name="username"
         htmlFor="username"
         id="username"
@@ -75,8 +80,9 @@ const SignupForm = (props) => {
         ''
       )}
       <Input
+        className={classes.input}
         name="email"
-        htmlFor="email"
+        htmlFor="text"
         id="email"
         placeHolder="Email"
         onChange={inputHandler}
@@ -87,8 +93,9 @@ const SignupForm = (props) => {
         ''
       )}
       <Input
+        className={classes.input}
         name="confirmEmail"
-        htmlFor="confirmEmail"
+        htmlFor="text"
         id="confirmEmail"
         placeHolder="Confirmer votre adresse mail"
         value={state}
@@ -100,6 +107,7 @@ const SignupForm = (props) => {
         ''
       )}
       <Input
+        className={`${classes.input} ${classes.passwordLabel}`}
         name="password"
         htmlFor="password"
         id="password"
@@ -107,6 +115,13 @@ const SignupForm = (props) => {
         placeHolder="Mot de passe"
         value={state}
         onChange={inputHandler}
+        label={
+          !shown ? (
+            <FaEyeSlash onClick={() => setShown(!shown)} />
+          ) : (
+            <FaEye onClick={() => setShown(!shown)} />
+          )
+        }
       />
       {!state.isValidPassword ? (
         <Error>Veuillez entrer un mot de passe valide</Error>
@@ -114,6 +129,7 @@ const SignupForm = (props) => {
         ''
       )}
       <Input
+        className={`${classes.input} ${classes.passwordLabel}`}
         name="confirmPassword"
         htmlFor="confirmPassword"
         id="confirmPassword"

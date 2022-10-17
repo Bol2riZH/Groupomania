@@ -1,0 +1,16 @@
+@import '../../style/abstracts/mixins';
+
+.input {
+  @include inputForm;
+}
+
+.passwordLabel {
+  position: relative;
+  & label {
+    font-size: 2rem;
+    position: absolute;
+
+    right: 0;
+    margin: 1.2rem 2rem;
+  }
+}

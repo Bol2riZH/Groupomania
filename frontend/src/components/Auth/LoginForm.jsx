@@ -1,13 +1,16 @@
 import React, { useState, useReducer } from 'react';
+
 import {
   LOG_INITIAL_STATE,
   ACTIONS,
   loginReducer,
 } from '../Reducer/loginReducer';
 
+import classes from './LoginForm.module.scss';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import Error from '../UI/Error';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const LoginForm = (props) => {
   const [state, dispatch] = useReducer(loginReducer, LOG_INITIAL_STATE);
@@ -30,9 +33,15 @@ const LoginForm = (props) => {
 
   return (
     <form onSubmit={submitHandler}>
+      {!state.isValidEmail ? (
+        <Error>Veuillez entrer un email valide</Error>
+      ) : (
+        ''
+      )}
       <Input
+        className={classes.input}
         name="email"
-        type="email"
+        type="text"
         htmlFor="email"
         id="email"
         placeHolder="Email"
@@ -40,12 +49,15 @@ const LoginForm = (props) => {
         onChange={loginHandler}
         isValid={state.isValidEmail}
       />
-      {!state.isValidEmail ? (
-        <Error>Veuillez entrer un email valide</Error>
+      {!state.isValidPassword ? (
+        <Error>Veuillez entrer un mot de passe valide</Error>
       ) : (
         ''
       )}
       <Input
+        // className={classes.passwordLabel}
+        className={`${classes.input} ${classes.passwordLabel}
+        }`}
         name="password"
         type={shown ? 'text' : 'password'}
         htmlFor="password"
@@ -54,15 +66,15 @@ const LoginForm = (props) => {
         value={state.password}
         onChange={loginHandler}
         isValid={state.isValidPassword}
+        label={
+          !shown ? (
+            <FaEyeSlash onClick={() => setShown(!shown)} />
+          ) : (
+            <FaEye onClick={() => setShown(!shown)} />
+          )
+        }
       />
-      {!state.isValidPassword ? (
-        <Error>Veuillez entrer un mot de passe valide</Error>
-      ) : (
-        ''
-      )}
-      <button type="button" onClick={() => setShown(!shown)}>
-        voir/cacher
-      </button>
+
       <Button type="submit">Connexion</Button>
     </form>
   );

@@ -2,8 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { AuthContextProvider } from './store/AuthContext';
 
-// import './style/scss/App.scss';
-// import './style/css/style.css';
+import './style/main.scss';
 
 import AppTest from './AppTest';
 import Home from './pages/Home';
