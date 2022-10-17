@@ -1,4 +1,19 @@
-@import '../style/variables';
+//@import '../style/scss/variables';
+@keyframes title-animation {
+  0% {
+    text-shadow: 15px 15px black;
+  }
+  100% {
+    text-shadow: -15px -15px black;
+  }
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 900;
+  color: black;
+  //animation: title-animation 1s ease-in-out alternate-reverse infinite;
+}
 
 .layout {
   display: flex;

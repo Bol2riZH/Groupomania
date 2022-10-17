@@ -2,7 +2,8 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { AuthContextProvider } from './store/AuthContext';
 
-import './style/global.scss';
+// import './style/scss/App.scss';
+// import './style/css/style.css';
 
 import AppTest from './AppTest';
 import Home from './pages/Home';

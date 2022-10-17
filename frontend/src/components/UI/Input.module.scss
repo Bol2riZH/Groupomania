@@ -1,20 +1,29 @@
-@import '../../style/variables';
-
 .input {
+  box-shadow: 4px 4px black;
+  border-radius: 3px;
+  margin-bottom: 2rem;
+
+  transition: scale 250ms ease-in-out;
+  &:hover {
+    scale: 102%;
+    box-shadow: 4px 4px 2px black;
+  }
+
   & input {
-    margin: 0.5rem auto;
-    padding: 1rem;
     width: 100%;
+    padding: 1rem;
+
+    border: 2px solid black;
+    box-shadow: 1px 1px white;
+    border-radius: 3px;
     &:focus {
-      outline: none;
-      border: 1.8px solid black;
-      background: rgba(112, 202, 230, 0.17);
+      box-shadow: 2px 2px white;
     }
   }
 }
 
 .input.invalid {
   & input {
-    background: #ffd7d7;
+    border-color: #d73c42;
   }
 }

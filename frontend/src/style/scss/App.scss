@@ -1,12 +1,17 @@
-@import 'reset';
-@import 'normalize';
-@import 'variables';
+@import './reset';
+@import './normalize';
+@import './variables';
+
+// UI
+@import '../../components/UI/Input.module';
+
+// pages
+@import '../../pages/Login.module';
 
 *,
 *:before,
 *:after {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
 }
 
@@ -22,13 +27,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1 {
-  text-align: center;
-}
-
-h2 {
-  font-size: 2rem;
-  font-weight: 500;
+input {
+  outline: none;
+  &::placeholder {
+    color: black;
+  }
 }
 
 form {
