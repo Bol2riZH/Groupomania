@@ -1,6 +1,36 @@
+@import '../style/variables';
+
 .layout {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & .titleContainer {
+    margin-bottom: 2rem;
+
+    width: fit-content;
+    box-shadow: 4px 4px 0 black;
+    border-radius: 3px;
+  }
+
+  & h2 {
+    width: fit-content;
+
+    padding: 1rem;
+
+    border: 2px solid black;
+    box-shadow: 1px 1px 0 white;
+    border-radius: 3px;
+
+    background: white;
+  }
 }
+
+// media query //
+//.form {
+//  width: 50rem;
+//  height: 53.5rem;
+//}
 
 .form {
   width: 100%;

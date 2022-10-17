@@ -76,10 +76,13 @@ const Login = () => {
 
   return (
     <div className={classes.layout}>
+      <h1>GROUPOMANIA</h1>
       <Card className={classes.form}>
-        <h1>GROUPOMANIA</h1>
         {!signup ? (
           <>
+            <div className={classes.titleContainer}>
+              <h2>Se connecter</h2>
+            </div>
             {!isValid && <Error>Email ou mot de passe incorrect</Error>}
             <LoginForm onLogin={loginHandler} />
             <Button onClick={accountHandler} className={classes.btn}>
@@ -88,6 +91,10 @@ const Login = () => {
           </>
         ) : (
           <>
+            <div className={classes.titleContainer}>
+              <h2>Créer un compte</h2>
+            </div>
+
             {!isValid && (
               <Error>Nom utilisateur ou adresse email déjà utilisées</Error>
             )}

@@ -12,7 +12,6 @@ import Profile from './pages/Profile';
 /*/////////////////////////////////////////////*/
 /* TODO:
     FIRST:
-        - Add modals
         - Add footer
     DESIGN:
         - loader
