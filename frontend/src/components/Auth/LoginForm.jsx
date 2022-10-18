@@ -9,8 +9,8 @@ import {
 import classes from './LoginForm.module.scss';
 import Input from '../UI/Input';
 import Error from '../UI/Error';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import ButtonConfirmation from '../UI/ButtonConfirmation';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const LoginForm = (props) => {
   const [state, dispatch] = useReducer(loginReducer, LOG_INITIAL_STATE);
@@ -73,8 +73,10 @@ const LoginForm = (props) => {
           )
         }
       />
-
-      <ButtonConfirmation type="submit">CONNEXION</ButtonConfirmation>
+      <div className={classes.footer}>
+        <ButtonConfirmation type="submit">CONNEXION</ButtonConfirmation>
+        <a onClick={props.onAccountHandler}>Pas encore de compte ?</a>
+      </div>
     </form>
   );
 };

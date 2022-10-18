@@ -144,7 +144,10 @@ const SignupForm = (props) => {
       ) : (
         ''
       )}
-      <ButtonConfirmation type="submit">ENVOYER</ButtonConfirmation>
+      <div className={classes.footer}>
+        <ButtonConfirmation type="submit">ENVOYER</ButtonConfirmation>
+        <Button onClick={props.onAccountHandler}>Retour</Button>
+      </div>
     </form>
   );
 };

@@ -6,7 +6,6 @@ import { axiosUser } from '../data/axios';
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../components/UI/Card';
-import Button from '../components/UI/Button';
 import Error from '../components/UI/Error';
 
 import LoginForm from '../components/Auth/LoginForm';
@@ -88,8 +87,10 @@ const Login = () => {
                 Email ou mot de passe incorrect
               </Error>
             )}
-            <LoginForm onLogin={loginHandler} />
-            <Button onClick={accountHandler}>Pas encore de compte ?</Button>
+            <LoginForm
+              onLogin={loginHandler}
+              onAccountHandler={accountHandler}
+            />
           </>
         ) : (
           <>
@@ -100,8 +101,10 @@ const Login = () => {
             {!isValid && (
               <Error>Nom utilisateur ou adresse email déjà utilisées</Error>
             )}
-            <SignupForm onSignup={signupHandler} />
-            <Button onClick={accountHandler}>Retour</Button>
+            <SignupForm
+              onSignup={signupHandler}
+              onAccountHandler={accountHandler}
+            />
           </>
         )}
       </Card>

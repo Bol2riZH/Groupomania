@@ -1,5 +1,5 @@
+@use '../../style/abstracts/colors';
 @use '../../style/UI/input';
-@use '../../style/UI/button';
 
 .input {
   @include input.inputForm;
@@ -13,5 +13,19 @@
 
     right: 0;
     margin: 1.2rem 2rem;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & a {
+    cursor: pointer;
+    transition: scale 25ms ease-in-out;
+    &:hover {
+      scale: 1.1;
+    }
   }
 }
