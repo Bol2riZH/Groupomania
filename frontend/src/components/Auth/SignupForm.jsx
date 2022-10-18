@@ -54,6 +54,7 @@ const SignupForm = (props) => {
     <form onSubmit={submitHandler}>
       {isEmptyForm && <ErrorMain>Formulaire non remplie</ErrorMain>}
 
+      {/*/////////// PROFIL PICTURE //////////////*/}
       {!state.isValidProfilPicture ? (
         <Error>Taille maximum autorisé 1Mo</Error>
       ) : (
@@ -69,6 +70,7 @@ const SignupForm = (props) => {
         onChange={inputHandler}
       />
 
+      {/*/////////// USERNAME //////////////*/}
       {!state.isValidUsername ? (
         <Error>Veuillez entrer nom d'utilisateur</Error>
       ) : (
@@ -85,6 +87,7 @@ const SignupForm = (props) => {
         isValid={state.isValidUsername}
       />
 
+      {/*/////////// EMAIL //////////////*/}
       {!state.isValidEmail ? (
         <Error>Veuillez entrer un email valide</Error>
       ) : (
@@ -100,6 +103,7 @@ const SignupForm = (props) => {
         isValid={state.isValidEmail}
       />
 
+      {/*/////////// CONFIRM EMAIL //////////////*/}
       {!state.isValidConfirmEmail ? (
         <Error>Les adresses email ne sont pas identiques</Error>
       ) : (
@@ -116,6 +120,7 @@ const SignupForm = (props) => {
         isValid={state.isValidConfirmEmail}
       />
 
+      {/*/////////// PASSWORD //////////////*/}
       {!state.isValidPassword ? (
         <Error>Veuillez entrer un mot de passe valide</Error>
       ) : (
@@ -140,6 +145,7 @@ const SignupForm = (props) => {
         }
       />
 
+      {/*/////////// CONFIRM PASSWORD //////////////*/}
       {!state.isValidConfirmPassword ? (
         <Error>Les mot de passe ne sont pas identiques</Error>
       ) : (

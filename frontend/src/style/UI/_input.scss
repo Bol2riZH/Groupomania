@@ -1,7 +1,6 @@
 @use '../abstracts/colors';
 
 @mixin inputForm {
-  width: 30rem;
   box-shadow: 5px 5px colors.$light-mode-black;
   margin-bottom: 3rem;
 
