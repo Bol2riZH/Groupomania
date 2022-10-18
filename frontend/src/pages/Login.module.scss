@@ -7,17 +7,16 @@
   }
 }
 
-h1 {
-  font-size: 4rem;
-  font-weight: 900;
-  color: black;
-
-  margin-bottom: 15rem;
-
-  //animation: title-animation 1s ease-in-out alternate-reverse infinite;
-}
-
 .layout {
+  h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    color: black;
+
+    margin-bottom: 15rem;
+
+    //animation: title-animation 1s ease-in-out alternate-reverse infinite;
+  }
   display: flex;
   flex-direction: column;
   align-items: center;

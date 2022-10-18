@@ -14,13 +14,13 @@
   animation-iteration-count: 6;
 
   & input {
-    color: colors.$light-mode-black;
+    color: colors.$light-mode-white;
     background: #d73c42;
     &::placeholder {
-      color: colors.$light-mode-black;
+      color: colors.$light-mode-white;
     }
   }
   & label {
-    color: colors.$light-mode-black;
+    color: colors.$light-mode-white;
   }
 }

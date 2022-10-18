@@ -2,23 +2,16 @@
 
 .header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 2rem;
+  justify-content: space-around;
+  align-items: flex-end;
   margin-bottom: 2rem;
+  padding: 0 2rem;
 
   background-color: colors.$light-mode-white;
-}
-
-.logo {
-  display: flex;
-  gap: 0.5rem;
-  & img {
-    width: 5rem;
-  }
-  & h1 {
-    font-weight: bolder;
+  border-bottom: 1px dashed colors.$light-mode-black;
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
   }
 }
 
