@@ -9,6 +9,7 @@ import { formData } from '../../data/formData';
 import classes from './SignupForm.module.scss';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
+import ErrorMain from '../UI/ErrorMain';
 import Error from '../UI/Error';
 
 import { FaEye, FaEyeSlash, FaFileDownload } from 'react-icons/fa';
@@ -51,7 +52,13 @@ const SignupForm = (props) => {
 
   return (
     <form onSubmit={submitHandler}>
-      {isEmptyForm && <Error>Formulaire non remplie</Error>}
+      {isEmptyForm && <ErrorMain>Formulaire non remplie</ErrorMain>}
+
+      {!state.isValidProfilPicture ? (
+        <Error>Taille maximum autorisé 1Mo</Error>
+      ) : (
+        ''
+      )}
       <Input
         label={<FaFileDownload />}
         name="profilePictureUrl"
@@ -61,8 +68,9 @@ const SignupForm = (props) => {
         value={state}
         onChange={inputHandler}
       />
-      {!state.isValidProfilPicture ? (
-        <Error>Taille maximum autorisé 1Mo</Error>
+
+      {!state.isValidUsername ? (
+        <Error>Veuillez entrer nom d'utilisateur</Error>
       ) : (
         ''
       )}
@@ -74,9 +82,11 @@ const SignupForm = (props) => {
         placeHolder="Nom d'utilisateur"
         value={state}
         onChange={inputHandler}
+        isValid={state.isValidUsername}
       />
-      {!state.isValidUsername ? (
-        <Error>Veuillez entrer nom d'utilisateur</Error>
+
+      {!state.isValidEmail ? (
+        <Error>Veuillez entrer un email valide</Error>
       ) : (
         ''
       )}
@@ -87,9 +97,11 @@ const SignupForm = (props) => {
         id="email"
         placeHolder="Email"
         onChange={inputHandler}
+        isValid={state.isValidEmail}
       />
-      {!state.isValidEmail ? (
-        <Error>Veuillez entrer un email valide</Error>
+
+      {!state.isValidConfirmEmail ? (
+        <Error>Les adresses email ne sont pas identiques</Error>
       ) : (
         ''
       )}
@@ -101,9 +113,11 @@ const SignupForm = (props) => {
         placeHolder="Confirmer votre adresse mail"
         value={state}
         onChange={inputHandler}
+        isValid={state.isValidConfirmEmail}
       />
-      {!state.isValidConfirmEmail ? (
-        <Error>Les adresses email ne sont pas identiques</Error>
+
+      {!state.isValidPassword ? (
+        <Error>Veuillez entrer un mot de passe valide</Error>
       ) : (
         ''
       )}
@@ -116,6 +130,7 @@ const SignupForm = (props) => {
         placeHolder="Mot de passe"
         value={state}
         onChange={inputHandler}
+        isValid={state.isValidPassword}
         label={
           !shown ? (
             <FaEyeSlash onClick={() => setShown(!shown)} />
@@ -124,8 +139,9 @@ const SignupForm = (props) => {
           )
         }
       />
-      {!state.isValidPassword ? (
-        <Error>Veuillez entrer un mot de passe valide</Error>
+
+      {!state.isValidConfirmPassword ? (
+        <Error>Les mot de passe ne sont pas identiques</Error>
       ) : (
         ''
       )}
@@ -138,12 +154,9 @@ const SignupForm = (props) => {
         placeHolder="Confirmer le mot de passe"
         value={state}
         onChange={inputHandler}
+        isValid={state.isValidConfirmPassword}
       />
-      {!state.isValidConfirmPassword ? (
-        <Error>Les mot de passe ne sont pas identiques</Error>
-      ) : (
-        ''
-      )}
+
       <div className={classes.footer}>
         <ButtonConfirmation type="submit">ENVOYER</ButtonConfirmation>
         <Button onClick={props.onAccountHandler}>Retour</Button>
