@@ -12,7 +12,7 @@ import Button from '../UI/Button';
 import ErrorMain from '../UI/ErrorMain';
 import Error from '../UI/Error';
 
-import { FaEye, FaEyeSlash, FaFileDownload } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaGithubAlt } from 'react-icons/fa';
 import ButtonConfirmation from '../UI/ButtonConfirmation';
 
 const SignupForm = (props) => {
@@ -61,7 +61,27 @@ const SignupForm = (props) => {
         ''
       )}
       <Input
-        label={<FaFileDownload />}
+        className={classes.upload}
+        label={
+          <>
+            {state.profilePictureUrl ? (
+              <>
+                <div className={classes.profilePicture}>
+                  <img
+                    src={URL.createObjectURL(state.profilePictureUrl)}
+                    alt="profile"
+                  />
+                </div>
+                <p>Pas celle-là finalement ?</p>
+              </>
+            ) : (
+              <>
+                <FaGithubAlt />
+                <p>Ajouter une photo de profil ?</p>
+              </>
+            )}
+          </>
+        }
         name="profilePictureUrl"
         htmlFor="profilePicture"
         id="profilePicture"

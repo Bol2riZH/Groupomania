@@ -17,11 +17,12 @@
 
 .footer {
   display: flex;
-  //justify-content: space-between;
   align-items: center;
 
+  margin-top: 2rem;
+
   & a {
-    margin-left: 2rem;
+    margin-left: 3rem;
     cursor: pointer;
     transition: scale 25ms ease-in-out;
     &:hover {

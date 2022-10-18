@@ -28,6 +28,11 @@ input {
   &::placeholder {
     color: colors.$light-mode-black;
   }
+  &[type='file'] {
+    opacity: 0;
+    z-index: -1;
+    position: absolute;
+  }
 }
 
 form {
