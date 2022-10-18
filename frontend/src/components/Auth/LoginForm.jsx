@@ -8,9 +8,9 @@ import {
 
 import classes from './LoginForm.module.scss';
 import Input from '../UI/Input';
-import Button from '../UI/Button';
 import Error from '../UI/Error';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import ButtonConfirmation from '../UI/ButtonConfirmation';
 
 const LoginForm = (props) => {
   const [state, dispatch] = useReducer(loginReducer, LOG_INITIAL_STATE);
@@ -74,7 +74,7 @@ const LoginForm = (props) => {
         }
       />
 
-      <Button type="submit">CONNEXION</Button>
+      <ButtonConfirmation type="submit">CONNEXION</ButtonConfirmation>
     </form>
   );
 };

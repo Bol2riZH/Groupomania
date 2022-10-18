@@ -12,6 +12,7 @@ import Button from '../UI/Button';
 import Error from '../UI/Error';
 
 import { FaEye, FaEyeSlash, FaFileDownload } from 'react-icons/fa';
+import ButtonConfirmation from '../UI/ButtonConfirmation';
 
 const SignupForm = (props) => {
   const [state, dispatch] = useReducer(signupReducer, USER_INITIAL_STATE);
@@ -143,7 +144,7 @@ const SignupForm = (props) => {
       ) : (
         ''
       )}
-      <Button type="submit">Créer un compte</Button>
+      <ButtonConfirmation type="submit">ENVOYER</ButtonConfirmation>
     </form>
   );
 };

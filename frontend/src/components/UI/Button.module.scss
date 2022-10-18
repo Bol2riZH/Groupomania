@@ -1,20 +1,18 @@
+@use '../../style/UI/button';
 @use '../../style/abstracts/colors';
 
 .offset {
   width: fit-content;
   height: 3rem;
-  border: 1px solid black;
-
+  border: 1px solid colors.$light-mode-black;
   margin: 1rem 0;
-
-  background: colors.$btn-color;
   &:hover {
     margin-bottom: 1rem;
   }
   & .button {
     padding: 0.5rem;
-    background-color: white;
-    border: 1px solid black;
+    background-color: colors.$light-mode-white;
+    border: 1px solid colors.$light-mode-black;
 
     transform: translate(-0.5rem, -0.5rem);
   }
@@ -23,8 +21,18 @@
     transform: translate(0);
     border: none;
   }
+}
 
+.confirmation {
+  background: colors.$btn-validation-color;
   & .button:active {
-    background-color: colors.$btn-color;
+    background-color: colors.$btn-validation-color;
+  }
+}
+
+.cancel {
+  background: colors.$btn-cancel-color;
+  & .button:active {
+    background-color: colors.$btn-cancel-color;
   }
 }

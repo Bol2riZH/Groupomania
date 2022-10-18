@@ -1,7 +1,8 @@
-@use '../../style/abstracts/mixins';
+@use '../../style/UI/input';
+@use '../../style/UI/button';
 
 .input {
-  @include mixins.inputForm;
+  @include input.inputForm;
 }
 
 .passwordLabel {

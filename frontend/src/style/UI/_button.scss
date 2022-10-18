@@ -1,0 +1,94 @@
+@use '../abstracts/colors';
+
+@mixin btn--base($color: white) {
+  .offset {
+    width: fit-content;
+    height: 3rem;
+    border: 1px solid colors.$light-mode-black;
+
+    margin: 1rem 0;
+
+    background: $color;
+    &:hover {
+      margin-bottom: 1rem;
+    }
+    & .button {
+      padding: 0.5rem;
+      background-color: colors.$light-mode-white;
+      border: 1px solid colors.$light-mode-black;
+
+      transform: translate(-0.5rem, -0.5rem);
+    }
+    & .button:hover {
+      cursor: pointer;
+      transform: translate(0);
+      border: none;
+    }
+
+    & .button:active {
+      background-color: $color;
+    }
+  }
+}
+
+@mixin btn--confirmation($color: colors.$btn-validation-color) {
+  .offset {
+    width: fit-content;
+    height: 3rem;
+    border: 1px solid colors.$light-mode-black;
+
+    margin: 1rem 0;
+
+    background: $color;
+    &:hover {
+      margin-bottom: 1rem;
+    }
+    & .button {
+      padding: 0.5rem;
+      background-color: colors.$light-mode-white;
+      border: 1px solid colors.$light-mode-black;
+
+      transform: translate(-0.5rem, -0.5rem);
+    }
+    & .button:hover {
+      cursor: pointer;
+      transform: translate(0);
+      border: none;
+    }
+
+    & .button:active {
+      background-color: $color;
+    }
+  }
+}
+
+@mixin btn--cancel($color: colors.$btn-cancel-color) {
+  .offset {
+    width: fit-content;
+    height: 3rem;
+    border: 1px solid colors.$light-mode-black;
+
+    margin: 1rem 0;
+
+    background: $color;
+    &:hover {
+      margin-bottom: 1rem;
+    }
+    & .button {
+      padding: 0.5rem;
+      background-color: colors.$light-mode-white;
+      border: 1px solid colors.$light-mode-black;
+
+      transform: translate(-0.5rem, -0.5rem);
+    }
+    & .button:hover {
+      cursor: pointer;
+      transform: translate(0);
+      border: none;
+    }
+
+    & .button:active {
+      background-color: $color;
+    }
+  }
+}

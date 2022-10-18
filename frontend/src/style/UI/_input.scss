@@ -1,0 +1,20 @@
+@use '../abstracts/colors';
+
+@mixin inputForm {
+  width: 30rem;
+  box-shadow: 5px 5px colors.$light-mode-black;
+  margin-bottom: 3rem;
+
+  &:hover {
+    scale: 103%;
+    box-shadow: 6px 5px colors.$light-mode-black;
+  }
+
+  & input {
+    width: 100%;
+    padding: 1rem;
+
+    border: 1px solid colors.$light-mode-black;
+    box-shadow: 2px 2px colors.$light-mode-white;
+  }
+}
