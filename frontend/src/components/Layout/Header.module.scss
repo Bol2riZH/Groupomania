@@ -1,4 +1,4 @@
-@import '../../style/abstracts/variables';
+@use '../../style/abstracts/colors';
 
 .header {
   display: flex;
@@ -45,7 +45,7 @@
     object-fit: cover;
 
     border-radius: 50%;
-    border: 0.3rem solid $btn-color;
+    border: 0.3rem solid colors.$btn-color;
     padding: 0.2rem;
 
     width: 5rem;

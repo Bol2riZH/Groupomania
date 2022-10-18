@@ -1,7 +1,5 @@
-@import 'src/style/base/reset';
-@import 'src/style/base/normalize';
-
-@import 'src/style/abstracts/variables';
+@use 'src/style/base/reset';
+@use 'src/style/base/normalize';
 
 *,
 *:before,

@@ -143,9 +143,6 @@ const SignupForm = (props) => {
       ) : (
         ''
       )}
-      <button type="button" onClick={() => setShown(!shown)}>
-        voir/cacher
-      </button>
       <Button type="submit">Créer un compte</Button>
     </form>
   );
