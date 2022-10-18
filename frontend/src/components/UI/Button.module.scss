@@ -9,6 +9,9 @@
   &:hover {
     margin-bottom: 1rem;
   }
+  &:active {
+    box-shadow: 0 0 5px colors.$btn-color;
+  }
   & .button {
     padding: 0.5rem;
     background-color: colors.$light-mode-white;
@@ -20,25 +23,45 @@
       cursor: pointer;
       transform: translate(0);
 
+      background-color: colors.$btn-color;
+
       border: none;
       border-bottom: 1px solid colors.$light-mode-black;
     }
     &:active {
+      transform: translate(0.1rem, 0.1rem);
       background-color: colors.$btn-color;
+      border-right: 1px solid colors.$light-mode-black;
     }
   }
 }
 
 .confirmation {
-  background: colors.$btn-validation-color;
+  background: colors.$btn-confirmation-color;
+  &:active {
+    box-shadow: 0 0 5px colors.$btn-confirmation-color;
+  }
+  & .button:hover {
+    background-color: colors.$btn-confirmation-color;
+  }
   & .button:active {
-    background-color: colors.$btn-validation-color;
+    transform: translate(0.1rem, 0.1rem);
+    background-color: colors.$btn-confirmation-color;
+    border-right: 1px solid colors.$light-mode-black;
   }
 }
 
 .cancel {
   background: colors.$btn-cancel-color;
-  & .button:active {
+  &:active {
+    box-shadow: 0 0 5px colors.$btn-cancel-color;
+  }
+  & .button:hover {
     background-color: colors.$btn-cancel-color;
+  }
+  & .button:active {
+    transform: translate(0.1rem, 0.1rem);
+    background-color: colors.$btn-cancel-color;
+    border-right: 1px solid colors.$light-mode-black;
   }
 }

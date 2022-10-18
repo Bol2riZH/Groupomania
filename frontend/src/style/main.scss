@@ -1,5 +1,6 @@
-@use 'src/style/base/reset';
-@use 'src/style/base/normalize';
+@use 'base/reset';
+@use 'base/normalize';
+@use 'abstracts/colors';
 
 *,
 *:before,
@@ -14,6 +15,7 @@ html {
 }
 
 body {
+  background-color: colors.$background;
   height: 100vh;
   font-size: 1.6rem;
   font-family: 'Lato', sans-serif;
@@ -24,7 +26,7 @@ body {
 input {
   outline: none;
   &::placeholder {
-    color: black;
+    color: colors.$light-mode-black;
   }
 }
 
