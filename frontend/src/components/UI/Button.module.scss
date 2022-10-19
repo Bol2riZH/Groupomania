@@ -8,8 +8,12 @@
   background-color: colors.$btn-color;
   &:hover {
     margin-bottom: 1rem;
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
   }
   &:active {
+    margin-left: 0;
+    margin-right: 0;
     box-shadow: 0 0 5px colors.$btn-color;
   }
   & .button {
