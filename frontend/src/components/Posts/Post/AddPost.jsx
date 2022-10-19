@@ -15,7 +15,8 @@ import Button from '../../UI/Button';
 import Textarea from '../../UI/Textarea';
 import Error from '../../UI/Error';
 import classes from '../../Auth/SignupForm.module.scss';
-import { FaGithubAlt } from 'react-icons/fa';
+import { FaCameraRetro } from 'react-icons/fa';
+import defaultProfilePicture from '../../../assets/images/defaultProfilePicture.svg';
 
 const AddPost = (props) => {
   const { ...auth } = useAuthContext(AuthContext);
@@ -94,12 +95,10 @@ const AddPost = (props) => {
                   <div className={classes.image}>
                     <img src={URL.createObjectURL(state.imageUrl)} alt="post" />
                   </div>
-                  <p>Changer de photo ?</p>
                 </>
               ) : (
                 <>
-                  <FaGithubAlt />
-                  <p>Ajouter une photo ?</p>
+                  <FaCameraRetro />
                 </>
               )}
             </>
