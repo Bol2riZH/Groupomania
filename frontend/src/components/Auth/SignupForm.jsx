@@ -62,6 +62,12 @@ const SignupForm = (props) => {
       )}
       <Input
         className={classes.upload}
+        name="profilePictureUrl"
+        htmlFor="profilePicture"
+        id="profilePicture"
+        type="file"
+        value={state}
+        onChange={inputHandler}
         label={
           <>
             {state.profilePictureUrl ? (
@@ -72,7 +78,7 @@ const SignupForm = (props) => {
                     alt="profile"
                   />
                 </div>
-                <p>Pas celle-là finalement ?</p>
+                <p>Changer votre photo de profil ?</p>
               </>
             ) : (
               <>
@@ -82,12 +88,6 @@ const SignupForm = (props) => {
             )}
           </>
         }
-        name="profilePictureUrl"
-        htmlFor="profilePicture"
-        id="profilePicture"
-        type="file"
-        value={state}
-        onChange={inputHandler}
       />
 
       {/*/////////// USERNAME //////////////*/}

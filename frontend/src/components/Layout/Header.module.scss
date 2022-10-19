@@ -13,22 +13,19 @@
     font-size: 1.8rem;
     font-weight: 700;
   }
+  & a {
+    margin-left: 3rem;
+    cursor: pointer;
+    transition: scale 25ms ease-in-out;
+    &:hover {
+      scale: 1.1;
+    }
+  }
 }
 
 .user {
   display: flex;
   flex-direction: column;
-}
-
-.btn {
-  font-size: 1rem;
-  background: none;
-  border: none;
-  color: colors.$light-mode-black;
-  &:hover {
-    cursor: pointer;
-    font-weight: bold;
-  }
 }
 
 .profilePicture {

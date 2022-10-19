@@ -1,5 +1,6 @@
 import React, { useReducer, useState } from 'react';
 import { useAuthContext } from '../../../hooks/useAuthContext';
+import { AuthContext } from '../../../store/AuthContext';
 
 import {
   ACTIONS,
@@ -12,8 +13,9 @@ import Card from '../../UI/Card';
 import Input from '../../UI/Input';
 import Button from '../../UI/Button';
 import Textarea from '../../UI/Textarea';
-import { AuthContext } from '../../../store/AuthContext';
 import Error from '../../UI/Error';
+import classes from '../../Auth/SignupForm.module.scss';
+import { FaGithubAlt } from 'react-icons/fa';
 
 const AddPost = (props) => {
   const { ...auth } = useAuthContext(AuthContext);
@@ -56,6 +58,7 @@ const AddPost = (props) => {
     <Card>
       <form onSubmit={submitHandler}>
         {isEmptyForm && <Error>Écrivez un message avant de l'envoyer</Error>}
+
         <h2>Quelles sont les nouvelles ?</h2>
         <Input
           name="title"
@@ -77,12 +80,30 @@ const AddPost = (props) => {
         />
         {!state.isValidPost ? <Error>Vous devez écrire un message</Error> : ''}
         <Input
+          className={classes.upload}
           name="imageUrl"
           htmlFor="postPicture"
           id="postPicture"
           type="file"
           value={state}
           onChange={inputHandler}
+          label={
+            <>
+              {state.imageUrl ? (
+                <>
+                  <div className={classes.image}>
+                    <img src={URL.createObjectURL(state.imageUrl)} alt="post" />
+                  </div>
+                  <p>Changer de photo ?</p>
+                </>
+              ) : (
+                <>
+                  <FaGithubAlt />
+                  <p>Ajouter une photo ?</p>
+                </>
+              )}
+            </>
+          }
         />
         <Button type="submit">Envoyer</Button>
       </form>

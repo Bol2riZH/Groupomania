@@ -56,9 +56,9 @@ const Header = () => {
               <img src={defaultProfilePicture} alt="profil" />
             )}
           </button>
-          <button className={classes.btn} onClick={logoutHandler}>
+          <a className={classes.btn} onClick={logoutHandler}>
             Se déconnecter
-          </button>
+          </a>
         </div>
       </header>
     </>
