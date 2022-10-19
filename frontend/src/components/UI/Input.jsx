@@ -2,7 +2,6 @@ import classes from './Input.module.scss';
 
 const Input = (props) => {
   return (
-    // <div className={`${classes.input} ${props.className}`}>
     <div
       className={`${classes.input} ${
         props.isValid === false ? classes.invalid : ''
@@ -16,6 +15,8 @@ const Input = (props) => {
         type={props.type || 'text'}
         onChange={props.onChange}
         autoFocus={props.autoFocus}
+        onClick={props.onClick}
+        onBlur={props.onBlur}
       />
     </div>
   );

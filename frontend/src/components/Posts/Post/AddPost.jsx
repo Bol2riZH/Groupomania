@@ -9,22 +9,25 @@ import {
 } from '../../Reducer/postReducer';
 import { formData } from '../../../data/formData';
 
+import classes from './AddPost.module.scss';
 import Card from '../../UI/Card';
 import Input from '../../UI/Input';
 import Button from '../../UI/Button';
 import Textarea from '../../UI/Textarea';
 import Error from '../../UI/Error';
-import classes from '../../Auth/SignupForm.module.scss';
+import ErrorMain from '../../UI/ErrorMain';
 import { FaCameraRetro } from 'react-icons/fa';
 import defaultProfilePicture from '../../../assets/images/defaultProfilePicture.svg';
 
 const AddPost = (props) => {
   const { ...auth } = useAuthContext(AuthContext);
   const [isEmptyForm, setIsEmptyForm] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   const [state, dispatch] = useReducer(postReducer, POST_INITIAL_STATE);
 
   const inputHandler = (e) => {
+    setIsEditing(true);
     dispatch({
       type: ACTIONS.INPUT,
       payload:
@@ -56,30 +59,31 @@ const AddPost = (props) => {
   };
 
   return (
-    <Card>
-      <form onSubmit={submitHandler}>
-        {isEmptyForm && <Error>Écrivez un message avant de l'envoyer</Error>}
+    <form onSubmit={submitHandler}>
+      {isEmptyForm && (
+        <ErrorMain>Écrivez un message avant de l'envoyer</ErrorMain>
+      )}
 
-        <h2>Quelles sont les nouvelles ?</h2>
-        <Input
-          name="title"
-          placeHolder="Titre de votre message"
-          value={state}
-          onChange={inputHandler}
-        />
+      <header className={classes.header}>
+        <h2>Bonjour {auth.username}</h2>
         {!state.isValidTitle ? (
           <Error>Vous devez donnez un titre à votre message</Error>
         ) : (
           ''
         )}
-        <Textarea
-          placeholder="...message"
-          name="post"
-          id="post"
-          rows="10"
+        <input
+          className={classes.title}
+          name="title"
+          placeholder="Quelles sont les nouvelles ?"
           onChange={inputHandler}
+          onBlur={() => {
+            if (!state.title && !state.post) {
+              setIsEditing(false);
+            }
+          }}
         />
-        {!state.isValidPost ? <Error>Vous devez écrire un message</Error> : ''}
+      </header>
+      <Card className={`${classes.postCard} ${!isEditing && classes.hidden}`}>
         <Input
           className={classes.upload}
           name="imageUrl"
@@ -104,9 +108,19 @@ const AddPost = (props) => {
             </>
           }
         />
+        {!state.isValidPost ? <Error>Vous devez écrire un message</Error> : ''}
+
+        <Textarea
+          placeholder="...message"
+          name="post"
+          id="post"
+          rows="10"
+          onChange={inputHandler}
+        />
+
         <Button type="submit">Envoyer</Button>
-      </form>
-    </Card>
+      </Card>
+    </form>
   );
 };
 

@@ -45,6 +45,7 @@ const Login = () => {
       const userId = {
         id: res.data.userId,
         token: res.data.token,
+        username: res.data.username,
         role: res.data.role,
       };
       setLocalStorage(userId);

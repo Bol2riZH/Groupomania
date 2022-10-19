@@ -1,0 +1,40 @@
+@use '../../../style/abstracts/colors';
+
+.header {
+  background-color: colors.$light-mode-white;
+  h2 {
+    position: relative;
+    bottom: 3rem;
+    left: 3rem;
+
+    font-size: 2rem;
+    //rotate: -20deg;
+    padding: 2rem;
+    width: fit-content;
+
+    border: 1px dashed black;
+    border-radius: 3px;
+
+    background: white;
+  }
+}
+
+.postCard {
+}
+
+.hidden {
+  display: none;
+}
+
+.upload {
+  text-align: center;
+  margin-bottom: 4rem;
+  & label {
+    font-size: 5rem;
+    transition: color 150ms ease-in-out;
+    &:hover {
+      cursor: pointer;
+      color: colors.$background;
+    }
+  }
+}

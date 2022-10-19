@@ -59,6 +59,7 @@ exports.login = catchAsync(async (req, res) => {
       token: jwt.sign({ userId: user._id }, process.env.TOKEN_KEY, {
         expiresIn: process.env.TOKEN_TTL,
       }),
+      username: user.username,
       role: user.role,
     });
   }
