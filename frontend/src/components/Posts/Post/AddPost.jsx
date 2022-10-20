@@ -110,6 +110,7 @@ const AddPost = (props) => {
               )}
             </>
           }
+          isValid={state.isValidImageUrl}
         />
         {!state.isValidPost ? (
           <Error className={classes.error}>Vous devez écrire un message</Error>
