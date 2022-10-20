@@ -53,7 +53,7 @@ const AddComment = (props) => {
         autoFocus
         name="comment"
         id="comment"
-        placeHolder="Écrivez un commentaire..."
+        placeholder="Écrivez un commentaire..."
         value={comment}
         onChange={inputHandler}
       />

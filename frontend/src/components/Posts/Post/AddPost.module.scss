@@ -1,5 +1,6 @@
 @use '../../../style/UI/input';
 @use '../../../style/UI/error';
+@use '../../../style/UI/button';
 @use '../../../style/abstracts/colors';
 
 .error {
@@ -16,6 +17,10 @@
   z-index: 2;
   border: 1px solid colors.$error-color;
   background-color: lighten(colors.$error-color, 50);
+}
+
+.btnConfirmation {
+  @include button.button(colors.$btn-confirmation-color);
 }
 
 .header {

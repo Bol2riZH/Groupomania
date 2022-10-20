@@ -6,7 +6,7 @@ const Textarea = (props) => {
     <textarea
       {...props}
       className={`${classes.textarea} ${
-        props.isValid === false ? classes.invalid : ''
+        props.isvalid === 'false' ? classes.invalid : ''
       } ${props.className} `}
     >
       {props.children}

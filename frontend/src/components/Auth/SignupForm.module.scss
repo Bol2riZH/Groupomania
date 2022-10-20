@@ -1,6 +1,7 @@
 @use '../../style/abstracts/colors';
 @use '../../style/UI/input';
 @use '../../style/UI/error';
+@use '../../style/UI/button';
 
 .input {
   min-width: 32rem;
@@ -13,6 +14,14 @@
 
 .errorMain {
   @include error.error(2rem, 2rem);
+}
+
+.btn {
+  @include button.button;
+}
+
+.btnConfirmation {
+  @include button.button(colors.$btn-confirmation-color);
 }
 
 .upload {

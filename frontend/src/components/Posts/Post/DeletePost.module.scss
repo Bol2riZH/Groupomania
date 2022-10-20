@@ -1,9 +1,6 @@
-.btnDelete {
-  background: #d15858;
-  &:hover {
-    background: #d73c42;
-  }
-  &:active {
-    background: #d15858;
-  }
+@use '../../../style/abstracts/colors';
+@use '../../../style/UI/button';
+
+.btnCancel {
+  @include button.button(colors.$btn-cancel-color);
 }

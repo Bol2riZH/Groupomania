@@ -80,7 +80,7 @@ const AddPost = (props) => {
         <Input
           className={classes.title}
           name="title"
-          placeHolder="Quelles sont les nouvelles ?"
+          placeholder="Quelles sont les nouvelles ?"
           onChange={inputHandler}
           onBlur={() => {
             if (!state.title && !state.post) {
@@ -122,9 +122,11 @@ const AddPost = (props) => {
           id="post"
           rows="10"
           onChange={inputHandler}
-          isValid={state.isValidPost}
+          isvalid={state.isValidPost.toString()}
         />
-        <Button type="submit">Envoyer</Button>
+        <Button className={classes.btnConfirmation} type="submit">
+          Envoyer
+        </Button>
       </Card>
     </form>
   );

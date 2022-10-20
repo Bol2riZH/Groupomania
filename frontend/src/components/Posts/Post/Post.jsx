@@ -83,7 +83,7 @@ const Post = (props) => {
             </ul>
 
             {auth.id === props.userId || auth.role === 'admin' ? (
-              <Button className={classes.btnEdit} onClick={editHandler}>
+              <Button className={classes.btnConfirmation} onClick={editHandler}>
                 Modifier
               </Button>
             ) : (
@@ -106,7 +106,7 @@ const Post = (props) => {
               onCancelComment={commentHandler}
             />
           ) : (
-            <Button className={classes.btnComment} onClick={commentHandler}>
+            <Button className={classes.btn} onClick={commentHandler}>
               Commenter
             </Button>
           )}

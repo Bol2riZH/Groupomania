@@ -58,7 +58,7 @@ const UpdateUserProfile = (props) => {
         name="username"
         htmlFor="username"
         id="username"
-        placeHolder="Changer votre nom d'utilisateur ?"
+        placeholder="Changer votre nom d'utilisateur ?"
         onChange={inputHandler}
       />
       {!state.isValidUsername && (

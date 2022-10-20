@@ -73,7 +73,7 @@ const EditPost = (props) => {
       <section className={classes.post}>
         <Input
           name="title"
-          placeHolder={props.title}
+          placeholder={props.title}
           value={props.title}
           onChange={inputHandler}
         />

@@ -9,7 +9,7 @@ import {
 import classes from './LoginForm.module.scss';
 import Input from '../UI/Input';
 import Error from '../UI/Error';
-import ButtonConfirmation from '../UI/ButtonConfirmation';
+import Button from '../UI/Button';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const LoginForm = (props) => {
@@ -45,7 +45,7 @@ const LoginForm = (props) => {
         type="text"
         htmlFor="email"
         id="email"
-        placeHolder="Email"
+        placeholder="Email"
         value={state.email}
         onChange={loginHandler}
         isValid={state.isValidEmail}
@@ -66,7 +66,7 @@ const LoginForm = (props) => {
         type={shown ? 'text' : 'password'}
         htmlFor="password"
         id="password"
-        placeHolder="Mot de passe"
+        placeholder="Mot de passe"
         value={state.password}
         onChange={loginHandler}
         isValid={state.isValidPassword}
@@ -79,7 +79,9 @@ const LoginForm = (props) => {
         }
       />
       <div className={classes.footer}>
-        <ButtonConfirmation type="submit">CONNEXION</ButtonConfirmation>
+        <Button className={classes.btnConfirmation} type="submit">
+          CONNEXION
+        </Button>
         <a onClick={props.onAccountHandler}>Pas encore de compte ?</a>
       </div>
     </form>

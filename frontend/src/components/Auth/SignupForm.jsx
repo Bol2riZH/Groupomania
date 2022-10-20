@@ -12,7 +12,6 @@ import Button from '../UI/Button';
 import Error from '../UI/Error';
 
 import { FaEye, FaEyeSlash, FaGithubAlt } from 'react-icons/fa';
-import ButtonConfirmation from '../UI/ButtonConfirmation';
 
 const SignupForm = (props) => {
   const [state, dispatch] = useReducer(signupReducer, USER_INITIAL_STATE);
@@ -104,7 +103,7 @@ const SignupForm = (props) => {
         name="username"
         htmlFor="username"
         id="username"
-        placeHolder="Nom d'utilisateur"
+        placeholder="Nom d'utilisateur"
         value={state}
         onChange={inputHandler}
         isValid={state.isValidUsername}
@@ -121,7 +120,7 @@ const SignupForm = (props) => {
         name="email"
         htmlFor="text"
         id="email"
-        placeHolder="Email"
+        placeholder="Email"
         onChange={inputHandler}
         isValid={state.isValidEmail}
       />
@@ -139,7 +138,7 @@ const SignupForm = (props) => {
         name="confirmEmail"
         htmlFor="text"
         id="confirmEmail"
-        placeHolder="Confirmer votre adresse mail"
+        placeholder="Confirmer votre adresse mail"
         value={state}
         onChange={inputHandler}
         isValid={state.isValidConfirmEmail}
@@ -159,7 +158,7 @@ const SignupForm = (props) => {
         htmlFor="password"
         id="password"
         type={shown ? 'text' : 'password'}
-        placeHolder="Mot de passe"
+        placeholder="Mot de passe"
         value={state}
         onChange={inputHandler}
         isValid={state.isValidPassword}
@@ -186,15 +185,19 @@ const SignupForm = (props) => {
         htmlFor="confirmPassword"
         id="confirmPassword"
         type={shown ? 'text' : 'password'}
-        placeHolder="Confirmer le mot de passe"
+        placeholder="Confirmer le mot de passe"
         value={state}
         onChange={inputHandler}
         isValid={state.isValidConfirmPassword}
       />
 
       <div className={classes.footer}>
-        <ButtonConfirmation type="submit">ENVOYER</ButtonConfirmation>
-        <Button onClick={props.onAccountHandler}>Retour</Button>
+        <Button className={classes.btnConfirmation} type="submit">
+          ENVOYER
+        </Button>
+        <Button className={classes.btn} onClick={props.onAccountHandler}>
+          Retour
+        </Button>
       </div>
     </form>
   );

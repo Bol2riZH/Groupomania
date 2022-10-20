@@ -1,5 +1,7 @@
+@use '../../style/abstracts/colors';
 @use '../../style/UI/input';
 @use '../../style/UI/error';
+@use '../../style/UI/button';
 
 .input {
   @include input.inputForm;
@@ -7,6 +9,10 @@
 
 .error {
   @include error.error;
+}
+
+.btnConfirmation {
+  @include button.button(colors.$btn-confirmation-color);
 }
 
 .passwordLabel {
