@@ -1,15 +1,31 @@
-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
+@use '../style/UI/button';
+@use '../style/UI/error';
+@use '../style/abstracts/colors';
 
-.img {
-  & img {
-    object-fit: cover;
-    width: 25rem;
-    height: 25rem;
-    border-radius: 50%;
+.profile {
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    & .btnPosition {
+      display: flex;
+      gap: 10rem;
+    }
+  }
+
+  & .btn {
+    @include button.button;
+  }
+
+  & .btnConfirmation {
+    @include button.button(colors.$btn-confirmation-color);
+  }
+
+  & .btnCancel {
+    @include button.button(colors.$btn-cancel-color);
+  }
+
+  & .error {
+    @include error.error(2rem, 2rem);
   }
 }

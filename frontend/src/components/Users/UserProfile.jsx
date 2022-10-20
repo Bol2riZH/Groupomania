@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { axiosUser } from '../../data/axios';
 
-import classes from '../../pages/Profile.module.scss';
+import classes from './UserProfile.module.scss';
 import defaultProfilePicture from '../../assets/images/defaultProfilePicture.svg';
 
 const UserProfile = () => {
@@ -18,9 +18,8 @@ const UserProfile = () => {
   };
 
   return (
-    <section>
+    <section className={classes.userProfile}>
       <h2>{user.username}</h2>
-      <p>{user.email}</p>
       <div className={classes.img}>
         {user.profilePictureUrl ? (
           <img src={user.profilePictureUrl} alt="profil" />

@@ -88,6 +88,7 @@ const SignupForm = (props) => {
             )}
           </>
         }
+        isValid={state.isValidProfilPicture}
       />
 
       {/*/////////// USERNAME //////////////*/}

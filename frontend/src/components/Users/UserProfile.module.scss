@@ -1,0 +1,32 @@
+@use '../../style/abstracts/colors';
+
+.userProfile {
+  & h2 {
+    position: relative;
+    rotate: -20deg;
+    top: 2.3rem;
+    right: 13rem;
+
+    width: fit-content;
+
+    font-size: 2rem;
+    padding: 1.7rem;
+
+    border: 2px dashed colors.$light-mode-black;
+    background-color: colors.$light-mode-white;
+  }
+  & .img {
+    width: 50rem;
+    height: 50rem;
+    margin-bottom: 5rem;
+    & img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+
+      padding: 5rem;
+
+      border: 2px dashed colors.$light-mode-black;
+    }
+  }
+}
