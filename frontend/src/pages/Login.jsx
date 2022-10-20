@@ -84,7 +84,11 @@ const Login = () => {
             <div className={classes.titleContainer}>
               <h2>SE CONNECTER</h2>
             </div>
-            {!isValid && <ErrorMain>Email ou mot de passe incorrect</ErrorMain>}
+            {!isValid && (
+              <Error className={classes.errorMain}>
+                Email ou mot de passe incorrect
+              </Error>
+            )}
             <LoginForm
               onLogin={loginHandler}
               onAccountHandler={accountHandler}
@@ -97,7 +101,9 @@ const Login = () => {
             </div>
 
             {!isValid && (
-              <Error>Nom utilisateur ou adresse email déjà utilisées</Error>
+              <Error className={classes.error}>
+                Nom utilisateur ou adresse email déjà utilisées
+              </Error>
             )}
             <SignupForm
               onSignup={signupHandler}

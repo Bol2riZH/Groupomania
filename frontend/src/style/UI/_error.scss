@@ -1,0 +1,11 @@
+@use '../abstracts/colors';
+
+@mixin error(
+  $fontSize: 1.2rem,
+  $marginBottom: 1rem,
+  $textColor: colors.$error-color
+) {
+  color: $textColor;
+  font-size: $fontSize;
+  margin-bottom: $marginBottom;
+}

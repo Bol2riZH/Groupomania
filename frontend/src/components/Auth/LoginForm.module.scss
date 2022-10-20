@@ -1,7 +1,12 @@
 @use '../../style/UI/input';
+@use '../../style/UI/error';
 
 .input {
   @include input.inputForm;
+}
+
+.error {
+  @include error.error;
 }
 
 .passwordLabel {

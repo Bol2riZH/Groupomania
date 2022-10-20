@@ -1,3 +1,6 @@
+@use '../style/abstracts/colors';
+@use '../style/UI/error';
+
 @keyframes title-animation {
   0% {
     text-shadow: 15px 15px black;
@@ -5,6 +8,14 @@
   100% {
     text-shadow: -15px -15px black;
   }
+}
+
+.error {
+  @include error.error;
+}
+
+.errorMain {
+  @include error.error(2rem, 2rem);
 }
 
 .layout {

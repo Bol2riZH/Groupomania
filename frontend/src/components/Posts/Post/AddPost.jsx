@@ -55,26 +55,32 @@ const AddPost = (props) => {
       dispatch({
         type: ACTIONS.CLEAR_INPUT,
       });
+      setIsEditing(false);
     }
   };
 
   return (
     <form onSubmit={submitHandler}>
       {isEmptyForm && (
-        <ErrorMain>Écrivez un message avant de l'envoyer</ErrorMain>
+        <Error className={classes.errorMain}>
+          Écrivez un message avant de l'envoyer
+        </Error>
       )}
 
       <header className={classes.header}>
         <h2>Bonjour {auth.username}</h2>
         {!state.isValidTitle ? (
-          <Error>Vous devez donnez un titre à votre message</Error>
+          <Error className={classes.error}>
+            Vous devez donnez un titre à votre message
+          </Error>
         ) : (
           ''
         )}
-        <input
+
+        <Input
           className={classes.title}
           name="title"
-          placeholder="Quelles sont les nouvelles ?"
+          placeHolder="Quelles sont les nouvelles ?"
           onChange={inputHandler}
           onBlur={() => {
             if (!state.title && !state.post) {
@@ -101,14 +107,16 @@ const AddPost = (props) => {
                   </div>
                 </>
               ) : (
-                <>
-                  <FaCameraRetro />
-                </>
+                <FaCameraRetro className={classes.faCamera} />
               )}
             </>
           }
         />
-        {!state.isValidPost ? <Error>Vous devez écrire un message</Error> : ''}
+        {!state.isValidPost ? (
+          <Error className={classes.error}>Vous devez écrire un message</Error>
+        ) : (
+          ''
+        )}
 
         <Textarea
           placeholder="...message"

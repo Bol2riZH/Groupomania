@@ -1,40 +1,93 @@
+@use '../../../style/UI/input';
+@use '../../../style/UI/error';
 @use '../../../style/abstracts/colors';
 
+.error {
+  @include error.error;
+  background-color: lighten(colors.$error-color, 50);
+  width: fit-content;
+  align-self: center;
+  padding: 0.5rem;
+}
+
+.errorMain {
+  @include error.error(2rem, 2rem);
+  padding: 0.5rem;
+  z-index: 2;
+  border: 1px solid colors.$error-color;
+  background-color: lighten(colors.$error-color, 50);
+}
+
 .header {
-  background-color: colors.$light-mode-white;
-  h2 {
+  display: flex;
+  flex-direction: column;
+
+  border: 2px dashed colors.$light-mode-black;
+  background-color: colors.$newPost;
+  & h2 {
     position: relative;
     bottom: 3rem;
     left: 3rem;
 
     font-size: 2rem;
-    //rotate: -20deg;
+    rotate: -10deg;
     padding: 2rem;
     width: fit-content;
 
-    border: 1px dashed black;
+    border: 2px dashed colors.$light-mode-black;
     border-radius: 3px;
 
-    background: white;
+    background-color: colors.$newPost;
+    color: colors.$light-mode-white;
+  }
+  & .title {
+    @include input.inputForm(
+      colors.$light-mode-black,
+      colors.$light-mode-white,
+      colors.$newPost
+    );
+    align-self: center;
+    width: 70%;
   }
 }
 
 .postCard {
+  background-color: colors.$newPostMessage;
+
+  border-bottom: 1px dashed colors.$light-mode-black;
+  border-left: 1px dashed colors.$light-mode-black;
+  border-right: 1px dashed colors.$light-mode-black;
+  .upload {
+    text-align: center;
+    margin-bottom: 2rem;
+    & label {
+      font-size: 8rem;
+      & .faCamera {
+        transition: scale 150ms ease-in-out;
+        &:hover {
+          cursor: pointer;
+          scale: 1.1;
+        }
+      }
+    }
+    & .image {
+      display: block;
+      align-items: center;
+      min-width: 90%;
+      transition: scale 150ms ease-in-out;
+      &:hover {
+        cursor: pointer;
+        scale: 102%;
+      }
+      & img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
 }
 
 .hidden {
   display: none;
-}
-
-.upload {
-  text-align: center;
-  margin-bottom: 4rem;
-  & label {
-    font-size: 5rem;
-    transition: color 150ms ease-in-out;
-    &:hover {
-      cursor: pointer;
-      color: colors.$background;
-    }
-  }
 }

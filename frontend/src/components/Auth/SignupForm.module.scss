@@ -1,9 +1,18 @@
 @use '../../style/abstracts/colors';
 @use '../../style/UI/input';
+@use '../../style/UI/error';
 
 .input {
   min-width: 32rem;
   @include input.inputForm;
+}
+
+.error {
+  @include error.error;
+}
+
+.errorMain {
+  @include error.error(2rem, 2rem);
 }
 
 .upload {

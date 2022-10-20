@@ -52,11 +52,13 @@ const SignupForm = (props) => {
 
   return (
     <form onSubmit={submitHandler}>
-      {isEmptyForm && <ErrorMain>Formulaire non remplie</ErrorMain>}
+      {isEmptyForm && (
+        <Error className={classes.errorMain}>Formulaire non remplie</Error>
+      )}
 
       {/*/////////// PROFIL PICTURE //////////////*/}
       {!state.isValidProfilPicture ? (
-        <Error>Taille maximum autorisé 1Mo</Error>
+        <Error className={classes.error}>Taille maximum autorisé 1Mo</Error>
       ) : (
         ''
       )}
@@ -92,7 +94,9 @@ const SignupForm = (props) => {
 
       {/*/////////// USERNAME //////////////*/}
       {!state.isValidUsername ? (
-        <Error>Veuillez entrer nom d'utilisateur</Error>
+        <Error className={classes.error}>
+          Veuillez entrer nom d'utilisateur
+        </Error>
       ) : (
         ''
       )}
@@ -109,7 +113,7 @@ const SignupForm = (props) => {
 
       {/*/////////// EMAIL //////////////*/}
       {!state.isValidEmail ? (
-        <Error>Veuillez entrer un email valide</Error>
+        <Error className={classes.error}>Veuillez entrer un email valide</Error>
       ) : (
         ''
       )}
@@ -125,7 +129,9 @@ const SignupForm = (props) => {
 
       {/*/////////// CONFIRM EMAIL //////////////*/}
       {!state.isValidConfirmEmail ? (
-        <Error>Les adresses email ne sont pas identiques</Error>
+        <Error className={classes.error}>
+          Les adresses email ne sont pas identiques
+        </Error>
       ) : (
         ''
       )}
@@ -142,7 +148,9 @@ const SignupForm = (props) => {
 
       {/*/////////// PASSWORD //////////////*/}
       {!state.isValidPassword ? (
-        <Error>Veuillez entrer un mot de passe valide</Error>
+        <Error className={classes.error}>
+          Veuillez entrer un mot de passe valide
+        </Error>
       ) : (
         ''
       )}
@@ -167,7 +175,9 @@ const SignupForm = (props) => {
 
       {/*/////////// CONFIRM PASSWORD //////////////*/}
       {!state.isValidConfirmPassword ? (
-        <Error>Les mot de passe ne sont pas identiques</Error>
+        <Error className={classes.error}>
+          Les mot de passe ne sont pas identiques
+        </Error>
       ) : (
         ''
       )}

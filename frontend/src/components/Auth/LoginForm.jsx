@@ -35,7 +35,7 @@ const LoginForm = (props) => {
     <form onSubmit={submitHandler}>
       {/*/////////// EMAIL //////////////*/}
       {!state.isValidEmail ? (
-        <Error>Veuillez entrer un email valide</Error>
+        <Error className={classes.error}>Veuillez entrer un email valide</Error>
       ) : (
         ''
       )}
@@ -53,7 +53,9 @@ const LoginForm = (props) => {
 
       {/*/////////// PASSWORD //////////////*/}
       {!state.isValidPassword ? (
-        <Error>Veuillez entrer un mot de passe valide</Error>
+        <Error className={classes.error}>
+          Veuillez entrer un mot de passe valide
+        </Error>
       ) : (
         ''
       )}

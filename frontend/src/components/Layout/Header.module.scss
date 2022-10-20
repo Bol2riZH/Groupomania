@@ -4,8 +4,8 @@
   margin-bottom: 10rem;
   padding: 0 15%;
 
-  background-color: colors.$light-mode-white;
-  border-bottom: 1px dashed colors.$light-mode-black;
+  background-color: colors.$header;
+  border-bottom: 1px dashed colors.$light-mode-white;
   .icons {
     display: flex;
     justify-content: space-between;
@@ -15,6 +15,7 @@
       width: 5rem;
     }
     & a {
+      color: colors.$light-mode-white;
       cursor: pointer;
       transition: scale 25ms ease-in-out;
       &:hover {
@@ -38,6 +39,6 @@
 
     width: 100%;
     height: 100%;
-    outline: 1px dashed black;
+    outline: 2px dashed colors.$light-mode-white;
   }
 }
