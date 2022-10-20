@@ -1,13 +1,5 @@
 @use '../../style/abstracts/colors';
-
-@keyframes error {
-  0% {
-    transform: translateX(-3px);
-  }
-  100% {
-    transform: translateX(3px);
-  }
-}
+@use '../../style/abstracts/keyframes';
 
 .input.invalid {
   animation: error 70ms alternate-reverse;

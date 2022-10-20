@@ -15,7 +15,6 @@ import Input from '../../UI/Input';
 import Button from '../../UI/Button';
 import Textarea from '../../UI/Textarea';
 import Error from '../../UI/Error';
-import ErrorMain from '../../UI/ErrorMain';
 import { FaCameraRetro } from 'react-icons/fa';
 import defaultProfilePicture from '../../../assets/images/defaultProfilePicture.svg';
 
@@ -27,6 +26,9 @@ const AddPost = (props) => {
   const [state, dispatch] = useReducer(postReducer, POST_INITIAL_STATE);
 
   const inputHandler = (e) => {
+    if (!state.post) state.isValidPost = true;
+    if (!state.title) state.isValidTitle = true;
+
     setIsEditing(true);
     dispatch({
       type: ACTIONS.INPUT,
@@ -66,7 +68,6 @@ const AddPost = (props) => {
           Écrivez un message avant de l'envoyer
         </Error>
       )}
-
       <header className={classes.header}>
         <h2>Bonjour {auth.username}</h2>
         {!state.isValidTitle ? (
@@ -76,7 +77,6 @@ const AddPost = (props) => {
         ) : (
           ''
         )}
-
         <Input
           className={classes.title}
           name="title"
@@ -87,6 +87,7 @@ const AddPost = (props) => {
               setIsEditing(false);
             }
           }}
+          isValid={state.isValidTitle}
         />
       </header>
       <Card className={`${classes.postCard} ${!isEditing && classes.hidden}`}>
@@ -101,11 +102,9 @@ const AddPost = (props) => {
           label={
             <>
               {state.imageUrl ? (
-                <>
-                  <div className={classes.image}>
-                    <img src={URL.createObjectURL(state.imageUrl)} alt="post" />
-                  </div>
-                </>
+                <div className={classes.image}>
+                  <img src={URL.createObjectURL(state.imageUrl)} alt="post" />
+                </div>
               ) : (
                 <FaCameraRetro className={classes.faCamera} />
               )}
@@ -117,15 +116,14 @@ const AddPost = (props) => {
         ) : (
           ''
         )}
-
         <Textarea
           placeholder="...message"
           name="post"
           id="post"
           rows="10"
           onChange={inputHandler}
+          isValid={state.isValidPost}
         />
-
         <Button type="submit">Envoyer</Button>
       </Card>
     </form>

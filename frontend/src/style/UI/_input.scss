@@ -22,11 +22,13 @@
     border: 1px solid colors.$light-mode-black;
     box-shadow: 2px 2px $shadColor;
     transition: background-color 100ms ease-in-out;
+
     &:hover {
       @if ($bgColor != white) {
         background-color: darken($bgColor, 10);
       }
     }
+
     &::placeholder {
       color: $textColor;
     }

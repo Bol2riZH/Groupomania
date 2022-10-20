@@ -9,7 +9,6 @@ import { formData } from '../../data/formData';
 import classes from './SignupForm.module.scss';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
-import ErrorMain from '../UI/ErrorMain';
 import Error from '../UI/Error';
 
 import { FaEye, FaEyeSlash, FaGithubAlt } from 'react-icons/fa';

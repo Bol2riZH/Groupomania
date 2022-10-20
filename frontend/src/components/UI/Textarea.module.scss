@@ -1,16 +1,25 @@
+@use '../../style/abstracts/keyframes';
+@use '../../style/abstracts/colors';
+
 .textarea {
   min-width: 100%;
   max-width: 100%;
 
   padding: 1rem;
+
   &:focus {
-    outline: none;
-    background: rgba(112, 202, 230, 0.17);
+    border: 1px solid colors.$light-mode-black;
+    outline: 1px solid colors.$light-mode-black;
   }
 }
-.textarea.invalid {
-  & textarea {
-    outline: none;
-    background: #ffd7d7;
+.invalid {
+  animation: error 70ms alternate-reverse;
+  animation-iteration-count: 6;
+
+  color: colors.$light-mode-white;
+  background: #d73c42;
+  border: 1px solid colors.$light-mode-black;
+  &::placeholder {
+    color: colors.$light-mode-white;
   }
 }

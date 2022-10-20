@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 
 import Card from '../components/UI/Card';
 import Error from '../components/UI/Error';
-import ErrorMain from '../components/UI/ErrorMain';
 
 import LoginForm from '../components/Auth/LoginForm';
 import SignupForm from '../components/Auth/SignupForm';
