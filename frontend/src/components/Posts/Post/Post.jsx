@@ -48,9 +48,9 @@ const Post = (props) => {
   };
 
   return (
-    <li>
-      <Card className={classes.postCard}>
-        <PostUserProfile {...props} />
+    <li className={classes.postCard}>
+      <PostUserProfile {...props} />
+      <Card>
         {!isEditing ? (
           <section className={classes.post}>
             <h2>{props.title}</h2>

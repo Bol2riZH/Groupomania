@@ -7,6 +7,7 @@
 
   margin: 10rem auto;
 
+  border: 1px dashed colors.$light-mode-black;
   & section {
     & textarea {
       min-width: 100%;
