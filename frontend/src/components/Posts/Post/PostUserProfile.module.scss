@@ -3,22 +3,24 @@
 .userProfile {
   display: flex;
   flex-direction: column;
-  //justify-content: space-between;
 
   position: relative;
   bottom: 3rem;
   left: 2.5rem;
   width: 40%;
-  max-width: 22rem;
+  max-width: 26rem;
 
   background-color: colors.$light-mode-white;
   border: 1px dashed colors.$light-mode-black;
   & h2 {
+    overflow-wrap: break-word;
     font-size: 2rem;
-    padding: 2rem;
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
+    padding-top: 1rem;
   }
   & .img {
-    max-width: 20rem;
+    max-width: 25rem;
     margin: 1rem;
     background-color: colors.$light-mode-white;
     & img {
@@ -27,8 +29,6 @@
       height: 100%;
 
       padding: 0.5rem;
-
-      border: 1px dashed colors.$light-mode-black;
     }
   }
 }

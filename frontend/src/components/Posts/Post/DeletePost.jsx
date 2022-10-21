@@ -44,9 +44,11 @@ const DeletePost = (props) => {
           onCancel={onCancel}
         />
       )}
-      <Button className={classes.btnCancel} onClick={confirmModalHandler}>
-        Supprimer
-      </Button>
+      <div className={classes.container}>
+        <Button className={classes.btnCancel} onClick={confirmModalHandler}>
+          X
+        </Button>
+      </div>
     </>
   );
 };

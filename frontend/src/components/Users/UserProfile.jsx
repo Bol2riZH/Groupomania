@@ -9,12 +9,17 @@ const UserProfile = () => {
   const [user, setUser] = useState('');
 
   useEffect(() => {
-    getProfil().catch(console.error);
+    getProfil();
   }, []);
 
   const getProfil = async () => {
-    const res = await axiosUser.get(`${authLog?.id}`);
-    setUser(res.data.user);
+    try {
+      const res = await axiosUser.get(`${authLog?.id}`);
+      setUser(res.data.user);
+      console.log(res.data.user);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

@@ -6,16 +6,30 @@
   flex-direction: column;
 
   margin: 10rem auto;
-
   border: 1px dashed colors.$light-mode-black;
-  & section {
-    & textarea {
-      min-width: 100%;
-      max-width: 100%;
-      height: 12rem;
-    }
-    .post {
+  background-color: colors.$light-mode-white;
+  & header {
+    display: flex;
+    justify-content: space-between;
+  }
+  & .post {
+    box-shadow: 5px 5px colors.$light-mode-black;
+    margin: 0 2.5rem;
+    & section {
+      padding: 1.5rem;
+
+      border: 1px solid colors.$light-mode-black;
+      box-shadow: 2px 2px colors.$light-mode-white;
+
+      & .btnConfirmation {
+        @include button.button(colors.$btn-confirmation-color);
+      }
+      & h2 {
+        font-size: 2rem;
+        font-weight: 700;
+      }
       & p {
+        line-height: 120%;
         margin: 2rem 0;
       }
     }
@@ -28,38 +42,44 @@
         height: 100%;
       }
     }
-    & .btnConfirmation {
-      @include button.button(colors.$btn-confirmation-color);
+    & textarea {
+      min-width: 100%;
+      max-width: 100%;
+      height: 12rem;
     }
   }
+
   & footer {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    margin: 2rem auto;
+
     & .btn {
       @include button.button;
     }
-    & .footerTop {
-      display: flex;
-      align-items: center;
-      & .btnLike {
-        margin-right: 1rem;
+  }
+
+  & .footerBottom {
+    display: flex;
+    & .btnLike {
+      margin-right: 1rem;
+      background: darkseagreen;
+      &:hover {
+        background: #4bc84b;
+      }
+      &:active {
         background: darkseagreen;
-        &:hover {
-          background: #4bc84b;
-        }
-        &:active {
-          background: darkseagreen;
-        }
       }
     }
-    & time {
-      font-size: 1.4rem;
-      font-style: italic;
-    }
+  }
+  & time {
+    font-size: 1.4rem;
+    font-style: italic;
   }
 }
+
 .commentCard {
   display: flex;
   align-items: center;

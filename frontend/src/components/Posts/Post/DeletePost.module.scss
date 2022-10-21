@@ -1,6 +1,10 @@
 @use '../../../style/abstracts/colors';
 @use '../../../style/UI/button';
 
-.btnCancel {
-  @include button.button(colors.$btn-cancel-color);
+.container {
+  margin-top: 2.2rem;
+  margin-right: 2.5rem;
+  & .btnCancel {
+    @include button.button(colors.$btn-cancel-color);
+  }
 }

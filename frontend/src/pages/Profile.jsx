@@ -24,6 +24,7 @@ const Profile = () => {
 
   const editHandler = () => {
     !isEditing ? setIsEditing(true) : setIsEditing(false);
+    setIsUnique(true);
   };
 
   const onConfirmUpdateHandler = async (updateUserInfo) => {

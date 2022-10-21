@@ -16,7 +16,6 @@ import CommentUserProfile from '../Comments/CommentUserProfile';
 import AddComment from '../Comments/AddComment';
 import LikeComment from '../Comments/LikeComment';
 import DeleteComment from '../Comments/DeleteComment';
-import ConfirmModal from '../../UI/ConfirmModal';
 
 const Post = (props) => {
   const { ...auth } = useAuthContext();
@@ -49,47 +48,62 @@ const Post = (props) => {
 
   return (
     <li className={classes.postCard}>
-      <PostUserProfile {...props} />
+      <header>
+        <PostUserProfile {...props} />
+        {(auth.id === props.userId || auth.role === 'admin') && (
+          <DeletePost {...props} />
+        )}
+      </header>
       <Card>
         {!isEditing ? (
-          <section className={classes.post}>
-            <h2>{props.title}</h2>
-            <p>{props.post}</p>
-            <div className={props.imageUrl && classes.img}>
-              {props.imageUrl ? <img src={props.imageUrl} alt="message" /> : ''}
-            </div>
-            <ul>
-              {comments &&
-                comments.map((comment) => (
-                  <li key={comment._id} className={classes.commentCard}>
-                    <CommentUserProfile {...comment} />
-                    <div className={classes.comment}>
-                      <p>{comment.comment}</p>
-                      <time>{comment.postedTime}</time>
-                    </div>
-                    {auth.id === comment.userId || auth.role === 'admin' ? (
-                      <DeleteComment
-                        {...comment}
-                        onDeleteComment={getCommentHandler}
-                      />
-                    ) : (
-                      <LikeComment
-                        onLikeComment={getCommentHandler}
-                        {...comment}
-                      />
-                    )}
-                  </li>
-                ))}
-            </ul>
-
-            {auth.id === props.userId || auth.role === 'admin' ? (
-              <Button className={classes.btnConfirmation} onClick={editHandler}>
-                Modifier
-              </Button>
-            ) : (
-              ''
-            )}
-          </section>
+          <div className={classes.post}>
+            <section>
+              <header>
+                <h2>{props.title}</h2>
+                {auth.id === props.userId || auth.role === 'admin' ? (
+                  <Button
+                    className={classes.btnConfirmation}
+                    onClick={editHandler}
+                  >
+                    Éditer
+                  </Button>
+                ) : (
+                  ''
+                )}
+              </header>
+              <p>{props.post}</p>
+              <div className={props.imageUrl && classes.img}>
+                {props.imageUrl ? (
+                  <img src={props.imageUrl} alt="message" />
+                ) : (
+                  ''
+                )}
+              </div>
+              <ul>
+                {comments &&
+                  comments.map((comment) => (
+                    <li key={comment._id} className={classes.commentCard}>
+                      <CommentUserProfile {...comment} />
+                      <div className={classes.comment}>
+                        <p>{comment.comment}</p>
+                        <time>{comment.postedTime}</time>
+                      </div>
+                      {auth.id === comment.userId || auth.role === 'admin' ? (
+                        <DeleteComment
+                          {...comment}
+                          onDeleteComment={getCommentHandler}
+                        />
+                      ) : (
+                        <LikeComment
+                          onLikeComment={getCommentHandler}
+                          {...comment}
+                        />
+                      )}
+                    </li>
+                  ))}
+              </ul>
+            </section>
+          </div>
         ) : (
           <EditPost
             {...props}
@@ -98,7 +112,9 @@ const Post = (props) => {
           />
         )}
         <footer>
-          {isCommenting ? (
+          {isEditing ? (
+            ''
+          ) : isCommenting ? (
             <AddComment
               {...props}
               onComment={getCommentHandler}
@@ -106,17 +122,26 @@ const Post = (props) => {
               onCancelComment={commentHandler}
             />
           ) : (
-            <Button className={classes.btn} onClick={commentHandler}>
-              Commenter
-            </Button>
+            <>
+              <Button className={classes.btn} onClick={commentHandler}>
+                Commenter
+              </Button>
+
+              <div className={classes.footerBottom}>
+                {/*{auth.id === props.userId || auth.role === 'admin' ? (*/}
+                {/*  <Button*/}
+                {/*    className={classes.btnConfirmation}*/}
+                {/*    onClick={editHandler}*/}
+                {/*  >*/}
+                {/*    Modifier*/}
+                {/*  </Button>*/}
+                {/*) : (*/}
+                {/*  ''*/}
+                {/*)}*/}
+                {auth.id !== props.userId && <LikePost {...props} />}
+              </div>
+            </>
           )}
-          <div className={classes.footerTop}>
-            {auth.id === props.userId || auth.role === 'admin' ? (
-              <DeletePost {...props} />
-            ) : (
-              <LikePost {...props} />
-            )}
-          </div>
           <time>{props.postedTime}</time>
         </footer>
       </Card>

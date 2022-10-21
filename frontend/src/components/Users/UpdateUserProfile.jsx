@@ -81,7 +81,11 @@ const UpdateUserProfile = (props) => {
         }
         isValid={state.isValidProfilPicture}
       />
-
+      {!state.isValidUsername && (
+        <Error className={classes.error}>
+          Veuillez entrer un nouveau nom d'utilisateur
+        </Error>
+      )}
       <Input
         className={classes.input}
         name="username"
@@ -91,11 +95,7 @@ const UpdateUserProfile = (props) => {
         onChange={inputHandler}
         isValid={state.isValidUsername}
       />
-      {!state.isValidUsername && (
-        <Error className={classes.error}>
-          Veuillez entrer un nouveau nom d'utilisateur
-        </Error>
-      )}
+
       <div className={classes.btnPosition}>
         <Button className={classes.btnConfirmation} onClick={isValidHandler}>
           Confirmer
