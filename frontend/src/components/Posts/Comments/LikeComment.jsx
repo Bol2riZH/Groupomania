@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import classes from './LikeComment.module.scss';
 
 import { axiosComment } from '../../../data/axios';
 
+import classes from './LikeComment.module.scss';
 import Button from '../../UI/Button';
+import { BiLike } from 'react-icons/bi';
 
 const LikeComment = (comment) => {
   const { ...auth } = useAuthContext();
@@ -38,9 +39,7 @@ const LikeComment = (comment) => {
 
   return (
     <>
-      <Button className={classes.btnLike} onClick={likeHandler}>
-        J'aime
-      </Button>
+      <BiLike className={classes.like} onClick={likeHandler} />
       <span>{likeComment}</span>
     </>
   );

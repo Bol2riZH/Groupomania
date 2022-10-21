@@ -6,6 +6,7 @@ import { axiosComment } from '../../../data/axios';
 import Button from '../../UI/Button';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import ConfirmModal from '../../UI/ConfirmModal';
+import { FaTrash } from 'react-icons/fa';
 
 const DeleteComment = (comment) => {
   const { ...auth } = useAuthContext();
@@ -44,9 +45,7 @@ const DeleteComment = (comment) => {
           onCancel={onCancel}
         />
       )}
-      <Button className={classes.btnDelete} onClick={confirmModalHandler}>
-        Supprimer
-      </Button>
+      <FaTrash className={classes.delete} onClick={confirmModalHandler} />
     </>
   );
 };

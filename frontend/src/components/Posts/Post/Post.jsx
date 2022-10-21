@@ -52,54 +52,23 @@ const Post = (props) => {
       <header>
         <PostUserProfile {...props} />
         {(auth.id === props.userId || auth.role === 'admin') && (
-          <DeletePost {...props} />
+          <div>
+            <RiEdit2Fill className={classes.edit} onClick={editHandler} />
+            <DeletePost {...props} />
+          </div>
         )}
       </header>
       <Card>
         {!isEditing ? (
-          <div className={classes.post}>
-            <section>
-              <header>
-                <h2>{props.title}</h2>
-                {auth.id === props.userId || auth.role === 'admin' ? (
-                  <RiEdit2Fill className={classes.edit} onClick={editHandler} />
-                ) : (
-                  ''
-                )}
-              </header>
-              <p>{props.post}</p>
-              <div className={props.imageUrl && classes.img}>
-                {props.imageUrl ? (
-                  <img src={props.imageUrl} alt="message" />
-                ) : (
-                  ''
-                )}
-              </div>
-              <ul>
-                {comments &&
-                  comments.map((comment) => (
-                    <li key={comment._id} className={classes.commentCard}>
-                      <CommentUserProfile {...comment} />
-                      <div className={classes.comment}>
-                        <p>{comment.comment}</p>
-                        <time>{comment.postedTime}</time>
-                      </div>
-                      {auth.id === comment.userId || auth.role === 'admin' ? (
-                        <DeleteComment
-                          {...comment}
-                          onDeleteComment={getCommentHandler}
-                        />
-                      ) : (
-                        <LikeComment
-                          onLikeComment={getCommentHandler}
-                          {...comment}
-                        />
-                      )}
-                    </li>
-                  ))}
-              </ul>
-            </section>
-          </div>
+          <section>
+            <header>
+              <h2>{props.title}</h2>
+            </header>
+            <p>{props.post}</p>
+            <div className={props.imageUrl && classes.img}>
+              {props.imageUrl ? <img src={props.imageUrl} alt="message" /> : ''}
+            </div>
+          </section>
         ) : (
           <EditPost
             {...props}
@@ -107,6 +76,31 @@ const Post = (props) => {
             onCancelEditing={editHandler}
           />
         )}
+        <section>
+          <ul>
+            {comments &&
+              comments.map((comment) => (
+                <li key={comment._id} className={classes.commentCard}>
+                  <CommentUserProfile {...comment} />
+                  <div className={classes.comment}>
+                    <p>{comment.comment}</p>
+                    <time>{comment.postedTime}</time>
+                  </div>
+                  {auth.id === comment.userId || auth.role === 'admin' ? (
+                    <DeleteComment
+                      {...comment}
+                      onDeleteComment={getCommentHandler}
+                    />
+                  ) : (
+                    <LikeComment
+                      onLikeComment={getCommentHandler}
+                      {...comment}
+                    />
+                  )}
+                </li>
+              ))}
+          </ul>
+        </section>
         <footer>
           {isEditing ? (
             ''
@@ -122,7 +116,6 @@ const Post = (props) => {
               <Button className={classes.btn} onClick={commentHandler}>
                 Commenter
               </Button>
-
               <div className={classes.footerBottom}>
                 {auth.id !== props.userId && auth.role !== 'admin' && (
                   <LikePost {...props} />

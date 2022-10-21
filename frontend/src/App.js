@@ -14,6 +14,7 @@ import Profile from './pages/Profile';
     BACKEND:
         - Optimization Post and Comment like
     DESIGN:
+        - username in edit profile
         - icon on edit and comment
         - User Profile (edit on same page ?)
         - Zoom on comment if too long

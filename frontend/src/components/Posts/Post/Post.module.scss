@@ -6,57 +6,65 @@
   flex-direction: column;
 
   margin: 10rem auto;
+  padding: 1.5rem 3rem;
+
   border: 1px dashed colors.$light-mode-black;
   background-color: colors.$light-mode-white;
   > header {
     display: flex;
     justify-content: space-between;
+    & .edit {
+      position: relative;
+      top: 0.3rem;
+
+      font-size: 2.6rem;
+      margin-right: 2rem;
+
+      transition: scale 100ms ease-in-out;
+      &:hover {
+        scale: 1.3;
+        cursor: pointer;
+      }
+    }
   }
-  & .post {
-    box-shadow: 5px 5px colors.$light-mode-black;
-    margin: 0 2.5rem;
-    & section {
-      padding: 1.5rem;
-
-      border: 1px solid colors.$light-mode-black;
-      box-shadow: 2px 2px colors.$light-mode-white;
-
-      > header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      & h2 {
-        font-size: 2rem;
-        font-weight: 700;
-      }
-      & .edit {
-        transition: scale 100ms ease-in-out;
-        font-size: 2rem;
-        &:hover {
-          scale: 1.3;
-          cursor: pointer;
-        }
-      }
-      & p {
-        line-height: 120%;
-        margin: 2rem 0;
+  & section {
+    position: relative;
+    bottom: 3rem;
+    > header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    & h2 {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    & .edit {
+      transition: scale 100ms ease-in-out;
+      font-size: 2rem;
+      &:hover {
+        scale: 1.3;
+        cursor: pointer;
       }
     }
-    .img {
+    > p {
+      line-height: 120%;
+      margin: 2rem 0;
+    }
+  }
+  .img {
+    width: 100%;
+    height: 30rem;
+    & img {
+      object-fit: cover;
       width: 100%;
-      height: 30rem;
-      & img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-      }
+      height: 100%;
     }
-    & textarea {
-      min-width: 100%;
-      max-width: 100%;
-      height: 12rem;
-    }
+  }
+  & textarea {
+    min-width: 100%;
+    max-width: 100%;
+    height: 12rem;
   }
 
   & footer {
@@ -64,7 +72,6 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    margin: 2rem auto;
 
     & .btn {
       @include button.button;
@@ -92,21 +99,50 @@
 
 .commentCard {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: space-between;
 
-  border: 1px solid colors.$light-mode-black;
-  box-shadow: 0 0 5px black;
   margin: 2rem auto;
   padding: 1rem;
-  width: 70%;
-}
-.comment {
-  & p {
-    font-size: 1.6rem;
-  }
-  & time {
-    font-size: 1rem;
-    font-style: italic;
+
+  box-shadow: 1px 1px 2px colors.$light-mode-black;
+  background-color: colors.$light-mode-white;
+  & .comment {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0.5rem 1rem;
+    width: 100%;
+    & p {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+
+      margin-bottom: 0.5rem;
+      height: 5rem;
+
+      font-size: 1.6rem;
+      transition: scale 250ms ease-in-out;
+      &:hover {
+        cursor: pointer;
+      }
+      &:active {
+        font-size: 1rem;
+        scale: 1.6;
+        background-color: colors.$light-mode-white;
+
+        display: inline;
+
+        height: 100%;
+        padding: 2rem;
+        margin: 5rem 0;
+        box-shadow: 0 0 3px colors.$light-mode-black;
+      }
+    }
+    & time {
+      align-self: flex-end;
+      font-size: 1rem;
+      font-style: italic;
+    }
   }
 }

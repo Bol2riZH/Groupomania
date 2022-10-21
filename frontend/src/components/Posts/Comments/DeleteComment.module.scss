@@ -1,11 +1,8 @@
-.btnDelete {
-  margin-left: 5rem;
-  font-size: 1rem;
-  background: #d15858;
+.delete {
+  font-size: 2rem;
+  transition: scale 100ms ease-in-out;
   &:hover {
-    background: #d73c42;
-  }
-  &:active {
-    background: #d15858;
+    cursor: pointer;
+    scale: 1.3;
   }
 }

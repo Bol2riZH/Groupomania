@@ -23,6 +23,7 @@ const CommentUserProfile = (comment) => {
 
   return (
     <header className={classes.userProfile}>
+      <span>{user.username}</span>
       <div className={classes.img}>
         {user.profilePictureUrl ? (
           <img src={user.profilePictureUrl} alt="profil" />
@@ -30,7 +31,6 @@ const CommentUserProfile = (comment) => {
           <img src={defaultProfilePicture} alt="profil" />
         )}
       </div>
-      <span>{user.username}</span>
     </header>
   );
 };

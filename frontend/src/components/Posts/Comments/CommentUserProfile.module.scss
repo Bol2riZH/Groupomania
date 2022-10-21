@@ -1,14 +1,11 @@
 @use '../../../style/abstracts/colors';
 
 .userProfile {
-  //display: flex;
   & span {
     font-size: 1.2rem;
   }
   & .img {
     width: 7rem;
-    margin-right: 0.5rem;
-
     & img {
       object-fit: cover;
       width: 100%;
