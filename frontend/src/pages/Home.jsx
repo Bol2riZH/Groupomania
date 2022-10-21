@@ -49,7 +49,7 @@ const Home = () => {
     <>
       <Header />
       <div className={classes.posts}>
-        <AddPost onAddPost={addPostHandler} />
+        {authLog.role !== 'admin' && <AddPost onAddPost={addPostHandler} />}
         <ul>
           {posts
             .sort((a, b) => b.date - a.date)

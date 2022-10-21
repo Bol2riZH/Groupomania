@@ -6,6 +6,7 @@ import { axiosComment } from '../../../data/axios';
 
 import Card from '../../UI/Card';
 import Button from '../../UI/Button';
+import { RiEdit2Fill } from 'react-icons/ri';
 
 import PostUserProfile from './PostUserProfile';
 import EditPost from './EditPost';
@@ -61,12 +62,7 @@ const Post = (props) => {
               <header>
                 <h2>{props.title}</h2>
                 {auth.id === props.userId || auth.role === 'admin' ? (
-                  <Button
-                    className={classes.btnConfirmation}
-                    onClick={editHandler}
-                  >
-                    Éditer
-                  </Button>
+                  <RiEdit2Fill className={classes.edit} onClick={editHandler} />
                 ) : (
                   ''
                 )}
@@ -128,17 +124,9 @@ const Post = (props) => {
               </Button>
 
               <div className={classes.footerBottom}>
-                {/*{auth.id === props.userId || auth.role === 'admin' ? (*/}
-                {/*  <Button*/}
-                {/*    className={classes.btnConfirmation}*/}
-                {/*    onClick={editHandler}*/}
-                {/*  >*/}
-                {/*    Modifier*/}
-                {/*  </Button>*/}
-                {/*) : (*/}
-                {/*  ''*/}
-                {/*)}*/}
-                {auth.id !== props.userId && <LikePost {...props} />}
+                {auth.id !== props.userId && auth.role !== 'admin' && (
+                  <LikePost {...props} />
+                )}
               </div>
             </>
           )}

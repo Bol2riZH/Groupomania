@@ -6,6 +6,7 @@ import { axiosPost } from '../../../data/axios';
 
 import Button from '../../UI/Button';
 import ConfirmModal from '../../UI/ConfirmModal';
+import { FaTrash } from 'react-icons/fa';
 
 const DeletePost = (props) => {
   const { ...auth } = useAuthContext();
@@ -44,11 +45,7 @@ const DeletePost = (props) => {
           onCancel={onCancel}
         />
       )}
-      <div className={classes.container}>
-        <Button className={classes.btnCancel} onClick={confirmModalHandler}>
-          X
-        </Button>
-      </div>
+      <FaTrash className={classes.delete} onClick={confirmModalHandler} />
     </>
   );
 };

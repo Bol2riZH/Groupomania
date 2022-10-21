@@ -1,18 +1,18 @@
+@use '../../../style/abstracts/colors';
+
 .userProfile {
-  display: flex;
-  flex-direction: column;
+  //display: flex;
+  & span {
+    font-size: 1.2rem;
+  }
   & .img {
-    margin: 0.5rem;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 7rem;
+    margin-right: 0.5rem;
+
     & img {
-      border-radius: 50%;
       object-fit: cover;
       width: 100%;
       height: 100%;
     }
-  }
-  & span {
-    font-size: 1.3rem;
   }
 }

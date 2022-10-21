@@ -11,10 +11,15 @@ import Profile from './pages/Profile';
 
 /*/////////////////////////////////////////////*/
 /* TODO:
-    FIRST:
-        - Add footer
+    BACKEND:
+        - Optimization Post and Comment like
     DESIGN:
-        - loader
+        - icon on edit and comment
+        - User Profile (edit on same page ?)
+        - Zoom on comment if too long
+        - Add footer
+        - Add loader
+    CLEAN LOG
  */
 /*/ ////////////////////////////////////////////*/
 
