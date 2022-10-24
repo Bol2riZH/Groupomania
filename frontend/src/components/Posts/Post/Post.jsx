@@ -17,12 +17,14 @@ import CommentUserProfile from '../Comments/CommentUserProfile';
 import AddComment from '../Comments/AddComment';
 import LikeComment from '../Comments/LikeComment';
 import DeleteComment from '../Comments/DeleteComment';
+import likeComment from '../Comments/LikeComment';
 
 const Post = (props) => {
   const { ...auth } = useAuthContext();
 
   const [isEditing, setIsEditing] = useState(false);
   const [isCommenting, setIsCommenting] = useState(false);
+  const [numberOfLikes, setNumberOfLikes] = useState();
 
   const [comments, setComments] = useState('');
 

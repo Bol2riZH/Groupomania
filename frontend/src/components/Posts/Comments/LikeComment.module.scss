@@ -1,9 +1,21 @@
 .like {
-  font-size: 5rem;
-  transition: scale 100ms ease-in-out;
-  &:hover {
-    scale: 1.3;
+  display: flex;
+  gap: 0.6rem;
+  height: fit-content;
+  & .icon {
+    font-size: 1.8rem;
+    transition: scale 100ms ease-in-out;
+    &:hover {
+      cursor: pointer;
+      scale: 1.3;
+    }
   }
-  &:active {
+  & span {
+    font-size: 1.6rem;
+    align-items: center;
+  }
+  & .full {
+    font-weight: bolder;
+    color: red;
   }
 }

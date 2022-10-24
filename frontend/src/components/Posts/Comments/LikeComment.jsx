@@ -1,19 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 
 import { axiosComment } from '../../../data/axios';
 
 import classes from './LikeComment.module.scss';
-import Button from '../../UI/Button';
-import { BiLike } from 'react-icons/bi';
+import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';
 
 const LikeComment = (comment) => {
   const { ...auth } = useAuthContext();
 
   const [likeComment, setLikeComment] = useState(+comment.likes);
+  const [stateLike, setStateLike] = useState(
+    comment.usersLiked.find((userId) => userId === auth.id)
+  );
+
+  useEffect(() => {
+    getStateLike();
+  }, []);
+
+  const getStateLike = async () => {
+    try {
+      await setStateLike(
+        comment.usersLiked.find((userId) => userId === auth.id)
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const likeHandler = async () => {
-    const stateLike = comment.usersLiked.find((userId) => userId === auth.id);
+    const stateLike = await comment.usersLiked.find(
+      (userId) => userId === auth.id
+    );
     try {
       const res = await axiosComment.post(
         `like/${comment._id}`,
@@ -32,16 +50,21 @@ const LikeComment = (comment) => {
         ? setLikeComment(+comment.likes + 1)
         : setLikeComment(+comment.likes - 1);
       comment.onLikeComment();
+      setStateLike(res.data.stateLike);
     } catch (err) {
       console.error(err);
     }
   };
 
   return (
-    <>
-      <BiLike className={classes.like} onClick={likeHandler} />
+    <div className={classes.like}>
+      {stateLike === 0 || stateLike === undefined ? (
+        <BsSuitHeart className={classes.icon} onClick={likeHandler} />
+      ) : (
+        <BsSuitHeartFill className={classes.icon} onClick={likeHandler} />
+      )}
       <span>{likeComment}</span>
-    </>
+    </div>
   );
 };
 
