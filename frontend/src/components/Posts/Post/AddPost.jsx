@@ -12,13 +12,13 @@ import { formData } from '../../../data/formData';
 import classes from './AddPost.module.scss';
 import Card from '../../UI/Card';
 import Input from '../../UI/Input';
-import Button from '../../UI/Button';
 import Textarea from '../../UI/Textarea';
 import Error from '../../UI/Error';
 import { FaCameraRetro } from 'react-icons/fa';
+import { ImArrowUp } from 'react-icons/im';
 import defaultProfilePicture from '../../../assets/images/defaultProfilePicture.svg';
 
-const AddPost = (props) => {
+const AddPost = (add) => {
   const { ...auth } = useAuthContext(AuthContext);
   const [isEmptyForm, setIsEmptyForm] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -52,7 +52,7 @@ const AddPost = (props) => {
     postInput.length === 0 ? setIsEmptyForm(true) : setIsEmptyForm(false);
 
     if (state.title !== '' && state.post !== '') {
-      props.onAddPost(formData(state), auth);
+      add.onAddPost(formData(state), auth);
       e.target.reset();
       dispatch({
         type: ACTIONS.CLEAR_INPUT,
@@ -101,7 +101,7 @@ const AddPost = (props) => {
             htmlFor="postPicture"
             id="postPicture"
             type="file"
-            value={state}
+            value={state.imageUrl}
             onChange={inputHandler}
             label={
               <>
@@ -131,9 +131,9 @@ const AddPost = (props) => {
             onChange={inputHandler}
             isvalid={state.isValidPost.toString()}
           />
-          <Button className={classes.btnConfirmation} type="submit">
-            Envoyer
-          </Button>
+          <button type="submit" className={classes.btnHidden}>
+            <ImArrowUp className={classes.send} />
+          </button>
         </Card>
       </div>
     </form>

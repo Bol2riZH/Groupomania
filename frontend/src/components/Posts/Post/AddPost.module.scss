@@ -15,7 +15,7 @@
 .errorMain {
   @include error.error(2rem, 2rem);
   padding: 0.5rem;
-  z-index: 2;
+  z-index: 3;
   border: 1px solid colors.$error-color;
   background-color: lighten(colors.$error-color, 50);
 }
@@ -93,6 +93,20 @@
           object-fit: cover;
           height: 100%;
           width: 100%;
+        }
+      }
+    }
+    & .btnHidden {
+      border: none;
+      background: none;
+      & .send {
+        margin-top: 1rem;
+        margin-left: 1rem;
+        font-size: 3rem;
+        transition: scale 100ms ease-in-out;
+        &:hover {
+          cursor: pointer;
+          scale: 1.3;
         }
       }
     }

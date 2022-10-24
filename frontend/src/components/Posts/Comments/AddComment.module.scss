@@ -4,7 +4,7 @@
 @use '../../../style/abstracts/keyframes';
 
 .container {
-  animation: inputPop 150ms ease-in-out;
+  animation: popup 150ms ease-in-out;
 
   margin-bottom: 5rem;
   & .comment {

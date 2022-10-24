@@ -5,7 +5,7 @@ import { axiosComment } from '../../../data/axios';
 
 import classes from './Post.module.scss';
 import Card from '../../UI/Card';
-import { RiEdit2Fill } from 'react-icons/ri';
+import { RiEdit2Fill, RiArrowGoBackFill } from 'react-icons/ri';
 import { FaRegCommentAlt } from 'react-icons/fa';
 
 import PostUserProfile from './PostUserProfile';
@@ -18,7 +18,7 @@ import AddComment from '../Comments/AddComment';
 import LikeComment from '../Comments/LikeComment';
 import DeleteComment from '../Comments/DeleteComment';
 
-const Post = (props) => {
+const Post = (props, { add }) => {
   const { ...auth } = useAuthContext();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -53,7 +53,14 @@ const Post = (props) => {
         <PostUserProfile {...props} />
         {(auth.id === props.userId || auth.role === 'admin') && (
           <div>
-            <RiEdit2Fill className={classes.edit} onClick={editHandler} />
+            {!isEditing ? (
+              <RiEdit2Fill className={classes.edit} onClick={editHandler} />
+            ) : (
+              <RiArrowGoBackFill
+                className={classes.edit}
+                onClick={editHandler}
+              />
+            )}
             <DeletePost {...props} />
           </div>
         )}
@@ -86,17 +93,15 @@ const Post = (props) => {
             onCancelComment={commentHandler}
           />
         ) : (
-          <>
-            <div className={classes.icons}>
-              <FaRegCommentAlt
-                className={classes.icon}
-                onClick={commentHandler}
-              />
-              {auth.id !== props.userId && auth.role !== 'admin' && (
-                <LikePost {...props} />
-              )}
-            </div>
-          </>
+          <div className={classes.icons}>
+            <FaRegCommentAlt
+              className={classes.icon}
+              onClick={commentHandler}
+            />
+            {auth.id !== props.userId && auth.role !== 'admin' && (
+              <LikePost {...props} />
+            )}
+          </div>
         )}
         <section>
           <ul>
