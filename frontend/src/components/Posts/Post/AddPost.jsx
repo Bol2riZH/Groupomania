@@ -62,7 +62,10 @@ const AddPost = (props) => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form
+      onSubmit={submitHandler}
+      onKeyDown={(e) => e.key === 'Escape' && setIsEditing(false)}
+    >
       {isEmptyForm && (
         <Error className={classes.errorMain}>
           Écrivez un message avant de l'envoyer
@@ -90,45 +93,49 @@ const AddPost = (props) => {
           isValid={state.isValidTitle}
         />
       </header>
-      <Card className={`${classes.postCard} ${!isEditing && classes.hidden}`}>
-        <Input
-          className={classes.upload}
-          name="imageUrl"
-          htmlFor="postPicture"
-          id="postPicture"
-          type="file"
-          value={state}
-          onChange={inputHandler}
-          label={
-            <>
-              {state.imageUrl ? (
-                <div className={classes.image}>
-                  <img src={URL.createObjectURL(state.imageUrl)} alt="post" />
-                </div>
-              ) : (
-                <FaCameraRetro className={classes.faCamera} />
-              )}
-            </>
-          }
-          isValid={state.isValidImageUrl}
-        />
-        {!state.isValidPost ? (
-          <Error className={classes.error}>Vous devez écrire un message</Error>
-        ) : (
-          ''
-        )}
-        <Textarea
-          placeholder="...message"
-          name="post"
-          id="post"
-          rows="10"
-          onChange={inputHandler}
-          isvalid={state.isValidPost.toString()}
-        />
-        <Button className={classes.btnConfirmation} type="submit">
-          Envoyer
-        </Button>
-      </Card>
+      <div className={classes.container}>
+        <Card className={`${classes.postCard} ${!isEditing && classes.hidden}`}>
+          <Input
+            className={classes.upload}
+            name="imageUrl"
+            htmlFor="postPicture"
+            id="postPicture"
+            type="file"
+            value={state}
+            onChange={inputHandler}
+            label={
+              <>
+                {state.imageUrl ? (
+                  <div className={classes.image}>
+                    <img src={URL.createObjectURL(state.imageUrl)} alt="post" />
+                  </div>
+                ) : (
+                  <FaCameraRetro className={classes.faCamera} />
+                )}
+              </>
+            }
+            isValid={state.isValidImageUrl}
+          />
+          {!state.isValidPost ? (
+            <Error className={classes.error}>
+              Vous devez écrire un message
+            </Error>
+          ) : (
+            ''
+          )}
+          <Textarea
+            placeholder="...message"
+            name="post"
+            id="post"
+            rows="10"
+            onChange={inputHandler}
+            isvalid={state.isValidPost.toString()}
+          />
+          <Button className={classes.btnConfirmation} type="submit">
+            Envoyer
+          </Button>
+        </Card>
+      </div>
     </form>
   );
 };

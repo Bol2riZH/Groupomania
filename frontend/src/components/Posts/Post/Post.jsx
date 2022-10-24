@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import classes from './Post.module.scss';
 
 import { axiosComment } from '../../../data/axios';
 
+import classes from './Post.module.scss';
 import Card from '../../UI/Card';
-import Button from '../../UI/Button';
 import { RiEdit2Fill } from 'react-icons/ri';
+import { FaRegCommentAlt } from 'react-icons/fa';
 
 import PostUserProfile from './PostUserProfile';
 import EditPost from './EditPost';
@@ -17,19 +17,17 @@ import CommentUserProfile from '../Comments/CommentUserProfile';
 import AddComment from '../Comments/AddComment';
 import LikeComment from '../Comments/LikeComment';
 import DeleteComment from '../Comments/DeleteComment';
-import likeComment from '../Comments/LikeComment';
 
 const Post = (props) => {
   const { ...auth } = useAuthContext();
 
   const [isEditing, setIsEditing] = useState(false);
   const [isCommenting, setIsCommenting] = useState(false);
-  const [numberOfLikes, setNumberOfLikes] = useState();
 
   const [comments, setComments] = useState('');
 
   useEffect(() => {
-    getCommentHandler().catch(console.error);
+    getCommentHandler();
   }, []);
 
   const getCommentHandler = async () => {
@@ -78,53 +76,56 @@ const Post = (props) => {
             onCancelEditing={editHandler}
           />
         )}
+        {isEditing ? (
+          ''
+        ) : isCommenting ? (
+          <AddComment
+            {...props}
+            onComment={getCommentHandler}
+            onConfirmComment={commentHandler}
+            onCancelComment={commentHandler}
+          />
+        ) : (
+          <>
+            <div className={classes.icons}>
+              <FaRegCommentAlt
+                className={classes.icon}
+                onClick={commentHandler}
+              />
+              {auth.id !== props.userId && auth.role !== 'admin' && (
+                <LikePost {...props} />
+              )}
+            </div>
+          </>
+        )}
         <section>
           <ul>
             {comments &&
-              comments.map((comment) => (
-                <li key={comment._id} className={classes.commentCard}>
-                  <CommentUserProfile {...comment} />
-                  <div className={classes.comment}>
-                    <p>{comment.comment}</p>
-                    <time>{comment.postedTime}</time>
-                  </div>
-                  {auth.id === comment.userId || auth.role === 'admin' ? (
-                    <DeleteComment
-                      {...comment}
-                      onDeleteComment={getCommentHandler}
-                    />
-                  ) : (
-                    <LikeComment
-                      onLikeComment={getCommentHandler}
-                      {...comment}
-                    />
-                  )}
-                </li>
-              ))}
+              comments
+                .sort((a, b) => b.date - a.date)
+                .map((comment) => (
+                  <li key={comment._id} className={classes.commentCard}>
+                    <CommentUserProfile {...comment} />
+                    <div className={classes.comment}>
+                      <p>{comment.comment}</p>
+                      <time>{comment.postedTime}</time>
+                    </div>
+                    {auth.id === comment.userId || auth.role === 'admin' ? (
+                      <DeleteComment
+                        {...comment}
+                        onDeleteComment={getCommentHandler}
+                      />
+                    ) : (
+                      <LikeComment
+                        onLikeComment={getCommentHandler}
+                        {...comment}
+                      />
+                    )}
+                  </li>
+                ))}
           </ul>
         </section>
         <footer>
-          {isEditing ? (
-            ''
-          ) : isCommenting ? (
-            <AddComment
-              {...props}
-              onComment={getCommentHandler}
-              onConfirmComment={commentHandler}
-              onCancelComment={commentHandler}
-            />
-          ) : (
-            <>
-              <Button className={classes.btn} onClick={commentHandler}>
-                Commenter
-              </Button>
-              <div className={classes.footerBottom}>
-                {auth.id !== props.userId && auth.role !== 'admin' && (
-                  <LikePost {...props} />
-                )}
-              </div>
-            </>
-          )}
           <time>{props.postedTime}</time>
         </footer>
       </Card>

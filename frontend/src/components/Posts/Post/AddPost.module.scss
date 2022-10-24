@@ -2,6 +2,7 @@
 @use '../../../style/UI/error';
 @use '../../../style/UI/button';
 @use '../../../style/abstracts/colors';
+@use '../../../style/abstracts/keyframes';
 
 .error {
   @include error.error;
@@ -24,6 +25,7 @@
 }
 
 .header {
+  z-index: 2;
   display: flex;
   flex-direction: column;
 
@@ -56,38 +58,42 @@
   }
 }
 
-.postCard {
-  padding: 5% 8%;
+.container {
+  overflow: hidden;
+  & .postCard {
+    animation: postMoveDown 450ms ease-in-out;
+    padding: 5% 8%;
 
-  border-bottom: 1px dashed colors.$light-mode-black;
-  border-left: 1px dashed colors.$light-mode-black;
-  border-right: 1px dashed colors.$light-mode-black;
-  .upload {
-    text-align: center;
-    margin-bottom: 2rem;
-    & label {
-      font-size: 8rem;
-      & .faCamera {
+    border-bottom: 1px dashed colors.$light-mode-black;
+    border-left: 1px dashed colors.$light-mode-black;
+    border-right: 1px dashed colors.$light-mode-black;
+    & .upload {
+      text-align: center;
+      margin-bottom: 2rem;
+      & label {
+        font-size: 8rem;
+        & .faCamera {
+          transition: scale 150ms ease-in-out;
+          &:hover {
+            cursor: pointer;
+            scale: 1.1;
+          }
+        }
+      }
+      & .image {
+        display: block;
+        align-items: center;
+        min-width: 90%;
         transition: scale 150ms ease-in-out;
         &:hover {
           cursor: pointer;
-          scale: 1.1;
+          scale: 102%;
         }
-      }
-    }
-    & .image {
-      display: block;
-      align-items: center;
-      min-width: 90%;
-      transition: scale 150ms ease-in-out;
-      &:hover {
-        cursor: pointer;
-        scale: 102%;
-      }
-      & img {
-        object-fit: cover;
-        height: 100%;
-        width: 100%;
+        & img {
+          object-fit: cover;
+          height: 100%;
+          width: 100%;
+        }
       }
     }
   }

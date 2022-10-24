@@ -17,6 +17,7 @@ const Input = (props) => {
         autoFocus={props.autoFocus}
         onClick={props.onClick}
         onBlur={props.onBlur}
+        onKeyDown={props.onKeyDown}
       />
     </div>
   );

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import classes from './AddComment.module.scss';
 
 import { axiosComment } from '../../../data/axios';
 
-import Button from '../../UI/Button';
+import classes from './AddComment.module.scss';
 import Input from '../../UI/Input';
 import Error from '../../UI/Error';
+import { ImArrowUp } from 'react-icons/im';
 
 const AddComment = (props) => {
   const { ...auth } = useAuthContext();
@@ -16,6 +16,7 @@ const AddComment = (props) => {
 
   const inputHandler = (e) => {
     setComment(e.target.value);
+    comment && setIsValid(true);
   };
 
   const confirmCommentHandler = async () => {
@@ -43,27 +44,40 @@ const AddComment = (props) => {
       console.error(err);
     }
   };
-  const cancelCommentHandler = () => {
-    props.onCancelComment();
-  };
 
   return (
-    <div className={classes.comment}>
-      <Input
-        autoFocus
-        name="comment"
-        id="comment"
-        placeholder="Écrivez un commentaire..."
-        value={comment}
-        onChange={inputHandler}
-      />
+    <div className={classes.container}>
+      <div className={classes.comment}>
+        <Input
+          autoFocus
+          name="comment"
+          id="comment"
+          placeholder="Écrivez un commentaire..."
+          value={comment}
+          onChange={inputHandler}
+          isValid={isValid}
+          label={
+            <ImArrowUp
+              className={classes.send}
+              onClick={confirmCommentHandler}
+            />
+          }
+          onKeyDown={(e) => {
+            e.key === 'Enter' && confirmCommentHandler();
+            e.key === 'Escape' && props.onCancelComment();
+          }}
+          onBlur={() => {
+            !comment && props.onCancelComment();
+          }}
+        />
+      </div>
       {!isValid ? (
-        <Error>Vous devez écrire un commentaire avant de l'envoyer</Error>
+        <Error className={classes.error}>
+          Vous devez écrire un commentaire avant de l'envoyer
+        </Error>
       ) : (
         ''
       )}
-      <Button onClick={confirmCommentHandler}>Envoyer</Button>
-      <Button onClick={cancelCommentHandler}>Annuler</Button>
     </div>
   );
 };

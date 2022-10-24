@@ -123,7 +123,7 @@ exports.noticePost = catchAsync(async (req, res) => {
       }
       return res
         .status(200)
-        .json({ status: 'success', message: 'notice removed' });
+        .json({ status: 'success', message: 'notice removed', stateLike });
 
     // like //
     case 1:
@@ -136,11 +136,13 @@ exports.noticePost = catchAsync(async (req, res) => {
         return res.status(200).json({
           status: 'success',
           message: 'post liked',
+          stateLike,
         });
       }
       return res.status(400).json({
         status: 'fail',
         message: 'post already liked',
+        stateLike,
       });
 
     // dislike //
