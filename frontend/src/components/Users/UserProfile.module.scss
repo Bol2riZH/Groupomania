@@ -1,6 +1,10 @@
 @use '../../style/abstracts/colors';
 
 .userProfile {
+  background-color: colors.$primary-color;
+  width: 140%;
+  border-radius: 50%;
+  box-shadow: 5px 5px colors.$light-mode-white;
   & h2 {
     position: relative;
     rotate: -20deg;
@@ -19,17 +23,20 @@
     font-size: 2rem;
     margin-bottom: 0.5rem;
     text-align: right;
+    color: colors.$light-mode-white;
   }
   & .img {
     width: 50rem;
     height: 50rem;
     margin-bottom: 5rem;
+
     & img {
+      background-color: colors.$light-mode-white;
       object-fit: cover;
       width: 100%;
       height: 100%;
 
-      padding: 5rem;
+      padding: 6rem;
 
       border: 2px dashed colors.$light-mode-black;
     }

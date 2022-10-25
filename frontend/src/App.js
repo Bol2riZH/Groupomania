@@ -12,9 +12,6 @@ import Profile from './pages/Profile';
 /* TODO:
     BACKEND:
         - Optimization Post and Comment like
-    DESIGN:
-        - Add footer
-        - Add loader
     CLEAN LOG
  */
 /*/ ////////////////////////////////////////////*/

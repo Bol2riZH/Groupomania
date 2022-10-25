@@ -29,7 +29,7 @@
   display: flex;
   flex-direction: column;
 
-  border: 2px dashed colors.$light-mode-black;
+  border: 2px dashed colors.$light-mode-white;
   background-color: colors.$newPost;
   & h2 {
     position: relative;
@@ -41,7 +41,7 @@
     padding: 2rem;
     width: fit-content;
 
-    border: 2px dashed colors.$light-mode-black;
+    border: 2px dashed colors.$light-mode-white;
     border-radius: 3px;
 
     background-color: colors.$newPost;
@@ -51,7 +51,7 @@
     @include input.inputForm(
       colors.$light-mode-black,
       colors.$light-mode-white,
-      colors.$newPost
+      colors.$quaternary-color
     );
     align-self: center;
     width: 70%;
@@ -68,6 +68,7 @@
     border-left: 1px dashed colors.$light-mode-black;
     border-right: 1px dashed colors.$light-mode-black;
     & .upload {
+      color: colors.$background;
       text-align: center;
       margin-bottom: 2rem;
       & label {
@@ -97,6 +98,7 @@
       }
     }
     & .btnHidden {
+      color: colors.$background;
       border: none;
       background: none;
       & .send {

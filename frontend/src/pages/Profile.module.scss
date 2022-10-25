@@ -3,19 +3,23 @@
 @use '../style/abstracts/colors';
 
 .profile {
-  height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
   padding-top: 8%;
+
+  background-image: url('../assets/images/BG-memphis.png');
+  background-size: cover;
   & section {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    padding: 3rem;
     & .btnPosition {
+      position: relative;
+      bottom: 10rem;
+
       display: flex;
-      gap: 10rem;
+      gap: 5rem;
     }
   }
 
@@ -33,5 +37,7 @@
 
   & .error {
     @include error.error(2rem, 2rem);
+    background-color: colors.$light-mode-white;
+    padding: 1rem;
   }
 }

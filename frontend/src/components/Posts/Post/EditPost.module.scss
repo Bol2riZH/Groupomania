@@ -16,7 +16,7 @@
   > label {
     font-size: 5rem;
     & .faCamera {
-      color: colors.$light-mode-black;
+      color: colors.$background;
       transition: scale 150ms ease-in-out;
 
       &:hover {
@@ -58,6 +58,7 @@
     }
   }
   & .confirmation {
+    color: colors.$background;
     font-size: 3rem;
     transition: scale 100ms ease-in-out;
     &:hover {

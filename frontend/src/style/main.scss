@@ -11,14 +11,13 @@
 
 html {
   font-size: 62.5%;
-  //margin: auto;
 }
 
 body {
+  background-image: url('../assets/images/BG-memphis.png');
+  background-size: cover;
+
   font-size: 1.6rem;
-  background-color: colors.$background;
-  //background-color: colors.$quaternary-color;
-  //height: 100vh;
   font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

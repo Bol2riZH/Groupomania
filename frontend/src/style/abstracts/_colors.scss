@@ -1,20 +1,19 @@
-$primary-color: #b7714b;
-$secondary-color: #261e1e;
-$tertiary-color: #55382e;
-$quaternary-color: #eec5b0;
+$primary-color: #22a9e1;
+$secondary-color: #eb197f;
+$tertiary-color: #3c4b6c;
+$quaternary-color: #fbc12a;
 
-$background: #eec5b0;
-//$background: white;
-$header: #55382e;
-$footer: $header;
-$newPost: #b7714b;
-$newPostMessage: #b7714b;
+$background: #0d172d;
+$header: $primary-color;
+$footer: $quaternary-color;
+
+$newPost: #3c4b6c;
 
 $error-color: #d73c42;
 
-$btn-color: #00fff7;
-$btn-confirmation-color: #13ff00;
-$btn-cancel-color: #d73c42;
+$btn-color: $tertiary-color;
+$btn-confirmation-color: $secondary-color;
+$btn-cancel-color: $quaternary-color;
 
 $light-mode-white: white;
 $light-mode-black: black;

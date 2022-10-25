@@ -43,6 +43,7 @@
       font-weight: 700;
     }
     & .edit {
+      color: colors.$background;
       transition: scale 100ms ease-in-out;
       font-size: 2rem;
       &:hover {
@@ -75,6 +76,8 @@
   }
 
   & .icons {
+    color: colors.$background;
+
     display: flex;
     justify-content: space-between;
     margin-left: 2rem;
@@ -91,9 +94,11 @@
   }
 
   & .iconOnly {
+    color: colors.$secondary-color;
     font-size: 2.5rem;
   }
   & .commentIcons {
+    color: colors.$background;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -107,10 +112,6 @@
     & span {
       font-size: 1.6rem;
       align-items: center;
-    }
-    & .full {
-      font-weight: bolder;
-      color: red;
     }
   }
   & footer {

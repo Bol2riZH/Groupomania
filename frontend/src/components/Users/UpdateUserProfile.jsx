@@ -100,10 +100,7 @@ const UpdateUserProfile = (props) => {
         <Button className={classes.btnConfirmation} onClick={isValidHandler}>
           Confirmer
         </Button>
-        <Button
-          className={classes.btnCancel}
-          onClick={() => props.onEditHandler()}
-        >
+        <Button className={classes.btn} onClick={() => props.onEditHandler()}>
           Annuler
         </Button>
       </div>

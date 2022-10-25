@@ -56,10 +56,10 @@ const Profile = () => {
           <>
             <UserProfile />
             <div className={classes.btnPosition}>
-              <Button className={classes.btn} onClick={editHandler}>
+              <Button className={classes.btnConfirmation} onClick={editHandler}>
                 Modifier le profil
               </Button>
-              <Button className={classes.btnCancel} onClick={goBackHandler}>
+              <Button className={classes.btn} onClick={goBackHandler}>
                 Retour
               </Button>
             </div>

@@ -1,14 +1,6 @@
 @use '../style/abstracts/colors';
+@use '../style/abstracts/keyframes';
 @use '../style/UI/error';
-
-@keyframes title-animation {
-  0% {
-    text-shadow: 15px 15px black;
-  }
-  100% {
-    text-shadow: -15px -15px black;
-  }
-}
 
 .error {
   @include error.error;
@@ -22,15 +14,15 @@
   h1 {
     font-size: 4rem;
     font-weight: 900;
-    color: black;
+    color: colors.$light-mode-white;
 
+    margin-left: 2.5rem;
     margin-bottom: 15rem;
 
-    //animation: title-animation 1s ease-in-out alternate-reverse infinite;
+    animation: title-animation 1s ease-in-out alternate-reverse infinite;
   }
   display: flex;
   flex-direction: column;
-  align-items: center;
 
   .form {
     padding: 5% 8%;

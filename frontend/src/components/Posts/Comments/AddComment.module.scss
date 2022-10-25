@@ -25,6 +25,7 @@
       }
     }
     & .send {
+      color: colors.$background;
       transition: scale 100ms ease-in-out;
       &:hover {
         cursor: pointer;

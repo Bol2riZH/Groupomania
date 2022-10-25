@@ -33,6 +33,7 @@
     scale: 1.1;
   }
   & label {
+    color: colors.$background;
     font-size: 10rem;
     &:hover {
       cursor: pointer;

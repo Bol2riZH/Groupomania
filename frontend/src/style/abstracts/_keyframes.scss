@@ -1,3 +1,14 @@
+@use '../../style/abstracts/colors';
+
+@keyframes title-animation {
+  0% {
+    text-shadow: 15px 15px colors.$light-mode-white;
+  }
+  100% {
+    text-shadow: -15px -15px colors.$light-mode-white;
+  }
+}
+
 @keyframes error {
   0% {
     transform: translateX(-3px);
