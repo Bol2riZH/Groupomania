@@ -1,6 +1,7 @@
 @use '../../../style/UI/button';
 @use '../../../style/abstracts/colors';
 @use '../../../style/abstracts/keyframes';
+@use '../../../style/abstracts/mediaqueries';
 
 .postCard {
   animation: popup 350ms ease-in-out;
@@ -11,8 +12,13 @@
   margin: 10rem auto;
   padding: 1.5rem 3rem;
 
-  border: 1px dashed colors.$light-mode-black;
   background-color: colors.$light-mode-white;
+
+  border-top: 1px dashed colors.$light-mode-black;
+  border-bottom: 1px dashed colors.$light-mode-black;
+  @include mediaqueries.medium {
+    border: 1px dashed colors.$light-mode-black;
+  }
   > header {
     display: flex;
     justify-content: space-between;

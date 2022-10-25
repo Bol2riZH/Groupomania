@@ -3,6 +3,7 @@
 @use '../../../style/UI/button';
 @use '../../../style/abstracts/colors';
 @use '../../../style/abstracts/keyframes';
+@use '../../../style/abstracts/mediaqueries';
 
 .error {
   @include error.error;
@@ -29,7 +30,11 @@
   display: flex;
   flex-direction: column;
 
-  border: 2px dashed colors.$light-mode-white;
+  border-top: 2px dashed colors.$light-mode-white;
+  border-bottom: 2px dashed colors.$light-mode-white;
+  @include mediaqueries.medium {
+    border: 2px dashed colors.$light-mode-white;
+  }
   background-color: colors.$newPost;
   & h2 {
     position: relative;

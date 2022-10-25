@@ -9,7 +9,8 @@
   align-items: center;
 
   background-color: colors.$primary-color;
-  width: 200%;
+  width: 90%;
+  max-width: 70rem;
   border-radius: 50%;
 
   box-shadow: 5px 5px colors.$light-mode-white;

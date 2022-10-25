@@ -3,9 +3,10 @@
 @keyframes title-animation {
   0% {
     text-shadow: 15px 15px colors.$light-mode-white;
+    color: colors.$secondary-color;
   }
   100% {
-    text-shadow: -15px -15px colors.$light-mode-white;
+    text-shadow: -15px -15px colors.$primary-color;
   }
 }
 
@@ -42,5 +43,14 @@
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+@keyframes rotation360 {
+  0% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

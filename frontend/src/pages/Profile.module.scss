@@ -3,8 +3,6 @@
 @use '../style/abstracts/colors';
 
 .profile {
-  display: flex;
-  justify-content: center;
   padding-top: 8%;
 
   background-image: url('../assets/images/BG-memphis.png');
@@ -13,10 +11,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 3rem;
     & .btnPosition {
       position: relative;
-      bottom: 10rem;
+      bottom: 8.5rem;
 
       display: flex;
       gap: 5rem;

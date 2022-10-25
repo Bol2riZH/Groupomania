@@ -1,15 +1,20 @@
 @use '../../style/abstracts/colors';
+@use '../../style/abstracts/mediaqueries';
 
 .userProfile {
   background-color: colors.$primary-color;
-  width: 140%;
+  width: 100%;
   border-radius: 50%;
   box-shadow: 5px 5px colors.$light-mode-white;
+  @include mediaqueries.medium {
+    margin: 0 10rem;
+    max-width: 900px;
+  }
   & h2 {
     position: relative;
     rotate: -20deg;
-    top: 3rem;
-    right: 13rem;
+    top: 4rem;
+    right: 16rem;
 
     width: fit-content;
 
@@ -20,15 +25,21 @@
     background-color: colors.$light-mode-white;
   }
   & p {
+    position: relative;
+    top: 2.5rem;
     font-size: 2rem;
-    margin-bottom: 0.5rem;
+    margin-right: 3rem;
     text-align: right;
-    color: colors.$light-mode-white;
+    color: colors.$background;
   }
   & .img {
-    width: 50rem;
+    width: 100%;
     height: 50rem;
     margin-bottom: 5rem;
+
+    @include mediaqueries.medium {
+      max-width: 70rem;
+    }
 
     & img {
       background-color: colors.$light-mode-white;
@@ -36,9 +47,14 @@
       width: 100%;
       height: 100%;
 
-      padding: 6rem;
+      padding: 8rem 3rem;
 
-      border: 2px dashed colors.$light-mode-black;
+      border-top: 2px dashed colors.$light-mode-black;
+      border-bottom: 2px dashed colors.$light-mode-black;
+
+      @include mediaqueries.medium {
+        border: 2px dashed colors.$light-mode-black;
+      }
     }
   }
 }

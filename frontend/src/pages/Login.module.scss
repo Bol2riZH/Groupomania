@@ -1,5 +1,6 @@
 @use '../style/abstracts/colors';
 @use '../style/abstracts/keyframes';
+@use '../style/abstracts/mediaqueries';
 @use '../style/UI/error';
 
 .error {
@@ -25,8 +26,16 @@
   flex-direction: column;
 
   .form {
-    padding: 5% 8%;
-    border: 1px dashed black;
+    padding: 2.5rem 5rem;
+    border-top: 1px dashed black;
+    border-bottom: 1px dashed black;
+
+    @include mediaqueries.medium {
+      border: 1px dashed black;
+      margin: 0 auto;
+      width: 70%;
+      max-width: 900px;
+    }
   }
 
   & .titleContainer {
@@ -36,8 +45,13 @@
   }
 
   & h2 {
-    font-size: 2rem;
     rotate: -20deg;
+    animation: rotation360 alternate-reverse;
+    animation-duration: 2s;
+    animation-delay: 3s;
+    animation-iteration-count: 2;
+
+    font-size: 2rem;
 
     width: fit-content;
     margin-bottom: 2rem;
