@@ -1,0 +1,36 @@
+@use '../abstracts/colors';
+
+@mixin inputForm(
+  $textColor: colors.$light-mode-black,
+  $bgColor: colors.$light-mode-white,
+  $shadColor: colors.$light-mode-white
+) {
+  box-shadow: 5px 5px colors.$light-mode-black;
+  margin-bottom: 3rem;
+  transition: scale 100ms ease-in-out;
+  &:hover {
+    scale: 103%;
+    box-shadow: 6px 5px colors.$light-mode-black;
+  }
+
+  & input {
+    color: $textColor;
+    background-color: $bgColor;
+    width: 100%;
+    padding: 1rem;
+
+    border: 1px solid colors.$light-mode-black;
+    box-shadow: 2px 2px $shadColor;
+    transition: background-color 100ms ease-in-out;
+
+    &:hover {
+      @if ($bgColor != white) {
+        background-color: darken($bgColor, 10);
+      }
+    }
+
+    &::placeholder {
+      color: $textColor;
+    }
+  }
+}

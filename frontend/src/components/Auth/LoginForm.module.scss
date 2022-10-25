@@ -1,0 +1,43 @@
+@use '../../style/abstracts/colors';
+@use '../../style/UI/input';
+@use '../../style/UI/error';
+@use '../../style/UI/button';
+
+.input {
+  @include input.inputForm;
+}
+
+.error {
+  @include error.error;
+}
+
+.btnConfirmation {
+  @include button.button(colors.$btn-confirmation-color);
+}
+
+.passwordLabel {
+  position: relative;
+  & label {
+    font-size: 2rem;
+    position: absolute;
+
+    right: 0;
+    margin: 1.2rem 2rem;
+  }
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+
+  margin-top: 2rem;
+
+  & a {
+    margin-left: 3rem;
+    cursor: pointer;
+    transition: scale 25ms ease-in-out;
+    &:hover {
+      scale: 1.1;
+    }
+  }
+}

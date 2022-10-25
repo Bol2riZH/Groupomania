@@ -1,0 +1,41 @@
+@use 'base/reset';
+@use 'base/normalize';
+@use 'abstracts/colors';
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-image: url('../assets/images/BG-memphis.png');
+  background-size: cover;
+
+  font-size: 1.6rem;
+  font-family: 'Lato', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input {
+  outline: none;
+  &::placeholder {
+    color: colors.$light-mode-black;
+  }
+  &[type='file'] {
+    opacity: 0;
+    z-index: -1;
+    position: absolute;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}

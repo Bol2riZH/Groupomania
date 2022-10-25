@@ -1,15 +1,40 @@
-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
+@use '../style/UI/button';
+@use '../style/UI/error';
+@use '../style/abstracts/colors';
 
-.img {
-  & img {
-    object-fit: cover;
-    width: 25rem;
-    height: 25rem;
-    border-radius: 50%;
+.profile {
+  padding-top: 8%;
+
+  background-image: url('../assets/images/BG-memphis.png');
+  background-size: cover;
+  & section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    & .btnPosition {
+      position: relative;
+      bottom: 8.5rem;
+
+      display: flex;
+      gap: 5rem;
+    }
+  }
+
+  & .btn {
+    @include button.button;
+  }
+
+  & .btnConfirmation {
+    @include button.button(colors.$btn-confirmation-color);
+  }
+
+  & .btnCancel {
+    @include button.button(colors.$btn-cancel-color);
+  }
+
+  & .error {
+    @include error.error(2rem, 2rem);
+    background-color: colors.$light-mode-white;
+    padding: 1rem;
   }
 }

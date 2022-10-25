@@ -6,7 +6,6 @@ import { axiosUser } from '../data/axios';
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../components/UI/Card';
-import Button from '../components/UI/Button';
 import Error from '../components/UI/Error';
 
 import LoginForm from '../components/Auth/LoginForm';
@@ -45,6 +44,7 @@ const Login = () => {
       const userId = {
         id: res.data.userId,
         token: res.data.token,
+        username: res.data.username,
         role: res.data.role,
       };
       setLocalStorage(userId);
@@ -81,27 +81,33 @@ const Login = () => {
         {!signup ? (
           <>
             <div className={classes.titleContainer}>
-              <h2>Se connecter</h2>
+              <h2>SE CONNECTER</h2>
             </div>
-            {!isValid && <Error>Email ou mot de passe incorrect</Error>}
-            <LoginForm onLogin={loginHandler} />
-            <Button onClick={accountHandler} className={classes.btn}>
-              Pas encore de compte ?
-            </Button>
+            {!isValid && (
+              <Error className={classes.errorMain}>
+                Email ou mot de passe incorrect
+              </Error>
+            )}
+            <LoginForm
+              onLogin={loginHandler}
+              onAccountHandler={accountHandler}
+            />
           </>
         ) : (
           <>
             <div className={classes.titleContainer}>
-              <h2>Créer un compte</h2>
+              <h2>CRÉER UN COMPTE</h2>
             </div>
 
             {!isValid && (
-              <Error>Nom utilisateur ou adresse email déjà utilisées</Error>
+              <Error className={classes.error}>
+                Nom utilisateur ou adresse email déjà utilisées
+              </Error>
             )}
-            <SignupForm onSignup={signupHandler} />
-            <Button onClick={accountHandler} className={classes.btn}>
-              Retour
-            </Button>
+            <SignupForm
+              onSignup={signupHandler}
+              onAccountHandler={accountHandler}
+            />
           </>
         )}
       </Card>

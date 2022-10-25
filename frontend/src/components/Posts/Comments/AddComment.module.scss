@@ -1,5 +1,43 @@
-.comment {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+@use '../../../style/UI/button';
+@use '../../../style/UI/error';
+@use '../../../style/abstracts/colors';
+@use '../../../style/abstracts/keyframes';
+
+.container {
+  animation: popup 150ms ease-in-out;
+
+  margin-bottom: 5rem;
+  & .comment {
+    & input {
+      padding: 2rem 2rem 2rem 5rem;
+      width: 100%;
+    }
+    & label {
+      position: relative;
+      top: 4.3rem;
+
+      margin-left: 1.5rem;
+      font-size: 2rem;
+
+      &:hover {
+        cursor: pointer;
+        scale: 1.3;
+      }
+    }
+    & .send {
+      color: colors.$background;
+      transition: scale 100ms ease-in-out;
+      &:hover {
+        cursor: pointer;
+        scale: 1.3;
+      }
+    }
+  }
+  & .error {
+    @include error.error;
+    background-color: lighten(colors.$error-color, 50);
+    width: fit-content;
+    align-self: center;
+    margin-top: 0.5rem;
+  }
 }

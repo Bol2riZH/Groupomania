@@ -6,9 +6,12 @@ import {
 } from '../Reducer/signupReducer';
 import { formData } from '../../data/formData';
 
+import classes from './SignupForm.module.scss';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import Error from '../UI/Error';
+
+import { FaEye, FaEyeSlash, FaGithubAlt } from 'react-icons/fa';
 
 const SignupForm = (props) => {
   const [state, dispatch] = useReducer(signupReducer, USER_INITIAL_STATE);
@@ -47,90 +50,156 @@ const SignupForm = (props) => {
 
   return (
     <form onSubmit={submitHandler}>
-      {isEmptyForm && <Error>Formulaire non remplie</Error>}
+      {isEmptyForm && (
+        <Error className={classes.errorMain}>Formulaire non remplie</Error>
+      )}
+
+      {/*/////////// PROFIL PICTURE //////////////*/}
+      {!state.isValidProfilPicture ? (
+        <Error className={classes.error}>Taille maximum autorisé 1Mo</Error>
+      ) : (
+        ''
+      )}
       <Input
+        className={classes.upload}
         name="profilePictureUrl"
         htmlFor="profilePicture"
         id="profilePicture"
         type="file"
         value={state}
         onChange={inputHandler}
+        label={
+          <>
+            {state.profilePictureUrl ? (
+              <>
+                <div className={classes.profilePicture}>
+                  <img
+                    src={URL.createObjectURL(state.profilePictureUrl)}
+                    alt="profile"
+                  />
+                </div>
+                <p>Changer votre photo de profil ?</p>
+              </>
+            ) : (
+              <>
+                <FaGithubAlt />
+                <p>Ajouter une photo de profil ?</p>
+              </>
+            )}
+          </>
+        }
+        isValid={state.isValidProfilPicture}
       />
-      {!state.isValidProfilPicture ? (
-        <Error>Taille maximum autorisé 1Mo</Error>
+
+      {/*/////////// USERNAME //////////////*/}
+      {!state.isValidUsername ? (
+        <Error className={classes.error}>
+          Veuillez entrer nom d'utilisateur
+        </Error>
       ) : (
         ''
       )}
       <Input
+        className={classes.input}
         name="username"
         htmlFor="username"
         id="username"
-        placeHolder="Nom d'utilisateur"
+        placeholder="Nom d'utilisateur"
         value={state}
         onChange={inputHandler}
+        isValid={state.isValidUsername}
       />
-      {!state.isValidUsername ? (
-        <Error>Veuillez entrer nom d'utilisateur</Error>
-      ) : (
-        ''
-      )}
-      <Input
-        name="email"
-        htmlFor="email"
-        id="email"
-        placeHolder="Email"
-        onChange={inputHandler}
-      />
+
+      {/*/////////// EMAIL //////////////*/}
       {!state.isValidEmail ? (
-        <Error>Veuillez entrer un email valide</Error>
+        <Error className={classes.error}>Veuillez entrer un email valide</Error>
       ) : (
         ''
       )}
       <Input
+        className={classes.input}
+        name="email"
+        htmlFor="text"
+        id="email"
+        placeholder="Email"
+        onChange={inputHandler}
+        isValid={state.isValidEmail}
+      />
+
+      {/*/////////// CONFIRM EMAIL //////////////*/}
+      {!state.isValidConfirmEmail ? (
+        <Error className={classes.error}>
+          Les adresses email ne sont pas identiques
+        </Error>
+      ) : (
+        ''
+      )}
+      <Input
+        className={classes.input}
         name="confirmEmail"
-        htmlFor="confirmEmail"
+        htmlFor="text"
         id="confirmEmail"
-        placeHolder="Confirmer votre adresse mail"
+        placeholder="Confirmer votre adresse mail"
         value={state}
         onChange={inputHandler}
+        isValid={state.isValidConfirmEmail}
       />
-      {!state.isValidConfirmEmail ? (
-        <Error>Les adresses email ne sont pas identiques</Error>
+
+      {/*/////////// PASSWORD //////////////*/}
+      {!state.isValidPassword ? (
+        <Error className={classes.error}>
+          Veuillez entrer un mot de passe valide
+        </Error>
       ) : (
         ''
       )}
       <Input
+        className={`${classes.input} ${classes.passwordLabel}`}
         name="password"
         htmlFor="password"
         id="password"
         type={shown ? 'text' : 'password'}
-        placeHolder="Mot de passe"
+        placeholder="Mot de passe"
         value={state}
         onChange={inputHandler}
+        isValid={state.isValidPassword}
+        label={
+          !shown ? (
+            <FaEyeSlash onClick={() => setShown(!shown)} />
+          ) : (
+            <FaEye onClick={() => setShown(!shown)} />
+          )
+        }
       />
-      {!state.isValidPassword ? (
-        <Error>Veuillez entrer un mot de passe valide</Error>
+
+      {/*/////////// CONFIRM PASSWORD //////////////*/}
+      {!state.isValidConfirmPassword ? (
+        <Error className={classes.error}>
+          Les mot de passe ne sont pas identiques
+        </Error>
       ) : (
         ''
       )}
       <Input
+        className={`${classes.input} ${classes.passwordLabel}`}
         name="confirmPassword"
         htmlFor="confirmPassword"
         id="confirmPassword"
         type={shown ? 'text' : 'password'}
-        placeHolder="Confirmer le mot de passe"
+        placeholder="Confirmer le mot de passe"
         value={state}
         onChange={inputHandler}
+        isValid={state.isValidConfirmPassword}
       />
-      {!state.isValidConfirmPassword ? (
-        <Error>Les mot de passe ne sont pas identiques</Error>
-      ) : (
-        ''
-      )}
-      <button type="button" onClick={() => setShown(!shown)}>
-        voir/cacher
-      </button>
-      <Button type="submit">Créer un compte</Button>
+
+      <div className={classes.footer}>
+        <Button className={classes.btnConfirmation} type="submit">
+          ENVOYER
+        </Button>
+        <Button className={classes.btn} onClick={props.onAccountHandler}>
+          Retour
+        </Button>
+      </div>
     </form>
   );
 };

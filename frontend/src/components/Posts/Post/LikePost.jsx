@@ -1,15 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import classes from './Post.module.scss';
 
 import { axiosPost } from '../../../data/axios';
 
-import Button from '../../UI/Button';
+import classes from './Post.module.scss';
+import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';
 
 const LikePost = (props) => {
   const { ...auth } = useAuthContext();
 
   const [likePost, setLikePost] = useState(+props.likes);
+  const [stateLike, setStateLike] = useState(
+    props.usersLiked.find((userId) => userId === auth.id)
+  );
+
+  useEffect(() => {
+    getStateLike();
+  }, []);
+
+  const getStateLike = async () => {
+    try {
+      await setStateLike(props.usersLiked.find((userId) => userId === auth.id));
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const likeHandler = async () => {
     const stateLike = props.usersLiked.find((userId) => userId === auth.id);
@@ -30,6 +45,7 @@ const LikePost = (props) => {
       !stateLike
         ? setLikePost(+props.likes + 1)
         : setLikePost(+props.likes - 1);
+      setStateLike(res.data.stateLike);
       props.onLikePost();
     } catch (err) {
       console.error(err);
@@ -37,12 +53,18 @@ const LikePost = (props) => {
   };
 
   return (
-    <>
-      <Button className={classes.btnLike} onClick={likeHandler}>
-        J'aime
-      </Button>
+    <div className={classes.like}>
+      {auth.id !== props.userId && auth.role !== 'admin' ? (
+        stateLike === 0 || stateLike === undefined ? (
+          <BsSuitHeart className={classes.icon} onClick={likeHandler} />
+        ) : (
+          <BsSuitHeartFill className={classes.icon} onClick={likeHandler} />
+        )
+      ) : (
+        <BsSuitHeartFill className={classes.iconOnly} />
+      )}
       <span>{likePost}</span>
-    </>
+    </div>
   );
 };
 

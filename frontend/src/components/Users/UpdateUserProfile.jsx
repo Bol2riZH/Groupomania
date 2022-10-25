@@ -1,15 +1,17 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer } from 'react';
 import {
   ACTIONS,
   USER_INITIAL_STATE,
   signupReducer,
 } from '../Reducer/signupReducer';
 
+import classes from './UpdateUserProfile.module.scss';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 
 import { formData } from '../../data/formData';
 import Error from '../UI/Error';
+import { FaGithubAlt } from 'react-icons/fa';
 
 const UpdateUserProfile = (props) => {
   const [state, dispatch] = useReducer(signupReducer, USER_INITIAL_STATE);
@@ -28,10 +30,13 @@ const UpdateUserProfile = (props) => {
     dispatch({
       type: ACTIONS.IS_VALID,
     });
-    // state.isValidProfilPicture && props.onUpdate(formData(state));
-    console.log(state.isValidProfilPicture);
-    console.log(state.isValidUsername);
     if (state.isValidUsername || state.isValidProfilPicture) submitHandler(e);
+
+    if (state.username) {
+      const newUsername = JSON.parse(localStorage.getItem('auth'));
+      newUsername.username = state.username;
+      localStorage.setItem('auth', JSON.stringify(newUsername));
+    }
   };
 
   const submitHandler = (e) => {
@@ -43,29 +48,62 @@ const UpdateUserProfile = (props) => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form className={classes.updateUser} onSubmit={submitHandler}>
+      {!state.isValidProfilPicture && (
+        <Error className={classes.error}>Taille maximum autorisé 1Mo</Error>
+      )}
       <Input
+        className={classes.upload}
         name="profilePictureUrl"
         htmlFor="profilePicture"
         id="profilePicture"
         type="file"
         onChange={inputHandler}
+        label={
+          <>
+            {state.profilePictureUrl ? (
+              <>
+                <div className={classes.profilePicture}>
+                  <img
+                    src={URL.createObjectURL(state.profilePictureUrl)}
+                    alt="profile"
+                  />
+                </div>
+                <p>Changer votre photo de profil ?</p>
+              </>
+            ) : (
+              <>
+                <FaGithubAlt />
+                <p>Changer votre photo de profil ?</p>
+              </>
+            )}
+          </>
+        }
+        isValid={state.isValidProfilPicture}
       />
-      {!state.isValidProfilPicture && (
-        <Error>Taille maximum autorisé 1Mo</Error>
+      {!state.isValidUsername && (
+        <Error className={classes.error}>
+          Veuillez entrer un nouveau nom d'utilisateur
+        </Error>
       )}
       <Input
+        className={classes.input}
         name="username"
         htmlFor="username"
         id="username"
-        placeHolder="Changer votre nom d'utilisateur ?"
+        placeholder="Changer votre nom d'utilisateur ?"
         onChange={inputHandler}
+        isValid={state.isValidUsername}
       />
-      {!state.isValidUsername && (
-        <Error>Veuillez entrer un nouveau nom d'utilisateur</Error>
-      )}
-      {/*<Button type="submit">Confirmer</Button>*/}
-      <Button onClick={isValidHandler}>Confirmer</Button>
+
+      <div className={classes.btnPosition}>
+        <Button className={classes.btnConfirmation} onClick={isValidHandler}>
+          Confirmer
+        </Button>
+        <Button className={classes.btn} onClick={() => props.onEditHandler()}>
+          Annuler
+        </Button>
+      </div>
     </form>
   );
 };

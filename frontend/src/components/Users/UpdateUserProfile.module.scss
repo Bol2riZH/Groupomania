@@ -1,0 +1,81 @@
+@use '../../style/UI/button';
+@use '../../style/UI/input';
+@use '../../style/UI/error';
+@use '../../style/abstracts/colors';
+
+.updateUser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: colors.$primary-color;
+  width: 90%;
+  max-width: 70rem;
+  border-radius: 50%;
+
+  box-shadow: 5px 5px colors.$light-mode-white;
+
+  & .error {
+    @include error.error;
+  }
+
+  & .input {
+    width: 60%;
+    @include input.inputForm(
+      colors.$light-mode-black,
+      colors.$light-mode-white,
+      colors.$secondary-color
+    );
+  }
+
+  & .btnConfirmation {
+    @include button.button(colors.$btn-confirmation-color);
+  }
+
+  & .btn {
+    @include button.button;
+  }
+
+  & .upload {
+    text-align: center;
+    margin: 4rem 0;
+    transition: scale 150ms ease-in-out;
+    &:hover {
+      cursor: pointer;
+      scale: 1.1;
+    }
+    & label {
+      color: colors.$light-mode-white;
+      font-size: 10rem;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    & p {
+      font-size: 1.6rem;
+    }
+    & .profilePicture {
+      width: 20rem;
+      margin: 5rem auto 1rem auto;
+      & img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+
+        padding: 1rem;
+
+        outline: 1px dashed colors.$light-mode-black;
+        background-color: colors.$light-mode-white;
+        &:hover {
+          cursor: pointer;
+          scale: 102%;
+        }
+      }
+    }
+  }
+  & .btnPosition {
+    padding-bottom: 3rem;
+    display: flex;
+    gap: 2rem;
+  }
+}

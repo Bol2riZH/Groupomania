@@ -1,20 +1,18 @@
-@import '../../style/variables';
-
-.input {
-  & input {
-    margin: 0.5rem auto;
-    padding: 1rem;
-    width: 100%;
-    &:focus {
-      outline: none;
-      border: 1.8px solid black;
-      background: rgba(112, 202, 230, 0.17);
-    }
-  }
-}
+@use '../../style/abstracts/colors';
+@use '../../style/abstracts/keyframes';
 
 .input.invalid {
+  animation: error 70ms alternate-reverse;
+  animation-iteration-count: 6;
+
   & input {
-    background: #ffd7d7;
+    color: colors.$light-mode-white;
+    background: #d73c42;
+    &::placeholder {
+      color: colors.$light-mode-white;
+    }
+  }
+  & label {
+    color: colors.$light-mode-white;
   }
 }

@@ -9,7 +9,7 @@ const PostUserProfile = (props) => {
   const [user, setUser] = useState('');
 
   useEffect(() => {
-    getProfil().catch(console.error);
+    getProfil();
   }, []);
 
   const getProfil = async () => {

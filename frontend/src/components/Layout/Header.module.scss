@@ -1,60 +1,51 @@
-@import '../../style/variables';
-
+@use '../../style/abstracts/colors';
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  height: 10rem;
+  margin-bottom: 10rem;
+  padding: 0 15%;
 
-  padding: 2rem;
-  margin-bottom: 2rem;
+  background-color: colors.$header;
+  border-bottom: 1px dashed colors.$background;
+  .icons {
+    display: flex;
+    justify-content: space-between;
 
-  background-color: white;
-}
+    padding: 2rem;
+    > img {
+      border-radius: 50%;
+      box-shadow: 5px 2px colors.$secondary-color;
+      width: 5rem;
 
-.logo {
-  display: flex;
-  gap: 0.5rem;
-  & img {
-    width: 5rem;
-  }
-  & h1 {
-    font-weight: bolder;
-  }
-}
+      padding: 1rem;
 
-.user {
-  display: flex;
-  flex-direction: column;
-}
-
-.btn {
-  font-size: 1rem;
-  background: none;
-  border: none;
-  color: black;
-  &:hover {
-    cursor: pointer;
-    font-weight: bold;
+      background-color: colors.$background;
+    }
+    & a {
+      font-size: 3rem;
+      color: colors.$background;
+      cursor: pointer;
+      transition: scale 25ms ease-in-out;
+      &:hover {
+        scale: 1.1;
+      }
+    }
+    .user {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
   }
 }
 
 .profilePicture {
-  background: none;
-  border: none;
+  width: 5rem;
+  height: 5rem;
   & img {
     object-fit: cover;
-
-    border-radius: 50%;
-    border: 0.3rem solid $btn-color;
     padding: 0.2rem;
 
-    width: 5rem;
-    height: 5rem;
-
-    transition: border 150ms;
-    &:hover {
-      cursor: pointer;
-      border: none;
-    }
+    width: 100%;
+    height: 100%;
+    outline: 2px dashed colors.$background;
   }
 }

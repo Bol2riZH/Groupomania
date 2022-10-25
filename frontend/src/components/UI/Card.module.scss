@@ -1,4 +1,7 @@
+@use '../../style/abstracts/colors';
+
 .card {
   background-color: white;
-  padding: 5rem;
+  //background-color: colors.$quaternary-color;
+  //padding: 5% 8%;
 }

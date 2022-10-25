@@ -4,7 +4,8 @@ import classes from './ConfirmModal.module.scss';
 import { createPortal } from 'react-dom';
 
 import Card from './Card';
-import Button from './Button';
+import { ImCross } from 'react-icons/im';
+import { BsCheckLg } from 'react-icons/bs';
 
 const Backdrop = (props) => {
   return <div className={classes.backdrop} onClick={props.onCancel} />;
@@ -15,8 +16,10 @@ const ModalOverlay = (props) => {
     <Card className={classes.modal}>
       <h2>{props.title}</h2>
       <p>{props.message}</p>
-      <Button onClick={props.onConfirm}>Confirmer</Button>
-      <Button onClick={props.onCancel}>Annuler</Button>
+      <div className={classes.btn}>
+        <BsCheckLg onClick={props.onConfirm} className={classes.confirmation} />
+        <ImCross onClick={props.onCancel} className={classes.cross} />
+      </div>
     </Card>
   );
 };

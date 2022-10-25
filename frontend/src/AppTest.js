@@ -3,7 +3,7 @@
 /*//////////////////////////////////////////////////////*/
 
 import React from 'react';
-import './style/global.scss';
+import './style/main.scss';
 
 import { Routes, Route } from 'react-router-dom';
 

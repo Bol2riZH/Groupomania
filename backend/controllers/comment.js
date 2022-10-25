@@ -57,7 +57,7 @@ exports.likeComment = catchAsync(async (req, res) => {
       }
       return res
         .status(200)
-        .json({ status: 'success', message: 'like removed' });
+        .json({ status: 'success', message: 'like removed', stateLike });
 
     // like //
     case 1:
@@ -70,11 +70,13 @@ exports.likeComment = catchAsync(async (req, res) => {
         return res.status(200).json({
           status: 'success',
           message: 'comment liked',
+          stateLike,
         });
       }
       return res.status(400).json({
         status: 'fail',
         message: 'comment already liked',
+        stateLike,
       });
     default:
       return res.status(400).json({

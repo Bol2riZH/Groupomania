@@ -1,0 +1,44 @@
+@use '../../style/abstracts/colors';
+
+@mixin button($color: colors.$btn-color) {
+  width: fit-content;
+  height: 3rem;
+
+  margin-bottom: 1rem;
+
+  background-color: $color;
+  border: 1px solid colors.$light-mode-black;
+  &:hover {
+    margin-bottom: 1rem;
+    margin-right: 0.1rem;
+  }
+  &:active {
+    margin-left: 0;
+    margin-right: 0;
+    box-shadow: 0 0 5px $color;
+  }
+  & button {
+    padding: 0.5rem;
+
+    background-color: colors.$light-mode-white;
+    border: 1px solid colors.$light-mode-black;
+
+    transform: translate(-0.4rem, -0.6rem);
+    transition: all 100ms ease-in-out;
+    &:hover {
+      color: colors.$light-mode-white;
+      cursor: pointer;
+      transform: translate(0);
+
+      background-color: $color;
+
+      border: none;
+      border-bottom: 1px solid colors.$light-mode-black;
+    }
+    &:active {
+      transform: translate(0.1rem, 0.1rem);
+      background-color: $color;
+      border-right: 1px solid colors.$light-mode-black;
+    }
+  }
+}

@@ -1,13 +1,16 @@
 import React, { useState, useReducer } from 'react';
+
 import {
   LOG_INITIAL_STATE,
   ACTIONS,
   loginReducer,
 } from '../Reducer/loginReducer';
 
+import classes from './LoginForm.module.scss';
 import Input from '../UI/Input';
-import Button from '../UI/Button';
 import Error from '../UI/Error';
+import Button from '../UI/Button';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const LoginForm = (props) => {
   const [state, dispatch] = useReducer(loginReducer, LOG_INITIAL_STATE);
@@ -30,40 +33,57 @@ const LoginForm = (props) => {
 
   return (
     <form onSubmit={submitHandler}>
+      {/*/////////// EMAIL //////////////*/}
+      {!state.isValidEmail ? (
+        <Error className={classes.error}>Veuillez entrer un email valide</Error>
+      ) : (
+        ''
+      )}
       <Input
+        className={classes.input}
         name="email"
-        type="email"
+        type="text"
         htmlFor="email"
         id="email"
-        placeHolder="Email"
+        placeholder="Email"
         value={state.email}
         onChange={loginHandler}
         isValid={state.isValidEmail}
       />
-      {!state.isValidEmail ? (
-        <Error>Veuillez entrer un email valide</Error>
+
+      {/*/////////// PASSWORD //////////////*/}
+      {!state.isValidPassword ? (
+        <Error className={classes.error}>
+          Veuillez entrer un mot de passe valide
+        </Error>
       ) : (
         ''
       )}
       <Input
+        className={`${classes.input} ${classes.passwordLabel}
+        }`}
         name="password"
         type={shown ? 'text' : 'password'}
         htmlFor="password"
         id="password"
-        placeHolder="Mot de passe"
+        placeholder="Mot de passe"
         value={state.password}
         onChange={loginHandler}
         isValid={state.isValidPassword}
+        label={
+          !shown ? (
+            <FaEyeSlash onClick={() => setShown(!shown)} />
+          ) : (
+            <FaEye onClick={() => setShown(!shown)} />
+          )
+        }
       />
-      {!state.isValidPassword ? (
-        <Error>Veuillez entrer un mot de passe valide</Error>
-      ) : (
-        ''
-      )}
-      <button type="button" onClick={() => setShown(!shown)}>
-        voir/cacher
-      </button>
-      <Button type="submit">Connexion</Button>
+      <div className={classes.footer}>
+        <Button className={classes.btnConfirmation} type="submit">
+          CONNEXION
+        </Button>
+        <a onClick={props.onAccountHandler}>Pas encore de compte ?</a>
+      </div>
     </form>
   );
 };

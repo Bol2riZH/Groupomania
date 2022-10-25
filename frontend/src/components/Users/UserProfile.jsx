@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { axiosUser } from '../../data/axios';
 
-import classes from '../../pages/Profile.module.scss';
+import classes from './UserProfile.module.scss';
 import defaultProfilePicture from '../../assets/images/defaultProfilePicture.svg';
 
 const UserProfile = () => {
@@ -9,19 +9,24 @@ const UserProfile = () => {
   const [user, setUser] = useState('');
 
   useEffect(() => {
-    getProfil().catch(console.error);
+    getProfil();
   }, []);
 
   const getProfil = async () => {
-    const res = await axiosUser.get(`${authLog?.id}`);
-    setUser(res.data.user);
+    try {
+      const res = await axiosUser.get(`${authLog?.id}`);
+      setUser(res.data.user);
+      console.log(res.data.user);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
-    <section>
+    <section className={classes.userProfile}>
       <h2>{user.username}</h2>
-      <p>{user.email}</p>
       <div className={classes.img}>
+        <p>{user.email}</p>
         {user.profilePictureUrl ? (
           <img src={user.profilePictureUrl} alt="profil" />
         ) : (

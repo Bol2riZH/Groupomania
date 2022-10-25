@@ -1,16 +1,34 @@
-@import '../../../style/variables';
+@use '../../../style/abstracts/colors';
 
 .userProfile {
+  position: relative;
+  bottom: 5.3rem;
+
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+
+  width: 40%;
+  max-width: 26rem;
+
+  background-color: colors.$light-mode-white;
+  border: 1px dashed colors.$light-mode-black;
+  & h2 {
+    overflow-wrap: break-word;
+    font-size: 2rem;
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
+    padding-top: 1rem;
+  }
   & .img {
-    width: 7rem;
-    height: 7rem;
+    max-width: 25rem;
+    margin: 1rem;
+    background-color: colors.$light-mode-white;
     & img {
-      border-radius: 50%;
       object-fit: cover;
       width: 100%;
       height: 100%;
+
+      padding: 0.5rem;
     }
   }
 }

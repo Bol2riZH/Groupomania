@@ -1,4 +1,9 @@
+@use '../style/abstracts/mediaqueries';
+
 .posts {
-  margin: 0 auto;
-  width: 70%;
+  @include mediaqueries.medium {
+    margin: 0 auto;
+    width: 70%;
+  }
+  max-width: 1440px;
 }

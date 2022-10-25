@@ -6,6 +6,7 @@ import { axiosPost } from '../../../data/axios';
 
 import Button from '../../UI/Button';
 import ConfirmModal from '../../UI/ConfirmModal';
+import { FaTrash } from 'react-icons/fa';
 
 const DeletePost = (props) => {
   const { ...auth } = useAuthContext();
@@ -39,14 +40,12 @@ const DeletePost = (props) => {
       {confirm && (
         <ConfirmModal
           title="Suppression"
-          message="Voulez-vous vraiment supprimer votre message ?"
+          message="Supprimer votre message ?"
           onConfirm={deleteHandler}
           onCancel={onCancel}
         />
       )}
-      <Button className={classes.btnDelete} onClick={confirmModalHandler}>
-        Supprimer
-      </Button>
+      <FaTrash className={classes.delete} onClick={confirmModalHandler} />
     </>
   );
 };

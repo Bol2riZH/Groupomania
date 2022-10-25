@@ -6,6 +6,7 @@ import { axiosPost } from '../data/axios';
 import Header from '../components/Layout/Header';
 import AddPost from '../components/Posts/Post/AddPost';
 import Post from '../components/Posts/Post/Post';
+import Footer from '../components/Layout/Footer';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
@@ -49,7 +50,7 @@ const Home = () => {
     <>
       <Header />
       <div className={classes.posts}>
-        <AddPost onAddPost={addPostHandler} />
+        {authLog.role !== 'admin' && <AddPost onAddPost={addPostHandler} />}
         <ul>
           {posts
             .sort((a, b) => b.date - a.date)
@@ -64,6 +65,7 @@ const Home = () => {
             ))}
         </ul>
       </div>
+      <Footer />
     </>
   );
 };
