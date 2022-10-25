@@ -6,6 +6,7 @@ import { axiosPost } from '../data/axios';
 import Header from '../components/Layout/Header';
 import AddPost from '../components/Posts/Post/AddPost';
 import Post from '../components/Posts/Post/Post';
+import Footer from '../components/Layout/Footer';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
@@ -64,6 +65,7 @@ const Home = () => {
             ))}
         </ul>
       </div>
+      <Footer />
     </>
   );
 };
