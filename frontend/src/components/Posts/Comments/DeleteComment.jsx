@@ -40,7 +40,7 @@ const DeleteComment = (comment) => {
       {confirm && (
         <ConfirmModal
           title="Suppression"
-          message="Voulez-vous vraiment supprimer votre commentaire ?"
+          message="Supprimer votre commentaire ?"
           onConfirm={deleteHandler}
           onCancel={onCancel}
         />

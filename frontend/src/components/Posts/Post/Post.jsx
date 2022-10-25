@@ -18,7 +18,7 @@ import AddComment from '../Comments/AddComment';
 import LikeComment from '../Comments/LikeComment';
 import DeleteComment from '../Comments/DeleteComment';
 
-const Post = (props, { add }) => {
+const Post = (props) => {
   const { ...auth } = useAuthContext();
 
   const [isEditing, setIsEditing] = useState(false);

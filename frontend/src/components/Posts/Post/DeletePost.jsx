@@ -40,7 +40,7 @@ const DeletePost = (props) => {
       {confirm && (
         <ConfirmModal
           title="Suppression"
-          message="Voulez-vous vraiment supprimer votre message ?"
+          message="Supprimer votre message ?"
           onConfirm={deleteHandler}
           onCancel={onCancel}
         />

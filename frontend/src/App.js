@@ -11,6 +11,7 @@ import Profile from './pages/Profile';
 
 /*/////////////////////////////////////////////*/
 /* TODO:
+        - See how many like on post and comment.... !!!!
     BACKEND:
         - Optimization Post and Comment like
     DESIGN:
