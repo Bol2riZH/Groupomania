@@ -54,10 +54,14 @@ const LikePost = (props) => {
 
   return (
     <div className={classes.like}>
-      {stateLike === 0 || stateLike === undefined ? (
-        <BsSuitHeart className={classes.icon} onClick={likeHandler} />
+      {auth.id !== props.userId && auth.role !== 'admin' ? (
+        stateLike === 0 || stateLike === undefined ? (
+          <BsSuitHeart className={classes.icon} onClick={likeHandler} />
+        ) : (
+          <BsSuitHeartFill className={classes.icon} onClick={likeHandler} />
+        )
       ) : (
-        <BsSuitHeartFill className={classes.icon} onClick={likeHandler} />
+        <BsSuitHeartFill className={classes.iconOnly} />
       )}
       <span>{likePost}</span>
     </div>

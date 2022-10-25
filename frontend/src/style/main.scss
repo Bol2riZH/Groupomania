@@ -15,10 +15,10 @@ html {
 }
 
 body {
-  //background-color: colors.$background;
-  background-color: colors.$quaternary-color;
-  //height: 100vh;
   font-size: 1.6rem;
+  background-color: colors.$background;
+  //background-color: colors.$quaternary-color;
+  //height: 100vh;
   font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

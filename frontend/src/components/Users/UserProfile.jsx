@@ -26,6 +26,7 @@ const UserProfile = () => {
     <section className={classes.userProfile}>
       <h2>{user.username}</h2>
       <div className={classes.img}>
+        <p>{user.email}</p>
         {user.profilePictureUrl ? (
           <img src={user.profilePictureUrl} alt="profil" />
         ) : (

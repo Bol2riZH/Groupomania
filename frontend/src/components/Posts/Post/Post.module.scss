@@ -55,7 +55,7 @@
       margin: 2rem 0;
     }
   }
-  .img {
+  & .img {
     min-width: 100%;
     & img {
       object-fit: cover;
@@ -74,14 +74,14 @@
     text-align: right;
   }
 
-  .icons {
+  & .icons {
     display: flex;
     justify-content: space-between;
     margin-left: 2rem;
     margin-right: 2rem;
     margin-bottom: 5rem;
   }
-  .icon {
+  & .icon {
     font-size: 2.5rem;
     transition: scale 100ms ease-in-out;
     &:hover {
@@ -89,6 +89,17 @@
       scale: 1.3;
     }
   }
+
+  & .iconOnly {
+    font-size: 2.5rem;
+  }
+  & .commentIcons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   & .like {
     display: flex;
     gap: 0.6rem;

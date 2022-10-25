@@ -3,9 +3,15 @@
 @use '../style/abstracts/colors';
 
 .profile {
-  section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 8%;
+  & section {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     & .btnPosition {
       display: flex;

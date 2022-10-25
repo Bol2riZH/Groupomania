@@ -4,7 +4,7 @@
   & h2 {
     position: relative;
     rotate: -20deg;
-    top: 2.3rem;
+    top: 3rem;
     right: 13rem;
 
     width: fit-content;
@@ -14,6 +14,11 @@
 
     border: 2px dashed colors.$light-mode-black;
     background-color: colors.$light-mode-white;
+  }
+  & p {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-align: right;
   }
   & .img {
     width: 50rem;

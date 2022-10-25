@@ -98,9 +98,7 @@ const Post = (props) => {
               className={classes.icon}
               onClick={commentHandler}
             />
-            {auth.id !== props.userId && auth.role !== 'admin' && (
-              <LikePost {...props} />
-            )}
+            <LikePost {...props} />
           </div>
         )}
         <section>
@@ -115,17 +113,19 @@ const Post = (props) => {
                       <p>{comment.comment}</p>
                       <time>{comment.postedTime}</time>
                     </div>
-                    {auth.id === comment.userId || auth.role === 'admin' ? (
-                      <DeleteComment
-                        {...comment}
-                        onDeleteComment={getCommentHandler}
-                      />
-                    ) : (
+                    <div className={classes.commentIcons}>
                       <LikeComment
                         onLikeComment={getCommentHandler}
                         {...comment}
                       />
-                    )}
+                      {(auth.id === comment.userId ||
+                        auth.role === 'admin') && (
+                        <DeleteComment
+                          {...comment}
+                          onDeleteComment={getCommentHandler}
+                        />
+                      )}
+                    </div>
                   </li>
                 ))}
           </ul>

@@ -58,10 +58,14 @@ const LikeComment = (comment) => {
 
   return (
     <div className={classes.like}>
-      {stateLike === 0 || stateLike === undefined ? (
-        <BsSuitHeart className={classes.icon} onClick={likeHandler} />
+      {auth.id !== comment.userId && auth.role !== 'admin' ? (
+        stateLike === 0 || stateLike === undefined ? (
+          <BsSuitHeart className={classes.icon} onClick={likeHandler} />
+        ) : (
+          <BsSuitHeartFill className={classes.icon} onClick={likeHandler} />
+        )
       ) : (
-        <BsSuitHeartFill className={classes.icon} onClick={likeHandler} />
+        <BsSuitHeartFill className={classes.iconOnly} />
       )}
       <span>{likeComment}</span>
     </div>
