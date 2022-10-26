@@ -5,6 +5,8 @@
   gap: 0.6rem;
   height: fit-content;
   & .icon {
+    color: colors.$secondary-color;
+
     font-size: 2.5rem;
     transition: scale 100ms ease-in-out;
     &:hover {
@@ -13,6 +15,7 @@
     }
   }
   & .iconComment {
+    color: colors.$secondary-color;
     font-size: 1.8rem;
     transition: scale 100ms ease-in-out;
 
@@ -22,17 +25,16 @@
     }
   }
   & .iconOnly {
-    color: colors.$secondary-color;
     font-size: 2.5rem;
   }
 
   & .iconOnlyComment {
-    color: colors.$secondary-color;
     font-size: 1.8rem;
   }
 
   & span {
     font-size: 1.6rem;
+    font-weight: 900;
     align-items: center;
   }
 }

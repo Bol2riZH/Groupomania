@@ -70,6 +70,26 @@ const EditPost = (edit) => {
 
   return (
     <section className={classes.post}>
+      <label htmlFor="editImage">
+        {imageUrl ? (
+          <>
+            <ImCross onClick={deletePostPicture} className={classes.cross} />
+            <div className={classes.image}>
+              <img src={URL.createObjectURL(imageUrl)} alt="post" />
+            </div>
+          </>
+        ) : (
+          <FaCameraRetro className={classes.faCamera} />
+        )}
+      </label>
+      <input
+        id="editImage"
+        className={classes.upload}
+        type="file"
+        onChange={(e) => {
+          setImageUrl(e.target.files[0]);
+        }}
+      />
       <Input
         className={classes.input}
         name="title"
@@ -78,35 +98,6 @@ const EditPost = (edit) => {
         onChange={inputHandler}
         isValid={state.isValidTitle}
       />
-      {edit.imageUrl ? (
-        <>
-          <ImCross onClick={deletePostPicture} className={classes.cross} />
-          <div className={classes.image}>
-            <img src={edit.imageUrl} alt="message" />
-          </div>
-        </>
-      ) : (
-        <>
-          <label htmlFor="editImage">
-            {imageUrl ? (
-              <div className={classes.image}>
-                <img src={URL.createObjectURL(imageUrl)} alt="post" />
-              </div>
-            ) : (
-              <FaCameraRetro className={classes.faCamera} />
-            )}
-          </label>
-          <input
-            id="editImage"
-            className={classes.upload}
-            type="file"
-            onChange={(e) => {
-              setImageUrl(e.target.files[0]);
-            }}
-          />
-        </>
-      )}
-
       <Textarea
         autoFocus
         name={'post'}
@@ -114,7 +105,6 @@ const EditPost = (edit) => {
         onChange={inputHandler}
         isvalid={state.isValidPost.toString()}
       />
-
       <BsCheckLg
         onClick={confirmEditHandler}
         className={classes.confirmation}

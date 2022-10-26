@@ -51,7 +51,7 @@ const Profile = () => {
 
   return (
     <Card className={classes.profile}>
-      <section>
+      <section className={classes.profileSection}>
         {!isEditing ? (
           <>
             <UserProfile />

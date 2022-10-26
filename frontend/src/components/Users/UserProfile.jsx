@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { axiosUser } from '../../utils/axios';
 
 import classes from './UserProfile.module.scss';
-import defaultProfilePicture from '../../assets/images/defaultProfilePicture.svg';
 
-const UserProfile = () => {
-  const authLog = JSON.parse(localStorage.getItem('auth'));
+import defaultProfilePicture from '../../assets/images/defaultProfilePicture.svg';
+import { useAuthContext } from '../../store/useAuthContext';
+
+const UserProfile = (props) => {
+  const { ...auth } = useAuthContext();
   const [user, setUser] = useState('');
 
   useEffect(() => {
@@ -13,27 +15,35 @@ const UserProfile = () => {
   }, []);
 
   const getProfil = async () => {
+    let getFrom;
+
+    if (props.post || props.comment) getFrom = props.userId;
+    else getFrom = auth.id;
+
     try {
-      const res = await axiosUser.get(`${authLog?.id}`);
+      const res = await axiosUser.get(`${getFrom}`);
       setUser(res.data.user);
-      console.log(res.data.user);
     } catch (err) {
       console.error(err);
     }
   };
 
   return (
-    <section className={classes.userProfile}>
-      <h2>{user.username}</h2>
+    <header
+      className={`${props.post && classes.postUserProfile} ${
+        props.comment && classes.commentUserProfile
+      } ${!props.post && !props.comment && classes.userProfile}`}
+    >
+      {props.comment ? <span>{user.username}</span> : <h2>{user.username}</h2>}
       <div className={classes.img}>
-        <p>{user.email}</p>
+        {!props.post && !props.comment && <p>{user.email}</p>}
         {user.profilePictureUrl ? (
           <img src={user.profilePictureUrl} alt="profil" />
         ) : (
           <img src={defaultProfilePicture} alt="profil" />
         )}
       </div>
-    </section>
+    </header>
   );
 };
 

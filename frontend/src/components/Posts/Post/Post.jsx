@@ -8,13 +8,12 @@ import Card from '../../UI/Card';
 import { RiEdit2Fill, RiArrowGoBackFill } from 'react-icons/ri';
 import { FaRegCommentAlt } from 'react-icons/fa';
 
+import UserProfile from '../../Users/UserProfile';
 import Likes from '../Likes';
 
-import PostUserProfile from './PostUserProfile';
 import EditPost from './EditPost';
 import DeletePost from './DeletePost';
 
-import CommentUserProfile from '../Comments/CommentUserProfile';
 import AddComment from '../Comments/AddComment';
 import DeleteComment from '../Comments/DeleteComment';
 
@@ -50,7 +49,7 @@ const Post = (props) => {
   return (
     <li className={classes.postCard}>
       <header>
-        <PostUserProfile {...props} />
+        <UserProfile {...props} />
         {(auth.id === props.userId || auth.role === 'admin') && (
           <div>
             {!isEditing ? (
@@ -108,7 +107,7 @@ const Post = (props) => {
                 .sort((a, b) => b.date - a.date)
                 .map((comment) => (
                   <li key={comment._id} className={classes.commentCard}>
-                    <CommentUserProfile {...comment} />
+                    <UserProfile {...comment} />
                     <div className={classes.comment}>
                       <p>{comment.comment}</p>
                       <time>{comment.postedTime}</time>

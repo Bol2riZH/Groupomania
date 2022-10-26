@@ -14,9 +14,9 @@
 }
 
 .errorMain {
+  z-index: 3;
   @include error.error(2rem, 2rem);
   padding: 0.5rem;
-  z-index: 3;
   border: 1px solid colors.$error-color;
   background-color: lighten(colors.$error-color, 50);
 }
@@ -30,12 +30,13 @@
   display: flex;
   flex-direction: column;
 
-  border-top: 2px dashed colors.$light-mode-white;
-  border-bottom: 2px dashed colors.$light-mode-white;
+  border-top: 2px dashed colors.$light-mode-black;
+  border-bottom: 2px dashed colors.$light-mode-black;
+  background-color: lighten(colors.$quaternary-color, 30);
+
   @include mediaqueries.medium {
-    border: 2px dashed colors.$light-mode-white;
+    border: 2px dashed colors.$light-mode-black;
   }
-  background-color: colors.$newPost;
   & h2 {
     position: relative;
     bottom: 3rem;
@@ -46,18 +47,15 @@
     padding: 2rem;
     width: fit-content;
 
-    border: 2px dashed colors.$light-mode-white;
+    border: 2px dashed colors.$light-mode-black;
     border-radius: 3px;
 
-    background-color: colors.$newPost;
-    color: colors.$light-mode-white;
+    background-color: lighten(colors.$quaternary-color, 40);
+
+    color: colors.$light-mode-black;
   }
   & .title {
-    @include input.inputForm(
-      colors.$light-mode-black,
-      colors.$light-mode-white,
-      colors.$quaternary-color
-    );
+    @include input.inputForm();
     align-self: center;
     width: 70%;
   }
@@ -70,6 +68,8 @@
     padding: 5% 8%;
 
     border-bottom: 1px dashed colors.$light-mode-black;
+    background-color: lighten(colors.$quaternary-color, 40);
+
     @include mediaqueries.medium {
       border-right: 1px dashed colors.$light-mode-black;
       border-left: 1px dashed colors.$light-mode-black;

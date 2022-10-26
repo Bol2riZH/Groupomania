@@ -7,14 +7,13 @@
   border-radius: 50%;
   box-shadow: 5px 5px colors.$light-mode-white;
   @include mediaqueries.medium {
-    margin: 0 10rem;
-    max-width: 900px;
+    max-width: 70rem;
   }
   & h2 {
     position: relative;
     rotate: -20deg;
-    top: 4rem;
-    right: 16rem;
+    top: 5rem;
+    left: 5rem;
 
     width: fit-content;
 
@@ -37,10 +36,6 @@
     height: 50rem;
     margin-bottom: 5rem;
 
-    @include mediaqueries.medium {
-      max-width: 70rem;
-    }
-
     & img {
       background-color: colors.$light-mode-white;
       object-fit: cover;
@@ -55,6 +50,54 @@
       @include mediaqueries.medium {
         border: 2px dashed colors.$light-mode-black;
       }
+    }
+  }
+}
+
+.postUserProfile {
+  position: relative;
+  bottom: 5.3rem;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 40%;
+  max-width: 15rem;
+
+  background-color: colors.$light-mode-white;
+  border: 1px dashed colors.$light-mode-black;
+  > h2 {
+    overflow-wrap: break-word;
+    font-size: 2rem;
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
+    padding-top: 1rem;
+  }
+  > .img {
+    max-width: 25rem;
+    margin: 1rem;
+    background-color: colors.$light-mode-white;
+    > img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+
+      padding: 0.5rem;
+    }
+  }
+}
+
+.commentUserProfile {
+  > span {
+    font-size: 1.2rem;
+  }
+  > .img {
+    width: 5rem;
+    margin-top: 0.3rem;
+    > img {
+      object-fit: cover;
+      width: 100%;
+      max-height: 5rem;
     }
   }
 }

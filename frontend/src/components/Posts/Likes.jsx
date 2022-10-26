@@ -28,7 +28,6 @@ const Likes = (props) => {
 
   const likeHandler = async () => {
     const stateLike = props.usersLiked.find((userId) => userId === auth.id);
-    console.log(stateLike);
 
     let sendTo;
     if (props.post) sendTo = axiosPost;
@@ -47,9 +46,8 @@ const Likes = (props) => {
           },
         }
       );
-
       console.log(res.data);
-      console.log(res.data.stateLike);
+
       !stateLike ? setLikes(+props.likes + 1) : setLikes(+props.likes - 1);
       props.onLike();
       setStateLike(res.data.stateLike);

@@ -11,9 +11,7 @@ import Profile from './pages/Profile';
 /*/////////////////////////////////////////////*/
 /* TODO:
     MODAL keyframe
-    CORRECT HORIZONTAL SCROLL BAR
     CLEAN LOG
-    REFACTORING ???
  */
 /*/ ////////////////////////////////////////////*/
 
@@ -30,7 +28,14 @@ const App = () => {
             </AuthContextProvider>
           }
         />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/profile"
+          element={
+            <AuthContextProvider>
+              <Profile />
+            </AuthContextProvider>
+          }
+        />
       </Routes>
     </>
   );
