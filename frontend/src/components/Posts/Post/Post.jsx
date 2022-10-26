@@ -8,14 +8,14 @@ import Card from '../../UI/Card';
 import { RiEdit2Fill, RiArrowGoBackFill } from 'react-icons/ri';
 import { FaRegCommentAlt } from 'react-icons/fa';
 
+import Likes from '../Likes';
+
 import PostUserProfile from './PostUserProfile';
 import EditPost from './EditPost';
-import LikePost from './LikePost';
 import DeletePost from './DeletePost';
 
 import CommentUserProfile from '../Comments/CommentUserProfile';
 import AddComment from '../Comments/AddComment';
-import LikeComment from '../Comments/LikeComment';
 import DeleteComment from '../Comments/DeleteComment';
 
 const Post = (props) => {
@@ -98,7 +98,7 @@ const Post = (props) => {
               className={classes.icon}
               onClick={commentHandler}
             />
-            <LikePost {...props} />
+            <Likes {...props} />
           </div>
         )}
         <section>
@@ -114,10 +114,7 @@ const Post = (props) => {
                       <time>{comment.postedTime}</time>
                     </div>
                     <div className={classes.commentIcons}>
-                      <LikeComment
-                        onLikeComment={getCommentHandler}
-                        {...comment}
-                      />
+                      <Likes {...comment} onLike={getCommentHandler} />
                       {(auth.id === comment.userId ||
                         auth.role === 'admin') && (
                         <DeleteComment

@@ -50,7 +50,7 @@ const Home = () => {
     <>
       <Header />
       <div className={classes.posts}>
-        {authLog.role !== 'admin' && <AddPost onAddPost={addPostHandler} />}
+        {authLog?.role !== 'admin' && <AddPost onAddPost={addPostHandler} />}
         <ul>
           {posts
             .sort((a, b) => b.date - a.date)
@@ -58,7 +58,7 @@ const Home = () => {
               <Post
                 key={post._id}
                 {...post}
-                onLikePost={getPostHandler}
+                onLike={getPostHandler}
                 onDeletePost={getPostHandler}
                 onEditPost={getPostHandler}
               />

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useAuthContext } from '../../../store/useAuthContext';
+import { useAuthContext } from '../../store/useAuthContext';
 
-import { axiosPost } from '../../../utils/axios';
+import { axiosPost, axiosComment } from '../../utils/axios';
 
-import classes from './Post.module.scss';
+import classes from './Likes.module.scss';
 import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';
 
-const LikePost = (props) => {
+const Likes = (props) => {
   const { ...auth } = useAuthContext();
 
-  const [likePost, setLikePost] = useState(+props.likes);
+  const [likes, setLikes] = useState(+props.likes);
   const [stateLike, setStateLike] = useState(
     props.usersLiked.find((userId) => userId === auth.id)
   );
@@ -28,9 +28,15 @@ const LikePost = (props) => {
 
   const likeHandler = async () => {
     const stateLike = props.usersLiked.find((userId) => userId === auth.id);
+    console.log(stateLike);
+
+    let sendTo;
+    if (props.post) sendTo = axiosPost;
+    if (props.comment) sendTo = axiosComment;
+
     try {
-      const res = await axiosPost.post(
-        `notice/${props._id}`,
+      const res = await sendTo.post(
+        `like/${props._id}`,
         {
           like: stateLike ? 0 : 1,
         },
@@ -41,12 +47,12 @@ const LikePost = (props) => {
           },
         }
       );
+
       console.log(res.data);
-      !stateLike
-        ? setLikePost(+props.likes + 1)
-        : setLikePost(+props.likes - 1);
+      console.log(res.data.stateLike);
+      !stateLike ? setLikes(+props.likes + 1) : setLikes(+props.likes - 1);
+      props.onLike();
       setStateLike(res.data.stateLike);
-      props.onLikePost();
     } catch (err) {
       console.error(err);
     }
@@ -56,16 +62,24 @@ const LikePost = (props) => {
     <div className={classes.like}>
       {auth.id !== props.userId && auth.role !== 'admin' ? (
         stateLike === 0 || stateLike === undefined ? (
-          <BsSuitHeart className={classes.icon} onClick={likeHandler} />
+          <BsSuitHeart
+            className={props.post ? classes.icon : classes.iconComment}
+            onClick={likeHandler}
+          />
         ) : (
-          <BsSuitHeartFill className={classes.icon} onClick={likeHandler} />
+          <BsSuitHeartFill
+            className={props.post ? classes.icon : classes.iconComment}
+            onClick={likeHandler}
+          />
         )
       ) : (
-        <BsSuitHeartFill className={classes.iconOnly} />
+        <BsSuitHeartFill
+          className={props.post ? classes.iconOnly : classes.iconOnlyComment}
+        />
       )}
-      <span>{likePost}</span>
+      <span>{likes}</span>
     </div>
   );
 };
 
-export default LikePost;
+export default Likes;

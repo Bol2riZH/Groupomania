@@ -90,35 +90,12 @@
     margin-right: 2rem;
     margin-bottom: 5rem;
   }
-  & .icon {
-    font-size: 2.5rem;
-    transition: scale 100ms ease-in-out;
-    &:hover {
-      cursor: pointer;
-      scale: 1.3;
-    }
-  }
-
-  & .iconOnly {
-    color: colors.$secondary-color;
-    font-size: 2.5rem;
-  }
   & .commentIcons {
     color: colors.$background;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-  }
-
-  & .like {
-    display: flex;
-    gap: 0.6rem;
-    height: fit-content;
-    & span {
-      font-size: 1.6rem;
-      align-items: center;
-    }
   }
   & footer {
     & time {
@@ -127,7 +104,6 @@
     }
   }
 }
-
 .commentCard {
   animation: popup 350ms ease-in-out;
 

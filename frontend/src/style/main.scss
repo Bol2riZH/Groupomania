@@ -1,6 +1,7 @@
 @use 'base/reset';
 @use 'base/normalize';
 @use 'abstracts/colors';
+@use 'abstracts/mediaqueries';
 
 *,
 *:before,
@@ -14,9 +15,11 @@ html {
 }
 
 body {
-  min-height: 100vh;
   background-image: url('../assets/images/BG-memphis.png');
   background-size: cover;
+  @include mediaqueries.small {
+    background-size: 100%;
+  }
 
   font-size: 1.6rem;
   font-family: 'Lato', sans-serif;

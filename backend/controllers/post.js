@@ -86,7 +86,7 @@ exports.removePostImage = catchAsync(async (req, res) => {
 
 /*/////////////////////////////////////////////*/
 /*///////////////// NOTICE ///////////////////*/
-exports.noticePost = catchAsync(async (req, res) => {
+exports.likePost = catchAsync(async (req, res) => {
   await likeHandler(req, res, Post);
 });
 
