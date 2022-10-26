@@ -4,7 +4,7 @@ import classes from './DeleteComment.module.scss';
 import { axiosComment } from '../../../data/axios';
 
 import Button from '../../UI/Button';
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useAuthContext } from '../../../store/useAuthContext';
 import ConfirmModal from '../../UI/ConfirmModal';
 import { FaTrash } from 'react-icons/fa';
 

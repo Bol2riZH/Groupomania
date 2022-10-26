@@ -100,7 +100,7 @@ const Login = () => {
             </div>
 
             {!isValid && (
-              <Error className={classes.error}>
+              <Error className={classes.errorMain}>
                 Nom utilisateur ou adresse email déjà utilisées
               </Error>
             )}

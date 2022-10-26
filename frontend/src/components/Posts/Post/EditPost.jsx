@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from 'react';
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useAuthContext } from '../../../store/useAuthContext';
 
 import { axiosPost } from '../../../data/axios';
 

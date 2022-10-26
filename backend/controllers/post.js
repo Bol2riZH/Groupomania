@@ -5,6 +5,7 @@ const Comment = require('../models/Comment');
 
 const catchAsync = require('../utils/catchAsync');
 const postedTime = require('../utils/postedTime');
+const { likeHandler } = require('../utils/likesHandler');
 
 const { findAndUnlinkPostImage } = require('../utils/findAndUnlinkImage');
 const {
@@ -92,85 +93,10 @@ exports.removePostImage = catchAsync(async (req, res) => {
 /*/////////////////////////////////////////////*/
 /*///////////////// NOTICE ///////////////////*/
 exports.noticePost = catchAsync(async (req, res) => {
-  const stateLike = +req.body.like;
-  const postToNoticed = await Post.findById(req.params.id);
-
-  // Control if the user already noticed the post //
-  const indexOfUserLike = controlUserLiked(postToNoticed, req);
-  const indexOfUserDislike = controlUserDisliked(postToNoticed, req);
-  const userLikes = controlUserLikes(postToNoticed, req);
-  const userDislikes = controlUserDislikes(postToNoticed, req);
-
-  switch (stateLike) {
-    // remove notice //
-    case 0:
-      if (indexOfUserLike !== false) {
-        await Post.findByIdAndUpdate(req.params.id, {
-          ...postToNoticed,
-          likes: postToNoticed.likes--,
-          usersLiked: postToNoticed.usersLiked.splice(indexOfUserLike, 1),
-        });
-      }
-      if (indexOfUserDislike !== false) {
-        await Post.findByIdAndUpdate(req.params.id, {
-          ...postToNoticed,
-          dislikes: postToNoticed.dislikes--,
-          usersDisliked: postToNoticed.usersDisliked.splice(
-            indexOfUserDislike,
-            1
-          ),
-        });
-      }
-      return res
-        .status(200)
-        .json({ status: 'success', message: 'notice removed', stateLike });
-
-    // like //
-    case 1:
-      if (!userLikes && !userDislikes) {
-        await Post.findByIdAndUpdate(req.params.id, {
-          ...postToNoticed,
-          likes: postToNoticed.likes++,
-          usersLiked: postToNoticed.usersLiked.push(req.auth.userId),
-        });
-        return res.status(200).json({
-          status: 'success',
-          message: 'post liked',
-          stateLike,
-        });
-      }
-      return res.status(400).json({
-        status: 'fail',
-        message: 'post already liked',
-        stateLike,
-      });
-
-    // dislike //
-    case -1:
-      if (!userDislikes && !userLikes) {
-        await Post.findByIdAndUpdate(req.params.id, {
-          ...postToNoticed,
-          dislikes: postToNoticed.dislikes++,
-          usersDisliked: postToNoticed.usersDisliked.push(req.auth.userId),
-        });
-        return res.status(400).json({
-          status: 'success',
-          message: 'post disliked',
-        });
-      }
-      return res.status(400).json({
-        status: 'fail',
-        message: 'post already disliked',
-      });
-    default:
-      return res.status(400).json({
-        status: 'fail',
-        message: 'bad request',
-      });
-  }
+  await likeHandler(req, res, Post);
 });
 
-/*//////////////////////////////////////////////////////////////////*/
+/*/ /////////////////////////////////////////////////////////////////*/
 /*///////////////// SEARCH BY USERNAME OR TITLE ///////////////////*/
 exports.searchPost = catchAsync(async (req, res) => {
   const post = await Post.find({

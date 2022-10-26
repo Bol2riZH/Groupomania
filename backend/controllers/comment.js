@@ -4,6 +4,7 @@ const Comment = require('../models/Comment');
 
 const catchAsync = require('../utils/catchAsync');
 const postedTime = require('../utils/postedTime');
+const { likeHandler } = require('../utils/likesHandler');
 const {
   controlUserLiked,
   controlUserLikes,
@@ -38,52 +39,7 @@ exports.getPostComments = catchAsync(async (req, res) => {
 /*///////////////////////////////////////////*/
 /*///////////////// LIKE ///////////////////*/
 exports.likeComment = catchAsync(async (req, res) => {
-  const stateLike = +req.body.like;
-  const commentToLike = await Comment.findById(req.params.id);
-
-  // Control if the user already liked the comment //
-  const indexOfUserLike = controlUserLiked(commentToLike, req);
-  const userLikes = controlUserLikes(commentToLike, req);
-
-  switch (stateLike) {
-    // remove like //
-    case 0:
-      if (indexOfUserLike !== false) {
-        await Comment.findByIdAndUpdate(req.params.id, {
-          ...commentToLike,
-          likes: commentToLike.likes--,
-          usersLiked: commentToLike.usersLiked.splice(indexOfUserLike, 1),
-        });
-      }
-      return res
-        .status(200)
-        .json({ status: 'success', message: 'like removed', stateLike });
-
-    // like //
-    case 1:
-      if (!userLikes) {
-        await Comment.findByIdAndUpdate(req.params.id, {
-          ...commentToLike,
-          likes: commentToLike.likes++,
-          usersLiked: commentToLike.usersLiked.push(req.auth.userId),
-        });
-        return res.status(200).json({
-          status: 'success',
-          message: 'comment liked',
-          stateLike,
-        });
-      }
-      return res.status(400).json({
-        status: 'fail',
-        message: 'comment already liked',
-        stateLike,
-      });
-    default:
-      return res.status(400).json({
-        status: 'fail',
-        message: 'bad request',
-      });
-  }
+  await likeHandler(req, res, Comment);
 });
 
 /*/////////////////////////////////////////////*/

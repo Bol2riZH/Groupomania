@@ -12,20 +12,20 @@
 }
 
 .layout {
-  h1 {
+  margin-bottom: 15rem;
+  & h1 {
+    animation: title-animation 1s ease-in-out alternate-reverse infinite;
+
     font-size: 4rem;
     font-weight: 900;
     color: colors.$light-mode-white;
 
     margin-left: 2.5rem;
     margin-bottom: 15rem;
-
-    animation: title-animation 1s ease-in-out alternate-reverse infinite;
   }
-  display: flex;
-  flex-direction: column;
 
-  .form {
+  & .form {
+    width: 100%;
     padding: 2.5rem 5rem;
     border-top: 1px dashed black;
     border-bottom: 1px dashed black;
@@ -63,9 +63,3 @@
     background: white;
   }
 }
-
-// media query //
-//.form {
-//  width: 50rem;
-//  height: 53.5rem;
-//}

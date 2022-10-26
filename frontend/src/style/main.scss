@@ -14,6 +14,7 @@ html {
 }
 
 body {
+  min-height: 100vh;
   background-image: url('../assets/images/BG-memphis.png');
   background-size: cover;
 
@@ -33,9 +34,4 @@ input {
     z-index: -1;
     position: absolute;
   }
-}
-
-form {
-  display: flex;
-  flex-direction: column;
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useAuthContext } from '../../../store/useAuthContext';
 import classes from './DeletePost.module.scss';
 
 import { axiosPost } from '../../../data/axios';

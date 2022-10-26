@@ -10,9 +10,12 @@ import Profile from './pages/Profile';
 
 /*/////////////////////////////////////////////*/
 /* TODO:
+    CORRECT HORIZONTAL SCROLL BAR
     BACKEND:
         - Optimization Post and Comment like
     CLEAN LOG
+    REFACTORING ???
+    Variable d'environnement ?
  */
 /*/ ////////////////////////////////////////////*/
 
