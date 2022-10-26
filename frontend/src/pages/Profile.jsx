@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { axiosUser } from '../data/axios';
+import { axiosUser } from '../utils/axios';
 
 import UserProfile from '../components/Users/UserProfile';
 import UpdateUserProfile from '../components/Users/UpdateUserProfile';
@@ -33,7 +33,7 @@ const Profile = () => {
       const res = await axiosUser.put(`/update/${authLog.id}`, updateUserInfo, {
         headers: {
           Authorization: `Bearer ${authLog.token}`,
-          'content-type': 'multipart/form-data',
+          'content-type': 'multipart/form-utils',
         },
       });
       console.log(res.data);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuthContext } from '../../../store/useAuthContext';
 
-import { axiosComment } from '../../../data/axios';
+import { axiosComment } from '../../../utils/axios';
 
 import classes from './AddComment.module.scss';
 import Input from '../../UI/Input';

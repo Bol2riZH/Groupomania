@@ -8,12 +8,6 @@ const postedTime = require('../utils/postedTime');
 const { likeHandler } = require('../utils/likesHandler');
 
 const { findAndUnlinkPostImage } = require('../utils/findAndUnlinkImage');
-const {
-  controlUserLiked,
-  controlUserDisliked,
-  controlUserLikes,
-  controlUserDislikes,
-} = require('../utils/controlUserPostNotice');
 
 /*//////////////////////////////////////////*/
 /*///////////////// ADD ///////////////////*/

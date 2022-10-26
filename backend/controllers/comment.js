@@ -5,11 +5,6 @@ const Comment = require('../models/Comment');
 const catchAsync = require('../utils/catchAsync');
 const postedTime = require('../utils/postedTime');
 const { likeHandler } = require('../utils/likesHandler');
-const {
-  controlUserLiked,
-  controlUserLikes,
-} = require('../utils/controlUserPostNotice');
-const Post = require('../models/Post');
 
 /*//////////////////////////////////////////*/
 /*///////////////// ADD ///////////////////*/

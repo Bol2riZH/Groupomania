@@ -4,7 +4,7 @@ import {
   USER_INITIAL_STATE,
   signupReducer,
 } from '../Reducer/signupReducer';
-import { formData } from '../../data/formData';
+import { formData } from '../../utils/formData';
 
 import classes from './SignupForm.module.scss';
 import Input from '../UI/Input';

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthContext } from '../../../store/useAuthContext';
 
-import { axiosComment } from '../../../data/axios';
+import { axiosComment } from '../../../utils/axios';
 
 import classes from './Post.module.scss';
 import Card from '../../UI/Card';

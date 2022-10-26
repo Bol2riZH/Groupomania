@@ -38,7 +38,7 @@ const UpdateUser = () => {
       {
         headers: {
           Authorization: `Bearer ${id.token}`,
-          'content-type': 'multipart/form-data',
+          'content-type': 'multipart/form-utils',
         },
       }
     );

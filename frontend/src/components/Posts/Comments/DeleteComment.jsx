@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classes from './DeleteComment.module.scss';
 
-import { axiosComment } from '../../../data/axios';
+import { axiosComment } from '../../../utils/axios';
 
 import Button from '../../UI/Button';
 import { useAuthContext } from '../../../store/useAuthContext';

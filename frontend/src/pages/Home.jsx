@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import classes from './Home.module.scss';
 
-import { axiosPost } from '../data/axios';
+import { axiosPost } from '../utils/axios';
 
 import Header from '../components/Layout/Header';
 import AddPost from '../components/Posts/Post/AddPost';
@@ -36,7 +36,7 @@ const Home = () => {
       const res = await axiosPost.post('/', postData, {
         headers: {
           Authorization: `Bearer ${authLog.token}`,
-          'content-type': 'multipart/form-data',
+          'content-type': 'multipart/form-utils',
         },
       });
       console.log(res.data);

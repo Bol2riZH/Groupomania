@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import classes from './Login.module.scss';
 
-import { axiosUser } from '../data/axios';
+import { axiosUser } from '../utils/axios';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -61,7 +61,7 @@ const Login = () => {
     try {
       const res = await axiosUser.post(`/signup`, userInfo, {
         headers: {
-          'content-type': 'multipart/form-data',
+          'content-type': 'multipart/form-utils',
         },
       });
       console.log(res.data);

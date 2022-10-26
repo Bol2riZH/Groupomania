@@ -57,7 +57,7 @@ const ListOfPosts = () => {
       const data = await fetchDataToDelete(post._id, userId).catch(
         console.error
       );
-      // forbidden ? not refreshing data //
+      // forbidden ? not refreshing utils //
       data !== undefined && setDeletePost(true);
     } else console.log('Forbidden');
   };
@@ -78,7 +78,7 @@ const ListOfPosts = () => {
       );
       setIsEditing(false);
 
-      // forbidden ? not refreshing data //
+      // forbidden ? not refreshing utils //
       data !== undefined && setDeletePost(true);
     } else console.log('Forbidden');
   };

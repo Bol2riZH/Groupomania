@@ -9,7 +9,7 @@ import classes from './UpdateUserProfile.module.scss';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 
-import { formData } from '../../data/formData';
+import { formData } from '../../utils/formData';
 import Error from '../UI/Error';
 import { FaGithubAlt } from 'react-icons/fa';
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthContext } from '../../../store/useAuthContext';
 
-import { axiosPost } from '../../../data/axios';
+import { axiosPost } from '../../../utils/axios';
 
 import classes from './Post.module.scss';
 import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs';

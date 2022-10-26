@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuthContext } from '../../../store/useAuthContext';
 import classes from './DeletePost.module.scss';
 
-import { axiosPost } from '../../../data/axios';
+import { axiosPost } from '../../../utils/axios';
 
 import Button from '../../UI/Button';
 import ConfirmModal from '../../UI/ConfirmModal';

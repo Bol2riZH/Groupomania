@@ -26,7 +26,7 @@ const AddPost = () => {
     const res = await axios.post('http://localhost:4000/api/posts', data, {
       headers: {
         Authorization: `Bearer ${id.token}`,
-        'content-type': 'multipart/form-data',
+        'content-type': 'multipart/form-utils',
       },
     });
     console.log(res.data);

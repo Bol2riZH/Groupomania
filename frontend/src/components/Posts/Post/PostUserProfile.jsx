@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import classes from './PostUserProfile.module.scss';
 
-import { axiosUser } from '../../../data/axios';
+import { axiosUser } from '../../../utils/axios';
 
 import defaultProfilePicture from '../../../assets/images/defaultProfilePicture.svg';
 

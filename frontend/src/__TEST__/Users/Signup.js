@@ -37,7 +37,7 @@ const Signup = () => {
       data,
       {
         headers: {
-          'content-type': 'multipart/form-data',
+          'content-type': 'multipart/form-utils',
         },
       }
     );

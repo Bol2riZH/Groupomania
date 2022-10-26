@@ -1,14 +1,14 @@
 import React, { useReducer, useState } from 'react';
 import { useAuthContext } from '../../../store/useAuthContext';
 
-import { axiosPost } from '../../../data/axios';
+import { axiosPost } from '../../../utils/axios';
 
 import {
   ACTIONS,
   postReducer,
   POST_INITIAL_STATE,
 } from '../../Reducer/postReducer';
-import { formData, formEditData } from '../../../data/formData';
+import { formData, formEditData } from '../../../utils/formData';
 
 import classes from './EditPost.module.scss';
 import Input from '../../UI/Input';
@@ -40,7 +40,7 @@ const EditPost = (edit) => {
       const res = await axiosPost.put(`${edit._id}`, editData, {
         headers: {
           Authorization: `Bearer ${auth.token}`,
-          'content-type': 'multipart/form-data',
+          'content-type': 'multipart/form-utils',
         },
       });
       console.log(res.data);
@@ -57,7 +57,7 @@ const EditPost = (edit) => {
       const res = await axiosPost.put(`remove-image/${edit._id}`, editData, {
         headers: {
           Authorization: `Bearer ${auth.token}`,
-          'content-type': 'multipart/form-data',
+          'content-type': 'multipart/form-utils',
         },
       });
       console.log(res.data);

@@ -7,7 +7,7 @@ import {
   POST_INITIAL_STATE,
   postReducer,
 } from '../../Reducer/postReducer';
-import { formData } from '../../../data/formData';
+import { formData } from '../../../utils/formData';
 
 import classes from './AddPost.module.scss';
 import Card from '../../UI/Card';
