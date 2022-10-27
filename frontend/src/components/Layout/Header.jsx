@@ -48,19 +48,18 @@ const Header = () => {
   return (
     <header className={classes.header}>
       <div className={classes.icons}>
-        {/*<h1>Groupomania</h1>*/}
         <img src={logo} alt="logo" />
         <div className={classes.user}>
-          <a className={classes.profilePicture} onClick={onProfileHandler}>
+          <div className={classes.profilePicture} onClick={onProfileHandler}>
             {profilePicture ? (
               <img src={profilePicture} alt="profil" />
             ) : (
               <img src={defaultProfilePicture} alt="profil" />
             )}
-          </a>
-          <a onClick={logoutHandler}>
+          </div>
+          <div className={classes.logout} onClick={logoutHandler}>
             <MdLogout />
-          </a>
+          </div>
         </div>
       </div>
     </header>

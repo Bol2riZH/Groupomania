@@ -18,7 +18,7 @@ const Home = () => {
   useEffect(() => {
     !authLog && navigate('/');
     getPostHandler();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getPostHandler = async () => {
     try {

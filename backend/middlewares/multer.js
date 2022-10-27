@@ -27,9 +27,6 @@ const storage = (destination) => {
   });
 };
 
-/*////////////////////////////////////*/
-/*TODO : process.env.xxx doesn't work*/
-/*//////////////////////////////////*/
 exports.profilePictureMulter = multer({
   storage: storage('profilePictures'),
   limits: { fileSize: 1000000 },

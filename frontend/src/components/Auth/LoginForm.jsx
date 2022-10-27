@@ -82,7 +82,7 @@ const LoginForm = (props) => {
         <Button className={classes.btnConfirmation} type="submit">
           CONNEXION
         </Button>
-        <a onClick={props.onAccountHandler}>Pas encore de compte ?</a>
+        <span onClick={props.onAccountHandler}>Pas encore de compte ?</span>
       </div>
     </form>
   );

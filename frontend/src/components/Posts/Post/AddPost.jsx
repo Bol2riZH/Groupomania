@@ -10,7 +10,6 @@ import {
 import { formData } from '../../../utils/formData';
 
 import classes from './AddPost.module.scss';
-import Card from '../../UI/Card';
 import Input from '../../UI/Input';
 import Textarea from '../../UI/Textarea';
 import Error from '../../UI/Error';
@@ -94,7 +93,7 @@ const AddPost = (add) => {
         />
       </header>
       <div className={classes.container}>
-        <Card className={`${classes.postCard} ${!isEditing && classes.hidden}`}>
+        <div className={`${classes.postCard} ${!isEditing && classes.hidden}`}>
           <Input
             className={classes.upload}
             name="imageUrl"
@@ -134,7 +133,7 @@ const AddPost = (add) => {
           <button type="submit" className={classes.btnHidden}>
             <ImArrowUp className={classes.send} />
           </button>
-        </Card>
+        </div>
       </div>
     </form>
   );

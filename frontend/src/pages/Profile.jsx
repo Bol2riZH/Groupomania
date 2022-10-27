@@ -7,7 +7,6 @@ import UserProfile from '../components/Users/UserProfile';
 import UpdateUserProfile from '../components/Users/UpdateUserProfile';
 
 import classes from './Profile.module.scss';
-import Card from '../components/UI/Card';
 import Button from '../components/UI/Button';
 import Error from '../components/UI/Error';
 
@@ -50,7 +49,7 @@ const Profile = () => {
   };
 
   return (
-    <Card className={classes.profile}>
+    <div className={classes.profile}>
       <section className={classes.profileSection}>
         {!isEditing ? (
           <>
@@ -78,7 +77,7 @@ const Profile = () => {
           </>
         )}
       </section>
-    </Card>
+    </div>
   );
 };
 

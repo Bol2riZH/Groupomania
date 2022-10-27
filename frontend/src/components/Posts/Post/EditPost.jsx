@@ -70,18 +70,28 @@ const EditPost = (edit) => {
 
   return (
     <section className={classes.post}>
+      {(edit.imageUrl || imageUrl) && (
+        <ImCross onClick={deletePostPicture} className={classes.cross} />
+      )}
+
       <label htmlFor="editImage">
-        {imageUrl ? (
-          <>
-            <ImCross onClick={deletePostPicture} className={classes.cross} />
-            <div className={classes.image}>
-              <img src={URL.createObjectURL(imageUrl)} alt="post" />
-            </div>
-          </>
-        ) : (
+        {!edit.ImageUrl && !imageUrl && (
           <FaCameraRetro className={classes.faCamera} />
         )}
+
+        {edit.imageUrl && !imageUrl && (
+          <div className={classes.image}>
+            <img src={edit.imageUrl} alt="message" />
+          </div>
+        )}
+
+        {imageUrl && (
+          <div className={classes.image}>
+            <img src={URL.createObjectURL(imageUrl)} alt="post" />
+          </div>
+        )}
       </label>
+
       <input
         id="editImage"
         className={classes.upload}

@@ -4,7 +4,6 @@ import { useAuthContext } from '../../../store/useAuthContext';
 import { axiosComment } from '../../../utils/axios';
 
 import classes from './Post.module.scss';
-import Card from '../../UI/Card';
 import { RiEdit2Fill, RiArrowGoBackFill } from 'react-icons/ri';
 import { FaRegCommentAlt } from 'react-icons/fa';
 
@@ -62,69 +61,63 @@ const Post = (props) => {
           </div>
         )}
       </header>
-      <Card>
-        {!isEditing ? (
-          <section>
-            <header>
-              <h2>{props.title}</h2>
-            </header>
-            <p>{props.post}</p>
-            <div className={props.imageUrl && classes.img}>
-              {props.imageUrl ? <img src={props.imageUrl} alt="message" /> : ''}
-            </div>
-          </section>
-        ) : (
-          <EditPost
-            {...props}
-            onConfirmEditing={editHandler}
-            onCancelEditing={editHandler}
-          />
-        )}
-        {isEditing ? (
-          ''
-        ) : isCommenting ? (
-          <AddComment
-            {...props}
-            onComment={getCommentHandler}
-            onConfirmComment={commentHandler}
-            onCancelComment={commentHandler}
-          />
-        ) : (
-          <div className={classes.icons}>
-            <FaRegCommentAlt
-              className={classes.icon}
-              onClick={commentHandler}
-            />
-            <Likes {...props} />
-          </div>
-        )}
+      {!isEditing ? (
         <section>
-          <ul>
-            {comments &&
-              comments
-                .sort((a, b) => b.date - a.date)
-                .map((comment) => (
-                  <li key={comment._id} className={classes.commentCard}>
-                    <UserProfile {...comment} />
-                    <div className={classes.comment}>
-                      <p>{comment.comment}</p>
-                      <time>{comment.postedTime}</time>
-                    </div>
-                    <div className={classes.commentIcons}>
-                      <Likes {...comment} onLike={getCommentHandler} />
-                      {(auth.id === comment.userId ||
-                        auth.role === 'admin') && (
-                        <Delete {...comment} onDelete={getCommentHandler} />
-                      )}
-                    </div>
-                  </li>
-                ))}
-          </ul>
+          <header>
+            <h2>{props.title}</h2>
+          </header>
+          <p>{props.post}</p>
+          <div className={props.imageUrl && classes.img}>
+            {props.imageUrl ? <img src={props.imageUrl} alt="message" /> : ''}
+          </div>
         </section>
-        <footer>
-          <time>{props.postedTime}</time>
-        </footer>
-      </Card>
+      ) : (
+        <EditPost
+          {...props}
+          onConfirmEditing={editHandler}
+          onCancelEditing={editHandler}
+        />
+      )}
+      {isEditing ? (
+        ''
+      ) : isCommenting ? (
+        <AddComment
+          {...props}
+          onComment={getCommentHandler}
+          onConfirmComment={commentHandler}
+          onCancelComment={commentHandler}
+        />
+      ) : (
+        <div className={classes.icons}>
+          <FaRegCommentAlt className={classes.icon} onClick={commentHandler} />
+          <Likes {...props} />
+        </div>
+      )}
+      <section>
+        <ul>
+          {comments &&
+            comments
+              .sort((a, b) => b.date - a.date)
+              .map((comment) => (
+                <li key={comment._id} className={classes.commentCard}>
+                  <UserProfile {...comment} />
+                  <div className={classes.comment}>
+                    <p>{comment.comment}</p>
+                    <time>{comment.postedTime}</time>
+                  </div>
+                  <div className={classes.commentIcons}>
+                    <Likes {...comment} onLike={getCommentHandler} />
+                    {(auth.id === comment.userId || auth.role === 'admin') && (
+                      <Delete {...comment} onDelete={getCommentHandler} />
+                    )}
+                  </div>
+                </li>
+              ))}
+        </ul>
+      </section>
+      <footer>
+        <time>{props.postedTime}</time>
+      </footer>
     </li>
   );
 };

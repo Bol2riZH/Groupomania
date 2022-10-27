@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import classes from './Login.module.scss';
 
 import { axiosUser } from '../utils/axios';
 
 import { useNavigate } from 'react-router-dom';
 
-import Card from '../components/UI/Card';
+import classes from './Login.module.scss';
 import Error from '../components/UI/Error';
 
 import LoginForm from '../components/Auth/LoginForm';
@@ -77,7 +76,7 @@ const Login = () => {
   return (
     <div className={classes.layout}>
       <h1>GROUPOMANIA</h1>
-      <Card className={classes.form}>
+      <div className={classes.form}>
         {!signup ? (
           <>
             <div className={classes.titleContainer}>
@@ -110,7 +109,7 @@ const Login = () => {
             />
           </>
         )}
-      </Card>
+      </div>
     </div>
   );
 };
