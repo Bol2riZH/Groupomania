@@ -58,7 +58,6 @@ const EditPost = (edit) => {
           'content-type': 'multipart/form-utils',
         },
       });
-      console.log(res.data);
       edit.onConfirmEditing();
       edit.onEditPost();
     } catch (err) {
