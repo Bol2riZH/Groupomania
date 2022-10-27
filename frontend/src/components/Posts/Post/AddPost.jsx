@@ -15,7 +15,6 @@ import Textarea from '../../UI/Textarea';
 import Error from '../../UI/Error';
 import { FaCameraRetro } from 'react-icons/fa';
 import { ImArrowUp } from 'react-icons/im';
-import defaultProfilePicture from '../../../assets/images/defaultProfilePicture.svg';
 
 const AddPost = (add) => {
   const { ...auth } = useAuthContext(AuthContext);
@@ -70,6 +69,7 @@ const AddPost = (add) => {
           Écrivez un message avant de l'envoyer
         </Error>
       )}
+      {/*////////////////////////////////////// HEADER //////////////////////////////////////*/}
       <header className={classes.header}>
         <h2>Bonjour {auth.username}</h2>
         {!state.isValidTitle ? (
@@ -92,7 +92,8 @@ const AddPost = (add) => {
           isValid={state.isValidTitle}
         />
       </header>
-      <div className={classes.container}>
+      {/*////////////////////////////////////// SECTION //////////////////////////////////////*/}
+      <section className={classes.container}>
         <div className={`${classes.postCard} ${!isEditing && classes.hidden}`}>
           <Input
             className={classes.upload}
@@ -134,7 +135,7 @@ const AddPost = (add) => {
             <ImArrowUp className={classes.send} />
           </button>
         </div>
-      </div>
+      </section>
     </form>
   );
 };

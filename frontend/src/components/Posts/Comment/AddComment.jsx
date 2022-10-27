@@ -33,7 +33,6 @@ const AddComment = (props) => {
           },
         }
       );
-      console.log(res.data);
       if (comment !== '') {
         props.onConfirmComment();
         props.onComment();

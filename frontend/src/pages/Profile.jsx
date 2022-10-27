@@ -35,7 +35,6 @@ const Profile = () => {
           'content-type': 'multipart/form-utils',
         },
       });
-      console.log(res.data);
       setIsEditing(false);
       setIsUnique(true);
 

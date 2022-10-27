@@ -7,7 +7,6 @@ import classes from './Logout.module.scss';
 const Logout = () => {
   const logoutHandler = () => {
     localStorage.clear();
-    console.log('user logout');
   };
 
   return (

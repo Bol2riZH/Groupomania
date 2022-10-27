@@ -24,7 +24,6 @@ const EditPost = (edit) => {
   const [imageUrl, setImageUrl] = useState('');
 
   const inputHandler = (e) => {
-    console.log(e.target.files);
     dispatch({
       type: ACTIONS.INPUT,
       payload:
@@ -35,7 +34,7 @@ const EditPost = (edit) => {
   };
 
   const confirmEditHandler = async () => {
-    const editData = formEditData(imageUrl, state);
+    const editData = imageUrl ? formEditData(imageUrl, state) : formData(state);
     try {
       const res = await axiosPost.put(`${edit._id}`, editData, {
         headers: {
@@ -43,7 +42,6 @@ const EditPost = (edit) => {
           'content-type': 'multipart/form-utils',
         },
       });
-      console.log(res.data);
       edit.onConfirmEditing();
       edit.onEditPost();
     } catch (err) {
@@ -69,6 +67,10 @@ const EditPost = (edit) => {
   };
 
   return (
+    // TEST :
+    // no post image and no upload post image on edit > show camera
+    // post image > show post image
+    // upload post image on edit > show post image on edit
     <section className={classes.post}>
       {(edit.imageUrl || imageUrl) && (
         <ImCross onClick={deletePostPicture} className={classes.cross} />

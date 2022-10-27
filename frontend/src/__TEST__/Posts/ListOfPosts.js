@@ -21,7 +21,6 @@ const ListOfPosts = () => {
   const fetchData = async () => {
     const res = await axios.get('http://localhost:4000/api/posts/');
     setPosts(res.data.posts);
-    console.log(res.data.posts);
   };
 
   const fetchDataToDelete = async (postId, userId) => {

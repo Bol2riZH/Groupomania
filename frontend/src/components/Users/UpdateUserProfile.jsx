@@ -1,4 +1,6 @@
 import React, { useReducer } from 'react';
+import { formData } from '../../utils/formData';
+
 import {
   ACTIONS,
   USER_INITIAL_STATE,
@@ -8,8 +10,6 @@ import {
 import classes from './UpdateUserProfile.module.scss';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
-
-import { formData } from '../../utils/formData';
 import Error from '../UI/Error';
 import { FaGithubAlt } from 'react-icons/fa';
 

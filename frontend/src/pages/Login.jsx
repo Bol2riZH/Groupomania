@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { axiosUser } from '../utils/axios';
 
-import { useNavigate } from 'react-router-dom';
+import LoginForm from '../components/Auth/LoginForm';
+import SignupForm from '../components/Auth/SignupForm';
 
 import classes from './Login.module.scss';
 import Error from '../components/UI/Error';
-
-import LoginForm from '../components/Auth/LoginForm';
-import SignupForm from '../components/Auth/SignupForm';
 
 const Login = () => {
   const [signup, setSignup] = useState(false);
@@ -37,7 +36,6 @@ const Login = () => {
       const res = await axiosUser.post('/login', {
         ...userLogin,
       });
-      console.log(res.data);
 
       setIsValid(true);
       const userId = {

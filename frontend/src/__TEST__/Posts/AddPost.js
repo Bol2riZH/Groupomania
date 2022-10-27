@@ -29,7 +29,6 @@ const AddPost = () => {
         'content-type': 'multipart/form-utils',
       },
     });
-    console.log(res.data);
   };
 
   const submitHandler = (e) => {

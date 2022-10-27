@@ -10,7 +10,6 @@ import classes from './SignupForm.module.scss';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import Error from '../UI/Error';
-
 import { FaEye, FaEyeSlash, FaGithubAlt } from 'react-icons/fa';
 
 const SignupForm = (props) => {

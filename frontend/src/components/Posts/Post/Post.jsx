@@ -3,16 +3,16 @@ import { useAuthContext } from '../../../store/useAuthContext';
 
 import { axiosComment } from '../../../utils/axios';
 
-import classes from './Post.module.scss';
-import { RiEdit2Fill, RiArrowGoBackFill } from 'react-icons/ri';
-import { FaRegCommentAlt } from 'react-icons/fa';
-
 import UserProfile from '../../Users/UserProfile';
 import Likes from '../Likes';
 import Delete from '../Delete';
 
 import EditPost from './EditPost';
 import AddComment from '../Comment/AddComment';
+
+import classes from './Post.module.scss';
+import { RiEdit2Fill, RiArrowGoBackFill } from 'react-icons/ri';
+import { FaRegCommentAlt } from 'react-icons/fa';
 
 const Post = (props) => {
   const { ...auth } = useAuthContext();
@@ -45,6 +45,7 @@ const Post = (props) => {
 
   return (
     <li className={classes.postCard}>
+      {/*////////////////////////////////////// POST HEADER //////////////////////////////////////*/}
       <header>
         <UserProfile {...props} />
         {(auth.id === props.userId || auth.role === 'admin') && (
@@ -61,6 +62,7 @@ const Post = (props) => {
           </div>
         )}
       </header>
+      {/*////////////////////////////////////// POST //////////////////////////////////////*/}
       {!isEditing ? (
         <section>
           <header>
@@ -93,6 +95,7 @@ const Post = (props) => {
           <Likes {...props} />
         </div>
       )}
+      {/*////////////////////////////////////// COMMENTS //////////////////////////////////////*/}
       <section>
         <ul>
           {comments &&
@@ -115,6 +118,7 @@ const Post = (props) => {
               ))}
         </ul>
       </section>
+      {/*////////////////////////////////////// FOOTER //////////////////////////////////////*/}
       <footer>
         <time>{props.postedTime}</time>
       </footer>

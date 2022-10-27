@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 import classes from '../Layout/Header.module.scss';
 import logo from '../../assets/logo/icon-monochrome-white.svg';
-import { MdLogout } from 'react-icons/md';
 import defaultProfilePicture from '../../assets/images/defaultProfilePicture.svg';
+import { MdLogout } from 'react-icons/md';
 
 const Header = () => {
   const [authLog, setAuthLog] = useState(

@@ -46,8 +46,6 @@ const Likes = (props) => {
           },
         }
       );
-      console.log(res.data);
-
       !stateLike ? setLikes(+props.likes + 1) : setLikes(+props.likes - 1);
       props.onLike();
       setStateLike(res.data.stateLike);

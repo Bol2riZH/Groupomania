@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import classes from './Home.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 import { axiosPost } from '../utils/axios';
 
@@ -7,7 +7,8 @@ import Header from '../components/Layout/Header';
 import AddPost from '../components/Posts/Post/AddPost';
 import Post from '../components/Posts/Post/Post';
 import Footer from '../components/Layout/Footer';
-import { useNavigate } from 'react-router-dom';
+
+import classes from './Home.module.scss';
 
 const Home = () => {
   const authLog = JSON.parse(localStorage.getItem('auth'));
@@ -24,8 +25,6 @@ const Home = () => {
     try {
       const res = await axiosPost.get();
       setPosts(res.data.posts);
-
-      console.log(res.data.posts);
     } catch (err) {
       console.error(err);
     }
@@ -39,7 +38,6 @@ const Home = () => {
           'content-type': 'multipart/form-utils',
         },
       });
-      console.log(res.data);
       getPostHandler();
     } catch (err) {
       console.error(err);

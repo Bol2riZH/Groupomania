@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useAuthContext } from '../../store/useAuthContext';
+
 import { axiosUser } from '../../utils/axios';
 
 import classes from './UserProfile.module.scss';
-
 import defaultProfilePicture from '../../assets/images/defaultProfilePicture.svg';
-import { useAuthContext } from '../../store/useAuthContext';
 
 const UserProfile = (props) => {
   const { ...auth } = useAuthContext();
@@ -29,6 +29,7 @@ const UserProfile = (props) => {
   };
 
   return (
+    // Test user profil in HEADER, POST or COMMENT //
     <header
       className={`${props.post && classes.postUserProfile} ${
         props.comment && classes.commentUserProfile

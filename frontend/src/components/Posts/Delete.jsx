@@ -30,7 +30,6 @@ const DeletePost = (props) => {
           'content-type': 'application/json',
         },
       });
-      console.log(res.data);
       props.onDelete();
     } catch (err) {
       console.error(err);

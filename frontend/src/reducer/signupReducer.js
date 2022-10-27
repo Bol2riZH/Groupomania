@@ -19,9 +19,6 @@ export const ACTIONS = {
   IS_VALID: 'is_valid',
 };
 
-/*///////////////*/
-/* TODO : REGEX */
-/*/////////////*/
 export const signupReducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.INPUT:
