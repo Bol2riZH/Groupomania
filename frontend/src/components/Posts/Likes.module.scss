@@ -25,14 +25,18 @@
     }
   }
   & .iconOnly {
+    color: colors.$tertiary-color;
+
     font-size: 2.5rem;
   }
 
   & .iconOnlyComment {
+    color: colors.$tertiary-color;
     font-size: 1.8rem;
   }
 
   & span {
+    color: colors.$tertiary-color;
     font-size: 1.6rem;
     font-weight: 900;
     align-items: center;

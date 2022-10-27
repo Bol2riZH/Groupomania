@@ -27,8 +27,8 @@ exports.addComment = catchAsync(async (req, res) => {
 exports.getPostComments = catchAsync(async (req, res) => {
   const postComment = await Comment.find({ postId: req.params.postId });
   if (!postComment)
-    return res.status(404).json({ message: 'Comments not founded' });
-  return res.status(200).json({ message: 'Comments: ', postComment });
+    return res.status(404).json({ message: 'Comment not founded' });
+  return res.status(200).json({ message: 'Comment: ', postComment });
 });
 
 /*///////////////////////////////////////////*/

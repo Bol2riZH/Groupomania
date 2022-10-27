@@ -59,7 +59,7 @@ const Home = () => {
                 key={post._id}
                 {...post}
                 onLike={getPostHandler}
-                onDeletePost={getPostHandler}
+                onDelete={getPostHandler}
                 onEditPost={getPostHandler}
               />
             ))}

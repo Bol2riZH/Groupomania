@@ -10,12 +10,10 @@ import { FaRegCommentAlt } from 'react-icons/fa';
 
 import UserProfile from '../../Users/UserProfile';
 import Likes from '../Likes';
+import Delete from '../Delete';
 
 import EditPost from './EditPost';
-import DeletePost from './DeletePost';
-
-import AddComment from '../Comments/AddComment';
-import DeleteComment from '../Comments/DeleteComment';
+import AddComment from '../Comment/AddComment';
 
 const Post = (props) => {
   const { ...auth } = useAuthContext();
@@ -60,7 +58,7 @@ const Post = (props) => {
                 onClick={editHandler}
               />
             )}
-            <DeletePost {...props} />
+            <Delete {...props} />
           </div>
         )}
       </header>
@@ -116,10 +114,7 @@ const Post = (props) => {
                       <Likes {...comment} onLike={getCommentHandler} />
                       {(auth.id === comment.userId ||
                         auth.role === 'admin') && (
-                        <DeleteComment
-                          {...comment}
-                          onDeleteComment={getCommentHandler}
-                        />
+                        <Delete {...comment} onDelete={getCommentHandler} />
                       )}
                     </div>
                   </li>
