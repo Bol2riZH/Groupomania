@@ -7,7 +7,7 @@ import {
   ACTIONS,
   postReducer,
   POST_INITIAL_STATE,
-} from '../../Reducer/postReducer';
+} from '../../../reducer/postReducer';
 import { formData, formEditData } from '../../../utils/formData';
 
 import classes from './EditPost.module.scss';

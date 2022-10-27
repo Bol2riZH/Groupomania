@@ -4,7 +4,7 @@ import {
   LOG_INITIAL_STATE,
   ACTIONS,
   loginReducer,
-} from '../Reducer/loginReducer';
+} from '../../reducer/loginReducer';
 
 import classes from './LoginForm.module.scss';
 import Input from '../UI/Input';

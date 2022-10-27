@@ -3,7 +3,7 @@ import {
   ACTIONS,
   USER_INITIAL_STATE,
   signupReducer,
-} from '../Reducer/signupReducer';
+} from '../../reducer/signupReducer';
 import { formData } from '../../utils/formData';
 
 import classes from './SignupForm.module.scss';

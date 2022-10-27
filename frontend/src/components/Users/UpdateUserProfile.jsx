@@ -3,7 +3,7 @@ import {
   ACTIONS,
   USER_INITIAL_STATE,
   signupReducer,
-} from '../Reducer/signupReducer';
+} from '../../reducer/signupReducer';
 
 import classes from './UpdateUserProfile.module.scss';
 import Input from '../UI/Input';

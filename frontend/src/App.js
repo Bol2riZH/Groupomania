@@ -10,7 +10,7 @@ import Profile from './pages/Profile';
 
 /*/////////////////////////////////////////////*/
 /* TODO:
-    MODAL keyframe
+    COMPRESS IMAGES ON UPLOAD
     CLEAN LOG
  */
 /*/ ////////////////////////////////////////////*/

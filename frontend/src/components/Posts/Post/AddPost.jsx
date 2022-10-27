@@ -6,7 +6,7 @@ import {
   ACTIONS,
   POST_INITIAL_STATE,
   postReducer,
-} from '../../Reducer/postReducer';
+} from '../../../reducer/postReducer';
 import { formData } from '../../../utils/formData';
 
 import classes from './AddPost.module.scss';
