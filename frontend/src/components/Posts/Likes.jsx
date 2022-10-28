@@ -16,7 +16,7 @@ const Likes = (props) => {
 
   useEffect(() => {
     getStateLike();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getStateLike = async () => {
     try {

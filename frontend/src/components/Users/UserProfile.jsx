@@ -12,7 +12,7 @@ const UserProfile = (props) => {
 
   useEffect(() => {
     getProfil();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getProfil = async () => {
     let getFrom;

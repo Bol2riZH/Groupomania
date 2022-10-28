@@ -9,7 +9,7 @@ exports.likeHandler = catchAsync(async (req, res, Data) => {
 
   if (stateLike === 0) {
     await Data.updateOne(
-      { _id: dataId },
+      { _id: dataId, usersLiked: { $eq: userId } },
       { $pull: { usersLiked: userId }, $inc: { likes: -1 } }
     );
     return res
@@ -18,7 +18,7 @@ exports.likeHandler = catchAsync(async (req, res, Data) => {
   }
   if (stateLike === 1) {
     await Data.updateOne(
-      { _id: dataId },
+      { _id: dataId, usersLiked: { $ne: userId } },
       { $push: { usersLiked: userId }, $inc: { likes: +1 } }
     );
     return res

@@ -3,13 +3,13 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const fs = require('fs');
 
 const User = require('../models/User');
 
 const catchAsync = require('../utils/catchAsync');
 const emailAndPasswordValidator = require('../utils/emailAndPasswordValidator');
 const { findAndUnlinkProfilePicture } = require('../utils/findAndUnlinkImage');
+const { compress } = require('../utils/compress');
 
 /*/////////////////////////////////////////////*/
 /*///////////////// SIGNUP ///////////////////*/
@@ -17,24 +17,19 @@ exports.signup = catchAsync(async (req, res) => {
   const user = await User.findOne({
     $or: [{ email: req.body.email }, { username: req.body.username }],
   });
-  if (user) {
-    if (req.file) {
-      fs.unlinkSync(
-        __dirname + '/../images/profilePictures/' + req.file.filename
-      );
-    }
+  if (user)
     return res.status(400).json({ message: 'Username or email already used' });
-  }
+
   if (emailAndPasswordValidator(req)) {
+    const file =
+      req.file && (await compress(`${req.file.filename}`, 'profilePictures'));
     const hash = await bcrypt.hash(req.body.password, 10);
     const user = new User({
       ...req.body,
       password: hash,
       profilePictureUrl:
         req.file &&
-        `${req.protocol}://${req.get('host')}/images/profilePictures/${
-          req.file.filename
-        }`,
+        `${req.protocol}://${req.get('host')}/images/profilePictures/${file}`,
       role: 'user',
     });
     await user.save();
@@ -74,11 +69,13 @@ exports.update = catchAsync(async (req, res) => {
     if (!req.file) updateUser = { ...req.body };
     else {
       findAndUnlinkProfilePicture(userToUpdate);
+      const file =
+        req.file && (await compress(`${req.file.filename}`, 'profilePictures'));
       updateUser = {
         ...req.body,
         profilePictureUrl: `${req.protocol}://${req.get(
           'host'
-        )}/images/profilePictures/${req.file.filename}`,
+        )}/images/profilePictures/${file}`,
       };
     }
     await User.findByIdAndUpdate(req.params.id, {

@@ -21,7 +21,7 @@ const AddComment = (props) => {
 
   const confirmCommentHandler = async () => {
     try {
-      const res = await axiosComment.post(
+      await axiosComment.post(
         `${props._id}`,
         {
           comment: comment,

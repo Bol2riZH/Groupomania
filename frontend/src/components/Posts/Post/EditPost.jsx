@@ -36,7 +36,7 @@ const EditPost = (edit) => {
   const confirmEditHandler = async () => {
     const editData = imageUrl ? formEditData(imageUrl, state) : formData(state);
     try {
-      const res = await axiosPost.put(`${edit._id}`, editData, {
+      await axiosPost.put(`${edit._id}`, editData, {
         headers: {
           Authorization: `Bearer ${auth.token}`,
           'content-type': 'multipart/form-utils',
@@ -52,7 +52,7 @@ const EditPost = (edit) => {
   const deletePostPicture = async () => {
     const editData = formData(state);
     try {
-      const res = await axiosPost.put(`remove-image/${edit._id}`, editData, {
+      await axiosPost.put(`remove-image/${edit._id}`, editData, {
         headers: {
           Authorization: `Bearer ${auth.token}`,
           'content-type': 'multipart/form-utils',

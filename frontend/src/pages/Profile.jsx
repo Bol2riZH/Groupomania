@@ -29,7 +29,7 @@ const Profile = () => {
   const onConfirmUpdateHandler = async (updateUserInfo) => {
     const authLog = JSON.parse(localStorage.getItem('auth'));
     try {
-      const res = await axiosUser.put(`/update/${authLog.id}`, updateUserInfo, {
+      await axiosUser.put(`/update/${authLog.id}`, updateUserInfo, {
         headers: {
           Authorization: `Bearer ${authLog.token}`,
           'content-type': 'multipart/form-utils',

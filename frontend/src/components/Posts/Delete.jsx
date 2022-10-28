@@ -24,7 +24,7 @@ const DeletePost = (props) => {
     if (props.post) sendTo = axiosPost;
     if (props.comment) sendTo = axiosComment;
     try {
-      const res = await sendTo.delete(`${props._id}`, {
+      await sendTo.delete(`${props._id}`, {
         headers: {
           Authorization: `Bearer ${auth.token}`,
           'content-type': 'application/json',

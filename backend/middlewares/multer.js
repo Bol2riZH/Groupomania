@@ -1,6 +1,7 @@
 'use strict';
 
 const multer = require('multer');
+
 require('dotenv').config();
 
 const MIME_TYPES = {
@@ -22,7 +23,8 @@ const storage = (destination) => {
         .slice(0, -1)
         .join('.');
       const extension = MIME_TYPES[file.mimetype];
-      cb(null, `${name}${Date.now()}.${extension}`);
+      const filename = `${name}${Date.now()}.${extension}`;
+      cb(null, filename);
     },
   });
 };

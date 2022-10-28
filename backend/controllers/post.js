@@ -8,15 +8,17 @@ const postedTime = require('../utils/postedTime');
 const { likeHandler } = require('../utils/likesHandler');
 
 const { findAndUnlinkPostImage } = require('../utils/findAndUnlinkImage');
+const { compress } = require('../utils/compress');
 
 /*//////////////////////////////////////////*/
 /*///////////////// ADD ///////////////////*/
 exports.addPost = catchAsync(async (req, res) => {
+  const file = req.file && (await compress(`${req.file.filename}`, 'posts'));
   const post = new Post({
     ...req.body,
     userId: req.auth.userId,
     imageUrl: req.file
-      ? `${req.protocol}://${req.get('host')}/images/posts/${req.file.filename}`
+      ? `${req.protocol}://${req.get('host')}/images/posts/${file}`
       : '',
     date: Date.now(),
     postedTime: postedTime(),
@@ -44,11 +46,11 @@ exports.updatePost = catchAsync(async (req, res) => {
       };
     else {
       findAndUnlinkPostImage(postToUpdate);
+      const file =
+        req.file && (await compress(`${req.file.filename}`, 'posts'));
       updatePost = {
         ...req.body,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${
-          req.file.filename
-        }`,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${file}`,
         // Don't update date for update post not to be up the post page //
         // date: Date.now(),
         postedTime: `Édité le : ${postedTime()}`,

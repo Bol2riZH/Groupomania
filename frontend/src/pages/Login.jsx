@@ -20,7 +20,7 @@ const Login = () => {
       setTimeout(() => {
         navigate('/home');
       }, 600);
-  }, [log]);
+  }, [log]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const accountHandler = () => {
     !signup ? setSignup(true) : setSignup(false);

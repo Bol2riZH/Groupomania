@@ -23,7 +23,7 @@ const Header = () => {
       : setTimeout(() => {
           navigate('/');
         }, 150);
-  }, [authLog]);
+  }, [authLog]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getProfil = async () => {
     try {

@@ -8,36 +8,27 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 
-/*/////////////////////////////////////////////*/
-/* TODO:
-    COMPRESS IMAGES ON UPLOAD
-    CLEAN LOG
- */
-/*/ ////////////////////////////////////////////*/
-
 const App = () => {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route
-          path="/home"
-          element={
-            <AuthContextProvider>
-              <Home />
-            </AuthContextProvider>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <AuthContextProvider>
-              <Profile />
-            </AuthContextProvider>
-          }
-        />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route
+        path="/home"
+        element={
+          <AuthContextProvider>
+            <Home />
+          </AuthContextProvider>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <AuthContextProvider>
+            <Profile />
+          </AuthContextProvider>
+        }
+      />
+    </Routes>
   );
 };
 

@@ -24,7 +24,7 @@ const Post = (props) => {
 
   useEffect(() => {
     getCommentHandler();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getCommentHandler = async () => {
     try {
