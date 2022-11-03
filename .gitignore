@@ -1,5 +1,7 @@
-/backend/node_modules
 /.idea
+/backend/node_modules
+/backend/.idea
+/frontend/.idea
 
 
 # dependencies
