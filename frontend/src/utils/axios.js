@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // base url from heroku
-const baseUrl = 'https://bgroupomania.herokuapp.com/';
+const baseUrl = 'https://bgroupomania.herokuapp.com';
 
 export const axiosUser = axios.create({
   baseURL: `${baseUrl}/api/auth`,
