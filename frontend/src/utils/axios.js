@@ -1,13 +1,14 @@
 import axios from 'axios';
+const baseUrl = 'https://bgroupomania.herokuapp.com/';
 
 export const axiosUser = axios.create({
-  baseURL: `http://localhost:4000/api/auth`,
+  baseURL: `${baseUrl}/api/auth`,
 });
 
 export const axiosPost = axios.create({
-  baseURL: `http://localhost:4000/api/posts`,
+  baseURL: `${baseUrl}/api/posts`,
 });
 
 export const axiosComment = axios.create({
-  baseURL: `http://localhost:4000/api/comments`,
+  baseURL: `${baseUrl}/api/comments`,
 });

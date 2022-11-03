@@ -16,6 +16,10 @@ const commentRoutes = require('./routes/comment');
 
 const path = require('path');
 
+app.get('/', (req, res) => {
+  res.send('APP ise running.');
+});
+
 app.use('/api/auth', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
