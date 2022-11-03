@@ -4,6 +4,13 @@ This repository contains the project 7 of OpenClassrooms training.
 
 For this project, I have to build an entire social network from scratch (BACK-END and FRONT-END).
 
+Follow [this link](https://open-classrooms-p7.vercel.app/) to have a look !
+
+Backend `Heroku`
+
+Frontend `Vercel`
+
+![img.png](img.png)
 
 > I took time to write the cleanest code possible :
  - Easy to read
