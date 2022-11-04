@@ -7,7 +7,6 @@ const postCtrl = require('../controllers/post');
 
 const auth = require('../middlewares/auth');
 const { postMulter } = require('../middlewares/multer');
-const { compress } = require('../utils/compress');
 
 router.post('/', auth, postMulter, postCtrl.addPost);
 router.put('/:id', auth, postMulter, postCtrl.updatePost);
