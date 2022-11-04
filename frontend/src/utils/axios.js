@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// url for Vercel deploy
 const baseUrlVercel = `https://open-classrooms-p7-backend.vercel.app`;
 
 export const axiosUser = axios.create({
