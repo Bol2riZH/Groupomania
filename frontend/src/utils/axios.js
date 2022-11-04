@@ -1,13 +1,15 @@
 import axios from 'axios';
 
+const baseUrlVercel = `https://open-classrooms-p7-backend.vercel.app`;
+
 export const axiosUser = axios.create({
-  baseURL: `http://localhost:4000/api/auth`,
+  baseURL: `${baseUrlVercel}/api/auth`,
 });
 
 export const axiosPost = axios.create({
-  baseURL: `http://localhost:4000/api/posts`,
+  baseURL: `${baseUrlVercel}/api/posts`,
 });
 
 export const axiosComment = axios.create({
-  baseURL: `http://localhost:4000/api/comments`,
+  baseURL: `${baseUrlVercel}/api/comments`,
 });
