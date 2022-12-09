@@ -1,16 +1,15 @@
-# PROJECT 7 - Groupomania
+# Groupomania
 
-This repository contains the project 7 of OpenClassrooms training.
+## OpenClassrooms Project 8 - FullStack Social network (MERN)
 
 For this project, I have to build an entire social network from scratch (BACK-END and FRONT-END).
 
-Follow [this link](https://open-classrooms-p7.vercel.app/) to have a look !
+I will soon deploy it on :
 
 Backend `Heroku`
 
 Frontend `Vercel`
 
-![img.png](img.png)
 
 > I took time to write the cleanest code possible :
  - Easy to read
@@ -44,6 +43,8 @@ Functionalities :
 - **E**xpress
 - **R**eact + SASS
 - **N**ode
+
+![img.png](img.png)
 
 >## How to connect :
 
