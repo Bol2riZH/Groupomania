@@ -42,10 +42,12 @@ Functionalities :
 
 - **M**ongoDB
 - **E**xpress
-- **R**eact
+- **R**eact + SASS
 - **N**ode
 
 >## How to connect :
+
+### Clone / download the code on the **main** branch
 
 **FRONTEND**
 
