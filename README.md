@@ -1,6 +1,6 @@
 # Groupomania
 
-## OpenClassrooms Project 8 - FullStack Social network (MERN)
+## OpenClassrooms Project 7 - FullStack Social network (MERN)
 
 For this project, I have to build an entire social network from scratch (BACK-END and FRONT-END).
 
