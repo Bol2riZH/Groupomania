@@ -7,19 +7,18 @@ const postCtrl = require('../controllers/post');
 
 const auth = require('../middlewares/auth');
 const { postMulter } = require('../middlewares/multer');
-const { compress } = require('../utils/compress');
 
 router.post('/', auth, postMulter, postCtrl.addPost);
 router.put('/:id', auth, postMulter, postCtrl.updatePost);
 router.put('/remove-image/:id', auth, postMulter, postCtrl.removePostImage);
-
-router.post('/like/:id', auth, postCtrl.likePost);
-
-router.post('/search-post', postCtrl.searchPost);
-
 router.get('/', postCtrl.getAllPosts);
-router.get('/:id', postCtrl.getOnePost);
-
+router.post('/like/:id', auth, postCtrl.likePost);
 router.delete('/:id', auth, postCtrl.deletePost);
+
+/*////////////////////////////////////////////////////*/
+/* THE FUNCTIONALITIES BELOW ARE NOT YET IMPLEMENTED */
+////////////////////////////////////////////////////*/
+router.post('/search-post', postCtrl.searchPost);
+router.get('/:id', postCtrl.getOnePost);
 
 module.exports = router;

@@ -40,8 +40,6 @@ exports.updatePost = catchAsync(async (req, res) => {
     if (!req.file)
       updatePost = {
         ...req.body,
-        // Don't update date for update post not to be up the post page //
-        // date: Date.now(),
         postedTime: `Édité le : ${postedTime()}`,
       };
     else {
@@ -51,8 +49,6 @@ exports.updatePost = catchAsync(async (req, res) => {
       updatePost = {
         ...req.body,
         imageUrl: `${req.protocol}://${req.get('host')}/images/posts/${file}`,
-        // Don't update date for update post not to be up the post page //
-        // date: Date.now(),
         postedTime: `Édité le : ${postedTime()}`,
       };
     }
@@ -86,23 +82,6 @@ exports.removePostImage = catchAsync(async (req, res) => {
   return res.status(403).json({ message: 'Forbidden' });
 });
 
-/*/////////////////////////////////////////////*/
-/*///////////////// NOTICE ///////////////////*/
-exports.likePost = catchAsync(async (req, res) => {
-  await likeHandler(req, res, Post);
-});
-
-/*/ /////////////////////////////////////////////////////////////////*/
-/*///////////////// SEARCH BY USERNAME OR TITLE ///////////////////*/
-exports.searchPost = catchAsync(async (req, res) => {
-  const post = await Post.find({
-    $or: [{ username: req.body.username }, { title: req.body.title }],
-  });
-  if (post.length === 0)
-    return res.status(404).json({ message: 'Posts not founded' });
-  return res.status(200).json({ message: 'Posts: ', post });
-});
-
 /*//////////////////////////////////////////////*/
 /*///////////////// GET ALL ///////////////////*/
 exports.getAllPosts = catchAsync(async (req, res) => {
@@ -111,12 +90,10 @@ exports.getAllPosts = catchAsync(async (req, res) => {
   return res.status(200).json({ message: 'Posts: ', posts });
 });
 
-/*//////////////////////////////////////////////*/
-/*///////////////// GET ONE ///////////////////*/
-exports.getOnePost = catchAsync(async (req, res) => {
-  const post = await Post.findById(req.params.id);
-  if (!post) return res.status(404).json({ message: 'Posts not founded' });
-  return res.status(200).json({ message: 'Posts: ', post });
+/*/////////////////////////////////////////////*/
+/*///////////////// LIKE ///////////////////*/
+exports.likePost = catchAsync(async (req, res) => {
+  await likeHandler(req, res, Post);
 });
 
 /*/////////////////////////////////////////////*/
@@ -132,4 +109,27 @@ exports.deletePost = catchAsync(async (req, res) => {
     return res.status(200).json({ message: 'post deleted !' });
   }
   return res.status(403).json({ message: 'Forbidden' });
+});
+
+/*////////////////////////////////////////////////////*/
+/* THE FUNCTIONALITIES BELOW ARE NOT YET IMPLEMENTED */
+////////////////////////////////////////////////////*/
+
+/*/ /////////////////////////////////////////////////////////////////*/
+/*///////////////// SEARCH BY USERNAME OR TITLE ///////////////////*/
+exports.searchPost = catchAsync(async (req, res) => {
+  const post = await Post.find({
+    $or: [{ username: req.body.username }, { title: req.body.title }],
+  });
+  if (post.length === 0)
+    return res.status(404).json({ message: 'Posts not founded' });
+  return res.status(200).json({ message: 'Posts: ', post });
+});
+
+/*//////////////////////////////////////////////*/
+/*///////////////// GET ONE ///////////////////*/
+exports.getOnePost = catchAsync(async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  if (!post) return res.status(404).json({ message: 'Posts not founded' });
+  return res.status(200).json({ message: 'Posts: ', post });
 });

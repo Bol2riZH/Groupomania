@@ -23,7 +23,7 @@ exports.addComment = catchAsync(async (req, res) => {
 });
 
 /*//////////////////////////////////////////////////*/
-/*///////////////// GET BY POST ///////////////////*/
+/*///////////////// GET BY COMMENT ///////////////////*/
 exports.getPostComments = catchAsync(async (req, res) => {
   const postComment = await Comment.find({ postId: req.params.postId });
   if (!postComment)
@@ -48,3 +48,7 @@ exports.deleteComment = catchAsync(async (req, res) => {
   }
   return res.status(403).json({ message: 'Forbidden' });
 });
+
+/*////////////////////////////////////////////////////*/
+/* THE FUNCTIONALITIES BELOW ARE NOT YET IMPLEMENTED */
+////////////////////////////////////////////////////*/

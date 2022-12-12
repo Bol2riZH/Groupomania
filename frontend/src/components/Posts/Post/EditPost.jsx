@@ -86,7 +86,7 @@ const EditPost = (edit) => {
           </div>
         )}
 
-        {imageUrl && (
+        {imageUrl && edit.imageUrl && (
           <div className={classes.image}>
             <img src={URL.createObjectURL(imageUrl)} alt="post" />
           </div>
