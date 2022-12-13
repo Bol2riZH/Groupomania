@@ -17,7 +17,7 @@ Frontend `Vercel`
  - Scalable 
 > Performance as been improved :
  - All images are compressed in .webp
- - Images are link and unlink from the server as the user 
+ - Images are linked and unlinked from the server as the user 
    - delete or update post/profile picture
 
 >I took care of all the design (inspire by Memphis design) and be carefull about accessibility and of course responsive.
@@ -29,7 +29,6 @@ Functionalities :
 - Post messages / comments
 - Like messages / comments
 - Update profile and messages
-- Delete messages and comments
 - Delete messages and comments
 
 `ADMIN`
